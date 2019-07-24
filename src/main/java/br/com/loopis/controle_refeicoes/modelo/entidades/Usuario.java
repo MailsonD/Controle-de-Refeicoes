@@ -2,10 +2,7 @@ package br.com.loopis.controle_refeicoes.modelo.entidades;
 
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -17,6 +14,7 @@ import java.util.Objects;
 public class Usuario implements Serializable {
 
     @Id
+    @GeneratedValue
     private int id;
     @Column(unique = true)
     private String matricula;
@@ -24,7 +22,7 @@ public class Usuario implements Serializable {
     @Column(unique = true)
     private String email;
     private String nome;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private NivelAcesso nivelAcesso;
 
     public Usuario(int id, String matricula, String senha, String email, String nome, NivelAcesso nivelAcesso) {
