@@ -4,30 +4,38 @@ import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.AlunoDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
+@Stateless
 public class AlunoDaoImpl implements AlunoDao {
+    
+    @PersistenceContext
+    private EntityManager em;
+    
     @Override
     public void salvar(Aluno object) {
-
+        em.persist(object);
     }
 
     @Override
     public void atualizar(Aluno object) {
-
+        em.merge(object);
     }
 
     @Override
     public void remover(Aluno object) {
-
+        em.remove(em.merge(object));
     }
 
     @Override
     public Aluno buscar(Object key) {
-        return null;
+        return em.find(Aluno.class, key);
     }
 
     @Override
     public List<Aluno> listar() {
-        return null;
+        return em.createQuery("SELECT a FROM Aluno a", Aluno.class).getResultList();
     }
 }
