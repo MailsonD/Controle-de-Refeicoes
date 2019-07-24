@@ -37,10 +37,5 @@ public class UsuarioDaoImpl implements UsuarioDao {
     @Override
     public List<Usuario> listar() {
         return em.createQuery("SELECT u FROM Usuario u",Usuario.class).getResultList();
-
-    }
-
-    public <T> List<T> listar(Class<T> classe) {
-        return em.createQuery("SELECT u FROM "+classe.getSimpleName()+" u",classe).getResultList();
     }
 }
