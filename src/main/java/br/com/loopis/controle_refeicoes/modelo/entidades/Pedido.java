@@ -1,18 +1,26 @@
 package br.com.loopis.controle_refeicoes.modelo.entidades;
 
+import br.com.loopis.controle_refeicoes.modelo.conversor.DataConversor;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.Turma;
 
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Pedido {
+@Entity
+public class Pedido implements Serializable {
 
     @Id
+    @GeneratedValue
     private Long id;
+    @ManyToOne
     private Usuario professor;
+    @Lob
     private String justificativa;
+    @Convert(converter = DataConversor.class)
     private LocalDate diaSolicitado;
+    @Enumerated(EnumType.STRING)
     private Turma turma;
 
     public Pedido(Usuario professor, String justificativa, LocalDate diaSolicitado, Turma turma) {
