@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Pedido {
 
     @Id
-    private int id;
+    private Long id;
     private Usuario professor;
     private String justificativa;
     private LocalDate diaSolicitado;
@@ -22,7 +22,7 @@ public class Pedido {
         this.turma = turma;
     }
 
-    public Pedido(int id, Usuario professor, String justificativa, LocalDate diaSolicitado, Turma turma) {
+    public Pedido(Long id, Usuario professor, String justificativa, LocalDate diaSolicitado, Turma turma) {
         this(professor,justificativa,diaSolicitado,turma);
         this.id = id;
     }
@@ -30,11 +30,11 @@ public class Pedido {
     public Pedido() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
