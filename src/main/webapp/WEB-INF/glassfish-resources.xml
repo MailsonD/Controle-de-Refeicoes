@@ -18,7 +18,7 @@
                           statement-timeout-in-seconds="-1" steady-pool-size="8"
                           validate-atmost-once-period-in-seconds="0" wrap-jdbc-objects="false"
                           name="post-gre-sql_persistence_events_postgresPool" >
-        <property name="serverName" value="localhots"/>
+        <property name="serverName" value="localhost"/>
         <property name="portNumber" value="5433"/>
         <property name="databaseName" value="controle_refeicoes"/>
         <property name="User" value="postgres"/>
