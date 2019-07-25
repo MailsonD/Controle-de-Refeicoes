@@ -24,14 +24,25 @@ public class Usuario implements Serializable {
     private String nome;
     @Enumerated(EnumType.STRING)
     private NivelAcesso nivelAcesso;
+    private Boolean ativo;
 
-    public Usuario(int id, String matricula, String senha, String email, String nome, NivelAcesso nivelAcesso) {
+    public Usuario(String matricula, String senha, String email, String nome, NivelAcesso nivelAcesso, Boolean ativo) {
+        this.matricula = matricula;
+        this.senha = senha;
+        this.email = email;
+        this.nome = nome;
+        this.nivelAcesso = nivelAcesso;
+        this.ativo = ativo;
+    }
+
+    public Usuario(int id, String matricula, String senha, String email, String nome, NivelAcesso nivelAcesso, Boolean ativo) {
         this.id = id;
         this.matricula = matricula;
         this.senha = senha;
         this.email = email;
         this.nome = nome;
         this.nivelAcesso = nivelAcesso;
+        this.ativo = ativo;
     }
 
     public Usuario() {
@@ -85,6 +96,14 @@ public class Usuario implements Serializable {
         this.nivelAcesso = nivelAcesso;
     }
 
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -95,12 +114,13 @@ public class Usuario implements Serializable {
                 Objects.equals(senha, usuario.senha) &&
                 Objects.equals(email, usuario.email) &&
                 Objects.equals(nome, usuario.nome) &&
-                nivelAcesso == usuario.nivelAcesso;
+                nivelAcesso == usuario.nivelAcesso &&
+                Objects.equals(ativo, usuario.ativo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, matricula, senha, email, nome, nivelAcesso);
+        return Objects.hash(id, matricula, senha, email, nome, nivelAcesso, ativo);
     }
 
     @Override
@@ -112,6 +132,7 @@ public class Usuario implements Serializable {
                 ", email='" + email + '\'' +
                 ", nome='" + nome + '\'' +
                 ", nivelAcesso=" + nivelAcesso +
+                ", ativo=" + ativo +
                 '}';
     }
 }

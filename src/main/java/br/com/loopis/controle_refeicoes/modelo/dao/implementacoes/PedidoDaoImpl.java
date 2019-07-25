@@ -8,6 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+/**
+ * @author Leanderson Coelho
+ * **/
 @Stateless
 public class PedidoDaoImpl implements PedidoDao {
 

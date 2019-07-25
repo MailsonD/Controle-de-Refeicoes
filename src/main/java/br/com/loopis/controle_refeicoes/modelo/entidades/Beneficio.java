@@ -4,14 +4,18 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
+
+/**
+ * @author Leanderson Coelho
+ * **/
 @Entity
 public class Beneficio implements Serializable {
 
     @Id
     @GeneratedValue
     private int id;
-    private TipoBeneficio tipobeneficio;
     private String edital;
     @Enumerated(EnumType.STRING)
     private TipoBeneficio tipoBeneficio;
@@ -21,15 +25,10 @@ public class Beneficio implements Serializable {
     public Beneficio() {
     }
 
-    public Beneficio(int id, TipoBeneficio tipobeneficio, String edital) {
-        this.id = id;
-        this.tipobeneficio = tipobeneficio;
+    public Beneficio(String edital, TipoBeneficio tipoBeneficio, Aluno alunoBeneficiado) {
         this.edital = edital;
-    }
-
-    public Beneficio(TipoBeneficio tipobeneficio, String edital) {
-        this.tipobeneficio = tipobeneficio;
-        this.edital = edital;
+        this.tipoBeneficio = tipoBeneficio;
+        this.alunoBeneficiado = alunoBeneficiado;
     }
 
     public int getId() {
@@ -40,14 +39,6 @@ public class Beneficio implements Serializable {
         this.id = id;
     }
 
-    public TipoBeneficio getTipobeneficio() {
-        return tipobeneficio;
-    }
-
-    public void setTipobeneficio(TipoBeneficio tipobeneficio) {
-        this.tipobeneficio = tipobeneficio;
-    }
-
     public String getEdital() {
         return edital;
     }
@@ -56,9 +47,45 @@ public class Beneficio implements Serializable {
         this.edital = edital;
     }
 
+    public TipoBeneficio getTipoBeneficio() {
+        return tipoBeneficio;
+    }
+
+    public void setTipoBeneficio(TipoBeneficio tipoBeneficio) {
+        this.tipoBeneficio = tipoBeneficio;
+    }
+
+    public Aluno getAlunoBeneficiado() {
+        return alunoBeneficiado;
+    }
+
+    public void setAlunoBeneficiado(Aluno alunoBeneficiado) {
+        this.alunoBeneficiado = alunoBeneficiado;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Beneficio beneficio = (Beneficio) o;
+        return id == beneficio.id &&
+                Objects.equals(edital, beneficio.edital) &&
+                tipoBeneficio == beneficio.tipoBeneficio &&
+                Objects.equals(alunoBeneficiado, beneficio.alunoBeneficiado);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, edital, tipoBeneficio, alunoBeneficiado);
+    }
+
     @Override
     public String toString() {
-        return "Beneficio{" + "id=" + id + ", tipobeneficio=" + tipobeneficio + ", edital=" + edital + '}';
+        return "Beneficio{" +
+                "id=" + id +
+                ", edital='" + edital + '\'' +
+                ", tipoBeneficio=" + tipoBeneficio +
+                ", alunoBeneficiado=" + alunoBeneficiado +
+                '}';
     }
-    
 }
