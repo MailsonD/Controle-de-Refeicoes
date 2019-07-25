@@ -68,10 +68,12 @@
                         </a>
                     </li>
                     <li class="nav-item active active-pro">
-                        <a class="nav-link active" href="upgrade.html">
+                        <a class="btn btn-info btn-fill nav-link active btn-wd" data-toggle="modal"
+                            data-target="#myModal1" href="#pablo">
                             <i class="nc-icon nc-stre-left"></i>
                             <p>Sair</p>
                         </a>
+
                     </li>
                 </ul>
             </div>
@@ -99,6 +101,28 @@
                 </div>
             </nav>
             <!-- End Navbar -->
+             <!-- Mini Modal -->
+             <div class="modal fade modal-mini modal-primary" id="myModal1" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+             <div class="modal-dialog">
+                 <div class="modal-content">
+                     <div class="modal-header justify-content-center">
+                         <div class="modal-profile">
+                             <i class="nc-icon nc-bulb-63"></i>
+                         </div>
+                     </div>
+                     <div class="modal-body text-center">
+                         <p>Deseja sair do sistema?</p>
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-link btn-simple">Sim</button>
+                         <button type="button" class="btn btn-link btn-simple"
+                             data-dismiss="modal">Não</button>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <!--  End Modal -->
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -135,13 +159,14 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <button class="col-lg-12 btn btn-success btn-fill"
-                                                    >Cadastrar</button>
+                                                <button class="col-lg-12 btn btn-success btn-fill">Cadastrar</button>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
+
                         </div>
                         <div class="col-md-12">
                             <div class="card strpied-tabled-with-hover">
@@ -162,7 +187,9 @@
                                                 <td>Dakota Rice</td>
                                                 <td>123456789</td>
                                                 <td>email@email.com</td>
-                                                <td></td>
+                                                <td>
+                                                    <button class="col-lg-12 btn btn-danger btn-warning">Apagar</button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>Minerva Hooper </td>
