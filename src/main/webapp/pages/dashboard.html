@@ -21,8 +21,9 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative Tim</title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <title>Cadastrar Gestor</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
@@ -51,49 +52,25 @@
                     <li>
                         <a class="nav-link" href="dashboard.html">
                             <i class="nc-icon nc-chart-pie-35"></i>
-                            <p>Dashboard</p>
+                            <p>Estatisticas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="CadastroDeGestor.html">
+                            <i class="nc-icon nc-circle-09"></i>
+                            <p>Usuario</p>
                         </a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="CadastroDeGestor.html">
-                            <i class="nc-icon nc-circle-09"></i>
-                            <p>User Profile</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="./table.html">
-                            <i class="nc-icon nc-notes"></i>
-                            <p>Table List</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="./typography.html">
-                            <i class="nc-icon nc-paper-2"></i>
-                            <p>Typography</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="./icons.html">
-                            <i class="nc-icon nc-atom"></i>
-                            <p>Icons</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="./maps.html">
-                            <i class="nc-icon nc-pin-3"></i>
-                            <p>Maps</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="./notifications.html">
-                            <i class="nc-icon nc-bell-55"></i>
-                            <p>Notifications</p>
+                        <a class="nav-link">
+                            <i class="nc-icon nc-badge"></i>
+                            <p>Cadastrar Gestor</p>
                         </a>
                     </li>
                     <li class="nav-item active active-pro">
                         <a class="nav-link active" href="upgrade.html">
-                            <i class="nc-icon nc-alien-33"></i>
-                            <p>Upgrade to PRO</p>
+                            <i class="nc-icon nc-stre-left"></i>
+                            <p>Sair</p>
                         </a>
                     </li>
                 </ul>
@@ -104,7 +81,8 @@
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#pablo"> Administrador </a>
-                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar burger-lines"></span>
                         <span class="navbar-toggler-bar burger-lines"></span>
                         <span class="navbar-toggler-bar burger-lines"></span>
@@ -130,78 +108,82 @@
                                     <h4 class="card-title">Cadastrar Gestor</h4>
                                 </div>
                                 <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-8 pr-3">
-                                                <div class="form-group">
-                                                    <label>Nome</label>
-                                                    <input type="text" class="form-control" placeholder="Nome">
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-md-12 pr-3">
+                                            <div class="form-group">
+                                                <label>Nome</label>
+                                                <input type="text" class="form-control" placeholder="Nome">
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12 pr-3">
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Email</label>
-                                                    <input type="email" class="form-control" placeholder="Email">
-                                                </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 pr-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Email</label>
+                                                <input type="email" class="form-control" placeholder="Email">
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12 pr-3">
-                                                <div class="form-group">
-                                                    <label>Matricula</label>
-                                                    <input type="text" class="form-control" placeholder="Matricula">
-                                                </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 pr-3">
+                                            <div class="form-group">
+                                                <label>Matricula</label>
+                                                <input type="text" class="form-control" placeholder="Matricula">
                                             </div>
                                         </div>
-                                        <div class="row">                                             
-                                            <div class="col-md-8 pr-3">
-                                                <button  class="col-lg-10 btn btn-success btn-fill pull-right" onclick="demo.showNotification('top','center')">Cadastrar Gestor</button>
-                                                <div class="clearfix"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <button class="col-lg-12 btn btn-success btn-fill"
+                                                    >Cadastrar</button>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="card strpied-tabled-with-hover">
                                 <div class="card-header ">
                                     <h4 class="card-title">Gestores</h4>
                                     <p class="card-category">Lista de Gestores Cadastrados</p>
                                 </div>
                                 <div class="card-body table-full-width table-responsive">
-                                    <table class="table table-hover table-striped">
+                                    <table class="table table-hover">
                                         <thead>
                                             <th>Nome</th>
                                             <th>Matricula</th>
                                             <th>Email</th>
+                                            <th>Apagar</th>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>Dakota Rice</td>
-                                            <td>123456789</td>
-                                            <td>email@email.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Minerva Hooper</td>
-                                            <td>123456789</td>
-                                            <td>email@email.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Sage Rodriguez</td>
-                                            <td>123456789</td>
-                                            <td>email@email.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Philip Chaney</td>
-                                            <td>123456789</td>
-                                            <td>email@email.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Doris Greene</td>
-                                            <td>123456789</td>
-                                            <td>email@email.com</td>
-                                        </tr>
+                                            <tr>
+                                                <td>Dakota Rice</td>
+                                                <td>123456789</td>
+                                                <td>email@email.com</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Minerva Hooper </td>
+                                                <td>123456789</td>
+                                                <td>email@email.com</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sage Rodriguez</td>
+                                                <td>123456789</td>
+                                                <td>email@email.com</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Philip Chaney</td>
+                                                <td>123456789</td>
+                                                <td>email@email.com</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Doris Greene</td>
+                                                <td>123456789</td>
+                                                <td>email@email.com</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
