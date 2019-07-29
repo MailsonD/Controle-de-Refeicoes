@@ -3,6 +3,10 @@ package br.com.loopis.controle_refeicoes.modelo.entidades;
 import javax.persistence.*;
 import java.io.Serializable;
 
+
+/**
+ * @author Leanderson Coelho
+ * **/
 @Entity
 public class Aluno implements Serializable {
 
