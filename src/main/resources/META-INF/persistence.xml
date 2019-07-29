@@ -3,7 +3,7 @@
     <persistence-unit name="PersistenciaSolicitacoes" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>java:app/jdbc/persistence_solicitacoes</jta-data-source>
-
+        
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
         </properties>
