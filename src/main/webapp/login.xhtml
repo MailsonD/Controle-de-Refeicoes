@@ -33,11 +33,13 @@
 
             <div class="card-body">
                 <h:form>
+		        <h:messages id="messagesError" infoStyle="list-style: none;color: green;"
+											errorStyle="list-style: none;color: red;" />
                     <div class="row">
                         <div class="col-md-12 pr-3">
                             <div class="form-group">
                                 <h:outputLabel value="Matricula"/>
-                                <h:inputText styleClass="form-control" value="#{loginBean.usuario.matricula}" >
+                                <h:inputText styleClass="form-control" value="#{autenticacaoBean.usuario.matricula}" >
                                     <f:passThroughAttribute name="placeholder" value="Matricula"></f:passThroughAttribute>
                                 </h:inputText>
                             </div>
@@ -47,14 +49,14 @@
                         <div class="col-md-12 pr-3">
                             <div class="form-group">
                                 <h:outputLabel value="Senha"/>
-                                <h:inputSecret styleClass="form-control" value="#{loginBean.usuario.senha}" >
+                                <h:inputSecret styleClass="form-control" value="#{autenticacaoBean.usuario.senha}" >
                                     <f:passThroughAttribute name="placeholder" value="Senha"></f:passThroughAttribute>
                                 </h:inputSecret>                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-10 pr-3">
-                            <h:commandButton type="submit" action="#{loginBean.login()}" styleClass="col-lg-10 btn btn-success btn-fill pull-right" value="Entrar"></h:commandButton>
+                            <h:commandButton type="submit" action="#{autenticacaoBean.login()}" styleClass="col-lg-10 btn btn-success btn-fill pull-right" value="Entrar"></h:commandButton>
                             <div class="clearfix"></div>
                         </div>
                     </div>

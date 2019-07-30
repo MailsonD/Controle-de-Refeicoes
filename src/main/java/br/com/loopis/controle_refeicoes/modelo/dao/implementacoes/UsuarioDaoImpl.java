@@ -7,6 +7,8 @@ import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoExc
 
 import javax.ejb.Stateless;
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -58,7 +60,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
     @Override
     public Usuario autenticar(Usuario usuario) throws SenhaInvalidaException, UsuarioNaoEncontradoException {
         Usuario trueUser = this.buscarPorMatricula(usuario);
-        if (usuario.getSenha().equals(trueUser.getSenha())) {
+        if (usuario.getSenha().equals(trueUser.getSenha()) && trueUser.getAtivo()) {
             return trueUser;
         } else throw new SenhaInvalidaException();
     }

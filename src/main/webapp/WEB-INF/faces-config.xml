@@ -3,5 +3,46 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <navigation-rule>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{autenticacaoBean.login()}</from-action>
+			<from-outcome>autorizado</from-outcome>
+			<if>#{autenticacaoBean.usuario.nivelAcesso == "ADMINISTRADOR"}</if>
+			<to-view-id>teste.xhtml?faces-redirect=true</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{autenticacaoBean.login()}</from-action>
+			<from-outcome>autorizado</from-outcome>
+			<if>#{autenticacaoBean.usuario.nivelAcesso == "PROFESSOR"}</if>
+			<to-view-id>teste.xhtml?faces-redirect=true</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{autenticacaoBean.login()}</from-action>
+			<from-outcome>autorizado</from-outcome>
+			<if>#{autenticacaoBean.usuario.nivelAcesso == "CAEST"}</if>
+			<to-view-id>teste.xhtml?faces-redirect=true</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{autenticacaoBean.login()}</from-action>
+			<from-outcome>autorizado</from-outcome>
+			<if>#{autenticacaoBean.usuario.nivelAcesso == "GESTOR"}</if>
+			<to-view-id>teste.xhtml?faces-redirect=true</to-view-id>
+			<redirect/>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-action>#{autenticacaoBean.logout()}</from-action>
+			<from-outcome>nao-autorizado</from-outcome>
+			<to-view-id>login.xhtml?faces-redirect=true</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
   
 </faces-config>
