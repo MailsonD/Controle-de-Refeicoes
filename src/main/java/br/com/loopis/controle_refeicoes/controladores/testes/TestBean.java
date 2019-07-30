@@ -1,4 +1,4 @@
-package br.com.loopis.controle_refeicoes.controle.testes;
+package br.com.loopis.controle_refeicoes.controladores.testes;
 
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.UsuarioDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.*;
@@ -6,15 +6,11 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteException;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.SenhaInvalidaException;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-
-import org.postgresql.util.PSQLException;
 
 @Singleton
 @Startup
