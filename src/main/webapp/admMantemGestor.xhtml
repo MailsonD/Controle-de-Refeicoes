@@ -108,7 +108,7 @@ and open the template in the editor.
                                                 <div class="col-md-12 pr-3">
                                                     <div class="form-group">
                                                         <label>Nome</label>
-                                                        <h:inputText  class="form-control">
+                                                        <h:inputText  class="form-control" value="#{gestorBean.usuario.nome}">
                                                             <f:passThroughAttribute name="placeholder" value="Nome"></f:passThroughAttribute>
                                                         </h:inputText>
                                                     </div>
@@ -118,7 +118,7 @@ and open the template in the editor.
                                                 <div class="col-md-12 pr-3">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Email</label>
-                                                        <h:inputText  class="form-control">
+                                                        <h:inputText  class="form-control" value="#{gestorBean.usuario.email}">
                                                             <f:passThroughAttribute name="placeholder" value="E-mail"></f:passThroughAttribute>
                                                         </h:inputText>
                                                     </div>
@@ -128,7 +128,7 @@ and open the template in the editor.
                                                 <div class="col-md-12 pr-3">
                                                     <div class="form-group">
                                                         <label>Matricula</label>
-                                                        <h:inputText  class="form-control"> 
+                                                        <h:inputText  class="form-control" value="#{gestorBean.usuario.matricula}">
                                                             <f:passThroughAttribute name="placeholder" value="Matricula"></f:passThroughAttribute>
                                                         </h:inputText>
                                                     </div>
@@ -241,9 +241,12 @@ and open the template in the editor.
                                                     <td>123456789</td>
                                                     <td>email@email.com</td>
                                                     <td>
-                                                        <a class="nav-link active" href="upgrade.html">
-                                                            <i class="nc-icon nc-simple-remove"></i>
-                                                        </a>
+                                                        <h:form>
+                                                            <h:commandLink styleClass="nav-link active nc-icon nc-simple-remove" action="#{gestorBean.remover()}"/>
+                                                        </h:form>
+<!--                                                        <a class="nav-link active" href="upgrade.html">-->
+<!--                                                            <i class="nc-icon nc-simple-remove"></i>-->
+<!--                                                        </a>-->
                                                     </td>
                                                 </tr>
                                             </tbody>
