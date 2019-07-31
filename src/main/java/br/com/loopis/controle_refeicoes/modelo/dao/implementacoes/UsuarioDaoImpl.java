@@ -2,6 +2,7 @@ package br.com.loopis.controle_refeicoes.modelo.dao.implementacoes;
 
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.UsuarioDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
+import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteException;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.SenhaInvalidaException;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
@@ -112,6 +113,13 @@ public class UsuarioDaoImpl implements UsuarioDao {
         if (usuario.getSenha().equals(trueUser.getSenha()) && trueUser.getAtivo()) {
             return trueUser;
         } else throw new SenhaInvalidaException();
+    }
+
+    @Override
+    public List<Usuario> usuariosComNivelDeAcesso(NivelAcesso nivelAcesso) {
+        TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.nivelAcesso=:na", Usuario.class);
+        query.setParameter("na", nivelAcesso);
+        return query.getResultList();
     }
 
 }
