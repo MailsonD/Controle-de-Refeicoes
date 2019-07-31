@@ -11,10 +11,10 @@ public class Beneficio implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    private TipoBeneficio tipobeneficio;
     private String edital;
     @Enumerated(EnumType.STRING)
-    private TipoBeneficio tipoBeneficio;
+    private TipoBeneficio tipobeneficio;
+//    private TipoBeneficio tipoBeneficio;
     @OneToOne()
     private Aluno alunoBeneficiado;
 
@@ -55,8 +55,18 @@ public class Beneficio implements Serializable {
     public void setEdital(String edital) {
         this.edital = edital;
     }
+    
+    
 
-    @Override
+    public Aluno getAlunoBeneficiado() {
+		return alunoBeneficiado;
+	}
+
+	public void setAlunoBeneficiado(Aluno alunoBeneficiado) {
+		this.alunoBeneficiado = alunoBeneficiado;
+	}
+
+	@Override
     public String toString() {
         return "Beneficio{" + "id=" + id + ", tipobeneficio=" + tipobeneficio + ", edital=" + edital + '}';
     }
