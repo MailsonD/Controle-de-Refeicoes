@@ -36,47 +36,13 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public void salvar(Usuario object) throws MatriculaExistenteException {
-     
-//        try{
-//            em.persist(object);
-//            em.flush();
-//        } catch(PersistenceException e){
-//            if (e.getCause().getClass().equals(ConstraintViolationException.class)){    
-//                System.out.println(e.getCause());
-//            }
-//        }
-
         try {
             object.setAtivo(true);
             em.persist(object);
-            //em.flush();
         } catch (EntityExistsException e){
             throw new MatriculaExistenteException();
-        }
-            //em.flush();
-//        } catch (PersistenceException e) {
-//            //PSQLException cause =  (PSQLException) e.getCause();
-//            //if(e.getDatabaseErrorCode() == 0){
-//            Throwable t = getLastThrowable(e);  //fetching Internal Exception
-//            SQLException exxx = (SQLException) t;  //casting Throwable object to SQL Exception
-//            System.out.println(exxx.getSQLState());
-            //if(exxx.getSQLState()==23000) // Integrity constraint violation
-            //{
-                //Custom Bussiness Logic
-            //    throw new MatriculaExistenteException();
-            //}
-                        
-            //}
-        //}
-                
+        }  
     }
-    
-//    private Throwable getLastThrowable(Exception e) {
-//        Throwable t = null;
-//        for(t = e.getCause(); t.getCause() != null; t = t.getCause());
-//        return t;
-//    } 
-
     @Override
     public void atualizar(Usuario object) {
         em.merge(object);

@@ -109,8 +109,8 @@ and open the template in the editor.
                                         <h4 class="card-title">Cadastrar CAEST</h4>
                                     </div>
                                     <div class="card-body">
-                                        <h:form>
-                                            <div class="row">
+                                        <h:form enctype="multipart/form-data">
+<!--                                            <div class="row">
                                                 <div class="col-md-12 pr-3">
                                                     <div class="form-group">
                                                         <label>Nome</label>
@@ -139,10 +139,16 @@ and open the template in the editor.
                                                         </h:inputText>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>-->
+                                            <h:messages id="messagesError" infoStyle="list-style: none;color: green;"
+                                                        errorStyle="list-style: none;color: red;" />
+                                            <h:inputFile 
+                                                value="#{professorBean.part}" 
+                                                required="true" 
+                                                requiredMessage="Faça o upload do arquivo .csv" ></h:inputFile>
                                             <div class="row">
                                                 <div class="col-md-10 pr-3">
-                                                    <h:commandButton class="col-lg-10 btn btn-success btn-fill pull-right" value="Cadastrar" >
+                                                    <h:commandButton action="#{professorBean.salvar()}" class="col-lg-10 btn btn-success btn-fill pull-right" value="Cadastrar" >
 
                                                     </h:commandButton>
 
@@ -164,26 +170,29 @@ and open the template in the editor.
                                         <p class="card-category">Lista de Funcionarios da CAEST Cadastrados</p>
                                     </div>
                                     <div class="card-body table-full-width table-responsive">
-                                        <h:dataTable class="table table-hover table-striped">
-                                            <h:column>
-                                                <f:facet name="header">NOME</f:facet>
+                                        <h:form>
+                                            
+                                            <h:dataTable class="table table-hover table-striped" value="#{professorBean.professores}" var="professor">
+                                                <h:column>
+                                                    <f:facet name="header">NOME</f:facet>
+                                                    <h:outputText value="#{professor.nome}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">MATRICULA</f:facet>
+                                                    <h:outputText value="#{professor.matricula}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">E-MAIL</f:facet>
+                                                    <h:outputText value="#{professor.email}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">EXCLUIR</f:facet>
+                                                    <h:commandButton action="#{professorBean.remover(professor)}" value="X"></h:commandButton>
 
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">MATRICULA</f:facet>
+                                                </h:column>
 
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">E-MAIL</f:facet>
-                                                <p> nome </p>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">EXCLUIR</f:facet>
-
-
-                                            </h:column>
-
-                                        </h:dataTable>
+                                            </h:dataTable>
+                                        </h:form>
                                     </div>
                                 </div>
                             </div>
