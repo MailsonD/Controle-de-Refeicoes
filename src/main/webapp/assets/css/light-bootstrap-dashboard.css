@@ -722,6 +722,50 @@ body>.navbar-collapse[data-color="purple"]:after {
     -webkit-overflow-scrolling: touch;
 }
 
+/*.main-login {
+    background: #9368E9;
+    background: -moz-linear-gradient(top, #9368E9 0%, #943bea 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #9368E9), color-stop(100%, #943bea));
+    background: -webkit-linear-gradient(top, #9368E9 0%, #943bea 100%);
+    background: -o-linear-gradient(top, #9368E9 0%, #943bea 100%);
+    background: -ms-linear-gradient(top, #9368E9 0%, #943bea 100%);
+    background: linear-gradient(to bottom, #9368E9 0%, #943bea 100%);
+    background-size: 150% 150%;
+    z-index: 3;
+    opacity: 1;
+    position: relative;
+    float: right;
+    width: calc(100% - 260px);
+    min-height: 100%;
+}
+
+.main-login>.content {
+    padding: 30px 15px;
+    min-height: calc(100% - 123px);
+}
+
+.main-login>.footer {
+    border-top: 1px solid #e7e7e7;
+}
+
+.main-login .navbar {
+    margin-bottom: 0;
+}
+
+.sidebar,
+.main-login {
+    overflow: auto;
+    max-height: 100%;
+    height: 100%;
+    -webkit-transition-property: top, bottom;
+    transition-property: top, bottom;
+    -webkit-transition-duration: .2s, .2s;
+    transition-duration: .2s, .2s;
+    -webkit-transition-timing-function: linear, linear;
+    transition-timing-function: linear, linear;
+    -webkit-overflow-scrolling: touch;
+}*/
+
 .fixed-plugin .dropdown .dropdown-menu {
     -webkit-transform: translate3d(0, -5%, 0) !important;
     -moz-transform: translate3d(0, -5%, 0) !important;
