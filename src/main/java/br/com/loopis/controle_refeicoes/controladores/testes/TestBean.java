@@ -21,36 +21,28 @@ public class TestBean {
 
     @PostConstruct
     private void init(){
-        Usuario u = new Usuario("123","123","meuEmail","meu nome", NivelAcesso.ADMINISTRADOR,true);
+        Usuario a = new Usuario("1234","123","meuEmail1","meu nome 1", NivelAcesso.ADMINISTRADOR,true);
+        Usuario b = new Usuario("1235","123","meuEmail2","meu nome 2", NivelAcesso.ADMINISTRADOR,true);
+        Usuario c = new Usuario("1236","123","meuEmail3","meu nome 3", NivelAcesso.ADMINISTRADOR,true);
+        Usuario d = new Usuario("1237","123","meuEmail4","meu nome 4", NivelAcesso.ADMINISTRADOR,true);
+        Usuario e = new Usuario("1238","123","meuEmail5","meu nome 5", NivelAcesso.GESTOR,true);
         try {
-            usuarioDao.salvar(u);
+            usuarioDao.salvar(a);
+            usuarioDao.salvar(b);
+            usuarioDao.salvar(c);
+            usuarioDao.salvar(d);
+            usuarioDao.salvar(e);
         } catch (MatriculaExistenteException ex) {
-            ex.getMessage();
+            ex.printStackTrace();
         }
-//        Usuario v = new Usuario("123","123","meuEmails","meu nome 2", NivelAcesso.ADMINISTRADOR,true);
-//        try {
-//            //try {
-//            usuarioDao.salvar(v);
-//            //} catch (PSQLException e){
-//        } catch (MatriculaExistenteException ex) {
-//            ex.getMessage();
-//        }
-            
-        //}
-        try {
-            System.out.println(usuarioDao.buscarPorMatricula(u).getSenha());
-//            Usuario z = u;
-//            z.setSenha("1234");
-//            System.out.println(usuarioDao.buscarPorMatricula(u).getSenha());
-            Usuario aut = usuarioDao.autenticar(u);
-            if(aut!=null){
-                System.out.println("Autenticado");
-            }else System.out.println("Nao autenticado");
-        } catch (UsuarioNaoEncontradoException e) {
-            e.printStackTrace();
-        } catch (SenhaInvalidaException e) {
-            e.printStackTrace();
-        }
+
+        usuarioDao.usuariosComNivelDeAcesso(NivelAcesso.GESTOR).forEach(
+                usuario -> {
+                    System.out.println(usuario.getNome());
+                }
+        );
+        //So vai exibir => "meu nome 5"
+
     }
 
 
