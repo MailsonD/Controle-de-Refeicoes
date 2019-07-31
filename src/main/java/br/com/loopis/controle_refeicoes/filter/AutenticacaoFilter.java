@@ -21,7 +21,7 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
  * 27 de jun de 2019
  * 16:45:18
  */
-@WebFilter(filterName="AutenticacaoFilter", urlPatterns="/teste.xhtml")
+//@WebFilter(filterName="AutenticacaoFilter", urlPatterns={"/adm/*", "/gestor/*", "/admInicio.xhtml"})
 public class AutenticacaoFilter implements Filter {
 
 	@Override
