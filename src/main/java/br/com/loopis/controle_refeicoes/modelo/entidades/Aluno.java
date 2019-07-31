@@ -16,7 +16,7 @@ public class Aluno implements Serializable {
     @Column(unique = true)
     private String matricula;
     private String nome;
-    @OneToOne(mappedBy = "alunoBeneficiado")
+    @OneToOne(mappedBy = "alunoBeneficiado", cascade=CascadeType.PERSIST)
     private Beneficio beneficio;
 
     public Aluno() {
@@ -56,8 +56,18 @@ public class Aluno implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
+    
+    
+    public Beneficio getBeneficio() {
+		return beneficio;
+	}
 
-    @Override
+	public void setBeneficio(Beneficio beneficio) {
+		this.beneficio = beneficio;
+	}
+
+	@Override
     public String toString() {
         return "Aluno{" + "id=" + id + ", matricula=" + matricula + ", nome=" + nome + '}';
     }
