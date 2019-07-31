@@ -36,7 +36,7 @@ public class AutenticacaoFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 //		AutenticacaoBean bean = (AutenticacaoBean) httpRequest.getSession(false).getAttribute("autenticacaoBean");
-		Usuario u = (Usuario) httpRequest.getSession(false).getAttribute("usuarioLogado");
+		Usuario u = (Usuario) httpRequest.getSession().getAttribute("usuarioLogado");
 		if(u==null) {//(bean==null || bean.usuario.getMatricula()==null)
 			httpResponse.sendRedirect(httpRequest.getContextPath()+"/login.xhtml");
 		}

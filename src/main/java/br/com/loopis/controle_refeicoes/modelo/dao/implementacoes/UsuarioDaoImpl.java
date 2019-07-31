@@ -47,6 +47,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 //        }
 
         try {
+            object.setAtivo(true);
             em.persist(object);
             //em.flush();
         } catch (EntityExistsException e){

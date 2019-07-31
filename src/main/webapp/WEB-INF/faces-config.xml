@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <navigation-rule>
-		<from-view-id>/login.xhtml</from-view-id>
+		<from-view-id>login.xhtml</from-view-id>
 		<navigation-case>
 			<from-action>#{autenticacaoBean.login()}</from-action>
 			<from-outcome>autorizado</from-outcome>
