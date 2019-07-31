@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * @author Leanderson Coelho
+ * **/
 @Entity
 public class Pedido implements Serializable {
 

@@ -8,6 +8,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+/**
+ * @author
+ * **/
 @Stateless
 public class AlunoDaoImpl implements AlunoDao {
     
