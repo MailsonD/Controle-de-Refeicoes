@@ -104,11 +104,13 @@ and open the template in the editor.
                                     </div>
                                     <div class="card-body">
                                         <h:form>
+                                            <h:messages id="messagesError" infoStyle="list-style: none;color: green;"
+                                                        errorStyle="list-style: none;color: red;" />
                                             <div class="row">
                                                 <div class="col-md-12 pr-3">
                                                     <div class="form-group">
                                                         <label>Nome</label>
-                                                        <h:inputText  class="form-control" value="#{GestorBean.usuario.nome}">
+                                                        <h:inputText  class="form-control" value="#{gestorBean.usuario.nome}">
                                                             <f:passThroughAttribute name="placeholder" value="Nome"></f:passThroughAttribute>
                                                         </h:inputText>
                                                     </div>
@@ -118,7 +120,7 @@ and open the template in the editor.
                                                 <div class="col-md-12 pr-3">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Email</label>
-                                                        <h:inputText  class="form-control" value="#{GestorBean.usuario.email}">
+                                                        <h:inputText  class="form-control" value="#{gestorBean.usuario.email}">
                                                             <f:passThroughAttribute name="placeholder" value="E-mail"></f:passThroughAttribute>
                                                         </h:inputText>
                                                     </div>
@@ -128,7 +130,7 @@ and open the template in the editor.
                                                 <div class="col-md-12 pr-3">
                                                     <div class="form-group">
                                                         <label>Matricula</label>
-                                                        <h:inputText  class="form-control" value="#{GestorBean.usuario.matricula}">
+                                                        <h:inputText  class="form-control" value="#{gestorBean.usuario.matricula}">
                                                             <f:passThroughAttribute name="placeholder" value="Matricula"></f:passThroughAttribute>
                                                         </h:inputText>
                                                     </div>
@@ -136,7 +138,7 @@ and open the template in the editor.
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-10 pr-3">
-                                                    <h:commandButton class="col-lg-10 btn btn-success btn-fill pull-right" action="#{GestorBean.cadastrar()}" value="Cadastrar" >
+                                                    <h:commandButton class="col-lg-10 btn btn-success btn-fill pull-right" action="#{gestorBean.cadastrar}" value="Cadastrar" >
 
                                                     </h:commandButton>
 
@@ -158,18 +160,21 @@ and open the template in the editor.
                                         <p class="card-category">Lista de Gestores Cadastrados</p>
                                     </div>
                                     <div class="card-body table-full-width table-responsive">
-                                        <h:dataTable class="table table-hover table-striped">
+                                        <h:dataTable class="table table-hover table-striped" value="#{gestorBean.gestores}" var="gestor">
                                             <h:column>
                                                 <f:facet name="header">NOME</f:facet>
+                                                <h:outputText value="#{gestor.nome}"/>
 
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">MATRICULA</f:facet>
+                                                <h:outputText value="#{gestor.matricula}"/>
 
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">E-MAIL</f:facet>
-                                                <p> nome </p>
+                                                <h:outputText value="#{gestor.email}"/>
+
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">EXCLUIR</f:facet>
