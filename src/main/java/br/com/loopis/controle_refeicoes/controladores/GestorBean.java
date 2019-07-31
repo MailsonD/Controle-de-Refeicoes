@@ -1,24 +1,24 @@
 package br.com.loopis.controle_refeicoes.controladores;
 
-import br.com.loopis.controle_refeicoes.modelo.dao.implementacoes.UsuarioDaoImpl;
-import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.DaoIF;
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.UsuarioDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteException;
+import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.view.ViewScoped;
 
-@RequestScoped
+
+@ViewScoped
 @Named
-public class GestorBean {
+public class GestorBean implements Serializable{
 
     private Usuario usuario;
     @Inject
@@ -39,9 +39,9 @@ public class GestorBean {
             gestorDao.salvar(usuario);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Gestor cadastrado com sucesso!", null));
 
-            gestores = gestorDao.listar();
+            gestores = gestorDao.usuariosComNivelDeAcesso(NivelAcesso.GESTOR);
         } catch (MatriculaExistenteException e) {
-            e.printStackTrace();
+            System.out.println("Foi");
         }
         return "";
     }
