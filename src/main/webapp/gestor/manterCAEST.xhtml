@@ -49,7 +49,7 @@ and open the template in the editor.
                                 <p>SOLICITAÇÕES</p>
                             </h:commandLink>
                         </li>
-                         <li>
+                        <li>
                             <h:commandLink class="nav-link" >
                                 <i class="nc-icon nc-circle-09"></i>
                                 <p>PERFIL</p>
@@ -77,7 +77,7 @@ and open the template in the editor.
 
 
                         <li class="nav-item active active-pro">
-                           
+
                             <h:commandLink class="nav-link active">
                                 <i class="nc-icon nc-button-power"></i>
                                 <p class="col-md-8">SAIR</p>
@@ -114,7 +114,7 @@ and open the template in the editor.
                                                 <div class="col-md-12 pr-3">
                                                     <div class="form-group">
                                                         <label>Nome</label>
-                                                        <h:inputText  class="form-control" value="#{gestorBean.usuario.nome}">
+                                                        <h:inputText  class="form-control" value="#{caestBean.caest.nome}">
                                                             <f:passThroughAttribute name="placeholder" value="Nome"></f:passThroughAttribute>
                                                         </h:inputText>
                                                     </div>
@@ -124,7 +124,7 @@ and open the template in the editor.
                                                 <div class="col-md-12 pr-3">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Email</label>
-                                                        <h:inputText  class="form-control" value="#{gestorBean.usuario.email}">
+                                                        <h:inputText  class="form-control" value="#{caestBean.caest.email}">
                                                             <f:passThroughAttribute name="placeholder" value="E-mail"></f:passThroughAttribute>
                                                         </h:inputText>
                                                     </div>
@@ -134,7 +134,7 @@ and open the template in the editor.
                                                 <div class="col-md-12 pr-3">
                                                     <div class="form-group">
                                                         <label>Matricula</label>
-                                                        <h:inputText  class="form-control" value="#{gestorBean.usuario.matricula}">
+                                                        <h:inputText  class="form-control" value="#{caestBean.caest.matricula}">
                                                             <f:passThroughAttribute name="placeholder" value="Matricula"></f:passThroughAttribute>
                                                         </h:inputText>
                                                     </div>
@@ -142,7 +142,7 @@ and open the template in the editor.
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-10 pr-3">
-                                                    <h:commandButton class="col-lg-10 btn btn-success btn-fill pull-right" value="Cadastrar" >
+                                                    <h:commandButton class="col-lg-10 btn btn-success btn-fill pull-right" action="#{caestBean.cadastrar()}" value="Cadastrar" >
 
                                                     </h:commandButton>
 
@@ -164,26 +164,31 @@ and open the template in the editor.
                                         <p class="card-category">Lista de Funcionarios da CAEST Cadastrados</p>
                                     </div>
                                     <div class="card-body table-full-width table-responsive">
-                                        <h:dataTable class="table table-hover table-striped">
-                                            <h:column>
-                                                <f:facet name="header">NOME</f:facet>
+                                        <h:form>
 
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">MATRICULA</f:facet>
+                                            <h:dataTable styleClass="table table-hover table-striped"
+                                                         value="#{caestBean.usuariosCaest}" var="caestUsua">
+                                                <h:column>
+                                                    <f:facet name="header">NOME</f:facet>
+                                                    <h:outputText value="#{caestUsua.nome}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">MATRICULA</f:facet>
+                                                    <h:outputText value="#{caestUsua.matricula}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">E-MAIL</f:facet>
+                                                    <h:outputText value="#{caestUsua.email}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">EXCLUIR</f:facet>
+                                                    <h:commandButton styleClass="btn btn-danger btn-fill" action="#{caestBean.remover(caestUsua)}"
+                                                                     value="Excluir"></h:commandButton>
 
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">E-MAIL</f:facet>
-                                                <p> nome </p>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">EXCLUIR</f:facet>
+                                                </h:column>
 
-
-                                            </h:column>
-
-                                        </h:dataTable>
+                                            </h:dataTable>
+                                        </h:form>
                                     </div>
                                 </div>
                             </div>
@@ -250,9 +255,9 @@ and open the template in the editor.
                                                         <h:form>
                                                             <h:commandLink styleClass="nav-link active nc-icon nc-simple-remove" action="#{gestorBean.remover()}"/>
                                                         </h:form>
-<!--                                                        <a class="nav-link active" href="upgrade.html">-->
-<!--                                                            <i class="nc-icon nc-simple-remove"></i>-->
-<!--                                                        </a>-->
+                                                        <!--                                                        <a class="nav-link active" href="upgrade.html">-->
+                                                        <!--                                                            <i class="nc-icon nc-simple-remove"></i>-->
+                                                        <!--                                                        </a>-->
                                                     </td>
                                                 </tr>
                                             </tbody>
