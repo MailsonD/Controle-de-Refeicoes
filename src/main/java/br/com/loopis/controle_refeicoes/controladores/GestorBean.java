@@ -45,7 +45,11 @@ public class GestorBean implements Serializable{
         }
         return "";
     }
-
+    
+    public void remover(Usuario usuario){
+        this.gestorDao.remover(usuario);
+        this.gestores = this.gestorDao.usuariosComNivelDeAcesso(NivelAcesso.GESTOR);
+    }
 
     public Usuario getUsuario() {
         return usuario;
