@@ -190,10 +190,11 @@ and open the template in the editor.
                                                         </h:commandButton>
                                                     </td>
                                                     <td>
-                                                        <h:commandButton style="margin-left: 10%" class="col-lg-12 btn btn-danger pull-right" 
-                                                                         value="Recusar" >
-
-                                                        </h:commandButton>
+                                                        <h:commandLink class="col-lg-12 btn btn-danger pull-right" value="Recusar">
+                                                            <f:ajax render="@all" />
+                                                            <f:passThroughAttribute name="data-toggle" value="modal" />
+                                                            <f:passThroughAttribute name="data-target" value="#myModal2" />
+                                                        </h:commandLink>
                                                     </td>
                                                     <td>
                                                         
@@ -218,7 +219,7 @@ and open the template in the editor.
                                 </div>
                             </div>
                         </div>
-                        <!-- Mini Modal -->
+                        <!-- Detalhes Modal -->
                         <div class="modal fade modal-primary" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -253,6 +254,38 @@ and open the template in the editor.
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-link btn-simple" data-dismiss="modal">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  End Modal -->
+                        <!-- Recusar Modal -->
+                        <div class="modal fade modal-primary" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header justify-content-center">
+
+                                        <h3>Recusar Solicitação </h3>
+                                       
+                                    </div>
+                                    <div class="modal-body">
+                                         <p> Você precisa inserir uma justificativa para não aceitar o pedido</p>
+                                        <h5>Justificativa: </h5>
+                                        <h:form>
+                                            <h:inputTextarea rows="5" styleClass="form-control">
+                                                
+                                            </h:inputTextarea>
+                                        </h:form>
+                                                                          
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-link btn-simple" data-dismiss="modal">Fechar</button>
+                                        
+                                        <h:commandButton class="col-lg-8 btn btn-danger pull-right" 
+                                                                          value="Resusar Solicitação" >
+                                            
+                                        </h:commandButton>
                                     </div>
                                 </div>
                             </div>
