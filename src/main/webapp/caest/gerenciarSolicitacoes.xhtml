@@ -30,7 +30,7 @@ and open the template in the editor.
 
     <h:body>
         <div class="wrapper">
-            <div class="sidebar" data-color="green" data-image="../assets/img/if.jpeg">
+            <div class="sidebar" data-color="green" data-image="../assets/img/sidebar-1.jpg">
                 <!--
             Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
     
@@ -49,10 +49,17 @@ and open the template in the editor.
                                 <p>SOLICITAÇÕES</p>
                             </h:commandLink>
                         </li>
-                       <li>
+                        <li>
                             <h:commandLink class="nav-link"  >
                                 <i class="nc-icon nc-paper-2"></i>
                                 <p>Historico</p>
+                            </h:commandLink>
+                        </li>
+
+                        <li>
+                            <h:commandLink class="nav-link">
+                                <i class="nc-icon nc-badge"></i>
+                                <p>ALUNOS BENEFICIADOS</p>
                             </h:commandLink>
                         </li>
                         <li>
@@ -61,13 +68,6 @@ and open the template in the editor.
                                 <p>Conta</p>
                             </h:commandLink>
                         </li>
-                         <li>
-                            <h:commandLink class="nav-link">
-                                <i class="nc-icon nc-badge"></i>
-                                <p>ALUNOS BENEFICIADOS</p>
-                            </h:commandLink>
-                        </li>
-
                         <!--                <li class="nav-item active">
                                                 <a class="nav-link" href="CadastroDeGestor.html">
                                                     <i class="nc-icon nc-circle-09"></i>
@@ -196,16 +196,16 @@ and open the template in the editor.
                                                         </h:commandLink>
                                                     </td>
                                                     <td>
-                                                        
+
                                                         <h:commandLink class="col-lg-12 btn btn-info pull-right" value="Detalhes">
                                                             <f:ajax render="@all" />
                                                             <f:passThroughAttribute name="data-toggle" value="modal" />
                                                             <f:passThroughAttribute name="data-target" value="#myModal1" />
                                                         </h:commandLink>
 
-<!--                                                    <a class="btn btn-info  btn-wd" data-toggle="modal" data-target="#myModal1" href="#pablo">
-                                                            Detalhes
-                                                        </a>-->
+                                                        <!--                                                    <a class="btn btn-info  btn-wd" data-toggle="modal" data-target="#myModal1" href="#pablo">
+                                                                                                                    Detalhes
+                                                                                                                </a>-->
 
                                                     </td>
 
@@ -249,7 +249,7 @@ and open the template in the editor.
                                                 </tbody>
                                             </table>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-link btn-simple" data-dismiss="modal">Fechar</button>
@@ -265,25 +265,25 @@ and open the template in the editor.
                                     <div class="modal-header justify-content-center">
 
                                         <h3>Recusar Solicitação </h3>
-                                       
+
                                     </div>
                                     <div class="modal-body">
-                                         <p> Você precisa inserir uma justificativa para não aceitar o pedido</p>
+                                        <p> Você precisa inserir uma justificativa para não aceitar o pedido</p>
                                         <h5>Justificativa: </h5>
                                         <h:form>
                                             <h:inputTextarea rows="5" styleClass="form-control">
-                                                
+
                                             </h:inputTextarea>
                                         </h:form>
-                                                                          
-                                        
+
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-link btn-simple" data-dismiss="modal">Fechar</button>
-                                        
+
                                         <h:commandButton class="col-lg-8 btn btn-danger pull-right" 
-                                                                          value="Resusar Solicitação" >
-                                            
+                                                         value="Resusar Solicitação" >
+
                                         </h:commandButton>
                                     </div>
                                 </div>
