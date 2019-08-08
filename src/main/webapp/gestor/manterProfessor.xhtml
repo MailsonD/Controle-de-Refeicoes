@@ -10,300 +10,190 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <head>
-        <meta charset="utf-8" />
-        <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png"/>
-        <link rel="icon" type="image/png" href="../assets/img/favicon.ico"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Cadastro de Gestor</title>
-        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-              name='viewport' />
-        <!--     Fonts and icons     -->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-        <!-- CSS Files -->
-        <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
-        <!-- CSS Just for demo purpose, don't include it in your project -->
-        <link href="../assets/css/demo.css" rel="stylesheet" />
-    </head>
+<head>
+    <meta charset="utf-8"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png"/>
+    <link rel="icon" type="image/png" href="../assets/img/favicon.ico"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>Cadastro de Gestor</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport'/>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+    <!-- CSS Files -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet"/>
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="../assets/css/demo.css" rel="stylesheet"/>
+    <!--        BOOTSTRAP 4-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
 
-    <h:body>
-        <div class="wrapper">
-            <div class="sidebar" data-color="green" data-image="../assets/img/sidebar-5.jpg">
-                <!--
-            Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-    
-            Tip 2: you can also add an image using data-image tag
-                -->
-                <div class="sidebar-wrapper">
-                    <div class="logo">
-                        <a href="http://www.creative-tim.com" class="simple-text">
-                            GERENCIA REFEIÇÕES
-                        </a>
-                    </div>
-                    <ul class="nav">
-                        <li>
-                            <h:commandLink class="nav-link" >
-                                <i class="nc-icon nc-notes"></i>
-                                <p>SOLICITAÇÕES</p>
-                            </h:commandLink>
-                        </li>
-                         <li>
-                            <h:commandLink class="nav-link" >
-                                <i class="nc-icon nc-circle-09"></i>
-                                <p>PERFIL</p>
-                            </h:commandLink>
-                        </li>
-                        <li class="nav-item active">
-                            <h:commandLink class="nav-link" >
-                                <i class="nc-icon nc-badge"></i>
-                                <p>CAEST</p>
-                            </h:commandLink>
-                        </li>
-                        <li class="nav-item">
-                            <h:commandLink class="nav-link" >
-                                <i class="nc-icon nc-badge"></i>
-                                <p>PROFESSOR</p>
-                            </h:commandLink>
-                        </li>
+</head>
 
-                        <!--                <li class="nav-item active">
-                                                <a class="nav-link" href="CadastroDeGestor.html">
-                                                    <i class="nc-icon nc-circle-09"></i>
-                                                    <p>Cadastro Gestor</p>
-                                                </a>
-                                            </li>-->
+<h:body>
+    <div class="wrapper">
+        <div class="sidebar" data-color="green" data-image="../assets/img/sidebar-5.jpg">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
-
-                        <li class="nav-item active active-pro">
-                           
-                            <h:commandLink class="nav-link active">
-                                <i class="nc-icon nc-button-power"></i>
-                                <p class="col-md-8">SAIR</p>
-                            </h:commandLink>
-                        </li>
-                    </ul>
+        Tip 2: you can also add an image using data-image tag
+            -->
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="http://www.creative-tim.com" class="simple-text">
+                        GERENCIA REFEIÇÕES
+                    </a>
                 </div>
+                <ul class="nav">
+                    <li>
+                        <h:commandLink class="nav-link">
+                            <i class="nc-icon nc-notes"></i>
+                            <p>SOLICITAÇÕES</p>
+                        </h:commandLink>
+                    </li>
+                    <li class="nav-item active">
+                        <h:commandLink class="nav-link">
+                            <i class="nc-icon nc-badge"></i>
+                            <p>PROFESSOR</p>
+                        </h:commandLink>
+                    </li>
+                </ul>
             </div>
-            <div class="main-panel">
-                <!-- Navbar -->
-                <nav class="navbar navbar-expand-lg " color-on-scroll="500">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#pablo"> Gestor </a>
-                        <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                                aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-bar burger-lines"></span>
-                            <span class="navbar-toggler-bar burger-lines"></span>
-                            <span class="navbar-toggler-bar burger-lines"></span>
-                        </button>
-                    </div>
-                </nav>
-                <!-- End Navbar -->
-                <div class="content" style="margin-left: 10%">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Cadastrar CAEST</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <h:form>
-                                            <div class="row">
-                                                <div class="col-md-12 pr-3">
-                                                    <div class="form-group">
-                                                        <label>Nome</label>
-                                                        <h:inputText  class="form-control" value="#{gestorBean.usuario.nome}">
-                                                            <f:passThroughAttribute name="placeholder" value="Nome"></f:passThroughAttribute>
-                                                        </h:inputText>
-                                                    </div>
+        </div>
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#pablo"> Gestor </a>
+                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                            aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                    </button>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content" style="margin-left: 10%">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Cadastrar Professores</h4>
+                                </div>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="custom-file">
+                                                    <h:messages id="messagesError"
+                                                                infoStyle="list-style: none;color: green;"
+                                                                errorStyle="list-style: none;color: red;"/>
+                                                    <h:inputFile styleClass="custom-file-input"
+                                                                 value="#{professorBean.part}"
+                                                                 required="true"
+                                                                 requiredMessage="Faça o upload do arquivo .csv"></h:inputFile>
+                                                    <label class="custom-file-label"
+                                                           for="customFile">Carregue seu arquivo .CSV</label>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-12 pr-3">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Email</label>
-                                                        <h:inputText  class="form-control" value="#{gestorBean.usuario.email}">
-                                                            <f:passThroughAttribute name="placeholder" value="E-mail"></f:passThroughAttribute>
-                                                        </h:inputText>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 pr-3">
-                                                    <div class="form-group">
-                                                        <label>Matricula</label>
-                                                        <h:inputText  class="form-control" value="#{gestorBean.usuario.matricula}">
-                                                            <f:passThroughAttribute name="placeholder" value="Matricula"></f:passThroughAttribute>
-                                                        </h:inputText>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-10 pr-3">
-                                                    <h:commandButton class="col-lg-10 btn btn-success btn-fill pull-right" value="Cadastrar" >
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-10 pr-3">
+                                                <h:commandButton action="#{professorBean.salvar()}"
+                                                                 class="col-lg-10 btn btn-success btn-fill pull-right"
+                                                                 value="Cadastrar">
 
-                                                    </h:commandButton>
-
-                                                    <!--                                                <button type="submit"
-                                                                                                        class="col-lg-10 btn btn-success btn-fill pull-right"
-                                                                                                        onclick="demo.showNotification('top','center')">Cadastrar
-                                                                                                        Gestor</button>-->
-                                                </div>
+                                                </h:commandButton>
                                             </div>
+                                        </div>
 
-                                        </h:form>
-                                    </div>
+                                    </h:form>
                                 </div>
                             </div>
-                            <div class="col-md-10">
-                                <div class="card strpied-tabled-with-hover">
-                                    <div class="card-header ">
-                                        <h4 class="card-title">Funcionarios CAEST</h4>
-                                        <p class="card-category">Lista de Funcionarios da CAEST Cadastrados</p>
-                                    </div>
-                                    <div class="card-body table-full-width table-responsive">
-                                        <h:dataTable class="table table-hover table-striped">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card strpied-tabled-with-hover">
+                                <div class="card-header ">
+                                    <h4 class="card-title">Professores</h4>
+                                    <p class="card-category">Lista de Professores Cadastrados</p>
+                                </div>
+                                <div class="card-body table-full-width table-responsive">
+                                    <h:form>
+
+                                        <h:dataTable styleClass="table table-hover table-striped"
+                                                     value="#{professorBean.professores}" var="professor">
                                             <h:column>
                                                 <f:facet name="header">NOME</f:facet>
-
+                                                <h:outputText value="#{professor.nome}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">MATRICULA</f:facet>
-
+                                                <h:outputText value="#{professor.matricula}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">E-MAIL</f:facet>
-                                                <p> nome </p>
+                                                <h:outputText value="#{professor.email}"/>
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">EXCLUIR</f:facet>
-
+                                                <h:commandButton styleClass="btn btn-danger btn-fill" action="#{professorBean.remover(professor)}"
+                                                                 value="Excluir"></h:commandButton>
 
                                             </h:column>
 
                                         </h:dataTable>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-10">
-                                <div class="card strpied-tabled-with-hover">
-                                    <div class="card-header ">
-                                        <h4 class="card-title">Funcionarios CAEST</h4>
-                                        <p class="card-category">Lista de Funcionarios da CAEST Cadastrados</p>
-                                    </div>
-                                    <div class="card-body table-full-width table-responsive">
-                                        <table class="table table-hover table-striped">
-                                            <thead>
-                                                <th>Nome</th>
-                                                <th>Matricula</th>
-                                                <th>Email</th>
-                                                <th>Excluir</th>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Dakota Rice</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
-                                                    <td>
-                                                        <a class="nav-link active" href="upgrade.html">
-                                                            <i class="nc-icon nc-simple-remove"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
-                                                    <td>
-                                                        <a class="nav-link active" href="upgrade.html">
-                                                            <i class="nc-icon nc-simple-remove"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
-                                                    <td>
-                                                        <a class="nav-link active" href="upgrade.html">
-                                                            <i class="nc-icon nc-simple-remove"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Philip Chaney</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
-                                                    <td>
-                                                        <a class="nav-link active" href="upgrade.html">
-                                                            <i class="nc-icon nc-simple-remove"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Doris Greene</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
-                                                    <td>
-                                                        <h:form>
-                                                            <h:commandLink styleClass="nav-link active nc-icon nc-simple-remove" action="#{gestorBean.remover()}"/>
-                                                        </h:form>
-<!--                                                        <a class="nav-link active" href="upgrade.html">-->
-<!--                                                            <i class="nc-icon nc-simple-remove"></i>-->
-<!--                                                        </a>-->
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                    </h:form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <nav>
-                            <p class="copyright text-center">
-                                ©
-                                <script>
-                                    document.write(new Date().getFullYear())
-                                </script>
-                                <a href="http://www.creative-tim.com">Loopis</a>, Melhor equipe de DAC
-                            </p>
-                        </nav>
-                    </div>
-                </footer>
             </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav>
+                        <p class="copyright text-center">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>
+                            <a href="http://www.creative-tim.com">Loopis</a>, Melhor equipe de DAC
+                        </p>
+                    </nav>
+                </div>
+            </footer>
         </div>
+    </div>
 
-    </h:body>
-    <!--   Core JS Files   -->
-    <script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-    <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-    <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-    <script src="../assets/js/plugins/bootstrap-switch.js"></script>
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-    <!--  Chartist Plugin  -->
-    <script src="../assets/js/plugins/chartist.min.js"></script>
-    <!--  Notifications Plugin    -->
-    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-    <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-    <script src="../assets/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
-    <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../assets/js/demo.js"></script>
-    <!-- <script type="text/javascript">
-        $(document).ready(function() {
-            // Javascript method's body can be found in assets/js/demos.js
-            demo.initDashboardPageCharts();
-    
-            demo.showNotification();
-    
-        });
-    </script> -->
+</h:body>
+<!--   Core JS Files   -->
+<script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="../assets/js/plugins/bootstrap-switch.js"></script>
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!--  Chartist Plugin  -->
+<script src="../assets/js/plugins/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<script src="../assets/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
+<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+<script src="../assets/js/demo.js"></script>
+<!-- <script type="text/javascript">
+    $(document).ready(function() {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+
+        demo.showNotification();
+
+    });
+</script> -->
 
 </html>

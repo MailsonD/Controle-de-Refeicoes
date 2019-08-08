@@ -29,23 +29,23 @@ public class TestBean {
 
     @PostConstruct
     private void init() {
-        try {
-            //Ordem para colunas no CSV matricula, senha, email, nome, nivelAcesso;
-            List<Usuario> listUsuarios = ManipuladorCSV.toListUsuario("/home/ian/Projetos_Programas/Java/Controle-de-Refeicoes/usuario.csv");
-            for (Usuario u : listUsuarios) {
-                usuarioDao.salvar(u);
-            }
-
-            //matricula, nome, edital, tipobeneficio
-            List<Aluno> listAlunos = ManipuladorCSV.toListAlunos("/home/ian/Projetos_Programas/Java/Controle-de-Refeicoes/aluno.csv");
-            for (Aluno a : listAlunos) {
-                alunoDao.salvar(a);
-            }
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (MatriculaExistenteException ex) {
-            Logger.getLogger(TestBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            //Ordem para colunas no CSV matricula, senha, email, nome, nivelAcesso;
+////            List<Usuario> listUsuarios = ManipuladorCSV.toListUsuario("/home/ian/Projetos_Programas/Java/Controle-de-Refeicoes/usuario.csv");
+////            for (Usuario u : listUsuarios) {
+////                usuarioDao.salvar(u);
+////            }
+//
+//            //matricula, nome, edital, tipobeneficio
+//            List<Aluno> listAlunos = ManipuladorCSV.toListAlunos("/home/ian/Projetos_Programas/Java/Controle-de-Refeicoes/aluno.csv");
+//            for (Aluno a : listAlunos) {
+//                alunoDao.salvar(a);
+//            }
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        } catch (MatriculaExistenteException ex) {
+//            Logger.getLogger(TestBean.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 }

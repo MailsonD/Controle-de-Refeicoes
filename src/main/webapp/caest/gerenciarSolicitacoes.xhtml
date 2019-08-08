@@ -15,7 +15,7 @@ and open the template in the editor.
         <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png"/>
         <link rel="icon" type="image/png" href="../assets/img/favicon.ico"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Cadastro de Gestor</title>
+        <title>CAEST</title>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
               name='viewport' />
         <!--     Fonts and icons     -->
@@ -43,7 +43,7 @@ and open the template in the editor.
                         </a>
                     </div>
                     <ul class="nav">
-                        <li>
+                        <li class="nav-item active">
                             <h:commandLink class="nav-link" >
                                 <i class="nc-icon nc-notes"></i>
                                 <p>SOLICITAÇÕES</p>
@@ -55,7 +55,7 @@ and open the template in the editor.
                                 <p>PERFIL</p>
                             </h:commandLink>
                         </li>
-                        <li class="nav-item active">
+                        <li >
                             <h:commandLink class="nav-link" >
                                 <i class="nc-icon nc-badge"></i>
                                 <p>CAEST</p>
@@ -100,91 +100,55 @@ and open the template in the editor.
                     </div>
                 </nav>
                 <!-- End Navbar -->
-                <div class="content" style="margin-left: 10%">
+                <div class="content" >
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-10">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Cadastrar CAEST</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <h:form>
-                                            <div class="row">
-                                                <div class="col-md-12 pr-3">
-                                                    <div class="form-group">
-                                                        <label>Nome</label>
-                                                        <h:inputText  class="form-control" value="#{caestBean.caest.nome}">
-                                                            <f:passThroughAttribute name="placeholder" value="Nome"></f:passThroughAttribute>
-                                                        </h:inputText>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 pr-3">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Email</label>
-                                                        <h:inputText  class="form-control" value="#{caestBean.caest.email}">
-                                                            <f:passThroughAttribute name="placeholder" value="E-mail"></f:passThroughAttribute>
-                                                        </h:inputText>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 pr-3">
-                                                    <div class="form-group">
-                                                        <label>Matricula</label>
-                                                        <h:inputText  class="form-control" value="#{caestBean.caest.matricula}">
-                                                            <f:passThroughAttribute name="placeholder" value="Matricula"></f:passThroughAttribute>
-                                                        </h:inputText>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-10 pr-3">
-                                                    <h:commandButton class="col-lg-10 btn btn-success btn-fill pull-right" action="#{caestBean.cadastrar()}" value="Cadastrar" >
 
-                                                    </h:commandButton>
-
-                                                    <!--                                                <button type="submit"
-                                                                                                        class="col-lg-10 btn btn-success btn-fill pull-right"
-                                                                                                        onclick="demo.showNotification('top','center')">Cadastrar
-                                                                                                        Gestor</button>-->
-                                                </div>
-                                            </div>
-
-                                        </h:form>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-10">
                                 <div class="card strpied-tabled-with-hover">
                                     <div class="card-header ">
-                                        <h4 class="card-title">Funcionarios CAEST</h4>
-                                        <p class="card-category">Lista de Funcionarios da CAEST Cadastrados</p>
+                                        <h4 class="card-title">Solicitações</h4>
+                                        <p class="card-category">Lista com as solicitações de refeição</p>
                                     </div>
                                     <div class="card-body table-full-width table-responsive">
                                         <h:form>
 
-                                            <h:dataTable styleClass="table table-hover table-striped"
-                                                         value="#{caestBean.usuariosCaest}" var="caestUsua">
+                                            <h:dataTable class="table table-hover table-striped" >
                                                 <h:column>
-                                                    <f:facet name="header">NOME</f:facet>
-                                                    <h:outputText value="#{caestUsua.nome}"/>
+                                                    <f:facet name="header">Turma</f:facet>
+                                                    <h:outputText value="ADS"/>
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header">MATRICULA</f:facet>
-                                                    <h:outputText value="#{caestUsua.matricula}"/>
+                                                    <f:facet name="header">Quantidade</f:facet>
+                                                    <h:outputText value="20"/>
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header">E-MAIL</f:facet>
-                                                    <h:outputText value="#{caestUsua.email}"/>
+                                                    <f:facet name="header">DIA</f:facet>
+                                                    <h:outputText value="03/09/2019"/>
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header">EXCLUIR</f:facet>
-                                                    <h:commandButton styleClass="btn btn-danger btn-fill" action="#{caestBean.remover(caestUsua)}"
-                                                                     value="Excluir"></h:commandButton>
+                                                    <f:facet name="header">REFEIÇÃO</f:facet>
+                                                    <h:outputText value="JANTAR"/>
+                                                </h:column>
 
+                                                <h:column>
+                                                    <f:facet name="header">AÇÃO</f:facet>
+                                                    <h:commandButton class="col-lg-6 btn btn-success btn-fill pull-right" 
+                                                                     value="Aceitar" >
+
+                                                    </h:commandButton>
+                                                    <h:commandButton class="col-lg-6 btn btn-danger btn-fill pull-right" 
+                                                                     value="Recusar" >
+
+                                                    </h:commandButton>
+                                                </h:column>
+
+                                                <h:column>
+                                                    <f:facet name="header">DETALHES</f:facet>
+                                                    <h:commandButton class="col-lg-6 btn btn-danger btn-fill pull-right" 
+                                                                     value="detalhes" >
+
+                                                    </h:commandButton>
                                                 </h:column>
 
                                             </h:dataTable>
@@ -192,7 +156,7 @@ and open the template in the editor.
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-10">
+                            <div class="col-md-12">
                                 <div class="card strpied-tabled-with-hover">
                                     <div class="card-header ">
                                         <h4 class="card-title">Funcionarios CAEST</h4>
@@ -201,71 +165,95 @@ and open the template in the editor.
                                     <div class="card-body table-full-width table-responsive">
                                         <table class="table table-hover table-striped">
                                             <thead>
-                                                <th>Nome</th>
-                                                <th>Matricula</th>
-                                                <th>Email</th>
-                                                <th>Excluir</th>
+                                                <th>Turma</th>
+                                                <th>Professor</th>
+                                                <th>Quantidade</th>
+                                                <th>Dia</th>
+                                                <th>Refeição</th>
+
+                                                <th>Ação</th>
+                                                <th> </th>
+                                                <th>Detalhes</th>
+
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Dakota Rice</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
+                                                    <td>ADS</td>
+                                                    <td>Ricardo Job</td>
+                                                    <td>50</td>
+                                                    <td>01/08/2019</td>
+                                                    <td>JANTA</td>
                                                     <td>
-                                                        <a class="nav-link active" href="upgrade.html">
-                                                            <i class="nc-icon nc-simple-remove"></i>
+                                                        <h:commandButton  class="col-lg-12 btn btn-success pull-right" 
+                                                                          value="Aceitar" >
+
+                                                        </h:commandButton>
+                                                    </td>
+                                                    <td>
+                                                        <h:commandButton style="margin-left: 10%" class="col-lg-12 btn btn-danger  pull-right" 
+                                                                         value="Recusar" >
+
+                                                        </h:commandButton>
+                                                    </td>
+                                                    <td>
+
+                                                        <a class="btn btn-info  btn-wd" data-toggle="modal" data-target="#myModal1" href="#pablo">
+                                                            Detalhes
                                                         </a>
+
                                                     </td>
+
+
                                                 </tr>
-                                                <tr>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
-                                                    <td>
-                                                        <a class="nav-link active" href="upgrade.html">
-                                                            <i class="nc-icon nc-simple-remove"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
-                                                    <td>
-                                                        <a class="nav-link active" href="upgrade.html">
-                                                            <i class="nc-icon nc-simple-remove"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Philip Chaney</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
-                                                    <td>
-                                                        <a class="nav-link active" href="upgrade.html">
-                                                            <i class="nc-icon nc-simple-remove"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Doris Greene</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
-                                                    <td>
-                                                        <h:form>
-                                                            <h:commandLink styleClass="nav-link active nc-icon nc-simple-remove" action="#{gestorBean.remover()}"/>
-                                                        </h:form>
-                                                        <!--                                                        <a class="nav-link active" href="upgrade.html">-->
-                                                        <!--                                                            <i class="nc-icon nc-simple-remove"></i>-->
-                                                        <!--                                                        </a>-->
-                                                    </td>
-                                                </tr>
+
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Mini Modal -->
+                        <div class="modal fade modal-primary" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header justify-content-center">
+
+                                        <h3>Detalhes </h3>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        <h4>Justificativa do Profesor: </h4>                                        
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                                            culpa qui officia deserunt mollit anim id est laborum.
+                                        </p>
+                                        <h4>Lista de Alunos: </h4>    
+                                        <div class="card-body table-full-width table-responsive">
+                                            <table class="table table-hover table-striped">
+                                                <thead>
+                                                    <th>Matricula</th>
+                                                    <th>Nome</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>201612010261</td>
+                                                        <td>Aluno Com Fome</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-link btn-simple" data-dismiss="modal">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  End Modal -->
                     </div>
                 </div>
                 <footer class="footer">
