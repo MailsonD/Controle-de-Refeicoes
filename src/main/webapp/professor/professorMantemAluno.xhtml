@@ -8,7 +8,8 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <head>
     <meta charset="utf-8"/>
@@ -107,17 +108,11 @@ and open the template in the editor.
                                         </select>
 
                                         <br/>
-                                        <h:inputTextarea cols="30" rows="10"/>
+                                        <h:inputTextarea class="form-control" cols="30" rows="10"/>
                                         <br/>
 
-                                        <h:inputText for="data" id="dataSoli"
-                                                     value="#{Bean.data}" name="dataSolicitacao">
+                                        <h:inputText a:type="date" styleClass="form-control" value="#{bean.date}" />
 
-                                            <f:convertDateTime type="date"/>
-                                            <f:convertDateTime for="dataSoli" pattern="dd/MM/yyyy"
-                                                               timeZone="America/Sao_Paulo"></f:convertDateTime>
-
-                                        </h:inputText>
                                         <br/>
                                         <h:selectBooleanCheckbox value="#{Bean.almocar}"/> Almocar
                                         <br/>
