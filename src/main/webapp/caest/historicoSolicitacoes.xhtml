@@ -15,7 +15,7 @@ and open the template in the editor.
         <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png"/>
         <link rel="icon" type="image/png" href="../assets/img/favicon.ico"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>CAEST</title>
+        <title>Controle de Refeições - CAEST - Historico de Solicitações</title>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
               name='viewport' />
         <!--     Fonts and icons     -->
@@ -26,6 +26,9 @@ and open the template in the editor.
         <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <link href="../assets/css/demo.css" rel="stylesheet" />
+
+        
+
     </head>
 
     <h:body>
@@ -57,7 +60,7 @@ and open the template in the editor.
                         </li>
                         <li>
                             <h:commandLink class="nav-link" >
-                                <i class="nc-icon nc-paper-2"></i>
+                                <i class="nc-icon nc-circle-09"></i>
                                 <p>Conta</p>
                             </h:commandLink>
                         </li>  
@@ -85,7 +88,7 @@ and open the template in the editor.
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#pablo"> CAEST </a>
+                        <a class="navbar-brand" href="#pablo">CAEST - Historico de Solicitações </a>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                                 aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -99,13 +102,16 @@ and open the template in the editor.
                     <div class="container-fluid">
                         <div class="row">
 
-                            <div class="col-md-10">
+                            <div class="col-md-12">
                                 <div class="card strpied-tabled-with-hover">
                                     <div class="card-header ">
                                         <h4 class="card-title">Solicitações</h4>
-                                        <p class="card-category">Lista com as solicitações de refeição</p>
+                                        <p class="card-category">Lista com o historico solicitações respondidas</p>
                                     </div>
+                                   
                                     <div class="card-body table-full-width table-responsive">
+
+
                                         <h:form>
 
                                             <h:dataTable class="table table-hover table-striped" >
@@ -125,7 +131,7 @@ and open the template in the editor.
                                                     <f:facet name="header">REFEIÇÃO</f:facet>
                                                     <h:outputText value="JANTAR"/>
                                                 </h:column>
-                                                                                                <h:column>
+                                                <h:column>
                                                     <f:facet name="header">SITUAÇÃO</f:facet>
                                                     <h:outputText value="APROVADA / RECUSADA"/>
                                                 </h:column>                                               
@@ -146,8 +152,8 @@ and open the template in the editor.
                             <div class="col-md-12">
                                 <div class="card strpied-tabled-with-hover">
                                     <div class="card-header ">
-                                        <h4 class="card-title">Funcionarios CAEST</h4>
-                                        <p class="card-category">Lista de Funcionarios da CAEST Cadastrados</p>
+                                        <h4 class="card-title">Solicitações</h4>
+                                        <p class="card-category">Lista com o historico solicitações respondidas</p>
                                     </div>
                                     <div class="card-body table-full-width table-responsive">
                                         <table class="table table-hover table-striped">
@@ -234,7 +240,7 @@ and open the template in the editor.
                             </div>
                         </div>
                         <!--  End Modal -->
-                        
+
                     </div>
                 </div>
                 <footer class="footer">
