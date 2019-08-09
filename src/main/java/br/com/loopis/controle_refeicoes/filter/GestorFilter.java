@@ -11,9 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import br.com.loopis.controle_refeicoes.controle.AutenticacaoBean;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
+import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 
 /**
  * @author Leanderson Coelho
@@ -21,8 +20,8 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
  * 27 de jun de 2019
  * 16:45:18
  */
-@WebFilter(filterName="AutenticacaoFilter", urlPatterns={"/adm/*", "/admInicio.xhtml"})
-public class AutenticacaoFilter implements Filter {
+@WebFilter(filterName="AutenticacaoFilter", urlPatterns={"/gestor/*, /admInicio.xhtml"})
+public class GestorFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -35,10 +34,9 @@ public class AutenticacaoFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
-//		AutenticacaoBean bean = (AutenticacaoBean) httpRequest.getSession(false).getAttribute("autenticacaoBean");
 		Usuario u = (Usuario) httpRequest.getSession().getAttribute("usuarioLogado");
-		if(u==null) {//(bean==null || bean.usuario.getMatricula()==null)
-			httpResponse.sendRedirect(httpRequest.getContextPath()+"/login.xhtml");
+                if(u.getNivelAcesso()!=NivelAcesso.GESTOR) {
+                    httpResponse.sendRedirect(httpRequest.getContextPath()+"/error/semPermicaoDeAcesso.xhtml");
 		}
 		chain.doFilter(httpRequest, httpResponse);
 	}
@@ -50,3 +48,7 @@ public class AutenticacaoFilter implements Filter {
 	}
 
 }
+//                    System.out.println("\nURI:"+httpRequest.getRequestURI());
+//                    System.out.println("\nURL:"+httpRequest.getRequestURL().toString());
+//                    System.out.println("\nContextPath:"+httpRequest.getContextPath());
+//                    System.out.println("\nPathInfo:"+httpRequest.getPathInfo());

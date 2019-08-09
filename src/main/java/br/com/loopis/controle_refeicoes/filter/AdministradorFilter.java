@@ -20,8 +20,8 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
  * 27 de jun de 2019
  * 16:45:18
  */
-@WebFilter(filterName="AutenticacaoFilter", urlPatterns={"/admInicio.xhtml, /adm/*, /gestor/*, /caest/*"})/*, /professor/**/
-public class AutenticacaoFilter implements Filter {
+@WebFilter(filterName="AutenticacaoFilter", urlPatterns={"/adm/*, /admInicio.xhtml"})
+public class AdministradorFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -35,8 +35,8 @@ public class AutenticacaoFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		Usuario u = (Usuario) httpRequest.getSession().getAttribute("usuarioLogado");
-                if(u==null) {
-			httpResponse.sendRedirect(httpRequest.getContextPath()+"/login.xhtml");
+                if(u.getNivelAcesso()!=NivelAcesso.ADMINISTRADOR) {
+                    httpResponse.sendRedirect(httpRequest.getContextPath()+"/error/semPermicaoDeAcesso.xhtml");
 		}
 		chain.doFilter(httpRequest, httpResponse);
 	}
