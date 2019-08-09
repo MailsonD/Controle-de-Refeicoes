@@ -8,7 +8,8 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <head>
         <meta charset="utf-8" />
@@ -26,88 +27,88 @@ and open the template in the editor.
         <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <link href="../assets/css/demo.css" rel="stylesheet" />
-         <style>
-        pre.prettyprint {
-            background-color: #eee;
-            border: 0px;
-            margin-bottom: 60px;
-            margin-top: 30px;
-            padding: 20px;
-            text-align: left;
-        }
+        <style>
+            pre.prettyprint {
+                background-color: #eee;
+                border: 0px;
+                margin-bottom: 60px;
+                margin-top: 30px;
+                padding: 20px;
+                text-align: left;
+            }
 
-        .atv,
-        .str {
-            color: #05AE0E;
-        }
+            .atv,
+            .str {
+                color: #05AE0E;
+            }
 
-        .tag,
-        .pln,
-        .kwd {
-            color: #3472F7;
-        }
+            .tag,
+            .pln,
+            .kwd {
+                color: #3472F7;
+            }
 
-        .atn {
-            color: #2C93FF;
-        }
+            .atn {
+                color: #2C93FF;
+            }
 
-        .pln {
-            color: #333;
-        }
+            .pln {
+                color: #333;
+            }
 
-        .com {
-            color: #999;
-        }
+            .com {
+                color: #999;
+            }
 
-        .space-top {
-            margin-top: 50px;
-        }
+            .space-top {
+                margin-top: 50px;
+            }
 
-        .btn-primary .caret {
-            border-top-color: #3472F7;
-            color: #3472F7;
-        }
+            .btn-primary .caret {
+                border-top-color: #3472F7;
+                color: #3472F7;
+            }
 
-        .area-line {
-            border: 1px solid #999;
-            border-left: 0;
-            border-right: 0;
-            color: #666;
-            display: block;
-            margin-top: 20px;
-            padding: 8px 0;
-            text-align: center;
-        }
+            .area-line {
+                border: 1px solid #999;
+                border-left: 0;
+                border-right: 0;
+                color: #666;
+                display: block;
+                margin-top: 20px;
+                padding: 8px 0;
+                text-align: center;
+            }
 
-        .area-line a {
-            color: #666;
-        }
+            .area-line a {
+                color: #666;
+            }
 
-        .container-fluid {
-            padding-right: 15px;
-            padding-left: 15px;
-        }
+            .container-fluid {
+                padding-right: 15px;
+                padding-left: 15px;
+            }
 
-        .table-shopping .td-name {
-            min-width: 130px;
-        }
+            .table-shopping .td-name {
+                min-width: 130px;
+            }
 
-        .pick-class-label {
-            border-radius: 8px;
-            border: 1px solid #E3E3E3;
-            color: #ffffff;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 75%;
-            font-weight: bold;
-            line-height: 1;
-            margin-right: 10px;
-            padding: 23px;
-            text-align: center;
-            vertical-align: baseline;
-            white-space: nowrap;
-        }
-    </style>
+            .pick-class-label {
+                border-radius: 8px;
+                border: 1px solid #E3E3E3;
+                color: #ffffff;
+                cursor: pointer;
+                display: inline-block;
+                font-size: 75%;
+                font-weight: bold;
+                line-height: 1;
+                margin-right: 10px;
+                padding: 23px;
+                text-align: center;
+                vertical-align: baseline;
+                white-space: nowrap;
+            }
+        </style>
     </head>
 
     <body class="documentation">
@@ -166,6 +167,49 @@ and open the template in the editor.
             <div class="main-panel2">
                 <div class="content">
                     <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header col-4">
+
+                                    </div>
+                                    <div class="card-body all-icons">
+                                       
+                                        <div class="row">
+
+                                            <div class="font-icon-list col-lg-3 col-md-3 col-sm-4 col-6">
+                                                <div class="font-icon-detail">
+                                                    <h2 class="card-title">139</h2>
+                                                    <p class="card-category">Refeições Extras</p>
+                                                </div>
+                                            </div>
+                                            <div class="font-icon-list col-lg-3 col-md-3 col-sm-4 col-6">
+                                                <div class="font-icon-detail">
+                                                    <h2 class="card-title">5</h2>
+                                                    <p class="card-category ">Socitações pendentes </p>
+                                                </div>
+                                            </div>
+                                            <div class="font-icon-list col-lg-3 col-md-3 col-sm-4 col-6">
+                                                <div class="font-icon-detail">
+                                                    <h2 class="card-title">13</h2>
+                                                    <p class="card-category">Socitações Aceitas </p>
+                                                </div>
+                                            </div>
+                                            <div class="font-icon-list col-lg-3 col-md-3 col-sm-4 col-6">
+                                                <div class="font-icon-detail">
+                                                    <h2 class="card-title">2</h2>
+                                                    <p class="card-category">Socitações Recusadas</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--                                        <hr/>
+                                                                                <div class="stats">
+                                                                                    <i class="fa fa-clock-o"></i> Dia 01/08/2019
+                                                                                </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
 
                     </div>
 
