@@ -8,7 +8,9 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
 
     <head>
         <meta charset="utf-8" />
@@ -102,10 +104,74 @@ and open the template in the editor.
                 <div class="content" >
                     <div class="container-fluid">
                         <div class="row">
+                            <div class="col-md-3">
+                                <div class="card strpied-tabled-with-hover">
+
+                                    <div class="card-body">
+
+
+                                        <h:inputText a:type="date" styleClass="form-control" value="#{bean.date}" />
+
+                                        <hr/>
+
+
+                                        <h:commandButton class="col-lg-12 btn btn-info btn-fill pull-right" 
+                                                         value="Buscar por data" />
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="card ">
+                                    <div class="card-header ">
+                                        <h4 class="card-title">Total</h4>
+                                        <p class="card-category">Socitações pendentes </p>
+                                    </div>
+                                    <div class="card-body ">
+                                        <hr/>
+                                        <div class="stats">
+                                            <i class="fa fa-clock-o"></i> Dia 01/08/2019
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card ">
+                                    <div class="card-header ">
+                                        <h4 class="card-title">Total</h4>
+                                        <p class="card-category"> Solicitações aceitas</p>
+                                    </div>
+                                    <div class="card-body ">
+                                        <hr/>
+                                        <div class="stats">
+                                            <i class="fa fa-clock-o"></i> Para o dia 01/08/2019
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card ">
+                                    <div class="card-header ">
+                                        <h4 class="card-title">Total</h4>
+                                        <p class="card-category"> Solicitações recusadas</p>
+                                    </div>
+                                    <div class="card-body ">
+                                        <hr/>
+                                        <div class="stats">
+                                            <i class="fa fa-clock-o"></i> Para o dia 01/08/2019
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
 
                             <div class="col-md-12">
                                 <div class="card strpied-tabled-with-hover">
                                     <div class="card-header ">
+
                                         <h4 class="card-title">Solicitações</h4>
                                         <p class="card-category">Lista com as solicitações de refeição</p>
                                     </div>
