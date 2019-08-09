@@ -20,7 +20,7 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
  * 27 de jun de 2019
  * 16:45:18
  */
-@WebFilter(filterName="AutenticacaoFilter", urlPatterns={"/caest/*"})
+@WebFilter(filterName="caestFilter", urlPatterns={"/caest/*"})
 public class CAESTFilter implements Filter {
 
 	@Override
@@ -35,7 +35,7 @@ public class CAESTFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		Usuario u = (Usuario) httpRequest.getSession().getAttribute("usuarioLogado");
-                if(u.getNivelAcesso()!=NivelAcesso.CAEST) {
+                if(u!=null && u.getNivelAcesso()!=NivelAcesso.CAEST) {
                     httpResponse.sendRedirect(httpRequest.getContextPath()+"/error/semPermicaoDeAcesso.xhtml");
 		}
 		chain.doFilter(httpRequest, httpResponse);

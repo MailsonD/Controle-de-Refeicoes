@@ -20,7 +20,7 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
  * 27 de jun de 2019
  * 16:45:18
  */
-@WebFilter(filterName="AutenticacaoFilter", urlPatterns={"/admInicio.xhtml, /adm/*, /gestor/*, /caest/*"})/*, /professor/**/
+//@WebFilter(filterName="autenticacaoFilter", urlPatterns={"/admInicio.xhtml, /adm/*, /gestor/*, /caest/*"})/*, /professor/**/
 public class AutenticacaoFilter implements Filter {
 
 	@Override
