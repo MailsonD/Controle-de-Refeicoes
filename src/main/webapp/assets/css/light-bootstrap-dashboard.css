@@ -78,9 +78,7 @@ button.close {
     -webkit-font-smoothing: antialiased;
     font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
     font-weight: 400;
-    background-color: #fff;
-    
-    
+
 }
 
 h1,
@@ -234,7 +232,7 @@ input[type="button"]::-moz-focus-inner,
 input[type="submit"]::-moz-focus-inner,
 select::-moz-focus-inner,
 input[type="file"]>input[type="button"]::-moz-focus-inner {
-    outline: 0;
+    outline: 0; 
 }
 
 .ui-slider-handle:focus,
