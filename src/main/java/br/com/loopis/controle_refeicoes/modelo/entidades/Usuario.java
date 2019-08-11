@@ -52,6 +52,13 @@ public class Usuario implements Serializable {
         this.nome = nome;
         this.nivelAcesso = nivelAcesso;
     }
+    
+    public Usuario(String matricula, String email, String nome, NivelAcesso nivelAcesso) {
+        this.matricula = matricula;
+        this.email = email;
+        this.nome = nome;
+        this.nivelAcesso = nivelAcesso;
+    }
 
     public Usuario() {
     }
