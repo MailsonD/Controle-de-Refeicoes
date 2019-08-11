@@ -43,6 +43,9 @@ public class ProfessorBean implements Serializable{
 //        professor = new Usuario();
         professores = new ArrayList<>();
         this.professores = this.dao.usuariosComNivelDeAcesso(NivelAcesso.PROFESSOR);
+        if(this.professores.size()==0){
+            this.professores = new ArrayList<>();
+        }
     }
     
     public void salvar(){
@@ -50,6 +53,7 @@ public class ProfessorBean implements Serializable{
         try {
             professoresAux = ManipuladorCSV.toListProfessor(part);
             if(professoresAux.size()>0){
+                this.dao.removerProfessores();
                 for(Usuario professor: professoresAux){
                     professor.setAtivo(true);
                     professor.setNivelAcesso(NivelAcesso.PROFESSOR);

@@ -1,4 +1,4 @@
-package br.com.loopis.controle_refeicoes.controle;
+package br.com.loopis.controle_refeicoes.controladores;
 
 import java.io.Serializable;
 
