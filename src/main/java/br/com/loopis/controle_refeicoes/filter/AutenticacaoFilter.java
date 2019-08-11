@@ -8,11 +8,9 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
-import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 
 /**
  * @author Leanderson Coelho
@@ -20,7 +18,6 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
  * 27 de jun de 2019
  * 16:45:18
  */
-//@WebFilter(filterName="autenticacaoFilter", urlPatterns={"/admInicio.xhtml, /adm/*, /gestor/*, /caest/*"})/*, /professor/**/
 public class AutenticacaoFilter implements Filter {
 
 	@Override
@@ -48,7 +45,3 @@ public class AutenticacaoFilter implements Filter {
 	}
 
 }
-//                    System.out.println("\nURI:"+httpRequest.getRequestURI());
-//                    System.out.println("\nURL:"+httpRequest.getRequestURL().toString());
-//                    System.out.println("\nContextPath:"+httpRequest.getContextPath());
-//                    System.out.println("\nPathInfo:"+httpRequest.getPathInfo());

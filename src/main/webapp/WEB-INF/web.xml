@@ -13,6 +13,7 @@
         <url-pattern>/adm/*</url-pattern>
         <url-pattern>/gestor/*</url-pattern>
         <url-pattern>/caest/*</url-pattern>
+        <url-pattern>/professor/*</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>

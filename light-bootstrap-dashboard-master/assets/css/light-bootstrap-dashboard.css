@@ -688,14 +688,7 @@ body>.navbar-collapse[data-color="purple"]:after {
 }
 
 .main-panel {
-    background: #9368E9;
-    background: -moz-linear-gradient(top, #9368E9 0%, #943bea 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #9368E9), color-stop(100%, #943bea));
-    background: -webkit-linear-gradient(top, #9368E9 0%, #943bea 100%);
-    background: -o-linear-gradient(top, #9368E9 0%, #943bea 100%);
-    background: -ms-linear-gradient(top, #9368E9 0%, #943bea 100%);
-    background: linear-gradient(to bottom, #9368E9 0%, #943bea 100%);
-    background-size: 150% 150%;
+  
     z-index: 3;
     opacity: 1;
     position: relative;
@@ -703,6 +696,7 @@ body>.navbar-collapse[data-color="purple"]:after {
     width: calc(100% - 260px);
     min-height: 100%;
 }
+
 
 .main-panel>.content {
     padding: 30px 15px;
@@ -729,6 +723,30 @@ body>.navbar-collapse[data-color="purple"]:after {
     -webkit-transition-timing-function: linear, linear;
     transition-timing-function: linear, linear;
     -webkit-overflow-scrolling: touch;
+}
+
+
+.main-panel2 {
+  
+    z-index: 3;
+    opacity: 1;
+    position: relative;
+    float: right;
+    width: 100%;
+    min-height: 100%;
+}
+
+.main-panel2>.content {
+    padding: 30px 15px;
+    min-height: calc(100% - 123px);
+}
+
+.main-panel>.footer {
+    border-top: 1px solid #e7e7e7;
+}
+
+.main-panel2 .navbar {
+    margin-bottom: 0;
 }
 
 .fixed-plugin .dropdown .dropdown-menu {

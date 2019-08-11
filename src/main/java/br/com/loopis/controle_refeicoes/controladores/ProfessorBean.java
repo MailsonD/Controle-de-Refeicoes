@@ -34,15 +34,16 @@ import javax.servlet.http.Part;
 public class ProfessorBean implements Serializable{
     @Inject
     UsuarioDao dao;
-//    Usuario professor;
     List<Usuario> professores;
     Part part;
     
     @PostConstruct
     public void init(){
-//        professor = new Usuario();
         professores = new ArrayList<>();
         this.professores = this.dao.usuariosComNivelDeAcesso(NivelAcesso.PROFESSOR);
+//        if(this.professores.size()==0){
+//            this.professores = new ArrayList<>();
+//        }
     }
     
     public void salvar(){
@@ -50,6 +51,7 @@ public class ProfessorBean implements Serializable{
         try {
             professoresAux = ManipuladorCSV.toListProfessor(part);
             if(professoresAux.size()>0){
+                this.dao.removerProfessores();
                 for(Usuario professor: professoresAux){
                     professor.setAtivo(true);
                     professor.setNivelAcesso(NivelAcesso.PROFESSOR);
@@ -74,14 +76,6 @@ public class ProfessorBean implements Serializable{
         this.dao.remover(usuario);
         this.professores = this.dao.usuariosComNivelDeAcesso(NivelAcesso.PROFESSOR);
     }
-
-//    public Usuario getProfessor() {
-//        return professor;
-//    }
-//
-//    public void setProfessor(Usuario professor) {
-//        this.professor = professor;
-//    }
 
     public Part getPart() {
         return part;
