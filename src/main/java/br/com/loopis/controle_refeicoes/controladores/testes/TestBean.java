@@ -8,6 +8,7 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteException;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.SenhaInvalidaException;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
+import br.com.loopis.controle_refeicoes.service.ServiceUsuario;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,6 +27,8 @@ public class TestBean {
     private UsuarioDao usuarioDao;
     @Inject
     private AlunoDao alunoDao;
+    @Inject
+    private ServiceUsuario serviceUsuario;
 
     @PostConstruct
     private void init() {
@@ -47,5 +50,18 @@ public class TestBean {
 //        } catch (MatriculaExistenteException ex) {
 //            Logger.getLogger(TestBean.class.getName()).log(Level.SEVERE, null, ex);
 //        }
+
+        Usuario um = new Usuario("123","0123","caio@gmail.com","caio",NivelAcesso.ADMINISTRADOR);
+        try {
+            serviceUsuario.salvar(um);
+        } catch (MatriculaExistenteException ex) {
+            System.out.println(ex.getMessage());
+        }
+        Usuario dois = new Usuario("123","0123","caio@gmail.com","caio",NivelAcesso.ADMINISTRADOR);
+        try {
+            serviceUsuario.salvar(dois);
+        } catch (MatriculaExistenteException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }
