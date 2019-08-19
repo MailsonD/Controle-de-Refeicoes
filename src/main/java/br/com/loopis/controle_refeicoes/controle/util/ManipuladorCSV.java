@@ -59,9 +59,12 @@ public class ManipuladorCSV {
         return lista;
     }
 
-    public static List<Aluno> toListAlunos(Part path) throws IOException {
+    public static List<Aluno> toListAlunos(Part part) throws IOException {
+        if (!(part.getContentType().equals("text/csv"))) {
+            return new ArrayList<>();
+        }
         String separador = ",";
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(String.valueOf(path))));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(part.getInputStream()));
         String linha = null;
         reader.readLine();
         List<Aluno> listaAlunos = new ArrayList<>();
