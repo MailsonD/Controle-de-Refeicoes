@@ -92,6 +92,11 @@ public class CaestBean implements Serializable{
         this.usuariosCaest = this.dao.usuariosComNivelDeAcesso(NivelAcesso.CAEST);
     }
 
+    public void removerAluno(Aluno aluno){
+        this.alunoDao.remover(aluno);
+        this.alunos = alunoDao.listar();
+    }
+
     public List<Aluno> getAlunos() {
         return alunos;
     }
