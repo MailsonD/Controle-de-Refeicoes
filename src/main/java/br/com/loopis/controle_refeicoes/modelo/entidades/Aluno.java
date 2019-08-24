@@ -16,7 +16,7 @@ public class Aluno implements Serializable {
     @Column(unique = true)
     private String matricula;
     private String nome;
-    @OneToOne(mappedBy = "alunoBeneficiado", cascade=CascadeType.PERSIST)
+    @OneToOne(mappedBy = "alunoBeneficiado", cascade={CascadeType.PERSIST,CascadeType.REMOVE})
     private Beneficio beneficio;
 
     public Aluno() {

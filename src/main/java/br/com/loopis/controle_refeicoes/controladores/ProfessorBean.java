@@ -5,18 +5,16 @@
  */
 package br.com.loopis.controle_refeicoes.controladores;
 
-import br.com.loopis.controle_refeicoes.controle.util.ManipuladorCSV;
+import br.com.loopis.controle_refeicoes.util.ManipuladorCSV;
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.UsuarioDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteException;
-import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;

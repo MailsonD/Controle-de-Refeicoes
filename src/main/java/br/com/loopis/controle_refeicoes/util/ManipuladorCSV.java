@@ -1,4 +1,4 @@
-package br.com.loopis.controle_refeicoes.controle.util;
+package br.com.loopis.controle_refeicoes.util;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -37,10 +37,12 @@ public class ManipuladorCSV {
         return lista;
     }
 
-    public static List<Aluno> toListAlunos(Part part) throws IOException, ArrayIndexOutOfBoundsException {
+
+    public static List<Aluno> toListAlunos(Part part) throws IOException {
         if (!(part.getContentType().equals("text/csv"))) {
             return new ArrayList<>();
         }
+        String separador = ",";
         BufferedReader reader = new BufferedReader(new InputStreamReader(part.getInputStream()));
         String linha = null;
         reader.readLine();

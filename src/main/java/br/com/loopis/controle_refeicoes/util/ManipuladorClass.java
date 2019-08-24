@@ -1,4 +1,4 @@
-package br.com.loopis.controle_refeicoes.controle.util;
+package br.com.loopis.controle_refeicoes.util;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

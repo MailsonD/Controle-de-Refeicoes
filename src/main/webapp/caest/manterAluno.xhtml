@@ -114,7 +114,7 @@ and open the template in the editor.
                                                                     errorStyle="list-style: none;color: red;"/>
 
                                                         <h:inputFile styleClass="custom-file-input"
-                                                                     value="#{beaan.part}"
+                                                                     value="#{caestBean.part}"
                                                                      required="true"
                                                                      requiredMessage="Faça o upload do arquivo .csv"></h:inputFile>
                                                         <label class="custom-file-label"
@@ -124,7 +124,7 @@ and open the template in the editor.
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-10 pr-3">
-                                                    <h:commandButton action="#{bean.salvar()}"
+                                                    <h:commandButton action="#{caestBean.salvarAlunosCsv()}"
                                                                      class="col-lg-10 btn btn-success btn-fill pull-right"
                                                                      value="Cadastrar">
 
@@ -146,28 +146,28 @@ and open the template in the editor.
                                         <h:form>
 
                                             <h:dataTable styleClass="table table-hover table-striped"
-                                                         value="#{professorBean.professores}" var="professor">
+                                                         value="#{caestBean.alunos}" var="aluno">
                                                 <h:column>
                                                     <f:facet name="header">NOME</f:facet>
-                                                    <h:outputText value="#{alunoBean.nome}"/>
+                                                    <h:outputText value="#{aluno.nome}"/>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">MATRICULA</f:facet>
-                                                    <h:outputText value="#{alunoBean.matricula}"/>
+                                                    <h:outputText value="#{aluno.matricula}"/>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">Beneficio</f:facet>
-                                                    <h:outputText value="#{alunoBean.benefico}"/>
+                                                    <h:outputText value="#{aluno.beneficio.tipoBeneficio}"/>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">Edital</f:facet>
-                                                    <h:outputText value="#{alunoBean.edital}"/>
+                                                    <h:outputText value="#{aluno.beneficio.edital}"/>
                                                 </h:column>
 
                                                 <h:column>
                                                     <f:facet name="header">Excluir</f:facet>
 
-                                                    <h:commandButton class="col-lg-6 btn btn-danger btn-fill pull-right" action="#{alunoBean.remover(professor)}" 
+                                                    <h:commandButton class="col-lg-6 btn btn-danger btn-fill pull-right" action="#{caestBean.removerAluno(aluno)}"
                                                                      value="Excluir" >
 
                                                     </h:commandButton>
