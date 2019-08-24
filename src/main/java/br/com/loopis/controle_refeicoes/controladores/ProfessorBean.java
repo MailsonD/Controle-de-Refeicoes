@@ -10,11 +10,15 @@ import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.UsuarioDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteException;
-
+import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -22,6 +26,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Part;
+import org.omnifaces.util.Faces;
 
 /**
  *
@@ -32,18 +37,16 @@ import javax.servlet.http.Part;
 public class ProfessorBean implements Serializable{
     @Inject
     UsuarioDao dao;
-//    Usuario professor;
     List<Usuario> professores;
     Part part;
     
     @PostConstruct
     public void init(){
-//        professor = new Usuario();
         professores = new ArrayList<>();
         this.professores = this.dao.usuariosComNivelDeAcesso(NivelAcesso.PROFESSOR);
-        if(this.professores.size()==0){
-            this.professores = new ArrayList<>();
-        }
+//        if(this.professores.size()==0){
+//            this.professores = new ArrayList<>();
+//        }
     }
     
     public void salvar(){
@@ -72,18 +75,22 @@ public class ProfessorBean implements Serializable{
         }
     } 
     
+    public void download(){
+        try {
+            File file = ManipuladorCSV.toProfessorCsv(dao.usuariosComNivelDeAcesso(NivelAcesso.PROFESSOR));
+            Faces.sendFile(file, true);
+            
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(ProfessorBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ProfessorBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void remover(Usuario usuario){
         this.dao.remover(usuario);
         this.professores = this.dao.usuariosComNivelDeAcesso(NivelAcesso.PROFESSOR);
     }
-
-//    public Usuario getProfessor() {
-//        return professor;
-//    }
-//
-//    public void setProfessor(Usuario professor) {
-//        this.professor = professor;
-//    }
 
     public Part getPart() {
         return part;

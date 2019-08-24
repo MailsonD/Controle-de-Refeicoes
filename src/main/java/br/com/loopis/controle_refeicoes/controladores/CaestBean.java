@@ -80,7 +80,7 @@ public class CaestBean implements Serializable{
             caest.setNivelAcesso(NivelAcesso.CAEST);
             dao.salvar(caest);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário CAEST cadastrado com sucesso!", null));
-
+            caest = new Usuario();
             usuariosCaest = dao.usuariosComNivelDeAcesso(NivelAcesso.CAEST);
         } catch (MatriculaExistenteException e) {
             System.out.println("Foi");

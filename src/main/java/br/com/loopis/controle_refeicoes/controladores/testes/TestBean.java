@@ -25,12 +25,23 @@ public class TestBean {
 
     @PostConstruct
     private void init() {
-//        List<Usuario> l = new ArrayList<>();
-//        l.add(new Usuario("123", "321", "email@gmail.com", "Zé", NivelAcesso.ADMINISTRADOR));
+//        Usuario u1 = new Usuario("1", "1", "1", "Usuario1", NivelAcesso.PROFESSOR, Boolean.TRUE);
+//        Usuario u2 = new Usuario("2", "2", "2", "Usuario2", NivelAcesso.ADMINISTRADOR, Boolean.TRUE);
+//        Usuario u3 = new Usuario("3", "3", "3", "Usuario3", NivelAcesso.CAEST, Boolean.TRUE);
+//        Usuario u4 = new Usuario("4", "4", "4", "Usuario4", NivelAcesso.GESTOR, Boolean.TRUE);
 //        try {
+//            usuarioDao.salvar(u1);
+//            usuarioDao.salvar(u2);
+//            usuarioDao.salvar(u3);
+//            usuarioDao.salvar(u4);
+//        } catch (MatriculaExistenteException ex) {
+//            Logger.getLogger(TestBean.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        try {
+    //        List<Usuario> l = new ArrayList<>();
+    //        l.add(new Usuario("123", "321", "email@gmail.com", "Zé", NivelAcesso.ADMINISTRADOR));
 //            File f = ManipuladorCSV.toProfessorCsv(l);
 //            System.out.println("\n"+f.getAbsolutePath());
-//        try {
 //            //Ordem para colunas no CSV matricula, senha, email, nome, nivelAcesso;
 ////            List<Usuario> listUsuarios = ManipuladorCSV.toListUsuario("/home/ian/Projetos_Programas/Java/Controle-de-Refeicoes/usuario.csv");
 ////            for (Usuario u : listUsuarios) {
