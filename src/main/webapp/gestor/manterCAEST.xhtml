@@ -15,7 +15,7 @@ and open the template in the editor.
         <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png"/>
         <link rel="icon" type="image/png" href="../assets/img/favicon.ico"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Cadastro de Gestor</title>
+        <title>Cadastro da Caest</title>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
               name='viewport' />
         <!--     Fonts and icons     -->
@@ -49,12 +49,6 @@ and open the template in the editor.
                                 <p>SOLICITAÇÕES</p>
                             </h:commandLink>
                         </li>
-                        <li>
-                            <h:commandLink class="nav-link" >
-                                <i class="nc-icon nc-circle-09"></i>
-                                <p>PERFIL</p>
-                            </h:commandLink>
-                        </li>
                         <li class="nav-item active">
                             <h:commandLink class="nav-link" >
                                 <i class="nc-icon nc-badge"></i>
@@ -68,14 +62,13 @@ and open the template in the editor.
                             </h:commandLink>
                         </li>
 
-                        <!--                <li class="nav-item active">
-                                                <a class="nav-link" href="CadastroDeGestor.html">
-                                                    <i class="nc-icon nc-circle-09"></i>
-                                                    <p>Cadastro Gestor</p>
-                                                </a>
-                                            </li>-->
 
-
+                        <li class="nav-item">
+                            <h:commandLink class="nav-link" >
+                                <i class="nc-icon nc-circle-09"></i>
+                                <p>Conta</p>
+                            </h:commandLink>
+                        </li>
                         <li class="nav-item active active-pro">
 
                             <h:commandLink class="nav-link active">
@@ -90,7 +83,7 @@ and open the template in the editor.
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#pablo"> Gestor </a>
+                        <a class="navbar-brand" href="#pablo"> Gestor - Cadastrar CAEST </a>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                                 aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -182,86 +175,13 @@ and open the template in the editor.
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">EXCLUIR</f:facet>
-                                                    <h:commandButton styleClass="btn btn-danger btn-fill" action="#{caestBean.remover(caestUsua)}"
+                                                    <h:commandButton styleClass="btn btn-danger" action="#{caestBean.remover(caestUsua)}"
                                                                      value="Excluir"></h:commandButton>
 
                                                 </h:column>
 
                                             </h:dataTable>
                                         </h:form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-10">
-                                <div class="card strpied-tabled-with-hover">
-                                    <div class="card-header ">
-                                        <h4 class="card-title">Funcionarios CAEST</h4>
-                                        <p class="card-category">Lista de Funcionarios da CAEST Cadastrados</p>
-                                    </div>
-                                    <div class="card-body table-full-width table-responsive">
-                                        <table class="table table-hover table-striped">
-                                            <thead>
-                                                <th>Nome</th>
-                                                <th>Matricula</th>
-                                                <th>Email</th>
-                                                <th>Excluir</th>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Dakota Rice</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
-                                                    <td>
-                                                        <a class="nav-link active" href="upgrade.html">
-                                                            <i class="nc-icon nc-simple-remove"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Minerva Hooper</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
-                                                    <td>
-                                                        <a class="nav-link active" href="upgrade.html">
-                                                            <i class="nc-icon nc-simple-remove"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Sage Rodriguez</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
-                                                    <td>
-                                                        <a class="nav-link active" href="upgrade.html">
-                                                            <i class="nc-icon nc-simple-remove"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Philip Chaney</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
-                                                    <td>
-                                                        <a class="nav-link active" href="upgrade.html">
-                                                            <i class="nc-icon nc-simple-remove"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Doris Greene</td>
-                                                    <td>123456789</td>
-                                                    <td>email@email.com</td>
-                                                    <td>
-                                                        <h:form>
-                                                            <h:commandLink styleClass="nav-link active nc-icon nc-simple-remove" action="#{gestorBean.remover()}"/>
-                                                        </h:form>
-                                                        <!--                                                        <a class="nav-link active" href="upgrade.html">-->
-                                                        <!--                                                            <i class="nc-icon nc-simple-remove"></i>-->
-                                                        <!--                                                        </a>-->
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
                                     </div>
                                 </div>
                             </div>
