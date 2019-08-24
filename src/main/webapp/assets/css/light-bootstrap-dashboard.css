@@ -11,7 +11,7 @@
 =========================================================
 
  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.*/
- 
+
 /*      light colors         */
 
 @keyframes spin {
@@ -78,6 +78,7 @@ button.close {
     -webkit-font-smoothing: antialiased;
     font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
     font-weight: 400;
+
 }
 
 h1,
@@ -4774,7 +4775,7 @@ License - nucleoapp.com/license/
 }
 
 /*------------------------
-	base class definition
+        base class definition
 -------------------------*/
 
 .nc-icon {
@@ -4951,7 +4952,7 @@ License - nucleoapp.com/license/
 }
 
 /*------------------------
-	font icons
+        font icons
 -------------------------*/
 
 .nc-air-baloon::before {
