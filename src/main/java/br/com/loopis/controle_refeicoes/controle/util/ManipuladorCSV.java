@@ -81,4 +81,31 @@ public class ManipuladorCSV {
         reader.close();
         return listaAlunos;
     }
+    
+    public static List<Aluno> toListAlunos(Part part) throws IOException, ArrayIndexOutOfBoundsException {
+        if (!(part.getContentType().equals("text/csv"))) {
+            return new ArrayList<>();
+        }
+        String separador = ",";
+        BufferedReader reader = new BufferedReader(new InputStreamReader(part.getInputStream()));
+        String linha = null;
+        reader.readLine();
+        List<Aluno> listaAlunos = new ArrayList<>();
+        while ((linha = reader.readLine()) != null) {
+            String[] dadosObjeto = linha.split(separador);
+            Aluno a = new Aluno(
+                    dadosObjeto[0],
+                    dadosObjeto[1]);
+            Beneficio b = new Beneficio(
+                    TipoBeneficio.valueOf(dadosObjeto[2]),
+                    dadosObjeto[3]);
+            b.setAlunoBeneficiado(a);
+            a.setBeneficio(b);
+            listaAlunos.add(a);
+        }
+        reader.close();
+        return listaAlunos;
+    }
+    
+    
 }

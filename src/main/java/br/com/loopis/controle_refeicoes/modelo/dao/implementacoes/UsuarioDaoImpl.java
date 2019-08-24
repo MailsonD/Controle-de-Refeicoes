@@ -89,5 +89,13 @@ public class UsuarioDaoImpl implements UsuarioDao {
         return query.getResultList();
     }
 
+    @Override
+    public void removerProfessores() {
+        String jpql = "DELETE FROM Usuario u WHERE u.nivelAcesso=:na";
+        Query query = em.createQuery(jpql);
+        query.setParameter("na", NivelAcesso.PROFESSOR);
+        query.executeUpdate();
+    }
+
 }
 
