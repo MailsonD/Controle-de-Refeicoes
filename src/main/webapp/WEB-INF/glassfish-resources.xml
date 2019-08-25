@@ -19,14 +19,12 @@
                           validate-atmost-once-period-in-seconds="0" wrap-jdbc-objects="false"
                           name="post-gre-sql_persistence_events_postgresPool" >
         <property name="serverName" value="localhost"/>
-        <!-- <property name="portNumber" value="5433"/> -->
+         <property name="portNumber" value="5433"/>
         <!-- <property name="portNumber" value="5432"/> Configuração de Caio-->
-        <property name="portNumber" value="5432"/>
         <property name="databaseName" value="controle_refeicoes"/>
         <property name="User" value="postgres"/>
-        <!-- <property name="Password" value="postgres"/> -->
+         <property name="Password" value="postgres"/>
         <!-- <property name="Password" value="0123"/> Configuração de Caio-->
-        <property name="Password" value="0123"/>
         <property name="driverClass" value="org.postgresql.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true"
