@@ -5,8 +5,17 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <ui:composition template="../WEB-INF/Template.xhtml">
+        <ui:define name="titulo">
+            <title>Cadastro de Gestor</title>
+        </ui:define>
+    </ui:composition>
+</h:head>
 <h:body>
     <ui:composition template="../WEB-INF/Template.xhtml">
+
         <ui:define name="Conteudo">
             <div class="main-panel">
                 <!-- Navbar -->
@@ -72,11 +81,6 @@
                                                             action="#{gestorBean.cadastrar}" value="Cadastrar">
 
                                                     </h:commandButton>
-
-                                                    <!--                                                <button type="submit"
-                                                                                                        class="col-lg-10 btn btn-success btn-fill pull-right"
-                                                                                                        onclick="demo.showNotification('top','center')">Cadastrar
-                                                                                                        Gestor</button>-->
                                                 </div>
                                             </div>
 
