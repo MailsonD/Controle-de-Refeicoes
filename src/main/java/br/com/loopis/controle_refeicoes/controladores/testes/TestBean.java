@@ -61,7 +61,7 @@ public class TestBean {
         try {
             serviceUsuario.salvar(dois);
         } catch (MatriculaExistenteException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("\nfoi");
         }
     }
 }
