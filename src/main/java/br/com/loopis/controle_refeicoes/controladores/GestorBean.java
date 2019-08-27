@@ -38,7 +38,7 @@ public class GestorBean implements Serializable{
             usuario.setNivelAcesso(NivelAcesso.GESTOR);
             gestorDao.salvar(usuario);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Gestor cadastrado com sucesso!", null));
-
+            usuario = new Usuario();
             gestores = gestorDao.usuariosComNivelDeAcesso(NivelAcesso.GESTOR);
         } catch (MatriculaExistenteException e) {
             System.out.println("Foi");

@@ -9,10 +9,15 @@ package br.com.loopis.controle_refeicoes.controladores;
  *
  * @author ian
  */
+import br.com.loopis.controle_refeicoes.util.ManipuladorCSV;
+import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.AlunoDao;
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.UsuarioDao;
+import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteException;
+
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
@@ -23,6 +28,7 @@ import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.view.ViewScoped;
+import javax.servlet.http.Part;
 
 
 @ViewScoped
@@ -32,14 +38,41 @@ public class CaestBean implements Serializable{
     private Usuario caest;
     @Inject
     private UsuarioDao dao;
+    @Inject
+    private AlunoDao alunoDao;
     private List<Usuario> usuariosCaest = new ArrayList<>();
+    private List<Aluno> alunos = new ArrayList<>();
+    private Part part;
 
     @PostConstruct
     public void init() {
         caest = new Usuario();
         usuariosCaest = dao.usuariosComNivelDeAcesso(NivelAcesso.CAEST);
+        alunos = alunoDao.listar();
     }
 
+    public void salvarAlunosCsv(){
+        List<Aluno> alunosAux = new ArrayList<>();
+        try {
+            alunosAux = ManipuladorCSV.toListAlunos(part);
+            if(alunosAux.size()>0){
+                for(Aluno aluno: alunosAux){
+                    this.alunoDao.salvar(aluno);
+                }
+                this.alunos = alunosAux;
+            }else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Documento com extenção inválida ou vazio!", null));
+            }
+
+
+        } catch (MatriculaExistenteException ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alunos com matrículas repetidas!", null));
+        } catch (IOException ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro na leitura deste arquivo!", null));
+        } catch (ArrayIndexOutOfBoundsException ex){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Coluna(s) a mais na estrutura do arquivo!", null));
+        }
+    }
 
     public void cadastrar(){
         try {
@@ -47,7 +80,7 @@ public class CaestBean implements Serializable{
             caest.setNivelAcesso(NivelAcesso.CAEST);
             dao.salvar(caest);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário CAEST cadastrado com sucesso!", null));
-
+            caest = new Usuario();
             usuariosCaest = dao.usuariosComNivelDeAcesso(NivelAcesso.CAEST);
         } catch (MatriculaExistenteException e) {
             System.out.println("Foi");
@@ -58,7 +91,28 @@ public class CaestBean implements Serializable{
         this.dao.remover(usuario);
         this.usuariosCaest = this.dao.usuariosComNivelDeAcesso(NivelAcesso.CAEST);
     }
-    
+
+    public void removerAluno(Aluno aluno){
+        this.alunoDao.remover(aluno);
+        this.alunos = alunoDao.listar();
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
+    public Part getPart() {
+        return part;
+    }
+
+    public void setPart(Part part) {
+        this.part = part;
+    }
+
     public Usuario getCaest() {
         return caest;
     }

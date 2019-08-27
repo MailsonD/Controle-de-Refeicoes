@@ -43,40 +43,43 @@ and open the template in the editor.
                         </a>
                     </div>
                     <ul class="nav">
-                        <li>
-                            <h:commandLink class="nav-link" >
-                                <i class="nc-icon nc-chart-pie-35"></i>
-                                <p>Inicio</p>
-                            </h:commandLink>
-                        </li>
-                         <li>
-                            <h:commandLink class="nav-link" >
-                                <i class="nc-icon nc-circle-09"></i>
-                                <p>PERFIL</p>
-                            </h:commandLink>
-                        </li>
-                        <li class="nav-item active">
-                            <h:commandLink class="nav-link" >
-                                <i class="nc-icon nc-badge"></i>
-                                <p>Gestor</p>
-                            </h:commandLink>
-                        </li>
+                        <h:form>
+                            
+                            <li>
+                                <h:commandLink class="nav-link" >
+                                    <i class="nc-icon nc-chart-pie-35"></i>
+                                    <p>Inicio</p>
+                                </h:commandLink>
+                            </li>
+                             <li>
+                                <h:commandLink class="nav-link" >
+                                    <i class="nc-icon nc-circle-09"></i>
+                                    <p>PERFIL</p>
+                                </h:commandLink>
+                            </li>
+                            <li class="nav-item active">
+                                <h:commandLink class="nav-link" >
+                                    <i class="nc-icon nc-badge"></i>
+                                    <p>Gestor</p>
+                                </h:commandLink>
+                            </li>
 
-                        <!--                <li class="nav-item active">
-                                                <a class="nav-link" href="CadastroDeGestor.html">
-                                                    <i class="nc-icon nc-circle-09"></i>
-                                                    <p>Cadastro Gestor</p>
-                                                </a>
-                                            </li>-->
+                            <!--                <li class="nav-item active">
+                                                    <a class="nav-link" href="CadastroDeGestor.html">
+                                                        <i class="nc-icon nc-circle-09"></i>
+                                                        <p>Cadastro Gestor</p>
+                                                    </a>
+                                                </li>-->
 
 
-                        <li class="nav-item active active-pro">
-                           
-                            <h:commandLink class="nav-link active">
-                                <i class="nc-icon nc-button-power"></i>
-                                <p class="col-md-8">SAIR</p>
-                            </h:commandLink>
-                        </li>
+                            <li class="nav-item active active-pro">
+
+                                <h:commandLink class="nav-link active" action="#{autenticacaoBean.logout()}">
+                                    <i class="nc-icon nc-button-power"></i>
+                                    <p class="col-md-8">SAIR</p>
+                                </h:commandLink>
+                            </li>
+                        </h:form>
                     </ul>
                 </div>
             </div>
@@ -155,30 +158,30 @@ and open the template in the editor.
                                         <p class="card-category">Lista de Gestores Cadastrados</p>
                                     </div>
                                     <div class="card-body table-full-width table-responsive">
-                                        <h:dataTable class="table table-hover table-striped" value="#{gestorBean.gestores}" var="gestor">
-                                            <h:column>
-                                                <f:facet name="header">NOME</f:facet>
-                                                <h:outputText value="#{gestor.nome}"/>
+                                        <h:form>
+                                            <h:dataTable class="table table-hover table-striped" value="#{gestorBean.gestores}" var="gestor">
+                                                <h:column>
+                                                    <f:facet name="header">NOME</f:facet>
+                                                    <h:outputText value="#{gestor.nome}"/>
 
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">MATRICULA</f:facet>
-                                                <h:outputText value="#{gestor.matricula}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">MATRICULA</f:facet>
+                                                    <h:outputText value="#{gestor.matricula}"/>
 
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">E-MAIL</f:facet>
-                                                <h:outputText value="#{gestor.email}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">E-MAIL</f:facet>
+                                                    <h:outputText value="#{gestor.email}"/>
 
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">EXCLUIR</f:facet>
-                                                <h:commandButton styleClass="btn btn-danger btn-fill" action="#{gestorBean.remover(gestor)}"
-                                                                 value="Excluir"></h:commandButton>
-
-                                            </h:column>
-
-                                        </h:dataTable>
+                                                </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">EXCLUIR</f:facet>
+                                                        <h:commandButton styleClass="btn btn-danger btn-fill" action="#{gestorBean.remover(gestor)}"
+                                                                         value="Excluir"></h:commandButton>
+                                                    </h:column>
+                                            </h:dataTable>
+                                        </h:form>
                                     </div>
                                 </div>
                             </div>

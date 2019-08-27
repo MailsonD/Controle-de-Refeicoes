@@ -15,7 +15,7 @@ and open the template in the editor.
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png"/>
     <link rel="icon" type="image/png" href="../assets/img/favicon.ico"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Cadastro de Gestor</title>
+    <title>Cadastro de Professores</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
     <!--     Fonts and icons     -->
@@ -59,6 +59,25 @@ and open the template in the editor.
                             <p>PROFESSOR</p>
                         </h:commandLink>
                     </li>
+                    <li class="nav-item">
+                        <h:commandLink class="nav-link">
+                            <i class="nc-icon nc-badge"></i>
+                            <p>CAEST</p>
+                        </h:commandLink>
+                    </li>
+                    <li class="nav-item">
+                        <h:commandLink class="nav-link" >
+                            <i class="nc-icon nc-circle-09"></i>
+                            <p>Conta</p>
+                        </h:commandLink>
+                    </li>
+                    <li class="nav-item active active-pro">
+
+                        <h:commandLink class="nav-link active">
+                            <i class="nc-icon nc-button-power"></i>
+                            <p class="col-md-8">SAIR</p>
+                        </h:commandLink>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -66,7 +85,7 @@ and open the template in the editor.
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#pablo"> Gestor </a>
+                    <a class="navbar-brand" href="#pablo"> Gestor - Cadastrar Professores </a>
                     <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                             aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar burger-lines"></span>
@@ -92,7 +111,7 @@ and open the template in the editor.
                                                     <h:messages id="messagesError"
                                                                 infoStyle="list-style: none;color: green;"
                                                                 errorStyle="list-style: none;color: red;"/>
-                                                    <h:inputFile styleClass="custom-file-input"
+                                                    <h:inputFile  styleClass="custom-file-input"
                                                                  value="#{professorBean.part}"
                                                                  required="true"
                                                                  requiredMessage="Faça o upload do arquivo .csv"></h:inputFile>
@@ -120,6 +139,11 @@ and open the template in the editor.
                                 <div class="card-header ">
                                     <h4 class="card-title">Professores</h4>
                                     <p class="card-category">Lista de Professores Cadastrados</p>
+                                        <h:commandButton action="#{professorBean.salvar()}"
+                                                         class="col-md-2 btn btn-sm btn-success btn-fill pull-right"
+                                                         value="Download">
+
+                                        </h:commandButton>
                                 </div>
                                 <div class="card-body table-full-width table-responsive">
                                     <h:form>

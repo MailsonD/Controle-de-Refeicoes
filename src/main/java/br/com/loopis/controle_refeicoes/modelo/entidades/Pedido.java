@@ -1,11 +1,13 @@
 package br.com.loopis.controle_refeicoes.modelo.entidades;
 
 import br.com.loopis.controle_refeicoes.modelo.conversor.DataConversor;
+import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.Turma;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -25,17 +27,36 @@ public class Pedido implements Serializable {
     private LocalDate diaSolicitado;
     @Enumerated(EnumType.STRING)
     private Turma turma;
+    @Enumerated(EnumType.STRING)
+    private TipoBeneficio tipoBeneficio;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<Aluno> alunos;
 
-    public Pedido(Usuario professor, String justificativa, LocalDate diaSolicitado, Turma turma) {
+    public Pedido(Long id, Usuario professor, String justificativa, LocalDate diaSolicitado, Turma turma, TipoBeneficio tipoBeneficio, List<Aluno> alunos) {
+        this.id = id;
         this.professor = professor;
         this.justificativa = justificativa;
         this.diaSolicitado = diaSolicitado;
         this.turma = turma;
+        this.tipoBeneficio = tipoBeneficio;
+        this.alunos = alunos;
     }
 
-    public Pedido(Long id, Usuario professor, String justificativa, LocalDate diaSolicitado, Turma turma) {
-        this(professor,justificativa,diaSolicitado,turma);
-        this.id = id;
+    public Pedido(Usuario professor, String justificativa, LocalDate diaSolicitado, Turma turma, TipoBeneficio tipoBeneficio, List<Aluno> alunos) {
+        this.professor = professor;
+        this.justificativa = justificativa;
+        this.diaSolicitado = diaSolicitado;
+        this.turma = turma;
+        this.tipoBeneficio = tipoBeneficio;
+        this.alunos = alunos;
+    }
+
+    public Pedido(Usuario professor, String justificativa, LocalDate diaSolicitado, Turma turma, TipoBeneficio tipoBeneficio) {
+        this.professor = professor;
+        this.justificativa = justificativa;
+        this.diaSolicitado = diaSolicitado;
+        this.turma = turma;
+        this.tipoBeneficio = tipoBeneficio;
     }
 
     public Pedido() {
@@ -81,31 +102,75 @@ public class Pedido implements Serializable {
         this.turma = turma;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pedido pedido = (Pedido) o;
-        return id == pedido.id &&
-                Objects.equals(professor, pedido.professor) &&
-                Objects.equals(justificativa, pedido.justificativa) &&
-                Objects.equals(diaSolicitado, pedido.diaSolicitado) &&
-                turma == pedido.turma;
+    public TipoBeneficio getTipoBeneficio() {
+        return tipoBeneficio;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, professor, justificativa, diaSolicitado, turma);
+    public void setTipoBeneficio(TipoBeneficio tipoBeneficio) {
+        this.tipoBeneficio = tipoBeneficio;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
 
     @Override
     public String toString() {
-        return "Pedido{" +
-                "id=" + id +
-                ", professor=" + professor +
-                ", justificativa='" + justificativa + '\'' +
-                ", diaSolicitado=" + diaSolicitado +
-                ", turma=" + turma +
-                '}';
+        return "Pedido{" + "id=" + id + ", professor=" + professor + ", justificativa=" + justificativa + ", diaSolicitado=" + diaSolicitado + ", turma=" + turma + ", tipoBeneficio=" + tipoBeneficio + ", alunos=" + alunos + '}';
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 59 * hash + Objects.hashCode(this.professor);
+        hash = 59 * hash + Objects.hashCode(this.justificativa);
+        hash = 59 * hash + Objects.hashCode(this.diaSolicitado);
+        hash = 59 * hash + Objects.hashCode(this.turma);
+        hash = 59 * hash + Objects.hashCode(this.tipoBeneficio);
+        hash = 59 * hash + Objects.hashCode(this.alunos);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pedido other = (Pedido) obj;
+        if (!Objects.equals(this.justificativa, other.justificativa)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.professor, other.professor)) {
+            return false;
+        }
+        if (!Objects.equals(this.diaSolicitado, other.diaSolicitado)) {
+            return false;
+        }
+        if (this.turma != other.turma) {
+            return false;
+        }
+        if (this.tipoBeneficio != other.tipoBeneficio) {
+            return false;
+        }
+        if (!Objects.equals(this.alunos, other.alunos)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

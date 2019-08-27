@@ -11,26 +11,30 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <head>
-        <meta charset="utf-8" />
+        <meta charset="utf-8"/>
         <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png"/>
         <link rel="icon" type="image/png" href="../assets/img/favicon.ico"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <title>Cadastro da Caest</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title>Controle de Refeições - CAEST - Cadastro de Alunos Beneficiados</title>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-              name='viewport' />
+              name='viewport'/>
         <!--     Fonts and icons     -->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
         <!-- CSS Files -->
-        <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+        <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet"/>
         <!-- CSS Just for demo purpose, don't include it in your project -->
-        <link href="../assets/css/demo.css" rel="stylesheet" />
+        <link href="../assets/css/demo.css" rel="stylesheet"/>
+        <!--        BOOTSTRAP 4-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+
     </head>
 
     <h:body>
         <div class="wrapper">
-            <div class="sidebar" data-color="green" data-image="../assets/img/sidebar-5.jpg">
+            <div class="sidebar" data-color="green" data-image="../assets/img/sidebar-1.jpg">
                 <!--
             Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
     
@@ -49,33 +53,32 @@ and open the template in the editor.
                                 <p>SOLICITAÇÕES</p>
                             </h:commandLink>
                         </li>
+                        <li>
+                            <h:commandLink class="nav-link"  >
+                                <i class="nc-icon nc-paper-2"></i>
+                                <p>Historico</p>
+                            </h:commandLink>
+                        </li>
                         <li class="nav-item active">
-                            <h:commandLink class="nav-link" >
+                            <h:commandLink class="nav-link">
                                 <i class="nc-icon nc-badge"></i>
-                                <p>CAEST</p>
+                                <p>ALUNOS BENEFICIADOS</p>
                             </h:commandLink>
                         </li>
-                        <li class="nav-item">
-                            <h:commandLink class="nav-link" >
-                                <i class="nc-icon nc-badge"></i>
-                                <p>PROFESSOR</p>
-                            </h:commandLink>
-                        </li>
-
-
-                        <li class="nav-item">
+                        <li>
                             <h:commandLink class="nav-link" >
                                 <i class="nc-icon nc-circle-09"></i>
                                 <p>Conta</p>
                             </h:commandLink>
                         </li>
-                        <li class="nav-item active active-pro">
 
+
+                        <li class="nav-item active active-pro">
                             <h:commandLink class="nav-link active">
                                 <i class="nc-icon nc-button-power"></i>
                                 <p class="col-md-8">SAIR</p>
                             </h:commandLink>
-                        </li>
+                        </li>   
                     </ul>
                 </div>
             </div>
@@ -83,7 +86,7 @@ and open the template in the editor.
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#pablo"> Gestor - Cadastrar CAEST </a>
+                        <a class="navbar-brand" href="#pablo"> CAEST </a>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                                 aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -99,50 +102,33 @@ and open the template in the editor.
                             <div class="col-md-10">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">Cadastrar CAEST</h4>
+                                        <h4 class="card-title">Cadastrar alunos que possuem auxilio alimentação </h4>
                                     </div>
                                     <div class="card-body">
-                                        <h:form>
+                                        <h:form enctype="multipart/form-data">
                                             <div class="row">
-                                                <div class="col-md-12 pr-3">
-                                                    <div class="form-group">
-                                                        <label>Nome</label>
-                                                        <h:inputText  class="form-control" value="#{caestBean.caest.nome}">
-                                                            <f:passThroughAttribute name="placeholder" value="Nome"></f:passThroughAttribute>
-                                                        </h:inputText>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 pr-3">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Email</label>
-                                                        <h:inputText  class="form-control" value="#{caestBean.caest.email}">
-                                                            <f:passThroughAttribute name="placeholder" value="E-mail"></f:passThroughAttribute>
-                                                        </h:inputText>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 pr-3">
-                                                    <div class="form-group">
-                                                        <label>Matricula</label>
-                                                        <h:inputText  class="form-control" value="#{caestBean.caest.matricula}">
-                                                            <f:passThroughAttribute name="placeholder" value="Matricula"></f:passThroughAttribute>
-                                                        </h:inputText>
+                                                <div class="col-md-12">
+                                                    <div class="custom-file">
+                                                        <h:messages id="messagesError"
+                                                                    infoStyle="list-style: none;color: green;"
+                                                                    errorStyle="list-style: none;color: red;"/>
+
+                                                        <h:inputFile styleClass="custom-file-input"
+                                                                     value="#{caestBean.part}"
+                                                                     required="true"
+                                                                     requiredMessage="Faça o upload do arquivo .csv"></h:inputFile>
+                                                        <label class="custom-file-label"
+                                                               for="customFile">Carregue seu arquivo .CSV</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-10 pr-3">
-                                                    <h:commandButton class="col-lg-10 btn btn-success btn-fill pull-right" action="#{caestBean.cadastrar()}" value="Cadastrar" >
+                                                    <h:commandButton action="#{caestBean.salvarAlunosCsv()}"
+                                                                     class="col-lg-10 btn btn-success btn-fill pull-right"
+                                                                     value="Cadastrar">
 
                                                     </h:commandButton>
-
-                                                    <!--                                                <button type="submit"
-                                                                                                        class="col-lg-10 btn btn-success btn-fill pull-right"
-                                                                                                        onclick="demo.showNotification('top','center')">Cadastrar
-                                                                                                        Gestor</button>-->
                                                 </div>
                                             </div>
 
@@ -153,32 +139,41 @@ and open the template in the editor.
                             <div class="col-md-10">
                                 <div class="card strpied-tabled-with-hover">
                                     <div class="card-header ">
-                                        <h4 class="card-title">Funcionarios CAEST</h4>
-                                        <p class="card-category">Lista de Funcionarios da CAEST Cadastrados</p>
+                                        <h4 class="card-title">Alunos Beneficiados</h4>
+                                        <p class="card-category">Lista de Alunos Beneficiados com alimentação</p>
                                     </div>
                                     <div class="card-body table-full-width table-responsive">
                                         <h:form>
 
                                             <h:dataTable styleClass="table table-hover table-striped"
-                                                         value="#{caestBean.usuariosCaest}" var="caestUsua">
+                                                         value="#{caestBean.alunos}" var="aluno">
                                                 <h:column>
                                                     <f:facet name="header">NOME</f:facet>
-                                                    <h:outputText value="#{caestUsua.nome}"/>
+                                                    <h:outputText value="#{aluno.nome}"/>
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">MATRICULA</f:facet>
-                                                    <h:outputText value="#{caestUsua.matricula}"/>
+                                                    <h:outputText value="#{aluno.matricula}"/>
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header">E-MAIL</f:facet>
-                                                    <h:outputText value="#{caestUsua.email}"/>
+                                                    <f:facet name="header">Beneficio</f:facet>
+                                                    <h:outputText value="#{aluno.beneficio.tipoBeneficio}"/>
                                                 </h:column>
                                                 <h:column>
-                                                    <f:facet name="header">EXCLUIR</f:facet>
-                                                    <h:commandButton styleClass="btn btn-danger" action="#{caestBean.remover(caestUsua)}"
-                                                                     value="Excluir"></h:commandButton>
+                                                    <f:facet name="header">Edital</f:facet>
+                                                    <h:outputText value="#{aluno.beneficio.edital}"/>
+                                                </h:column>
 
+                                                <h:column>
+                                                    <f:facet name="header">Excluir</f:facet>
+
+                                                    <h:commandButton class="col-lg-6 btn btn-danger btn-fill pull-right" action="#{caestBean.removerAluno(aluno)}"
+                                                                     value="Excluir" >
+
+                                                    </h:commandButton>
                                                 </h:column>
+
+
 
                                             </h:dataTable>
                                         </h:form>
