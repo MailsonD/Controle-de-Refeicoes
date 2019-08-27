@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
+
+    <title>Solicitar</title>
+
+    <!--     Fonts and icons     -->
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+
+    <!-- CSS Files -->
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/light-bootstrap-dashboard.css"/>
+    <link rel="stylesheet" href="assets/css/demo.css"/>
+
+    <!--    SCRIPT Files -->
+
+    <h:outputScript name="assets/js/core/jquery.3.2.1.min.js"/>
+    <h:outputScript name="assets/js/core/popper.min.js"/>
+    <h:outputScript name="assets/js/core/bootstrap.min.js"/>
+    <h:outputScript name="assets/js/plugins/bootstrap-switch.js"/>
+    <h:outputScript name="assets/js/plugins/chartist.min.js"/>
+    <h:outputScript name="assets/js/plugins/bootstrap-notify.js"/>
+    <h:outputScript name="assets/js/light-bootstrap-dashboard.js"/>
+    <h:outputScript name="assets/js/demo.js"/>
+
+</h:head>
+
+<h:body>
+    <div class="wrapper">
+        <div class="sidebar" data-color="green" data-image="../resources/assets/img/sidebar-1.jpg">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+        Tip 2: you can also add an image using data-image tag
+            -->
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="http://www.creative-tim.com" class="simple-text">
+                        GERÊNCIA REFEIÇÕES
+                    </a>
+                </div>
+                <ul class="nav">
+                    <li class="nav-item active">
+                        <h:commandLink class="nav-link">
+                            <i class="nc-icon nc-chart-pie-36"></i>
+                            <p>Estatísticas</p>
+                        </h:commandLink>
+                    </li>
+                    <li>
+                        <h:commandLink class="nav-link">
+                            <i class="nc-icon nc-badge"></i>
+                            <p>Cadastrar Gestor</p>
+                        </h:commandLink>
+                    </li>
+
+
+
+
+                    <li class="nav-item active active-pro">
+
+                        <h:commandLink class="nav-link active">
+                            <i class="nc-icon nc-button-power"></i>
+                            <p class="col-md-8">Sair</p>
+                        </h:commandLink>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#pablo"> Administrador - Estatísticas </a>
+                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                            aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                        <span class="navbar-toggler-bar burger-lines"></span>
+                    </button>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-body all-icons">
+                            <div class="row">
+                                <div class="font-icon-list col-3">
+                                    <div class="font-icon-detail">
+                                        <h2 class="card-title">139</h2>
+                                        <p class="card-category">Almoços Deferidos</p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-3">
+                                    <div class="font-icon-detail">
+                                        <h2 class="card-title">5</h2>
+                                        <p class="card-category ">Almoços Indeferidos </p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-3">
+                                    <div class="font-icon-detail">
+                                        <h2 class="card-title">139</h2>
+                                        <p class="card-category">Ambos Deferidos</p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-3">
+                                    <div class="font-icon-detail">
+                                        <h2 class="card-title">139</h2>
+                                        <p class="card-category">Ambos Indeferidos</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="font-icon-list col-4">
+                                    <div class="font-icon-detail">
+                                        <h2 class="card-title">Ricardo Job</h2>
+                                        <p class="card-category">Professor que mais Solicitou almoços</p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-4">
+                                    <div class="font-icon-detail">
+                                        <h2 class="card-title">Rafael</h2>
+                                        <p class="card-category">Professor que mais Solicitou Jantares </p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-4">
+                                    <div class="font-icon-detail">
+                                        <h2 class="card-title">Caio</h2>
+                                        <p class="card-category">Professor que mais Solicitou Ambos</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="font-icon-list col-3">
+                                    <div class="font-icon-detail">
+                                        <h2 class="card-title">139</h2>
+                                        <p class="card-category">Jantares Deferidos</p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-3">
+                                    <div class="font-icon-detail">
+                                        <h2 class="card-title">5</h2>
+                                        <p class="card-category ">Jantares Indeferidos </p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-3">
+                                    <div class="font-icon-detail">
+                                        <h2 class="card-title">Quarta</h2>
+                                        <p class="card-category">Dia da semana com mais Solicitações</p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-3">
+                                    <div class="font-icon-detail">
+                                        <h2 class="card-title">Segunda</h2>
+                                        <p class="card-category ">Dia da semana com menos Solicitações</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="font-icon-list col-6">
+                                    <div class="font-icon-detail">
+                                        <h2 class="card-title">Mulher Legal</h2>
+                                        <p class="card-category">Funcionario CAEST que aceitou Solicitações</p>
+                                    </div>
+                                </div>
+                                <div class="font-icon-list col-6">
+                                    <div class="font-icon-detail">
+                                        <h2 class="card-title">Mulher dessa Semana</h2>
+                                        <p class="card-category">Funcionario CAEST que recusou Solicitações</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav>
+                        <p class="copyright text-center">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>
+                            <a href="http://www.creative-tim.com">Loopis</a>, Melhor equipe de DAC
+                        </p>
+                    </nav>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+</h:body>
+</html>
