@@ -41,4 +41,9 @@ public class AlunoDaoImpl implements AlunoDao {
     public List<Aluno> listar() {
         return em.createQuery("SELECT a FROM Aluno a", Aluno.class).getResultList();
     }
+
+    @Override
+    public Aluno buscarPorMatricula(String matricula) {
+        return em.find(Aluno.class, matricula);
+    }
 }
