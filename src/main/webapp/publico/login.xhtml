@@ -16,7 +16,7 @@ and open the template in the editor.
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
 
-        <title>SOLICITAR</title>
+        <title>Login</title>
 
         <!--     Fonts and icons     -->
 
@@ -180,11 +180,11 @@ and open the template in the editor.
             <div class="page-header clear-filter">
                 <div class="page-header-image" data-parallax="true" style="background-image: url('../resources/assets/img/if2.jpg')">
                     <div class="filter"> </div>
-                    
-                    
+
+
                     <div class="card col-sm-9 col-md-7 col-lg-5 mx-auto py-5 my-5 shadow p-3 mb-5 bg-white rounded title-container text-center">
                         <div class="card-header">
-                            <h4 class="card-title">Gerência Refeições</h4>
+                            <h4 class="card-title">Gerência Refeições - Login</h4>
                         </div>
 
                         <div class="card-body">
@@ -213,7 +213,15 @@ and open the template in the editor.
                                 <div class="row">
                                     <div class="col-md-10 pr-3">
                                         <h:commandButton type="submit" action="#{autenticacaoBean.login()}" styleClass="col-lg-10 btn btn-success btn-fill pull-right" value="Entrar"></h:commandButton>
-                                        <div class="clearfix"></div>
+
+                                        <div class="clearfix"></div>                                        
+
+                                    </div>
+                                    
+                                    <div class="col-md-12 text-center">
+                                        <h:commandLink class="text-success">Primeiro acesso</h:commandLink>
+
+
                                     </div>
                                 </div>
                             </h:form>
