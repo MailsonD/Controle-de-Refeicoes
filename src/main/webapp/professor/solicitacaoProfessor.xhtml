@@ -11,78 +11,22 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-<h:head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
+<!--ALOCANDO TEMPLATE-->
+<ui:composition template="../WEB-INF/Template.xhtml">
 
-    <title>SOLICITAR</title>
-
-    <!--     Fonts and icons     -->
-
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
-
-    <!-- CSS Files -->
-
-    <h:outputStylesheet name="assets/img/apple-icon.png"/>
-    <h:outputStylesheet name="assets/img/favicon.ico"/>
-    <h:outputStylesheet name="assets/css/bootstrap.min.css"/>
-    <h:outputStylesheet name="assets/sass/light-bootstrap-dashboard.scss"/>
-    <h:outputStylesheet name="assets/css/light-bootstrap-dashboard.css"/>
-    <h:outputStylesheet name="assets/css/demo.css"/>
+    <!--DEFININDO TITULO-->
+    <ui:define name="titulo">
+        <title>Solicitação</title>
+    </ui:define>
 
 
-<!--    SCRIPT Files -->
-
-    <h:outputScript name="assets/js/core/jquery.3.2.1.min.js"/>
-    <h:outputScript name="assets/js/core/popper.min.js"/>
-    <h:outputScript name="assets/js/core/bootstrap.min.js"/>
-    <h:outputScript name="assets/js/plugins/bootstrap-switch.js"/>
-    <h:outputScript name="assets/js/plugins/chartist.min.js"/>
-    <h:outputScript name="assets/js/plugins/bootstrap-notify.js"/>
-    <h:outputScript name="assets/js/light-bootstrap-dashboard.js"/>
-    <h:outputScript name="assets/js/demo.js"/>
-
-</h:head>
-
-<h:body>
-    <div class="wrapper">
-        <div class="sidebar" data-color="green" data-image="../resources/assets/img/sidebar-5.jpg">
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-        Tip 2: you can also add an image using data-image tag
-            -->
-            <div class="sidebar-wrapper">
-                <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        GERENCIA REFEIÇÕES
-                    </a>
-                </div>
-                <ul class="nav">
-                    <li class="nav-item active">
-                        <h:commandLink class="nav-link">
-                            <i class="nc-icon nc-notes"></i>
-                            <p>SOLICITAR</p>
-                        </h:commandLink>
-                    </li>
-
-                    <li class="nav-item active active-pro">
-
-                        <h:commandLink class="nav-link active">
-                            <i class="nc-icon nc-button-power"></i>
-                            <p class="col-md-8">SAIR</p>
-                        </h:commandLink>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <!--DEFININDO CONTEUDO-->
+    <ui:define name="Conteudo">
         <div class="main-panel">
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#pablo"> Professor </a>
+                    <a class="navbar-brand" href="#pablo"> Professor - Fazer Solicitação </a>
                     <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                             aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar burger-lines"></span>
@@ -121,7 +65,7 @@ and open the template in the editor.
                                         <h:inputTextarea class="form-control" cols="30" rows="10"/>
                                         <br/>
 
-                                        <h:inputText a:type="date" styleClass="form-control" value="#{bean.date}" />
+                                        <h:inputText a:type="date" styleClass="form-control" value="#{bean.date}"/>
 
                                         <br/>
                                         <h:selectBooleanCheckbox value="#{Bean.almocar}"/> Almocar
@@ -204,7 +148,6 @@ and open the template in the editor.
                 </div>
             </footer>
         </div>
-    </div>
-
-</h:body>
+    </ui:define>
+</ui:composition>
 </html>

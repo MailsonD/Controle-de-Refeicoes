@@ -10,77 +10,17 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<head>
-    <meta charset="utf-8"/>
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png"/>
-    <link rel="icon" type="image/png" href="../assets/img/favicon.ico"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Cadastro de Professores</title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-          name='viewport'/>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
-    <!-- CSS Files -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet"/>
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="../assets/css/demo.css" rel="stylesheet"/>
-    <!--        BOOTSTRAP 4-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+<!--ALOCANDO TEMPLATE-->
+<ui:composition template="../WEB-INF/Template.xhtml">
 
-</head>
+    <!--DEFININDO TITULO-->
+    <ui:define name="titulo">
+        <title>Cadastrar Professores</title>
+    </ui:define>
 
-<h:body>
-    <div class="wrapper">
-        <div class="sidebar" data-color="green" data-image="../assets/img/sidebar-5.jpg">
-            <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
-        Tip 2: you can also add an image using data-image tag
-            -->
-            <div class="sidebar-wrapper">
-                <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        GERENCIA REFEIÇÕES
-                    </a>
-                </div>
-                <ul class="nav">
-                    <li>
-                        <h:commandLink class="nav-link">
-                            <i class="nc-icon nc-notes"></i>
-                            <p>SOLICITAÇÕES</p>
-                        </h:commandLink>
-                    </li>
-                    <li class="nav-item active">
-                        <h:commandLink class="nav-link">
-                            <i class="nc-icon nc-badge"></i>
-                            <p>PROFESSOR</p>
-                        </h:commandLink>
-                    </li>
-                    <li class="nav-item">
-                        <h:commandLink class="nav-link">
-                            <i class="nc-icon nc-badge"></i>
-                            <p>CAEST</p>
-                        </h:commandLink>
-                    </li>
-                    <li class="nav-item">
-                        <h:commandLink class="nav-link" >
-                            <i class="nc-icon nc-circle-09"></i>
-                            <p>Conta</p>
-                        </h:commandLink>
-                    </li>
-                    <li class="nav-item active active-pro">
-
-                        <h:commandLink class="nav-link active">
-                            <i class="nc-icon nc-button-power"></i>
-                            <p class="col-md-8">SAIR</p>
-                        </h:commandLink>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <!--DEFININDO CONTEUDO-->
+    <ui:define name="Conteudo">
         <div class="main-panel">
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
@@ -107,16 +47,19 @@ and open the template in the editor.
                                     <h:form enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="custom-file">
+                                                <div class="pr-3 col-md-10 custom-file">
                                                     <h:messages id="messagesError"
                                                                 infoStyle="list-style: none;color: green;"
                                                                 errorStyle="list-style: none;color: red;"/>
-                                                    <h:inputFile  styleClass="custom-file-input"
-                                                                 value="#{professorBean.part}"
-                                                                 required="true"
-                                                                 requiredMessage="Faça o upload do arquivo .csv"></h:inputFile>
-                                                    <label class="custom-file-label"
-                                                           for="customFile">Carregue seu arquivo .CSV</label>
+                                                    <div class="input-group mb-3">
+                                                        <h:inputFile styleClass="form-control"
+                                                                     value="#{professorBean.part}"
+                                                                     required="true"
+                                                                     requiredMessage="Faça o upload do arquivo .csv"></h:inputFile>
+                                                        <div class="input-group-append">
+                                                            <h:commandButton styleClass="btn btn-outline-secondary" value="Carregar .CSV" type="button" />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,11 +82,11 @@ and open the template in the editor.
                                 <div class="card-header ">
                                     <h4 class="card-title">Professores</h4>
                                     <p class="card-category">Lista de Professores Cadastrados</p>
-                                        <h:commandButton action="#{professorBean.salvar()}"
-                                                         class="col-md-2 btn btn-sm btn-success btn-fill pull-right"
-                                                         value="Download">
+                                    <h:commandButton action="#{professorBean.salvar()}"
+                                                     class="col-md-2 btn btn-sm btn-success btn-fill pull-right"
+                                                     value="Download">
 
-                                        </h:commandButton>
+                                    </h:commandButton>
                                 </div>
                                 <div class="card-body table-full-width table-responsive">
                                     <h:form>
@@ -164,7 +107,8 @@ and open the template in the editor.
                                             </h:column>
                                             <h:column>
                                                 <f:facet name="header">EXCLUIR</f:facet>
-                                                <h:commandButton styleClass="btn btn-danger btn-fill" action="#{professorBean.remover(professor)}"
+                                                <h:commandButton styleClass="btn btn-danger btn-fill"
+                                                                 action="#{professorBean.remover(professor)}"
                                                                  value="Excluir"></h:commandButton>
 
                                             </h:column>
@@ -191,33 +135,6 @@ and open the template in the editor.
                 </div>
             </footer>
         </div>
-    </div>
-
-</h:body>
-<!--   Core JS Files   -->
-<script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-<script src="../assets/js/plugins/bootstrap-switch.js"></script>
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-<!--  Chartist Plugin  -->
-<script src="../assets/js/plugins/chartist.min.js"></script>
-<!--  Notifications Plugin    -->
-<script src="../assets/js/plugins/bootstrap-notify.js"></script>
-<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-<script src="../assets/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
-<!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-<script src="../assets/js/demo.js"></script>
-<!-- <script type="text/javascript">
-    $(document).ready(function() {
-        // Javascript method's body can be found in assets/js/demos.js
-        demo.initDashboardPageCharts();
-
-        demo.showNotification();
-
-    });
-</script> -->
-
+    </ui:define>
+</ui:composition>
 </html>
