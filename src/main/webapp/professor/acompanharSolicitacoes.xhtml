@@ -35,189 +35,218 @@ and open the template in the editor.
                         </button>
                     </div>
                 </nav>
-                
-                 <div class="content">
-                <div class="container-fluid">
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header col-4">
+                <div class="content">
+                    <div class="container-fluid">
 
-                                </div>
-                                <div class="card-body all-icons">
-                                    <div class="row">
-                                        <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header col-4">
 
-                                            <div class="card">
-                                                <table>
-                                                    <tr>
-                                                        <td>
-                                                            <h:inputText a:type="date" styleClass="form-control"
-                                                                         value="#{bean.date}"/>
-                                                        </td>
-                                                        <td>
-                                                            <h:commandButton
-                                                                    class="col-lg-12 btn btn-success btn-fill pull-right"
-                                                                    value="Buscar por data"/>
-                                                        </td>
-                                                    </tr>
-
-                                                </table>
-                                            </div>
-
-
-                                        </div>
                                     </div>
-                                   
+                                    <div class="card-body all-icons">
+                                        <div class="row">
+                                            <div class="col-md-12">
+
+                                                <div class="card">
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <h:inputText a:type="date" styleClass="form-control"
+                                                                             value="#{bean.date}"/>
+                                                            </td>
+                                                            <td>
+                                                                <select class="form-control" id="select">
+                                                                    <option value=""></option>
+
+                                                                    <option value="">Aceita</option>
+                                                                    <option value="">Recusada</option>
+                                                                    <option value="">Pendente</option>
+
+
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <h:commandButton
+                                                                    class="col-lg-12 btn btn-success btn-fill pull-right"
+                                                                    value="Buscar"/>
+                                                            </td>
+                                                        </tr>
+                                                        <!--                                                        <tr>
+                                                                                                                    <td>
+                                                                                                                        <select class="form-control" id="select">
+                                                                                                                            <option value="">Situação</option>
+                                                                                                                            <optgroup label="Es">
+                                                                                                                                <option value="">Aceita</option>
+                                                                                                                                <option value="">Recusada</option>
+                                                                                                                                <option value="">Pendente</option>
+                                                                                                                            </optgroup>
+                                                                                                                            
+                                                                                                                        </select>
+                                                                                                                    </td>
+                                                                                                                    <td>
+                                                                                                                        <h:commandButton
+                                                                                                                            class="col-lg-12 btn btn-success btn-fill pull-right"
+                                                                                                                            value="Buscar por Situação"/>
+                                                                                                                    </td>
+                                                                                                                </tr>-->
+
+                                                    </table>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-
-                     
-                        <div class="col-md-12">
-                            <div class="card strpied-tabled-with-hover">
-                                <div class="card-header ">
-                                    <h4 class="card-title">Solicitações</h4>
-                                    <p class="card-category"></p>
-                                </div>
-                                <div class="card-body table-full-width table-responsive">
-                                    <table class="table table-hover table-striped">
-                                        <thead>
-                                        <th>Turma</th>
-                                        <th>Quantidade</th>
-                                        <th>Dia</th>
-                                        <th>Refeição</th>
-
-                                        <th>Situação</th>
-                                        <th>Apagar</th>
-                                        <th>Detalhes</th>
-
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>ADS</td>
-                                            <td>50</td>
-                                            <td>01/08/2019</td>
-                                            <td>JANTA</td>
-                                            <td>
-                                               ACEITA
-                                            </td>
-                                            <td>
-                                                <h:commandLink class="col-lg-12 btn btn-danger pull-right"
-                                                               value="Apagar">
-                                                    <f:ajax render="@all"/>
-                                                    <f:passThroughAttribute name="data-toggle" value="modal"/>
-                                                    <f:passThroughAttribute name="data-target" value="#myModal2"/>
-                                                </h:commandLink>
-                                            </td>
-                                            <td>
-
-                                                <h:commandLink class="col-lg-12 btn btn-info pull-right"
-                                                               value="Detalhes">
-                                                    <f:ajax render="@all"/>
-                                                    <f:passThroughAttribute name="data-toggle" value="modal"/>
-                                                    <f:passThroughAttribute name="data-target" value="#myModal1"/>
-                                                </h:commandLink>
-
-                                                <!--                                                    <a class="btn btn-info  btn-wd" data-toggle="modal" data-target="#myModal1" href="#pablo">
-                                                                                                            Detalhes
-                                                                                                        </a>-->
-
-                                            </td>
+                        <div class="row">
 
 
-                                        </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Detalhes Modal -->
-                    <div class="modal fade modal-primary" id="myModal1" tabindex="-1" role="dialog"
-                         aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header justify-content-center">
-
-                                    <h3>Detalhes </h3>
-
-                                </div>
-                                <div class="modal-body">
-                                    <h4>Justificativa do Profesor: </h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                        culpa qui officia deserunt mollit anim id est laborum.
-                                    </p>
-                                    <h4>Lista de Alunos: </h4>
+                            <div class="col-md-12">
+                                <div class="card strpied-tabled-with-hover">
+                                    <div class="card-header ">
+                                        <h4 class="card-title">Solicitações</h4>
+                                        <p class="card-category"></p>
+                                    </div>
                                     <div class="card-body table-full-width table-responsive">
                                         <table class="table table-hover table-striped">
                                             <thead>
-                                            <th>Matricula</th>
-                                            <th>Nome</th>
+                                                <th>Turma</th>
+                                                <th>Quantidade</th>
+                                                <th>Dia</th>
+                                                <th>Refeição</th>
+
+                                                <th>Situação</th>
+                                                <th>Apagar</th>
+                                                <th>Detalhes</th>
+
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>201612010261</td>
-                                                <td>Aluno Com Fome</td>
-                                            </tr>
+                                                <tr>
+                                                    <td>ADS</td>
+                                                    <td>50</td>
+                                                    <td>01/08/2019</td>
+                                                    <td>JANTA</td>
+                                                    <td>
+                                                        ACEITA
+                                                    </td>
+                                                    <td>
+                                                        <h:commandLink class="col-lg-12 btn btn-danger pull-right"
+                                                                       value="Apagar">
+                                                            <f:ajax render="@all"/>
+                                                            <f:passThroughAttribute name="data-toggle" value="modal"/>
+                                                            <f:passThroughAttribute name="data-target" value="#myModal2"/>
+                                                        </h:commandLink>
+                                                    </td>
+                                                    <td>
+
+                                                        <h:commandLink class="col-lg-12 btn btn-info pull-right"
+                                                                       value="Detalhes">
+                                                            <f:ajax render="@all"/>
+                                                            <f:passThroughAttribute name="data-toggle" value="modal"/>
+                                                            <f:passThroughAttribute name="data-target" value="#myModal1"/>
+                                                        </h:commandLink>
+
+                                                        <!--                                                    <a class="btn btn-info  btn-wd" data-toggle="modal" data-target="#myModal1" href="#pablo">
+                                                                                                                    Detalhes
+                                                                                                                </a>-->
+
+                                                    </td>
+
+
+                                                </tr>
+
                                             </tbody>
                                         </table>
                                     </div>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-link btn-simple"
-                                            data-dismiss="modal">Fechar
-                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!--  End Modal -->
-                    <!-- Recusar Modal -->
-                    <div class="modal fade modal-primary" id="myModal2" tabindex="-1" role="dialog"
-                         aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header justify-content-center">
+                        <!-- Detalhes Modal -->
+                        <div class="modal fade modal-primary" id="myModal1" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header justify-content-center">
 
-                                    <h3>Recusar Solicitação </h3>
+                                        <h3>Detalhes </h3>
 
-                                </div>
-                                <div class="modal-body">
-                                    <p> Você precisa inserir uma justificativa para não aceitar o pedido</p>
-                                    <h5>Justificativa: </h5>
-                                    <h:form>
-                                        <h:inputTextarea rows="5" styleClass="form-control">
+                                    </div>
+                                    <div class="modal-body">
+                                        <h4>Justificativa do Profesor: </h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                                            culpa qui officia deserunt mollit anim id est laborum.
+                                        </p>
+                                        <h4>Lista de Alunos: </h4>
+                                        <div class="card-body table-full-width table-responsive">
+                                            <table class="table table-hover table-striped">
+                                                <thead>
+                                                    <th>Matricula</th>
+                                                    <th>Nome</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>201612010261</td>
+                                                        <td>Aluno Com Fome</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
 
-                                        </h:inputTextarea>
-                                    </h:form>
-
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-link btn-simple"
-                                            data-dismiss="modal">Fechar
-                                    </button>
-
-                                    <h:commandButton class="col-lg-8 btn btn-danger pull-right"
-                                                     value="Resusar Solicitação">
-
-                                    </h:commandButton>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-link btn-simple"
+                                                data-dismiss="modal">Fechar
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!--  End Modal -->
+                        <!-- Recusar Modal -->
+                        <div class="modal fade modal-primary" id="myModal2" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header justify-content-center">
+
+                                        <h3>Recusar Solicitação </h3>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        <p> Você precisa inserir uma justificativa para não aceitar o pedido</p>
+                                        <h5>Justificativa: </h5>
+                                        <h:form>
+                                            <h:inputTextarea rows="5" styleClass="form-control">
+
+                                            </h:inputTextarea>
+                                        </h:form>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-link btn-simple"
+                                                data-dismiss="modal">Fechar
+                                        </button>
+
+                                        <h:commandButton class="col-lg-8 btn btn-danger pull-right"
+                                                         value="Resusar Solicitação">
+
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  End Modal -->
                     </div>
-                    <!--  End Modal -->
                 </div>
-            </div>
                 <footer class="footer">
                     <div class="container-fluid">
                         <nav>
