@@ -196,7 +196,7 @@ and open the template in the editor.
                                     <div class="col-md-12 pr-3">
                                         <div class="form-group">
                                             <h:outputLabel value="Matricula"/>
-                                            <h:inputText styleClass="form-control" value="#{autenticacaoBean.usuario.matricula}" >
+                                            <h:inputText styleClass="form-control" required="true" value="#{primerioAcessoBean.matricula}" >
                                                 <f:passThroughAttribute name="placeholder" value="Matricula"></f:passThroughAttribute>
                                             </h:inputText>
                                         </div>
@@ -206,15 +206,15 @@ and open the template in the editor.
                                     <div class="col-md-12 pr-3">
                                         <div class="form-group">
                                             <h:outputLabel value="E-mail"/>
-                                            <h:inputSecret styleClass="form-control" value="#{autenticacaoBean.usuario.email}" >
+                                            <h:inputText styleClass="form-control" required="true" value="#{primerioAcessoBean.email}" >
                                                 <f:passThroughAttribute name="placeholder" value="E-mail"></f:passThroughAttribute>
-                                            </h:inputSecret>                           
+                                            </h:inputText>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-10 pr-3">
-                                        <h:commandButton type="submit" action="#{autenticacaoBean.login()}" styleClass="col-lg-10 btn btn-success btn-fill pull-right" value="Enviar"></h:commandButton>
+                                        <h:commandButton type="submit" action="#{primerioAcessoBean.submit()}" styleClass="col-lg-10 btn btn-success btn-fill pull-right" value="Enviar"></h:commandButton>
 
                                         <div class="clearfix"></div>                                        
 

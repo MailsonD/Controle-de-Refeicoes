@@ -64,9 +64,9 @@ public class UsuarioDaoImpl implements UsuarioDao {
     }
 
     @Override
-    public Usuario buscarPorMatricula(Usuario usuario) throws UsuarioNaoEncontradoException {
+    public Usuario buscarPorMatricula(String matricula) throws UsuarioNaoEncontradoException {
         TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.matricula=:mat", Usuario.class);
-        query.setParameter("mat", usuario.getMatricula());
+        query.setParameter("mat", matricula);
         try {
             return query.getSingleResult();
         } catch (NoResultException e) {
@@ -76,7 +76,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public Usuario autenticar(Usuario usuario) throws SenhaInvalidaException, UsuarioNaoEncontradoException {
-        Usuario trueUser = this.buscarPorMatricula(usuario);
+        Usuario trueUser = this.buscarPorMatricula(usuario.getMatricula());
         if (usuario.getSenha().equals(trueUser.getSenha()) && trueUser.getAtivo()) {
             return trueUser;
         } else throw new SenhaInvalidaException();
