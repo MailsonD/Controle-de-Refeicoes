@@ -42,7 +42,7 @@ public class TestBean {
             usuarioDao.salvar(u1);
             usuarioDao.salvar(u2);
             usuarioDao.salvar(u3);
-            usuarioDao.salvar(u4);
+//            usuarioDao.salvar(u4);
         } catch (MatriculaExistenteException ex) {
             Logger.getLogger(TestBean.class.getName()).log(Level.SEVERE, null, ex);
         }
