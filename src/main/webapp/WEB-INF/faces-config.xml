@@ -17,7 +17,7 @@
             <from-action>#{autenticacaoBean.login()}</from-action>
             <from-outcome>autorizado</from-outcome>
             <if>#{autenticacaoBean.usuario.nivelAcesso == "PROFESSOR"}</if>
-            <to-view-id>professor/professorMantemAluno.xhtml?faces-redirect=true</to-view-id>
+            <to-view-id>professor/realizarSolicitacao.xhtml?faces-redirect=true</to-view-id>
             <redirect/>
         </navigation-case>
 		
