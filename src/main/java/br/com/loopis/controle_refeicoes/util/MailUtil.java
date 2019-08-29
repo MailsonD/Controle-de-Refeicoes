@@ -22,7 +22,7 @@ public class MailUtil {
 
 
     private static final String MAIL_ADRESS = "testerson.testador@gmail.com";
-    private static final String MAIL_NAME = "Testerson, o incrível testador";
+    private static final String MAIL_NAME = "Controle de Refeições - IFPB";
     private static final String MAIL_PASSWORD = "testebanco2";
 
     private static final String ACCEPT_HTML = "text/html;; x-java-content-handler=com.sun.mail.handlers.text_html";
@@ -63,13 +63,30 @@ public class MailUtil {
     public static void enviarEmail(){
         log.info("Iniciando Envio de email");
         try{
-            String htmlBody = "<strong>This is an HTML Message</strong>"+
-                    "<br/>"+
-                    "<img src='https://media.giphy.com/media/XreQmk7ETCak0/giphy.gif'/>";
-            String textBody = "This is a Text Message.";
+            String htmlBody = "<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n" +
+                    "    <tr>\n" +
+                    "        <td align=\"center\" bgcolor=\"#32CD32\" style=\"padding: 40px 0 30px 0;\">\n" +
+                    "            <img src=\"https://media.giphy.com/media/XreQmk7ETCak0/giphy.gif\" alt=\"Criando Mágica de E-mail\" width=\"300\" height=\"230\" style=\"display: block;\" />\n" +
+                    "        </td>\n" +
+                    "    </tr>\n" +
+                    "    <tr>\n" +
+                    "        <td style=\"border: 1px solid #cccccc; padding: 20px 0 30px 0; color: #153643; font-family: Arial, sans-serif;\">\n" +
+                    "\n" +
+                    "            <center>\n" +
+                    "                <b style=\"font-size: 24px\">Caro, nome da pessoa.</b>\n" +
+                    "                <br>\n" +
+                    "                <h4 style=\"font-size: 24px\"> Seja bem vindo ao nosso Sistema!!</h4>\n" +
+                    "                <h4 style=\"font-size: 20px\">Sua senha foi gerada automaticamente.</h4>\n" +
+                    "                <br>\n" +
+                    "                <b style=\"font-size: 20px\"> senha ,</b>\n" +
+                    "                <b style=\"font-size: 24px\">SENHA</b>\n" +
+                    "            </center>\n" +
+                    "        </td>\n" +
+                    "    </tr>\n" +
+                    "</table>";
 
             Message msg = new MimeMessage(session);
-            //aqui seta o remetente
+
             msg.setFrom(new InternetAddress(
                     MAIL_ADRESS, MAIL_NAME)
             );
@@ -78,12 +95,10 @@ public class MailUtil {
                     new InternetAddress("mailssondennis@gmail.com", "Mailson Dennis")
             );
 
-            msg.setSubject("testando envio de email");
+            msg.setSubject("Confirmação de acesso a - Controle de Refeições IFPB");
 
-//            msg.setText(htmlBody);
             msg.setContent(htmlBody, "text/html");
 
-            System.out.println("Enviando");
             Transport.send(msg);
 
             log.info("Email enviado com sucesso!");
