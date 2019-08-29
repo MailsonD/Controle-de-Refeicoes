@@ -2,6 +2,7 @@ package br.com.loopis.controle_refeicoes.controladores;
 
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.UsuarioDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
+import br.com.loopis.controle_refeicoes.util.GeradorDeSenha;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -32,6 +33,9 @@ public class PrimerioAcessoBean {
                     FacesContext.getCurrentInstance().addMessage(null,
                             new FacesMessage(FacesMessage.SEVERITY_WARN, "A conta informada já possui uma senha!", null));
                 }else if(user.getEmail().equals(email)){
+                    String senhaGerada = GeradorDeSenha.gerarSenhaAleatoria();
+                    user.setSenha(senhaGerada);
+                    usuarioDao.atualizar(user);
                     //TODO enviar email. Gerar senha.
                     return "acessoGerado";
                 }else{
