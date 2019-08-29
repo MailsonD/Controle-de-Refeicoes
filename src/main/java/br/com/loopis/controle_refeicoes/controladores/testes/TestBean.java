@@ -48,6 +48,7 @@ public class TestBean {
             usuarioDao.salvar(u5);
 
             em.persist(ab);
+
         } catch (MatriculaExistenteException ex) {
             Logger.getLogger(TestBean.class.getName()).log(Level.SEVERE, null, ex);
         }
