@@ -298,7 +298,7 @@ input:focus {
 .page-header .title-container {
     color: #fff;
     position: relative;
-    top: 50px; !important;
+    top: 10%; !important;
     z-index: 3;
 }
 
