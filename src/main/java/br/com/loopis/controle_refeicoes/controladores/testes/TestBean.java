@@ -39,7 +39,7 @@ public class TestBean {
         Usuario u3 = new Usuario("3", "3", "3", "Usuario3", NivelAcesso.CAEST, Boolean.TRUE);
         Usuario u4 = new Usuario("4", "4", "4", "Usuario4", NivelAcesso.GESTOR, Boolean.TRUE);
         Usuario u5 = new Usuario("123", null, "mailssondennis@gmail.com", "Mailson", NivelAcesso.PROFESSOR, true);
-        AlunoBeneficiado ab = new AlunoBeneficiado("1", "Zé", TipoBeneficio.AMBOS, "2019.12");
+//        AlunoBeneficiado ab = new AlunoBeneficiado("1", "Zé", TipoBeneficio.AMBOS, "2019.12");
         try {
             usuarioDao.salvar(u1);
             usuarioDao.salvar(u2);
@@ -47,8 +47,7 @@ public class TestBean {
             usuarioDao.salvar(u4);
             usuarioDao.salvar(u5);
 
-            em.persist(ab);
-
+//            em.persist(ab);
         } catch (MatriculaExistenteException ex) {
             Logger.getLogger(TestBean.class.getName()).log(Level.SEVERE, null, ex);
         }
