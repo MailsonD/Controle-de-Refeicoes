@@ -35,7 +35,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
     private EntityManager em;
 
     @Override
-    public void salvar(Usuario object) throws MatriculaExistenteException {
+    public void salvar(Usuario object){
         try {
             object.setAtivo(true);
             em.persist(object);
