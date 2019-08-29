@@ -4,8 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
-import br.com.loopis.controle_refeicoes.modelo.entidades.Beneficio;
+import br.com.loopis.controle_refeicoes.modelo.entidades.AlunoBeneficiado;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
@@ -38,7 +37,7 @@ public class ManipuladorCSV {
     }
 
 
-    public static List<Aluno> toListAlunos(Part part) throws IOException {
+    public static List<AlunoBeneficiado> toListAlunos(Part part) throws IOException {
         if (!(part.getContentType().equals("text/csv"))) {
             return new ArrayList<>();
         }
@@ -46,18 +45,17 @@ public class ManipuladorCSV {
         BufferedReader reader = new BufferedReader(new InputStreamReader(part.getInputStream()));
         String linha = null;
         reader.readLine();
-        List<Aluno> listaAlunos = new ArrayList<>();
+        List<AlunoBeneficiado> listaAlunos = new ArrayList<>();
         while ((linha = reader.readLine()) != null) {
             String[] dadosObjeto = linha.split(separador);
-            Aluno a = new Aluno(
+            
+            AlunoBeneficiado ab = new AlunoBeneficiado(
                     dadosObjeto[0],
-                    dadosObjeto[1]);
-            Beneficio b = new Beneficio(
+                    dadosObjeto[1],
                     TipoBeneficio.valueOf(dadosObjeto[2]),
                     dadosObjeto[3]);//edital
-            b.setAlunoBeneficiado(a);
-            a.setBeneficio(b);
-            listaAlunos.add(a);
+            
+            listaAlunos.add(ab);
         }
         reader.close();
         return listaAlunos;
@@ -88,22 +86,22 @@ public class ManipuladorCSV {
         return new File("_professor.csv");
 
     }
-    public static File toAlunoCsv(List<Aluno> alunos) throws FileNotFoundException, UnsupportedEncodingException, IOException {
+    public static File toAlunoCsv(List<AlunoBeneficiado> alunos) throws FileNotFoundException, UnsupportedEncodingException, IOException {
 
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("_aluno.csv"), "UTF-8"));
         StringBuffer linha = new StringBuffer();
         linha.append("Matrícula,Nome,Tipo de Benefício,Edital");
         bw.write(linha.toString());
         bw.newLine();
-        for (Aluno aluno : alunos) {
+        for (AlunoBeneficiado aluno : alunos) {
             linha = new StringBuffer();
             linha.append(aluno.getMatricula());
             linha.append(separador);
             linha.append(aluno.getNome());
             linha.append(separador);
-            linha.append(aluno.getBeneficio().getTipoBeneficio());
+            linha.append(aluno.getTipoBeneficio());
             linha.append(separador);
-            linha.append(aluno.getBeneficio().getEdital());
+            linha.append(aluno.getEditalBeneficio());
             linha.append(separador);
             bw.write(linha.toString());
             bw.newLine();

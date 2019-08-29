@@ -1,11 +1,12 @@
 package br.com.loopis.controle_refeicoes.modelo.dao.implementacoes;
 
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.AlunoDao;
-import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
+import br.com.loopis.controle_refeicoes.modelo.entidades.AlunoBeneficiado;
 
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -18,27 +19,36 @@ public class AlunoDaoImpl implements AlunoDao {
     private EntityManager em;
     
     @Override
-    public void salvar(Aluno object) {
+    public void salvar(AlunoBeneficiado object) {
         em.persist(object);
     }
 
     @Override
-    public void atualizar(Aluno object) {
+    public void atualizar(AlunoBeneficiado object) {
         em.merge(object);
     }
 
     @Override
-    public void remover(Aluno object) {
+    public void remover(AlunoBeneficiado object) {
         em.remove(em.merge(object));
     }
 
     @Override
-    public Aluno buscar(Object key) {
-        return em.find(Aluno.class, key);
+    public AlunoBeneficiado buscar(Object key) {
+        return em.find(AlunoBeneficiado.class, key);
     }
 
     @Override
-    public List<Aluno> listar() {
-        return em.createQuery("SELECT a FROM Aluno a", Aluno.class).getResultList();
+    public List<AlunoBeneficiado> listar() {
+        return em.createQuery("SELECT a FROM AlunoBeneficiado a", AlunoBeneficiado.class).getResultList();
+    }
+
+    @Override
+    public AlunoBeneficiado buscarPorMatricula(String matricula) {
+        try{
+            return em.createQuery("select a from AlunoBeneficiado a where a.matricula like :matricula", AlunoBeneficiado.class).setParameter("matricula", matricula).getSingleResult();
+        }catch(NoResultException e){
+            return null;
+        }
     }
 }

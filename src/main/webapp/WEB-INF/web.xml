@@ -9,7 +9,6 @@
     </filter>
     <filter-mapping>
         <filter-name>autenticacaoFilter</filter-name>
-        <url-pattern>/admInicio.xhtml</url-pattern>
         <url-pattern>/adm/*</url-pattern>
         <url-pattern>/gestor/*</url-pattern>
         <url-pattern>/caest/*</url-pattern>

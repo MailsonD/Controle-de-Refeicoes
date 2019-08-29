@@ -1,6 +1,7 @@
 package br.com.loopis.controle_refeicoes.modelo.dao.interfaces;
 
-import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
+import br.com.loopis.controle_refeicoes.modelo.entidades.AlunoBeneficiado;
 
-public interface AlunoDao extends DaoIF<Aluno> {
+public interface AlunoDao extends DaoIF<AlunoBeneficiado> {
+    public AlunoBeneficiado buscarPorMatricula(String matricula);
 }

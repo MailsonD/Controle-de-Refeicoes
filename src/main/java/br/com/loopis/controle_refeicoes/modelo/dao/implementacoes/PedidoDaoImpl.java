@@ -1,6 +1,7 @@
 package br.com.loopis.controle_refeicoes.modelo.dao.implementacoes;
 
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.PedidoDao;
+import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
 
 import javax.ejb.Stateless;
@@ -19,6 +20,8 @@ public class PedidoDaoImpl implements PedidoDao {
 
     @Override
     public void salvar(Pedido object) {
+//        String jpql = "select a from Pedido p join p.alunos a where a in :alunos";
+//        em.createQuery(jpql).setParameter("alunos", object.getAlunos());
         em.persist(object);
     }
 
