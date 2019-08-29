@@ -60,7 +60,7 @@ public class MailUtil {
         CommandMap.setDefaultCommandMap(mc);
     }
 
-    public static void enviarEmail(){
+    public static void enviarEmail(String emailDestinatario, String nomeDestinatario, String senhaGerada){
         log.info("Iniciando Envio de email");
         try{
             String htmlBody = "<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n" +
@@ -73,13 +73,13 @@ public class MailUtil {
                     "        <td style=\"border: 1px solid #cccccc; padding: 20px 0 30px 0; color: #153643; font-family: Arial, sans-serif;\">\n" +
                     "\n" +
                     "            <center>\n" +
-                    "                <b style=\"font-size: 24px\">Caro, nome da pessoa.</b>\n" +
+                    "                <b style=\"font-size: 24px\">Caro, "+nomeDestinatario+".</b>\n" +
                     "                <br>\n" +
                     "                <h4 style=\"font-size: 24px\"> Seja bem vindo ao nosso Sistema!!</h4>\n" +
                     "                <h4 style=\"font-size: 20px\">Sua senha foi gerada automaticamente.</h4>\n" +
                     "                <br>\n" +
                     "                <b style=\"font-size: 20px\"> senha ,</b>\n" +
-                    "                <b style=\"font-size: 24px\">SENHA</b>\n" +
+                    "                <b style=\"font-size: 24px\">"+senhaGerada+"</b>\n" +
                     "            </center>\n" +
                     "        </td>\n" +
                     "    </tr>\n" +
@@ -92,7 +92,7 @@ public class MailUtil {
             );
 
             msg.addRecipient(Message.RecipientType.TO,
-                    new InternetAddress("mailssondennis@gmail.com", "Mailson Dennis")
+                    new InternetAddress(emailDestinatario, nomeDestinatario)
             );
 
             msg.setSubject("Confirmação de acesso a - Controle de Refeições IFPB");

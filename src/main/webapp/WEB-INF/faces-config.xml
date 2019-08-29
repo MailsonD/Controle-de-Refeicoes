@@ -62,6 +62,7 @@
     <navigation-rule>
         <from-view-id>publico/primeiroLogin.xhtml</from-view-id>
         <navigation-case>
+            <from-action>#{primerioAcessoBean.submit()}</from-action>
             <from-outcome>acessoGerado</from-outcome>
             <to-view-id>login.xhtml?faces-redirect=true</to-view-id>
             <redirect/>
