@@ -41,13 +41,13 @@ public class TestBean {
         Usuario u5 = new Usuario("123", null, "mailssondennis@gmail.com", "Mailson", NivelAcesso.PROFESSOR, true);
         AlunoBeneficiado ab = new AlunoBeneficiado("1", "Zé", TipoBeneficio.AMBOS, "2019.12");
         try {
-            usuarioDao.salvar(u1);
-            usuarioDao.salvar(u2);
-            usuarioDao.salvar(u3);
-            usuarioDao.salvar(u4);
-            usuarioDao.salvar(u5);
+//            usuarioDao.salvar(u1);
+//            usuarioDao.salvar(u2);
+//            usuarioDao.salvar(u3);
+//            usuarioDao.salvar(u4);
+//            usuarioDao.salvar(u5);
 
-            em.persist(ab);
+//            em.persist(ab);
 
         } catch (MatriculaExistenteException ex) {
             Logger.getLogger(TestBean.class.getName()).log(Level.SEVERE, null, ex);
