@@ -9,130 +9,132 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-<h:head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
 
-    <title>Solicitar</title>
+        <title>Solicitar</title>
 
-    <!--     Fonts and icons     -->
+        <!--     Fonts and icons     -->
 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
 
-    <!-- CSS Files -->
+        <!-- CSS Files -->
 
-    <h:outputStylesheet name="assets/img/apple-icon.png"/>
-    <h:outputStylesheet name="assets/img/favicon.ico"/>
-    <h:outputStylesheet name="assets/css/bootstrap.min.css"/>
-    <h:outputStylesheet name="assets/sass/light-bootstrap-dashboard.scss"/>
-    <h:outputStylesheet name="assets/css/light-bootstrap-dashboard.css"/>
-    <h:outputStylesheet name="assets/css/demo.css"/>
-
-
-    <!--    SCRIPT Files -->
-
-    <h:outputScript name="assets/js/core/jquery.3.2.1.min.js"/>
-    <h:outputScript name="assets/js/core/popper.min.js"/>
-    <h:outputScript name="assets/js/core/bootstrap.min.js"/>
-    <h:outputScript name="assets/js/plugins/bootstrap-switch.js"/>
-    <h:outputScript name="assets/js/plugins/chartist.min.js"/>
-    <h:outputScript name="assets/js/plugins/bootstrap-notify.js"/>
-    <h:outputScript name="assets/js/light-bootstrap-dashboard.js"/>
-    <h:outputScript name="assets/js/demo.js"/>
+        <h:outputStylesheet name="assets/img/apple-icon.png"/>
+        <h:outputStylesheet name="assets/img/favicon.ico"/>
+        <h:outputStylesheet name="assets/css/bootstrap.min.css"/>
+        <h:outputStylesheet name="assets/sass/light-bootstrap-dashboard.scss"/>
+        <h:outputStylesheet name="assets/css/light-bootstrap-dashboard.css"/>
+        <h:outputStylesheet name="assets/css/demo.css"/>
 
 
-    <!--    STATIC CSS-->
+        <!--    SCRIPT Files -->
 
-    <style>
-        pre.prettyprint {
-            background-color: #eee;
-            border: 0px;
-            margin-bottom: 60px;
-            margin-top: 30px;
-            padding: 20px;
-            text-align: left;
-        }
-
-        .atv,
-        .str {
-            color: #05AE0E;
-        }
-
-        .tag,
-        .pln,
-        .kwd {
-            color: #3472F7;
-        }
-
-        .atn {
-            color: #2C93FF;
-        }
-
-        .pln {
-            color: #333;
-        }
-
-        .com {
-            color: #999;
-        }
-
-        .space-top {
-            margin-top: 50px;
-        }
-
-        .btn-primary .caret {
-            border-top-color: #3472F7;
-            color: #3472F7;
-        }
-
-        .area-line {
-            border: 1px solid #999;
-            border-left: 0;
-            border-right: 0;
-            color: #666;
-            display: block;
-            margin-top: 20px;
-            padding: 8px 0;
-            text-align: center;
-        }
-
-        .area-line a {
-            color: #666;
-        }
-
-        .container-fluid {
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-
-        .table-shopping .td-name {
-            min-width: 130px;
-        }
-
-        .pick-class-label {
-            border-radius: 8px;
-            border: 1px solid #E3E3E3;
-            color: #ffffff;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 75%;
-            font-weight: bold;
-            line-height: 1;
-            margin-right: 10px;
-            padding: 23px;
-            text-align: center;
-            vertical-align: baseline;
-            white-space: nowrap;
-        }
-    </style>
-</h:head>
+        <h:outputScript name="assets/js/core/jquery.3.2.1.min.js"/>
+        <h:outputScript name="assets/js/core/popper.min.js"/>
+        <h:outputScript name="assets/js/core/bootstrap.min.js"/>
+        <h:outputScript name="assets/js/plugins/bootstrap-switch.js"/>
+        <h:outputScript name="assets/js/plugins/chartist.min.js"/>
+        <h:outputScript name="assets/js/plugins/bootstrap-notify.js"/>
+        <h:outputScript name="assets/js/light-bootstrap-dashboard.js"/>
+        <h:outputScript name="assets/js/demo.js"/>
 
 
-<body class="documentation">
+
+
+        <!--    STATIC CSS-->
+
+        <style>
+            pre.prettyprint {
+                background-color: #eee;
+                border: 0px;
+                margin-bottom: 60px;
+                margin-top: 30px;
+                padding: 20px;
+                text-align: left;
+            }
+
+            .atv,
+            .str {
+                color: #05AE0E;
+            }
+
+            .tag,
+            .pln,
+            .kwd {
+                color: #3472F7;
+            }
+
+            .atn {
+                color: #2C93FF;
+            }
+
+            .pln {
+                color: #333;
+            }
+
+            .com {
+                color: #999;
+            }
+
+            .space-top {
+                margin-top: 50px;
+            }
+
+            .btn-primary .caret {
+                border-top-color: #3472F7;
+                color: #3472F7;
+            }
+
+            .area-line {
+                border: 1px solid #999;
+                border-left: 0;
+                border-right: 0;
+                color: #666;
+                display: block;
+                margin-top: 20px;
+                padding: 8px 0;
+                text-align: center;
+            }
+
+            .area-line a {
+                color: #666;
+            }
+
+            .container-fluid {
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+
+            .table-shopping .td-name {
+                min-width: 130px;
+            }
+
+            .pick-class-label {
+                border-radius: 8px;
+                border: 1px solid #E3E3E3;
+                color: #ffffff;
+                cursor: pointer;
+                display: inline-block;
+                font-size: 75%;
+                font-weight: bold;
+                line-height: 1;
+                margin-right: 10px;
+                padding: 23px;
+                text-align: center;
+                vertical-align: baseline;
+                white-space: nowrap;
+            }
+        </style>
+    </h:head>
+
+
+    <body class="documentation">
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg " color-on-scroll="500">
             <div class="container-fluid">
@@ -179,46 +181,64 @@ and open the template in the editor.
                     <div class="filter"> </div>
 
                     <div class="title-container2 text-center">
-                        <h1>Controle de Refeições</h1>
-                        <h3>Sistema de gerenciamento de refeições do IFPB Campus Cajazeiras</h3>
-                        <br />
+                        <div class="form-group"> <div id="contador"></div>
+
+                            <h1> Ja servimos 
+                                <b> <big>  <span class="counter-up" data-count-to="3970"></span> </big></b>
+                                refeições extras
+                            </h1>
+
+                        </div>
+
+
+
                     </div>
+
+
+
                 </div>
             </div>
-            
+            <br/>
             <div class="main-panel2">
+
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-4">
                                 <div class="card">
-                                    <div class="card-header col-4">
 
-                                    </div>
                                     <div class="card-body all-icons">
-                                       
-                                        <div class="row">
+                                        <div class="form-group">
+                                            <h2 class="text-center">Controle de Refeições</h2>
+                                            <p>É o sistema de gerenciamento de refeições do IFPB Campus Cajazeiras, 
+                                                desenvolvido pela Loopis Soluções Tecnologicas, empresa junior o curso de 
+                                                Analise e Desenvolvimento de Sistemas.</p>
+                                            <p>Aqui os professores podem enviar direto para CAEST solicitações contendo a lista de alunos que precisam da refeição 
+                                                em dias de reposição, essa solicitação é avaliada e respondidas. Caso aprovadas, os alunos da da solicitação
+                                                são inseridos automaticamente na lista do refeitorio.</p>
+                                            <h3> Tudo online!</h3>
 
-                                            <div class="font-icon-list col-lg-3 col-md-3 col-sm-4 col-6">
-                                                <div class="font-icon-detail">
-                                                    <h2 class="card-title">139</h2>
-                                                    <p class="card-category">Refeições Extras</p>
-                                                </div>
-                                            </div>
                                         </div>
-                                                                                    <!--                                        <hr/>
-                                                                                <div class="stats">
-                                               <                                     <i class="fa fa-clock-o"></i> Dia 01/08/2019
-                                                                                </div>-->
+
+
+
                                     </div>
                                 </div>
                             </div>
-                        </div>  
+                            <div class="col-md-8">
+                                <div class="card">
 
+                                    <div class="card-body all-icons">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
 
 
                 </div>
+
             </div>
             <footer class="footer">
                 <div class="container-fluid">
@@ -282,5 +302,28 @@ and open the template in the editor.
     
         });
     </script> -->
+    <script type="text/javascript">
+                                const tempo_intervalo = 5; //ms -> define a velocidade da animação
+                                const tempo = 40000; //ms -> define o tempo total da animaçao
+
+                                $('.counter-up').each(function () {
+                                    let count_to = parseInt($(this).data('countTo'));
+                                    let intervalos = tempo / tempo_intervalo; //quantos passos de animação tem
+                                    let incremento = count_to / intervalos; //quanto cada contador deve aumentar
+                                    let valor = 0;
+                                    let el = $(this);
+
+                                    let timer = setInterval(function () {
+                                        if (valor >= count_to) { //se já contou tudo tem de parar o timer
+                                            valor = count_to;
+                                            clearInterval(timer);
+                                        }
+
+                                        let texto = valor.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+                                        el.text(texto);
+                                        valor += incremento;
+                                    }, tempo_intervalo);
+                                });
+    </script>
 
 </html>
