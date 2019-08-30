@@ -58,4 +58,13 @@ public class PedidoDaoImpl implements PedidoDao {
                 .getResultList();
     }
 
+    @Override
+    public List<Pedido> buscarPorProfessor(int keyProfessor, int numeroDaPagina) {
+        TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.professor.id = :keyProfessor ORDER BY p.statusPedido", Pedido.class);
+        query.setParameter("keyProfessor", keyProfessor);
+        return query.setFirstResult(this.QUANTIDADE_POR_PAGINA * (numeroDaPagina - 1))
+                .setMaxResults(this.QUANTIDADE_POR_PAGINA)
+                .getResultList();
+    }
+
 }
