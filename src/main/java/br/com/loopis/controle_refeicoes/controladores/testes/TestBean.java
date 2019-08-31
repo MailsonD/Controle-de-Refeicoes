@@ -50,17 +50,5 @@ public class TestBean {
         } catch (MatriculaExistenteException ex) {
             Logger.getLogger(TestBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        try {
-//            List<Usuario> l = new ArrayList<>();
-//            l.add(new Usuario("123", "321", "email@gmail.com", "Zé", NivelAcesso.ADMINISTRADOR));
-//            File f = ManipuladorCSV.toProfessorCsv(l);
-//            System.out.println("\n" + f.getAbsolutePath());
-//
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-
-
     }
 }
