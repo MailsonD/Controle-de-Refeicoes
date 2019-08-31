@@ -136,6 +136,10 @@ public class Pedido implements Serializable {
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
     }
+    
+    public int getQuantAlunos(){
+        return alunos.size();
+    }
 
     @Override
     public boolean equals(Object o) {

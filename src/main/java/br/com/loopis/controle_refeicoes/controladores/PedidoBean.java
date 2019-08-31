@@ -11,6 +11,7 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.AlunoBeneficiado;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
+import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.Turma;
 import java.io.Serializable;
@@ -28,80 +29,109 @@ import javax.servlet.http.HttpSession;
  *
  * @author ian
  */
-
 @Named
 @ViewScoped
-public class PedidoBean implements Serializable{
-    
+public class PedidoBean implements Serializable {
+
     private Pedido pedido;
+//    private List<Pedido> pedidos;
     private Aluno aluno;
     private List<Aluno> alunos;
     private List<TipoBeneficio> tipoBeneficiosSelecionados;
+    private int numPagina;
     @Inject
     private PedidoDao pedidoService;
-    @Inject 
+    @Inject
     private AlunoDao alunoService;
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         aluno = new Aluno();
         alunos = new ArrayList<>();
         tipoBeneficiosSelecionados = new ArrayList<>();
         pedido = new Pedido();
+//        pedidos = new ArrayList<>();
+        numPagina = 1;
     }
-    
-    public String addAluno(){
+
+    public String addAluno() {
+        if(aluno.getMatricula().equals("") || aluno.getNome().equals("")){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                        "•Informe nome e matrícula do aluno", null));
+            return null;
+        }
+        
+        for(Aluno a:alunos){
+            if (a.getMatricula().equals(aluno.getMatricula())) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                        "•Aluno com matrícula "+aluno.getMatricula()+" já foi adicionado à lista", null));
+                return null;
+            }
+        }
+        
         alunos.add(aluno);
         aluno = new Aluno();
         return null;
     }
-    
-    public Turma[] listarTurmas(){
+
+    public Turma[] listarTurmas() {
         return Turma.values();
     }
-    
-    public String cadastrarPedido(){
+
+    public String cadastrarPedido() {
         int tamList = alunos.size();
-        alunos.removeIf(a->{
+        alunos.removeIf(a -> {
             AlunoBeneficiado alunoBeneficiado = alunoService.buscarPorMatricula(a.getMatricula());
-            if(alunoBeneficiado!=null){
+            if (alunoBeneficiado != null) {
                 TipoBeneficio beneficioAlunoBeneficio = alunoBeneficiado.getTipoBeneficio();
-                if(beneficioAlunoBeneficio==pedido.getTipoBeneficio() || beneficioAlunoBeneficio==TipoBeneficio.AMBOS){
+                if (beneficioAlunoBeneficio == pedido.getTipoBeneficio() || beneficioAlunoBeneficio == TipoBeneficio.AMBOS) {
                     return true;
                 }
             }
             return false;
         });
-        
-        if(tamList!=alunos.size()){
-            if(alunos.size()==0){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Todos os alunos selecionados já possuem o benefício", null));
+
+        if (tamList != alunos.size()) {
+            if (alunos.size() == 0) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "•Todos os alunos selecionados já possuem o benefício", null));
                 return null;
             }
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Na lista havia alunos que já recebem o benefício. Eles serão removidos da lista para você", null));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "•Na lista havia alunos que já recebem o benefício. Eles serão removidos da lista para você", null));
         }
-        if(tipoBeneficiosSelecionados.size()>1){
+        if (tipoBeneficiosSelecionados.size() > 1) {
             pedido.setTipoBeneficio(TipoBeneficio.AMBOS);
-        }else{
+        } else {
             pedido.setTipoBeneficio(tipoBeneficiosSelecionados.get(0));
         }
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        pedido.setProfessor((Usuario)session.getAttribute("usuarioLogado"));
+        pedido.setProfessor((Usuario) session.getAttribute("usuarioLogado"));
         pedido.setAlunos(alunos);
+        pedido.setStatusPedido(StatusPedido.PENDENTE);
         pedidoService.salvar(pedido);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "•Solicitação realizado com sucesso!", null));
         tipoBeneficiosSelecionados = new ArrayList<>();
         alunos = new ArrayList<>();
         aluno = new Aluno();
         pedido = new Pedido();
         return null;
     }
-    
-    public TipoBeneficio[] getTiposBeneficio(){
+
+    public TipoBeneficio[] getTiposBeneficio() {
         return TipoBeneficio.values();
     }
-    
-    public int tamanhoListaAlunos(){
+
+    public int tamanhoListaAlunos() {
         return alunos.size();
+    }
+
+    public List<Pedido> listar(int idUsuario) {
+        return pedidoService.buscarPorProfessor(idUsuario, numPagina);
+    }
+    
+    public String excluir(Pedido p){
+        pedidoService.remover(p);
+        pedido = new Pedido();
+        return null;
     }
 
     public Pedido getPedido() {
@@ -136,7 +166,4 @@ public class PedidoBean implements Serializable{
         this.tipoBeneficiosSelecionados = tipoBeneficiosSelecionados;
     }
 
-    
-    
-    
 }
