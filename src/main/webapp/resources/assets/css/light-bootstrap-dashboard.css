@@ -295,12 +295,20 @@ input:focus {
     z-index: 1;
 }
 
+.page-header .title-container2 {
+    color: #fff;
+    position: relative;
+    top: 40% !important;
+    z-index: 3;
+}
+
 .page-header .title-container {
     color: #fff;
     position: relative;
-    top: 10%; !important;
+    top: 10% !important;
     z-index: 3;
 }
+
 
 .page-header .filter:after {
     background: transparent linear-gradient(to bottom, #87CB16 0%, #6dc030 100%) repeat scroll 0 0/150% 150%;
