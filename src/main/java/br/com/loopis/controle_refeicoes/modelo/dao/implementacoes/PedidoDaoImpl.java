@@ -2,6 +2,7 @@ package br.com.loopis.controle_refeicoes.modelo.dao.implementacoes;
 
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.PedidoDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
+import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -63,5 +64,14 @@ public class PedidoDaoImpl implements PedidoDao {
                 .setMaxResults(this.QUANTIDADE_POR_PAGINA)
                 .getResultList();
     }
+
+    public List<Pedido> buscarPorTipoBeneficio(TipoBeneficio tipoBeneficio, int numeroDaPagina) {
+        TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.tipoBeneficio = :tipoBeneficio ORDER BY p.diaSolicitado DESC", Pedido.class);
+        query.setParameter("tipoBeneficio", tipoBeneficio);
+        return query.setFirstResult(this.QUANTIDADE_POR_PAGINA * (numeroDaPagina - 1))
+                .setMaxResults(this.QUANTIDADE_POR_PAGINA)
+                .getResultList();
+    }
+
 
 }
