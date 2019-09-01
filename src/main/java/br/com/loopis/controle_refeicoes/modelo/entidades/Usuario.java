@@ -34,16 +34,6 @@ public class Usuario implements Serializable {
         this.nivelAcesso = nivelAcesso;
         this.ativo = ativo;
     }
-
-    public Usuario(int id, String matricula, String senha, String email, String nome, NivelAcesso nivelAcesso, Boolean ativo) {
-        this.id = id;
-        this.matricula = matricula;
-        this.senha = senha;
-        this.email = email;
-        this.nome = nome;
-        this.nivelAcesso = nivelAcesso;
-        this.ativo = ativo;
-    }
     
     public Usuario(String matricula, String senha, String email, String nome, NivelAcesso nivelAcesso) {
         this.matricula = matricula;
@@ -51,6 +41,7 @@ public class Usuario implements Serializable {
         this.email = email;
         this.nome = nome;
         this.nivelAcesso = nivelAcesso;
+        this.ativo = true;
     }
     
     public Usuario(String matricula, String email, String nome, NivelAcesso nivelAcesso) {
@@ -58,6 +49,7 @@ public class Usuario implements Serializable {
         this.email = email;
         this.nome = nome;
         this.nivelAcesso = nivelAcesso;
+        this.ativo = true;
     }
 
     public Usuario() {
