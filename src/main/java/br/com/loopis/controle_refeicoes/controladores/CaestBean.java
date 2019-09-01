@@ -13,6 +13,7 @@ import br.com.loopis.controle_refeicoes.util.ManipuladorCSV;
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.AlunoDao;
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.UsuarioDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
+import br.com.loopis.controle_refeicoes.modelo.entidades.AlunoBeneficiado;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteException;
@@ -41,7 +42,7 @@ public class CaestBean implements Serializable{
     @Inject
     private AlunoDao alunoDao;
     private List<Usuario> usuariosCaest = new ArrayList<>();
-    private List<Aluno> alunos = new ArrayList<>();
+    private List<AlunoBeneficiado> alunos = new ArrayList<>();
     private Part part;
 
     @PostConstruct
@@ -52,11 +53,11 @@ public class CaestBean implements Serializable{
     }
 
     public void salvarAlunosCsv(){
-        List<Aluno> alunosAux = new ArrayList<>();
+        List<AlunoBeneficiado> alunosAux = new ArrayList<>();
         try {
             alunosAux = ManipuladorCSV.toListAlunos(part);
             if(alunosAux.size()>0){
-                for(Aluno aluno: alunosAux){
+                for(AlunoBeneficiado aluno: alunosAux){
                     this.alunoDao.salvar(aluno);
                 }
                 this.alunos = alunosAux;
@@ -92,16 +93,16 @@ public class CaestBean implements Serializable{
         this.usuariosCaest = this.dao.usuariosComNivelDeAcesso(NivelAcesso.CAEST);
     }
 
-    public void removerAluno(Aluno aluno){
+    public void removerAluno(AlunoBeneficiado aluno){
         this.alunoDao.remover(aluno);
         this.alunos = alunoDao.listar();
     }
 
-    public List<Aluno> getAlunos() {
+    public List<AlunoBeneficiado> getAlunos() {
         return alunos;
     }
 
-    public void setAlunos(List<Aluno> alunos) {
+    public void setAlunos(List<AlunoBeneficiado> alunos) {
         this.alunos = alunos;
     }
 

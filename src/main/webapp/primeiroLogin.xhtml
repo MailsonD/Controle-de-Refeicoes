@@ -164,7 +164,7 @@ and open the template in the editor.
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#pablo">
+                            <a class="nav-link" href="#pablo">  
                                 <span class="no-icon">Entrar</span>
                             </a>
                         </li>
@@ -178,13 +178,14 @@ and open the template in the editor.
 
 
             <div class="page-header clear-filter">
-                <div class="page-header-image" data-parallax="true" style="background-image: url('../resources/assets/img/if2.jpg')">
+                <div class="page-header-image" data-parallax="true" style="background-image: url('resources/assets/img/if2.jpg')">
                     <div class="filter"> </div>
 
 
-                    <div class="card col-sm-9 col-md-7 col-lg-5 mx-auto py-5 my-5 shadow p-3 mb-5 bg-white rounded title-container text-center">
-                        <div class="card-header">
-                            <h4 class="card-title">Gerência Refeições - Login</h4>
+                    <div class="card bg-white rounded container col-md-5 margin-top title-container">
+                        <div class="card-header text-center ">
+                            <h4 class="card-title">Gerência Refeições - Primeiro Login</h4>
+                            <h5 class="card-title"> Você recebera um email para confirmar as informações! </h5>
                         </div>
 
                         <div class="card-body">
@@ -195,7 +196,7 @@ and open the template in the editor.
                                     <div class="col-md-12 pr-3">
                                         <div class="form-group">
                                             <h:outputLabel value="Matricula"/>
-                                            <h:inputText styleClass="form-control" value="#{autenticacaoBean.usuario.matricula}" >
+                                            <h:inputText styleClass="form-control" required="true" value="#{primerioAcessoBean.matricula}" >
                                                 <f:passThroughAttribute name="placeholder" value="Matricula"></f:passThroughAttribute>
                                             </h:inputText>
                                         </div>
@@ -204,25 +205,26 @@ and open the template in the editor.
                                 <div class="row">
                                     <div class="col-md-12 pr-3">
                                         <div class="form-group">
-                                            <h:outputLabel value="Senha"/>
-                                            <h:inputSecret styleClass="form-control" value="#{autenticacaoBean.usuario.senha}" >
-                                                <f:passThroughAttribute name="placeholder" value="Senha"></f:passThroughAttribute>
-                                            </h:inputSecret>                            </div>
+                                            <h:outputLabel value="E-mail"/>
+                                            <h:inputText styleClass="form-control" required="true" value="#{primerioAcessoBean.email}" >
+                                                <f:passThroughAttribute name="placeholder" value="E-mail"></f:passThroughAttribute>
+                                            </h:inputText>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-10 pr-3">
-                                        <h:commandButton type="submit" action="#{autenticacaoBean.login()}" styleClass="col-lg-10 btn btn-success btn-fill pull-right" value="Entrar"></h:commandButton>
+                                        <h:commandButton type="submit" action="#{primerioAcessoBean.submit()}" styleClass="col-lg-10 btn btn-success btn-fill pull-right" value="Enviar"></h:commandButton>
 
                                         <div class="clearfix"></div>                                        
 
                                     </div>
                                     
-                                    <div class="col-md-12 text-center">
+<!--                                    <div class="col-md-12 text-center">
                                         <h:commandLink class="text-success">Primeiro acesso</h:commandLink>
 
 
-                                    </div>
+                                    </div>-->
                                 </div>
                             </h:form>
                         </div>

@@ -1,7 +1,9 @@
 package br.com.loopis.controle_refeicoes.modelo.dao.implementacoes;
 
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.PedidoDao;
+import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
+import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 
 import javax.ejb.Stateless;
@@ -24,6 +26,8 @@ public class PedidoDaoImpl implements PedidoDao {
 
     @Override
     public void salvar(Pedido object) {
+//        String jpql = "select a from Pedido p join p.alunos a where a in :alunos";
+//        em.createQuery(jpql).setParameter("alunos", object.getAlunos());
         em.persist(object);
     }
 
@@ -73,5 +77,15 @@ public class PedidoDaoImpl implements PedidoDao {
                 .getResultList();
     }
 
+
+    @Override
+    public List<Pedido> buscarPedidosAceitos(LocalDate data, TipoBeneficio tipoBeneficio) {
+        TypedQuery<Pedido> query = em.createQuery("SELECT DISTINCT p FROM Pedido p WHERE p.diaSolicitado = :data AND p.statusPedido = :status AND  p.tipoBeneficio = :tipoBeneficio OR p.tipoBeneficio = :tipoDefault ", Pedido.class);
+        query.setParameter("data", data);
+        query.setParameter("tipoBeneficio", tipoBeneficio);
+        query.setParameter("tipoDefault", TipoBeneficio.AMBOS);
+        query.setParameter("status", StatusPedido.ACEITO);
+        return query.getResultList();
+    }
 
 }

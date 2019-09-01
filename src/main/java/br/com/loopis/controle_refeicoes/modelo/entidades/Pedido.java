@@ -35,7 +35,9 @@ public class Pedido implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private TipoBeneficio tipoBeneficio;
-    @ManyToMany(cascade = CascadeType.PERSIST)
+//    @ManyToMany(/*cascade = CascadeType.PERSIST*/)
+    @ElementCollection
+    @CollectionTable(name = "aluno_pedido")
     private List<Aluno> alunos;
 
     public Pedido(){};

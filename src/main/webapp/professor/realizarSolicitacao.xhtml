@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <!--ALOCANDO TEMPLATE-->
+    <ui:composition template="../WEB-INF/Template.xhtml">
+        <!--DEFININDO TITULO-->
+        <ui:define name="titulo">
+            <title>Solicitação</title>
+        </ui:define>
+
+        <!--DEFININDO CONTEUDO-->
+        <ui:define name="Conteudo">
+            <div class="main-panel">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#pablo"> Professor - Fazer Solicitação </a>
+                        <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                                aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                        </button>
+                    </div>
+                </nav>
+                <!-- End Navbar -->
+                <div class="content">
+                    <h:form>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card strpied-tabled-with-hover">
+                                        <div class="card-header ">
+                                            <h4 class="card-title">Solicitar</h4>
+                                            <p class="card-category">Informe os Dados</p>
+                                            <h:messages id="messagesError"
+                                                                infoStyle="list-style: none;color: green;"
+                                                                errorStyle="list-style: none;color: red;"/>
+                                        </div>
+                                        <div class="card-body">
+                                            <h:selectOneMenu styleClass="form-control" id="select" required="true" value="#{pedidoBean.pedido.turma}" requiredMessage="•Informe a turma antes de solicitar o pedido ou adicionar alunos a lista">
+                                                <f:selectItem itemLabel="___TURMA___"/>
+                                                <f:selectItems value="#{pedidoBean.listarTurmas()}" var="turma">
+                                                    <f:selectItem itemValue="#{turma}" itemLabel="#{turma.descricao}"></f:selectItem>
+                                                </f:selectItems>
+                                            </h:selectOneMenu>
+
+
+                                            <br/>
+                                            <h:inputTextarea class="form-control" cols="30" rows="10" value="#{pedidoBean.pedido.justificativa}" required="true" requiredMessage="•Informe a justificativa antes de solicitar o pedido ou adicionar alunos a lista"/>
+                                            <br/>
+
+                                            <h:inputText a:type="date" styleClass="form-control" value="#{pedidoBean.pedido.diaSolicitado}" requiredMessage="•Informe a data antes de solicitar o pedido ou adicionar alunos a lista"
+                                                         converter="localDateConverter" required="true"/>
+
+                                            <h:selectManyCheckbox id="tipoBeneficio" value="#{pedidoBean.tipoBeneficiosSelecionados}" required="true" requiredMessage="•Informe o tipo de benéficio antes de solicitar o pedido ou adicionar alunos a lista">
+                                                <br/>
+                                                <f:selectItem itemValue="#{pedidoBean.tiposBeneficio[0]}" itemLabel="Almoço"/>
+                                                <br/>
+                                                <f:selectItem itemValue="#{pedidoBean.tiposBeneficio[1]}" itemLabel="Janta" />
+                                            </h:selectManyCheckbox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <!--<h:form>-->
+                                                <div class="form-group">
+                                                    <h:inputText class="form-control" value="#{pedidoBean.aluno.nome}">
+                                                        <f:passThroughAttribute name="placeholder"
+                                                                                value="Nome"></f:passThroughAttribute>
+                                                    </h:inputText>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h:inputText class="form-control" value="#{pedidoBean.aluno.matricula}">
+                                                        <f:passThroughAttribute name="placeholder"
+                                                                                value="Matricula"></f:passThroughAttribute>
+                                                    </h:inputText>
+                                                </div>
+                                                <div class="form-group">
+                                                    <h:commandButton class="btn btn-success btn-fill pull-right"
+                                                                     action="#{pedidoBean.addAluno()}" value="Adicionar">
+                                                    </h:commandButton>
+                                                </div>
+                                            <!--</h:form>-->
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="card strpied-tabled-with-hover">
+                                        <div class="card-header ">
+                                            <h4 class="card-title">Solicitações</h4>
+                                            <p class="card-category">Lista de Alunos</p>
+                                        </div>
+                                        <div class="card-body table-full-width table-responsive">
+                                            <!--<h:form>-->
+
+                                                <h:dataTable class="table table-hover table-striped" value="#{pedidoBean.alunos}" var="aluno">
+                                                    <h:column>
+                                                        <f:facet name="header">Matricula</f:facet>
+                                                        #{aluno.matricula}
+                                                    </h:column>
+                                                    <h:column>
+                                                        <f:facet name="header">Nome</f:facet>
+                                                        #{aluno.nome}
+                                                    </h:column>
+                                                </h:dataTable>
+                                            <!--</h:form>-->
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9 pr-3">
+                                <!--<h:form>-->
+                                <h:commandButton class="col-lg-8 btn btn-success btn-fill pull-right" disabled="#{pedidoBean.tamanhoListaAlunos() eq 0}"
+                                                     action="#{pedidoBean.cadastrarPedido()}" value="SOLICITAR">
+
+                                    </h:commandButton>
+                                <!--</h:form>-->
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <nav>
+                            <p class="copyright text-center">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>
+                                <a href="http://www.creative-tim.com">Loopis</a>, Melhor equipe de DAC
+                            </p>
+                        </nav>
+                    </div>
+                </footer>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

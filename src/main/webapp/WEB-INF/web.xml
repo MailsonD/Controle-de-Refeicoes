@@ -9,11 +9,11 @@
     </filter>
     <filter-mapping>
         <filter-name>autenticacaoFilter</filter-name>
-        <url-pattern>/admInicio.xhtml</url-pattern>
         <url-pattern>/adm/*</url-pattern>
         <url-pattern>/gestor/*</url-pattern>
         <url-pattern>/caest/*</url-pattern>
         <url-pattern>/professor/*</url-pattern>
+        <url-pattern>/login</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>

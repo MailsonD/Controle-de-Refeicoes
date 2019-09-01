@@ -1,5 +1,6 @@
 package br.com.loopis.controle_refeicoes.modelo.dao.interfaces;
 
+import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 
@@ -13,7 +14,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @param numeroDaPagina Número da página do resultado da buscar
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
-    public List<Pedido> buscarPorData(LocalDate data, int numeroDaPagina);
+    List<Pedido> buscarPorData(LocalDate data, int numeroDaPagina);
 
     /**
      * Pedidos de um professor, o resultado é ordenado pelos pedidos em abertos (PENDENTE).
@@ -31,4 +32,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
     public List<Pedido> buscarPorTipoBeneficio(TipoBeneficio tipoBeneficio, int numeroDaPagina);
+
+    List<Pedido> buscarPedidosAceitos(LocalDate data, TipoBeneficio tipoBeneficio);
+
 }

@@ -9,7 +9,7 @@
             <from-action>#{autenticacaoBean.login()}</from-action>
             <from-outcome>autorizado</from-outcome>
             <if>#{autenticacaoBean.usuario.nivelAcesso == "ADMINISTRADOR"}</if>
-            <to-view-id>adm/manterGestor.xhtml?faces-redirect=true</to-view-id>
+            <to-view-id>adm/estatisticasADM.xhtml?faces-redirect=true</to-view-id>
             <redirect/>
         </navigation-case>
 		
@@ -17,7 +17,7 @@
             <from-action>#{autenticacaoBean.login()}</from-action>
             <from-outcome>autorizado</from-outcome>
             <if>#{autenticacaoBean.usuario.nivelAcesso == "PROFESSOR"}</if>
-            <to-view-id>professor/professorMantemAluno.xhtml?faces-redirect=true</to-view-id>
+            <to-view-id>professor/acompanharSolicitacoes.xhtml?faces-redirect=true</to-view-id>
             <redirect/>
         </navigation-case>
 		
@@ -36,6 +36,13 @@
             <to-view-id>gestor/estatisticasGestor.xhtml?faces-redirect=true</to-view-id>
             <redirect/>
         </navigation-case>
+
+        <navigation-case>
+            <from-action>#{primerioAcessoBean.abrirPagina()}</from-action>
+            <from-outcome>meuPrimeiroAcesso</from-outcome>
+            <to-view-id>publico/primeiroLogin.xhtml?faces-redirect=true</to-view-id>
+            <redirect/>
+        </navigation-case>
 		
         <navigation-case>
             <from-action>#{autenticacaoBean.logout()}</from-action>
@@ -48,6 +55,15 @@
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>desautenticar</from-outcome>
+            <to-view-id>login.xhtml?faces-redirect=true</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>primeiroLogin.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{primerioAcessoBean.submit()}</from-action>
+            <from-outcome>acessoGerado</from-outcome>
             <to-view-id>login.xhtml?faces-redirect=true</to-view-id>
             <redirect/>
         </navigation-case>

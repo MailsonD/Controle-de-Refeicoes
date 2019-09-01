@@ -16,7 +16,7 @@ and open the template in the editor.
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
 
-        <title>Login</title>
+        <title>Solicitar</title>
 
         <!--     Fonts and icons     -->
 
@@ -43,6 +43,8 @@ and open the template in the editor.
         <h:outputScript name="assets/js/plugins/bootstrap-notify.js"/>
         <h:outputScript name="assets/js/light-bootstrap-dashboard.js"/>
         <h:outputScript name="assets/js/demo.js"/>
+
+
 
 
         <!--    STATIC CSS-->
@@ -174,66 +176,70 @@ and open the template in the editor.
         </nav>
         <!-- End Navbar -->
         <div class="wrapper">
-
-
-
             <div class="page-header clear-filter">
                 <div class="page-header-image" data-parallax="true" style="background-image: url('../resources/assets/img/if2.jpg')">
                     <div class="filter"> </div>
 
+                    <div class="title-container2 text-center">
+                        <div class="form-group"> <div id="contador"></div>
 
-                    <div class="card col-sm-9 col-md-7 col-lg-5 mx-auto py-5 my-5 shadow p-3 mb-5 bg-white rounded title-container text-center">
-                        <div class="card-header">
-                            <h4 class="card-title">Gerência Refeições - Primeiro Login</h4>
-                            <h5 class="card-title"> Você recebera um email para confirmar as informações! </h5>
+                            <h1> Ja servimos 
+                                <b> <big>  <span class="counter-up" data-count-to="3970"></span> </big></b>
+                                refeições extras
+                            </h1>
+
                         </div>
 
-                        <div class="card-body">
-                            <h:form>
-                                <h:messages id="messagesError" infoStyle="list-style: none;color: green;"
-                                            errorStyle="list-style: none;color: red;" />
-                                <div class="row">
-                                    <div class="col-md-12 pr-3">
-                                        <div class="form-group">
-                                            <h:outputLabel value="Matricula"/>
-                                            <h:inputText styleClass="form-control" value="#{autenticacaoBean.usuario.matricula}" >
-                                                <f:passThroughAttribute name="placeholder" value="Matricula"></f:passThroughAttribute>
-                                            </h:inputText>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 pr-3">
-                                        <div class="form-group">
-                                            <h:outputLabel value="E-mail"/>
-                                            <h:inputSecret styleClass="form-control" value="#{autenticacaoBean.usuario.email}" >
-                                                <f:passThroughAttribute name="placeholder" value="E-mail"></f:passThroughAttribute>
-                                            </h:inputSecret>                           
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-10 pr-3">
-                                        <h:commandButton type="submit" action="#{autenticacaoBean.login()}" styleClass="col-lg-10 btn btn-success btn-fill pull-right" value="Enviar"></h:commandButton>
-
-                                        <div class="clearfix"></div>                                        
-
-                                    </div>
-                                    
-<!--                                    <div class="col-md-12 text-center">
-                                        <h:commandLink class="text-success">Primeiro acesso</h:commandLink>
 
 
-                                    </div>-->
-                                </div>
-                            </h:form>
-                        </div>
                     </div>
+
+
 
                 </div>
             </div>
+            <br/>
+            <div class="main-panel2">
+
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card">
+
+                                    <div class="card-body all-icons">
+                                        <div class="form-group">
+                                            <h2 class="text-center">Controle de Refeições</h2>
+                                            <p>É o sistema de gerenciamento de refeições do IFPB Campus Cajazeiras, 
+                                                desenvolvido pela Loopis Soluções Tecnologicas, empresa junior o curso de 
+                                                Analise e Desenvolvimento de Sistemas.</p>
+                                            <p>Aqui os professores podem enviar direto para CAEST solicitações contendo a lista de alunos que precisam da refeição 
+                                                em dias de reposição, essa solicitação é avaliada e respondidas. Caso aprovadas, os alunos da da solicitação
+                                                são inseridos automaticamente na lista do refeitorio.</p>
+                                            <h3> Tudo online!</h3>
+
+                                        </div>
 
 
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card">
+
+                                    <div class="card-body all-icons">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
             <footer class="footer">
                 <div class="container-fluid">
                     <nav>
@@ -296,5 +302,28 @@ and open the template in the editor.
     
         });
     </script> -->
+    <script type="text/javascript">
+                                const tempo_intervalo = 5; //ms -> define a velocidade da animação
+                                const tempo = 40000; //ms -> define o tempo total da animaçao
+
+                                $('.counter-up').each(function () {
+                                    let count_to = parseInt($(this).data('countTo'));
+                                    let intervalos = tempo / tempo_intervalo; //quantos passos de animação tem
+                                    let incremento = count_to / intervalos; //quanto cada contador deve aumentar
+                                    let valor = 0;
+                                    let el = $(this);
+
+                                    let timer = setInterval(function () {
+                                        if (valor >= count_to) { //se já contou tudo tem de parar o timer
+                                            valor = count_to;
+                                            clearInterval(timer);
+                                        }
+
+                                        let texto = valor.toFixed(0).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+                                        el.text(texto);
+                                        valor += incremento;
+                                    }, tempo_intervalo);
+                                });
+    </script>
 
 </html>
