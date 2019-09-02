@@ -160,4 +160,11 @@ public class Pedido implements Serializable {
     public int hashCode() {
         return Objects.hash(id, professor, justificativa, diaSolicitado, turma, statusPedido, tipoBeneficio, alunos);
     }
+
+    @Override
+    public String toString() {
+        return "Pedido{" + "id=" + id + ", professor=" + professor + ", justificativa=" + justificativa + ", diaSolicitado=" + diaSolicitado + ", turma=" + turma + ", statusPedido=" + statusPedido + ", tipoBeneficio=" + tipoBeneficio + ", alunos=" + alunos + '}';
+    }
+    
+    
 }
