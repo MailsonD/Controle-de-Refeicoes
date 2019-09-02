@@ -144,32 +144,30 @@ and open the template in the editor.
                                                         <f:ajax render="myModal2" execute="#{pedidoBean.geradorDeNomesParaModais()}"/>
                                                         <f:passThroughAttribute name="data-toggle" value="modal"/>
                                                         <f:passThroughAttribute name="data-target" value="#{pedidoBean.recuperarNomeModal(true)}"/>
-                                                        <!-- Exclusão Modal -->
-                                                        <div class="modal fade modal-primary" id="#{pedidoBean.recuperarNomeModal(false)}" tabindex="-1" role="dialog"
-                                                             aria-labelledby="myModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header justify-content-center">
+                                                    </h:commandLink>
+                                                    <!-- Exclusão Modal -->
+                                                    <div class="modal fade modal-primary" id="#{pedidoBean.recuperarNomeModal(false)}" tabindex="-1" role="dialog"
+                                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header justify-content-center">
 
-                                                                        <h3>Remover Solicitação </h3>
+                                                                    <h3>Remover Solicitação </h3>
 
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-link btn-simple"
-                                                                                data-dismiss="modal">Fechar
-                                                                        </button>
-                                                                        <h:form>
-                                                                            <h:commandButton class="col-lg-8 btn btn-danger pull-right"
-                                                                                             value="Apagar" action="#{pedidoBean.excluir(pedido)}">
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-link btn-simple"
+                                                                            data-dismiss="modal">Fechar
+                                                                    </button>
+                                                                    <h:commandButton class="col-lg-8 btn btn-danger pull-right"
+                                                                                     value="Apagar" action="#{pedidoBean.excluir(pedido)}">
 
-                                                                            </h:commandButton>
-                                                                        </h:form>
-                                                                    </div>
+                                                                    </h:commandButton>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!-- Fim da modal -->
-                                                    </h:commandLink>
+                                                    </div>
+                                                    <!-- Fim da modal -->
                                                 </h:column>
                                                 <h:column>
                                                     <f:facet name="header">Detalhes</f:facet>
@@ -178,46 +176,46 @@ and open the template in the editor.
                                                         <f:ajax render="myModal1" execute="#{pedidoBean.geradorDeNomesParaModais()}"/>
                                                         <f:passThroughAttribute name="data-toggle" value="modal"/>
                                                         <f:passThroughAttribute name="data-target" value="#{pedidoBean.recuperarNomeModal(true)}"/>
-                                                        <!-- Detalhes Modal -->
-                                                        <div class="modal fade modal-primary" id="#{pedidoBean.recuperarNomeModal(false)}" tabindex="-1" role="dialog"
-                                                             aria-labelledby="myModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header justify-content-center">
+                                                    </h:commandLink>
+                                                    <!-- Detalhes Modal -->
+                                                    <div class="modal fade modal-primary" id="#{pedidoBean.recuperarNomeModal(false)}" tabindex="-1" role="dialog"
+                                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header justify-content-center">
 
-                                                                        <h3>Detalhes </h3>
+                                                                    <h3>Detalhes </h3>
 
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <h4>Justificativa do Profesor: </h4>
+                                                                    #{pedido.justificativa}
+                                                                    <h4>Lista de Alunos: </h4>
+                                                                    <div class="card-body table-full-width table-responsive">
+                                                                        <h:dataTable class="table table-hover table-striped" value="#{pedido.alunos}" var="aluno">
+                                                                            <h:column>
+                                                                                <f:facet name="header">Matricula</f:facet>
+                                                                                    #{aluno.matricula}
+                                                                            </h:column>
+                                                                            <h:column>
+                                                                                <f:facet name="header">Nome</f:facet>
+                                                                                    #{aluno.nome}
+                                                                            </h:column>
+                                                                        </h:dataTable>
                                                                     </div>
-                                                                    <div class="modal-body">
-                                                                        <h4>Justificativa do Profesor: </h4>
-                                                                        #{pedido.justificativa}
-                                                                        <h4>Lista de Alunos: </h4>
-                                                                        <div class="card-body table-full-width table-responsive">
-                                                                            <h:dataTable class="table table-hover table-striped" value="#{pedido.alunos}" var="aluno">
-                                                                                <h:column>
-                                                                                    <f:facet name="header">Matricula</f:facet>
-                                                                                        #{aluno.matricula}
-                                                                                </h:column>
-                                                                                <h:column>
-                                                                                    <f:facet name="header">Nome</f:facet>
-                                                                                        #{aluno.nome}
-                                                                                </h:column>
-                                                                            </h:dataTable>
-                                                                        </div>
 
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-link btn-simple"
-                                                                                data-dismiss="modal">Fechar
-                                                                        </button>
-                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-link btn-simple"
+                                                                            data-dismiss="modal">Fechar
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!-- Fim da modal -->
-                                                    </h:commandLink>
+                                                    </div>
+                                                    <!-- Fim da modal -->
                                                 </h:column>
-                                                
+
                                             </h:dataTable>
                                         </h:form>
                                     </div>

@@ -132,6 +132,7 @@ public class PedidoBean implements Serializable {
     }
     
     public String excluir(Pedido p){
+        System.out.println("Foi");
         pedidoService.remover(p);
         pedido = new Pedido();
         return null;
