@@ -176,21 +176,19 @@ and open the template in the editor.
         </nav>
         <!-- End Navbar -->
         <div class="wrapper">
-            <div class="page-header clear-filter">
-                <div class="page-header-image" data-parallax="true" style="background-image: url('../resources/assets/img/if2.jpg')">
+            <div class="page-header2 clear-filter">
+                <div class="page-header-image2" data-parallax="true" style="background-image: url('../resources/assets/img/if2.jpg')">
                     <div class="filter"> </div>
 
                     <div class="title-container2 text-center">
                         <div class="form-group"> <div id="contador"></div>
-
-                            <h1> Ja servimos 
-                                <b> <big>  <span class="counter-up" data-count-to="3970"></span> </big></b>
+                            
+                            <h1> Hoje o #horario do perdido tem
+                                <b> <big>  <span class="counter-up" data-count-to="123"></span> </big></b>
                                 refeições extras
                             </h1>
 
                         </div>
-
-
 
                     </div>
 
@@ -204,34 +202,59 @@ and open the template in the editor.
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+
                                 <div class="card">
+                                    <table>
+                                        <tr>
 
-                                    <div class="card-body all-icons">
-                                        <div class="form-group">
-                                            <h2 class="text-center">Controle de Refeições</h2>
-                                            <p>É o sistema de gerenciamento de refeições do IFPB Campus Cajazeiras, 
-                                                desenvolvido pela Loopis Soluções Tecnologicas, empresa junior o curso de 
-                                                Analise e Desenvolvimento de Sistemas.</p>
-                                            <p>Aqui os professores podem enviar direto para CAEST solicitações contendo a lista de alunos que precisam da refeição 
-                                                em dias de reposição, essa solicitação é avaliada e respondidas. Caso aprovadas, os alunos da da solicitação
-                                                são inseridos automaticamente na lista do refeitorio.</p>
-                                            <h3> Tudo online!</h3>
+                                            <td>
+                                                <select class="form-control" id="select">
+                                                    <option value="">Almoço</option>
+                                                    <option value="">Janta</option>
+                                                </select>
+                                            </td>   
+                                            <td>
+                                                <h:commandButton
+                                                    class="col-lg-12 btn btn-success btn-fill pull-right"
+                                                    value="Buscar"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
 
-                                        </div>
 
+                            </div>
 
-
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <div class="card strpied-tabled-with-hover">
+                                    <div class="card-header ">
+                                        <h4 class="card-title">Lista de alunos</h4>
+                                        <p class="card-category"> Dia: 00/00/000</p>
+                                    </div>
+                                    <div class="card-body table-full-width table-responsive">
+                                        <h:dataTable class="table table-hover table-striped" value="#{pedidoBean.alunos}" var="aluno">
+                                            <h:column>
+                                                <f:facet name="header">Matricula</f:facet>
+                                                    #{aluno.matricula}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Nome</f:facet>
+                                                    #{aluno.nome}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">Turma</f:facet>
+                                                    #{aluno.turma}
+                                            </h:column>
+                                        </h:dataTable>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8">
-                                <div class="card">
 
-                                    <div class="card-body all-icons">
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                     </div>
@@ -240,7 +263,9 @@ and open the template in the editor.
                 </div>
 
             </div>
-            <footer class="footer">
+            
+        </div>
+        <footer class="footer">
                 <div class="container-fluid">
                     <nav>
                         <ul class="footer-menu">
@@ -275,7 +300,6 @@ and open the template in the editor.
                     </nav>
                 </div>
             </footer>
-        </div>
     </body>
     <!--   Core JS Files   -->
     <script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
@@ -304,7 +328,7 @@ and open the template in the editor.
     </script> -->
     <script type="text/javascript">
                                 const tempo_intervalo = 5; //ms -> define a velocidade da animação
-                                const tempo = 40000; //ms -> define o tempo total da animaçao
+                                const tempo = 400; //ms -> define o tempo total da animaçao
 
                                 $('.counter-up').each(function () {
                                     let count_to = parseInt($(this).data('countTo'));
