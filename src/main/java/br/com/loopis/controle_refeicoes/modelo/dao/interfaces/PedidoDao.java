@@ -45,4 +45,5 @@ public interface PedidoDao extends DaoIF<Pedido> {
      */
     List<Pedido> buscarPedido(int keyProfessor, LocalDate dataPedido, StatusPedido statusPedido, int numeroDaPagina);
 
+
 }

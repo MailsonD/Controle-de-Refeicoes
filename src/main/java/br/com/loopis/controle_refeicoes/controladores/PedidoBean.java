@@ -6,9 +6,11 @@
 package br.com.loopis.controle_refeicoes.controladores;
 
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.AlunoDao;
+import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.JustificativaCAESTDao;
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.PedidoDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.AlunoBeneficiado;
+import br.com.loopis.controle_refeicoes.modelo.entidades.JustificativaCAEST;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
@@ -38,6 +40,10 @@ public class PedidoBean implements Serializable {
     private List<Aluno> alunos;
     private List<TipoBeneficio> tipoBeneficiosSelecionados;
     private int numPagina;
+    private JustificativaCAEST justificativaCAEST;
+    
+    @Inject
+    private JustificativaCAESTDao justificativaCAESTService;
     @Inject
     private PedidoDao pedidoService;
     @Inject
@@ -50,6 +56,7 @@ public class PedidoBean implements Serializable {
         tipoBeneficiosSelecionados = new ArrayList<>();
         pedido = new Pedido();
         numPagina = 1;
+        justificativaCAEST = new JustificativaCAEST();
     }
 
     public String addAluno() {
@@ -121,14 +128,34 @@ public class PedidoBean implements Serializable {
     public int tamanhoListaAlunos() {
         return alunos.size();
     }
+    
+    
 
     public List<Pedido> listar(int idUsuario) {
         return pedidoService.buscarPorProfessor(idUsuario, numPagina);
     }
     
+//    public List<Pedido> listar() {
+//        return pedidoService.buscarPorStatusPedido(StatusPedido.PENDENTE, numPagina);
+//    }
+    
     public String excluir(Pedido p){
         pedidoService.remover(p);
         pedido = new Pedido();
+        return null;
+    }
+    
+    public String recusar(Pedido p, Usuario usuarioCaest){
+        justificativaCAEST.setPedido(p);
+        justificativaCAEST.setUsuarioCAEST(usuarioCaest);
+        justificativaCAESTService.salvar(justificativaCAEST);
+        justificativaCAEST = new JustificativaCAEST();
+        return null;
+    }
+    
+    public String aceitar(Pedido p){
+        p.setStatusPedido(StatusPedido.ACEITO);
+        pedidoService.atualizar(p);
         return null;
     }
     
@@ -164,4 +191,12 @@ public class PedidoBean implements Serializable {
         this.tipoBeneficiosSelecionados = tipoBeneficiosSelecionados;
     }
 
+    public JustificativaCAEST getJustificativaCAEST() {
+        return justificativaCAEST;
+    }
+
+    public void setJustificativaCAEST(JustificativaCAEST justificativaCAEST) {
+        this.justificativaCAEST = justificativaCAEST;
+    }
+    
 }

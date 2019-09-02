@@ -12,7 +12,7 @@ public class JustificativaCAEST implements Serializable {
     @Id
     @GeneratedValue
     private int id;
-    @OneToOne
+    @OneToOne()
     private Pedido pedido;
     @Lob
     private String justificativa;
