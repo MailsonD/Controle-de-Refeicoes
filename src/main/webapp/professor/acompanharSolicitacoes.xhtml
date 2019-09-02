@@ -141,12 +141,12 @@ and open the template in the editor.
                                                     <f:facet name="header">Apagar</f:facet>
                                                     <h:commandLink class="col-lg-12 btn btn-danger pull-right"
                                                                    value="Apagar">
-                                                        <f:ajax render="myModal2" execute="#{pedidoBean.geradorDeNomesParaModais()}"/>
+                                                        <f:ajax render="myModal2"/>
                                                         <f:passThroughAttribute name="data-toggle" value="modal"/>
-                                                        <f:passThroughAttribute name="data-target" value="#{pedidoBean.recuperarNomeModal(true)}"/>
+                                                        <f:passThroughAttribute name="data-target" value="#modal#{pedido.id}"/>
                                                     </h:commandLink>
                                                     <!-- Exclusão Modal -->
-                                                    <div class="modal fade modal-primary" id="#{pedidoBean.recuperarNomeModal(false)}" tabindex="-1" role="dialog"
+                                                    <div class="modal fade modal-primary" id="modal#{pedido.id}" tabindex="-1" role="dialog"
                                                          aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
@@ -173,12 +173,12 @@ and open the template in the editor.
                                                     <f:facet name="header">Detalhes</f:facet>
                                                     <h:commandLink class="col-lg-12 btn btn-info pull-right"
                                                                    value="Detalhes">
-                                                        <f:ajax render="myModal1" execute="#{pedidoBean.geradorDeNomesParaModais()}"/>
+                                                        <f:ajax render="myModal1"/>
                                                         <f:passThroughAttribute name="data-toggle" value="modal"/>
-                                                        <f:passThroughAttribute name="data-target" value="#{pedidoBean.recuperarNomeModal(true)}"/>
+                                                        <f:passThroughAttribute name="data-target" value="#modal2#{pedido.id}"/>
                                                     </h:commandLink>
                                                     <!-- Detalhes Modal -->
-                                                    <div class="modal fade modal-primary" id="#{pedidoBean.recuperarNomeModal(false)}" tabindex="-1" role="dialog"
+                                                    <div class="modal fade modal-primary" id="modal2#{pedido.id}" tabindex="-1" role="dialog"
                                                          aria-labelledby="myModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">

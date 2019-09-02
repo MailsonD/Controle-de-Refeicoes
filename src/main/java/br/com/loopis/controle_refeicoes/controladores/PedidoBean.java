@@ -17,7 +17,6 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.Turma;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -35,12 +34,10 @@ import javax.servlet.http.HttpSession;
 public class PedidoBean implements Serializable {
 
     private Pedido pedido;
-//    private List<Pedido> pedidos;
     private Aluno aluno;
     private List<Aluno> alunos;
     private List<TipoBeneficio> tipoBeneficiosSelecionados;
     private int numPagina;
-    private String nomeModal;
     @Inject
     private PedidoDao pedidoService;
     @Inject
@@ -52,9 +49,7 @@ public class PedidoBean implements Serializable {
         alunos = new ArrayList<>();
         tipoBeneficiosSelecionados = new ArrayList<>();
         pedido = new Pedido();
-//        pedidos = new ArrayList<>();
         numPagina = 1;
-        nomeModal = "";
     }
 
     public String addAluno() {
@@ -132,17 +127,11 @@ public class PedidoBean implements Serializable {
     }
     
     public String excluir(Pedido p){
-        System.out.println("Foi");
         pedidoService.remover(p);
         pedido = new Pedido();
         return null;
     }
     
-    public String geradorDeNomesParaModais(){
-        nomeModal = "#a"+UUID.randomUUID().toString();
-        return nomeModal;
-    }
-        
     public Pedido getPedido() {
         return pedido;
     }
@@ -173,12 +162,6 @@ public class PedidoBean implements Serializable {
 
     public void setTipoBeneficiosSelecionados(List<TipoBeneficio> tipoBeneficiosSelecionados) {
         this.tipoBeneficiosSelecionados = tipoBeneficiosSelecionados;
-    }
-
-    public String recuperarNomeModal(boolean comCerquilha) {
-        if(comCerquilha)
-            return nomeModal;
-        return nomeModal.replace("#", "");
     }
 
 }
