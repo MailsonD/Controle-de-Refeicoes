@@ -88,4 +88,15 @@ public class PedidoDaoImpl implements PedidoDao {
         return query.getResultList();
     }
 
+    @Override
+    public List<Pedido> buscarPedido(int keyProfessor, LocalDate dataPedido, StatusPedido statusPedido, int numeroDaPagina) {
+        TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.professor.id = :keyProfessor AND p.diaSolicitado = :dataPedido AND p.statusPedido = CAST(:statusPedido as text )", Pedido.class);
+        query.setParameter("keyProfessor", keyProfessor);
+        query.setParameter("dataPedido", dataPedido);
+        query.setParameter("statusPedido", statusPedido);
+        return query.setFirstResult(this.QUANTIDADE_POR_PAGINA * (numeroDaPagina - 1))
+                .setMaxResults(this.QUANTIDADE_POR_PAGINA)
+                .getResultList();
+    }
+
 }
