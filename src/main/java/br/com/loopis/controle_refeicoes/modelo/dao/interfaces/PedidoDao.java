@@ -2,6 +2,7 @@ package br.com.loopis.controle_refeicoes.modelo.dao.interfaces;
 
 import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
+import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 
 import java.time.LocalDate;
@@ -34,5 +35,14 @@ public interface PedidoDao extends DaoIF<Pedido> {
     public List<Pedido> buscarPorTipoBeneficio(TipoBeneficio tipoBeneficio, int numeroDaPagina);
 
     List<Pedido> buscarPedidosAceitos(LocalDate data, TipoBeneficio tipoBeneficio);
+
+    /**
+     *
+     * @param keyProfessor
+     * @param dataPedido
+     * @param statusPedido
+     * @return
+     */
+    List<Pedido> buscarPedido(int keyProfessor, LocalDate dataPedido, StatusPedido statusPedido, int numeroDaPagina);
 
 }
