@@ -738,12 +738,28 @@ body>.navbar-collapse[data-color="purple"]:after {
     min-height: 100%;
 }
 
+.main-panel2 {
+    background: rgba(203, 203, 210, 0.15);
+    position: relative;
+    float: right;
+    width: 100% ;
+}
+
 .main-panel>.content {
     padding: 30px 15px;
     min-height: calc(100% - 123px);
 }
 
+.main-panel2>.content {
+    padding: 30px 15px;
+    min-height: calc(100% - 123px);
+}
+
 .main-panel>.footer {
+    border-top: 1px solid #e7e7e7;
+}
+
+.main-panel2>.footer {
     border-top: 1px solid #e7e7e7;
 }
 
