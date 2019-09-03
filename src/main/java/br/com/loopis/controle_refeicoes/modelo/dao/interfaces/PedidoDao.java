@@ -24,7 +24,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @param numeroDaPagina Número da página do resultado da buscar.
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
-    public List<Pedido> buscarPorProfessor(int keyProfessor, int numeroDaPagina);
+    List<Pedido> buscarPorProfessor(int keyProfessor, int numeroDaPagina);
 
     /**
      * Pedidos de um tipo de benefício. Consulta páginada por data do pedido de forma decrescente.
@@ -32,18 +32,25 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @param numeroDaPagina Número da página do resultado da buscar.
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
-    public List<Pedido> buscarPorTipoBeneficio(TipoBeneficio tipoBeneficio, int numeroDaPagina);
+    List<Pedido> buscarPorTipoBeneficio(TipoBeneficio tipoBeneficio, int numeroDaPagina);
 
     List<Pedido> buscarPedidosAceitos(LocalDate data, TipoBeneficio tipoBeneficio);
 
     /**
      *
-     * @param keyProfessor
-     * @param dataPedido
-     * @param statusPedido
-     * @return
+     * @param keyProfessor Chave do professor que deve ser bucado.
+     * @param dataPedido Data da solicitação que deve ser buscada.
+     * @param statusPedido Status do pedido que deve ser buscado.
+     * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
     List<Pedido> buscarPedido(int keyProfessor, LocalDate dataPedido, StatusPedido statusPedido, int numeroDaPagina);
 
+    /**
+     * Lista de pedidos com determinado Status de pedido.
+     * @param statusPedido Tipo do status que deve ser buscado.
+     * @param numeroDaPagina Número da página do resultado da buscar.
+     * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
+     */
+    public List<Pedido> buscarPorStatusPedido(StatusPedido statusPedido, int numeroDaPagina);
 
 }
