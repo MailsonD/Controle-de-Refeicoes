@@ -59,7 +59,7 @@ public class TestBean {
         List<Aluno> alunos3 = new ArrayList<>();
         alunos3.add(new Aluno("987", "1"));
         List<Aluno> alunos4 = new ArrayList<>();
-        alunos4.add(new Aluno("789", "2"));
+        alunos4.add(new Aluno("123", "2"));
         alunos4.add(new Aluno("456", "3"));
         
         Pedido p1 = new Pedido(u1, "teste 1", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.ALMOCO, alunos1);

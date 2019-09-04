@@ -17,6 +17,7 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.Turma;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -39,9 +40,14 @@ public class PedidoBean implements Serializable {
     private Aluno aluno;
     private List<Aluno> alunos;
     private List<TipoBeneficio> tipoBeneficiosSelecionados;
+    private Long countPedidosAceitos;
+    private Long countPedidosPendentes;
+    private Long countPedidosRecusados;
+    private Long quantRefeicoes;
     private int numPagina;
+    private LocalDate dia;
     private JustificativaCAEST justificativaCAEST;
-    
+
     @Inject
     private JustificativaCAESTDao justificativaCAESTService;
     @Inject
@@ -57,23 +63,25 @@ public class PedidoBean implements Serializable {
         pedido = new Pedido();
         numPagina = 1;
         justificativaCAEST = new JustificativaCAEST();
+        dia = LocalDate.now();
+        contagemDePedidosPorStatus();
     }
 
     public String addAluno() {
-        if(aluno.getMatricula().equals("") || aluno.getNome().equals("")){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-                        "•Informe nome e matrícula do aluno", null));
+        if (aluno.getMatricula().equals("") || aluno.getNome().equals("")) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "•Informe nome e matrícula do aluno", null));
             return null;
         }
-        
-        for(Aluno a:alunos){
+
+        for (Aluno a : alunos) {
             if (a.getMatricula().equals(aluno.getMatricula())) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-                        "•Aluno com matrícula "+aluno.getMatricula()+" já foi adicionado à lista", null));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "•Aluno com matrícula " + aluno.getMatricula() + " já foi adicionado à lista", null));
                 return null;
             }
         }
-        
+
         alunos.add(aluno);
         aluno = new Aluno();
         return null;
@@ -85,6 +93,10 @@ public class PedidoBean implements Serializable {
 
     public String cadastrarPedido() {
         int tamList = alunos.size();
+        if (pedido.getDiaSolicitado().isBefore(LocalDate.now().plusDays(1))) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "•Você não pode fazer uma solicitação de refeição nesta data", null));
+            return null;
+        }
         alunos.removeIf(a -> {
             AlunoBeneficiado alunoBeneficiado = alunoService.buscarPorMatricula(a.getMatricula());
             if (alunoBeneficiado != null) {
@@ -128,37 +140,61 @@ public class PedidoBean implements Serializable {
     public int tamanhoListaAlunos() {
         return alunos.size();
     }
-    
-    
+
+    public String contagemDePedidosPorStatus() {
+        if (dia == null) {
+            dia = LocalDate.now();
+        }
+        countPedidosPendentes = pedidoService.quantidadeDePedidosPorStatus(dia, StatusPedido.PENDENTE);
+        countPedidosAceitos = pedidoService.quantidadeDePedidosPorStatus(dia, StatusPedido.ACEITO);
+        countPedidosRecusados = pedidoService.quantidadeDePedidosPorStatus(dia, StatusPedido.RECUSADO);
+        quantRefeicoes = pedidoService.quantidadeDeRefeicoes(dia);
+        return null;
+
+    }
 
     public List<Pedido> listar(int idUsuario) {
         return pedidoService.buscarPorProfessor(idUsuario, numPagina);
     }
-    
-//    public List<Pedido> listar() {
-//        return pedidoService.buscarPorStatusPedido(StatusPedido.PENDENTE, numPagina);
-//    }
-    
-    public String excluir(Pedido p){
+
+    public List<Pedido> listar() {
+        return pedidoService.buscarPorStatusPedido(StatusPedido.PENDENTE, numPagina);
+    }
+
+    //aluno já esta em outras solicitações deferidas?
+    public boolean alunoJaPossuiBeneficio(Aluno a, LocalDate diaPedido) {
+        System.out.print("\nteste:");
+        List<Aluno> alunosContemplados = pedidoService.alunosQuePossuemBeneficio(diaPedido);
+        if (alunosContemplados.isEmpty()) {
+            System.out.println("entrou no if");
+            return false;
+        }
+
+        return alunosContemplados.stream().anyMatch((outroAluno) -> (outroAluno.getMatricula().equals(a.getMatricula())));
+    }
+
+    public String excluir(Pedido p) {
         pedidoService.remover(p);
         pedido = new Pedido();
         return null;
     }
-    
-    public String recusar(Pedido p, Usuario usuarioCaest){
+
+    public String recusar(Pedido p, Usuario usuarioCaest) {
         justificativaCAEST.setPedido(p);
         justificativaCAEST.setUsuarioCAEST(usuarioCaest);
         justificativaCAESTService.salvar(justificativaCAEST);
         justificativaCAEST = new JustificativaCAEST();
+        contagemDePedidosPorStatus();
         return null;
     }
-    
-    public String aceitar(Pedido p){
+
+    public String aceitar(Pedido p) {
         p.setStatusPedido(StatusPedido.ACEITO);
         pedidoService.atualizar(p);
+        contagemDePedidosPorStatus();
         return null;
     }
-    
+
     public Pedido getPedido() {
         return pedido;
     }
@@ -198,5 +234,46 @@ public class PedidoBean implements Serializable {
     public void setJustificativaCAEST(JustificativaCAEST justificativaCAEST) {
         this.justificativaCAEST = justificativaCAEST;
     }
-    
+
+    public Long getCountPedidosAceitos() {
+        return countPedidosAceitos;
+    }
+
+    public void setCountPedidosAceitos(Long countPedidosAceitos) {
+        this.countPedidosAceitos = countPedidosAceitos;
+    }
+
+    public Long getCountPedidosPendentes() {
+        return countPedidosPendentes;
+    }
+
+    public void setCountPedidosPendentes(Long countPedidosPendentes) {
+        this.countPedidosPendentes = countPedidosPendentes;
+    }
+
+    public Long getCountPedidosRecusados() {
+        return countPedidosRecusados;
+    }
+
+    public void setCountPedidosRecusados(Long countPedidosRecusados) {
+        this.countPedidosRecusados = countPedidosRecusados;
+    }
+
+    public Long getQuantRefeicoes() {
+        return quantRefeicoes;
+    }
+
+    public void setQuantRefeicoes(Long quantRefeicoes) {
+        this.quantRefeicoes = quantRefeicoes;
+    }
+
+    public LocalDate getDia() {
+        return dia;
+    }
+
+    public void setDia(LocalDate dia) {
+        this.dia = dia;
+    }
+
 }
+//deve ser permitido a persistencia de pedidos para o mesmo dia, de professores diferentes e com os mesmos alunos. <== para gerar estatisticas relacionadas a professores.

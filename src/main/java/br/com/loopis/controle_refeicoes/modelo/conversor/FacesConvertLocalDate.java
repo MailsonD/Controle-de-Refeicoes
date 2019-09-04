@@ -32,7 +32,6 @@ public class FacesConvertLocalDate implements Converter {
             UIComponent component,
             String value) {
         if(value.isEmpty()){
-            System.out.println(value);
             return null;
         }
         return LocalDate.parse(value,DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -43,6 +42,9 @@ public class FacesConvertLocalDate implements Converter {
             FacesContext context,
             UIComponent component,
             Object value) {
+        if(value==null){
+            return null;
+        }
         LocalDate dateValue = (LocalDate) value;
         return dateValue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));//value.toString();
     }
