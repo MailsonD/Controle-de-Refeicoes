@@ -1,0 +1,44 @@
+Usuário:
+    /usuario
+    Login:
+        POST
+        /usuario/login -> Recebe matricula e senha -> Retorna Usuario (sem senha)
+    Primerio Acesso:
+        POST
+        /usuario/primerioAcesso -> Recebe matricula e email -> Código de sucesso 200   
+    alterar Senha:
+        PUT
+        /usuario/aterarSenha -> Recebe Usuario e senha nova -> Usuário atualizado
+    
+Relatórios:
+    /relatorio
+    GET
+
+Pedido:
+    /pedido
+    Criar Pedido:
+        POST
+        /pedido -> Recebe Pedido -> Retorna sucesso 
+    Recuperar pedidos por professor:
+        GET         
+        /pedido/professor/id?page=x -> Recebe id Professor + pagina -> Retorna lista de pedidos do professor
+    Filtrar pedidos por professor: 
+        GET
+        /pedido/professor/id?page=x&data=dd/mm/yyyy&statusPedido=asdqasd -> Recebe um monte de coisa -> Retorna a página filtrada;
+    Quantidade de refeições:
+        GET
+        /pedido/total-refeicoes -> Recebe nada -> Retorna a quantidade de refeições concedidas
+    Buscar a lista do almoço:
+        GET
+        /pedido/resultado/almoço -> Recebe nada -> Retorna a lista de alunos aprovados para o almoço no dia de hoje
+    Buscar a lista da janta:
+        GET
+        /pedido/resultado/janta -> Recebe nada -> Retorna a lista de alunos aprovados para a janta no dia de hoje
+    
+        
+    
+        
+            
+    
+    
+    
