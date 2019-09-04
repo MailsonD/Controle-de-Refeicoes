@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * @author Leanderson Coelho
- * **/
+ **/
 @Stateless
 public class PedidoDaoImpl implements PedidoDao {
 
@@ -42,12 +42,12 @@ public class PedidoDaoImpl implements PedidoDao {
     }
 
     @Override
-    public Pedido buscar(Object key){
-        return em.find(Pedido.class,key);
+    public Pedido buscar(Object key) {
+        return em.find(Pedido.class, key);
     }
 
     @Override
-    public List<Pedido> listar(){
+    public List<Pedido> listar() {
         return em.createQuery("SELECT p FROM Pedido p").getResultList();
     }
 
@@ -69,6 +69,15 @@ public class PedidoDaoImpl implements PedidoDao {
                 .getResultList();
     }
 
+    public List<Pedido> buscarPorTipoBeneficio(TipoBeneficio tipoBeneficio, int numeroDaPagina) {
+        TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.tipoBeneficio = :tipoBeneficio ORDER BY p.diaSolicitado DESC", Pedido.class);
+        query.setParameter("tipoBeneficio", tipoBeneficio);
+        return query.setFirstResult(this.QUANTIDADE_POR_PAGINA * (numeroDaPagina - 1))
+                .setMaxResults(this.QUANTIDADE_POR_PAGINA)
+                .getResultList();
+    }
+
+
     @Override
     public List<Pedido> buscarPedidosAceitos(LocalDate data, TipoBeneficio tipoBeneficio) {
         TypedQuery<Pedido> query = em.createQuery("SELECT DISTINCT p FROM Pedido p WHERE p.diaSolicitado = :data AND p.statusPedido = :status AND  p.tipoBeneficio = :tipoBeneficio OR p.tipoBeneficio = :tipoDefault ", Pedido.class);
@@ -77,6 +86,25 @@ public class PedidoDaoImpl implements PedidoDao {
         query.setParameter("tipoDefault", TipoBeneficio.AMBOS);
         query.setParameter("status", StatusPedido.ACEITO);
         return query.getResultList();
+    }
+
+    @Override
+    public List<Pedido> buscarPedido(int keyProfessor, LocalDate dataPedido, StatusPedido statusPedido, int numeroDaPagina) {
+        TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.professor.id = :keyProfessor AND p.diaSolicitado = :dataPedido AND p.statusPedido = CAST(:statusPedido as text ) ORDER BY p.diaSolicitado DESC", Pedido.class);
+        query.setParameter("keyProfessor", keyProfessor);
+        query.setParameter("dataPedido", dataPedido);
+        query.setParameter("statusPedido", statusPedido);
+        return query.setFirstResult(this.QUANTIDADE_POR_PAGINA * (numeroDaPagina - 1))
+                .setMaxResults(this.QUANTIDADE_POR_PAGINA)
+                .getResultList();
+    }
+
+    public List<Pedido> buscarPorStatusPedido(StatusPedido statusPedido, int numeroDaPagina) {
+        TypedQuery<Pedido> query = em.createQuery("SELECT * FROM Pedido p WHERE p.statusPedido = :statusPedido ORDER BY p.diaSolicitado ASC", Pedido.class);
+        query.setParameter("statusPedido", statusPedido);
+        return query.setFirstResult(this.QUANTIDADE_POR_PAGINA * (numeroDaPagina - 1))
+                .setMaxResults(this.QUANTIDADE_POR_PAGINA)
+                .getResultList();
     }
 
 }
