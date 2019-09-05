@@ -175,6 +175,8 @@ and open the template in the editor.
             </div>
         </nav>
         <!-- End Navbar -->
+
+        <h:form>
         <div class="wrapper">
             <div class="page-header2 clear-filter">
                 <div class="page-header-image2" data-parallax="true" style="background-image: url('../resources/assets/img/if2.jpg')">
@@ -184,8 +186,8 @@ and open the template in the editor.
                         <div class="form-group"> <div id="contador"></div>
 
                             <h1> Hoje serão servidos 
-                                <b> <big>  <span class="counter-up" data-count-to="3970"></span> </big></b>
-                                #refeição extras
+                                <b> <big>  <span class="counter-up" data-count-to="#{publicoBean.quant}"></span> </big></b>
+                                #{publicoBean.beneficio} extras
                             </h1>
 
                         </div>
@@ -198,7 +200,6 @@ and open the template in the editor.
             </div>
             <div class="main-panel2">
 
-                <h:form>
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
@@ -215,8 +216,8 @@ and open the template in the editor.
 <!--                                                </select>-->
 
                                                 <h:selectOneMenu class="form-control" id="select" value="#{publicoBean.beneficio}">
-                                                    <f:selectItem itemLabel="Almoço" itemValue="almoco"/>
-                                                    <f:selectItem itemLabel="Janta" itemValue="janta"/>
+                                                    <f:selectItem itemLabel="Almoço" itemValue="almoços"/>
+                                                    <f:selectItem itemLabel="Janta" itemValue="jantares"/>
                                                 </h:selectOneMenu>
                                             </td>   
                                             <td>
@@ -266,10 +267,10 @@ and open the template in the editor.
 
                 </div>
 
-                </h:form>
             </div>
             
         </div>
+        </h:form>
         <footer class="footer">
                 <div class="container-fluid">
                     <nav>

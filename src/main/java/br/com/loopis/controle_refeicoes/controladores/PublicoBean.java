@@ -31,20 +31,23 @@ public class PublicoBean implements Serializable {
     private PedidoDao pedidoDao;
     private LocalDate data;
     private String beneficio;
+    private int quant;
 
     @PostConstruct
     public void init(){
         pedidos = new ArrayList<>();
         alunoExibicaos = new ArrayList<>();
         data = LocalDate.now();
+        quant = 0;
     }
 
 
     public void listar(){
-        if(beneficio.equals("almoco")){
+        if(beneficio.equals("almoços")){
             try {
                 pedidos = new ArrayList<>();
                 pedidos = pedidoDao.buscarPedidosAceitos(data, TipoBeneficio.ALMOCO);
+                quant = pedidoDao.quantRefeicaoDia(data, TipoBeneficio.ALMOCO);
                 formarLista(pedidos);
             } catch (Exception e){
                 e.printStackTrace();
@@ -54,6 +57,7 @@ public class PublicoBean implements Serializable {
             try {
                 pedidos = new ArrayList<>();
                 pedidos = pedidoDao.buscarPedidosAceitos(data, TipoBeneficio.JANTA);
+                quant = pedidoDao.quantRefeicaoDia(data, TipoBeneficio.JANTA);
                 formarLista(pedidos);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -114,5 +118,13 @@ public class PublicoBean implements Serializable {
 
     public void setAlunoExibicaos(List<AlunoExibicao> alunoExibicaos) {
         this.alunoExibicaos = alunoExibicaos;
+    }
+
+    public int getQuant() {
+        return quant;
+    }
+
+    public void setQuant(int quant) {
+        this.quant = quant;
     }
 }

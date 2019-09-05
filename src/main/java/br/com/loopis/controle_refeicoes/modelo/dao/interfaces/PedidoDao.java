@@ -53,4 +53,5 @@ public interface PedidoDao extends DaoIF<Pedido> {
      */
     public List<Pedido> buscarPorStatusPedido(StatusPedido statusPedido, int numeroDaPagina);
 
+    public int quantRefeicaoDia(LocalDate data, TipoBeneficio tipoBeneficio);
 }
