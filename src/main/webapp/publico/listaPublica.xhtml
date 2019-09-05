@@ -182,17 +182,10 @@ and open the template in the editor.
 
                     <div class="title-container2 text-center">
                         <div class="form-group"> <div id="contador"></div>
-<<<<<<< HEAD
 
                             <h1> Hoje serão servidos 
                                 <b> <big>  <span class="counter-up" data-count-to="3970"></span> </big></b>
                                 #refeição extras
-=======
-                            
-                            <h1> Hoje o #horario do perdido tem
-                                <b> <big>  <span class="counter-up" data-count-to="123"></span> </big></b>
-                                refeições extras
->>>>>>> d519e570d3abd80ea291fa2200d2e02a383855a9
                             </h1>
 
                         </div>
@@ -216,15 +209,20 @@ and open the template in the editor.
                                     <table>
                                         <tr>
                                             <td>
-                                                <select class="form-control" id="select">
-                                                    <option value="">Almoço</option>
-                                                    <option value="">Janta</option>
-                                                </select>
+<!--                                                <select class="form-control" id="select">-->
+<!--                                                    <option value="">Almoço</option>-->
+<!--                                                    <option value="">Janta</option>-->
+<!--                                                </select>-->
+
+                                                <h:selectOneMenu class="form-control" id="select" value="#{publicoBean.beneficio}">
+                                                    <f:selectItem itemLabel="Almoço" itemValue="almoco"/>
+                                                    <f:selectItem itemLabel="Janta" itemValue="janta"/>
+                                                </h:selectOneMenu>
                                             </td>   
                                             <td>
                                                 <h:commandButton
                                                     class="col-lg-12 btn btn-success btn-fill pull-right" value="Buscar"
-                                                    action= "#"/>
+                                                    action= "#{publicoBean.listar()}"/>
                                             </td>
                                         </tr>
                                     </table>
@@ -243,7 +241,7 @@ and open the template in the editor.
                                         <p class="card-category"> #{publicoBean.data}</p>
                                     </div>
                                     <div class="card-body table-full-width table-responsive">
-                                        <h:dataTable class="table table-hover table-striped" value="#{pedidoBean.alunos}" var="aluno">
+                                        <h:dataTable class="table table-hover table-striped" value="#{publicoBean.alunoExibicaos}" var="aluno">
                                             <h:column>
                                                 <f:facet name="header">Matricula</f:facet>
                                                     #{aluno.matricula}

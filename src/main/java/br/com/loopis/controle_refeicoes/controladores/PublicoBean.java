@@ -1,11 +1,15 @@
 package br.com.loopis.controle_refeicoes.controladores;
 
-import br.com.loopis.controle_refeicoes.modelo.dao.implementacoes.AlunoDaoImpl;
-import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.AlunoDao;
-import br.com.loopis.controle_refeicoes.modelo.entidades.AlunoBeneficiado;
+import br.com.loopis.controle_refeicoes.modelo.dao.implementacoes.PedidoDaoImpl;
+import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.PedidoDao;
+import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
+import br.com.loopis.controle_refeicoes.modelo.entidades.AlunoExibicao;
+import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
+import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -21,36 +25,71 @@ import java.util.List;
 @ViewScoped
 public class PublicoBean implements Serializable {
 
-    private List<AlunoBeneficiado> alunos;
-    private AlunoDao alunoDao;
+    private List<Pedido> pedidos;
+    private List<AlunoExibicao> alunoExibicaos;
+    @Inject
+    private PedidoDao pedidoDao;
     private LocalDate data;
+    private String beneficio;
 
     @PostConstruct
     public void init(){
-        alunos = new ArrayList<>();
-        alunoDao = new AlunoDaoImpl();
+        pedidos = new ArrayList<>();
+        alunoExibicaos = new ArrayList<>();
         data = LocalDate.now();
     }
 
 
     public void listar(){
-
+        if(beneficio.equals("almoco")){
+            try {
+                pedidos = new ArrayList<>();
+                pedidos = pedidoDao.buscarPedidosAceitos(data, TipoBeneficio.ALMOCO);
+                formarLista(pedidos);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else {
+            try {
+                pedidos = new ArrayList<>();
+                pedidos = pedidoDao.buscarPedidosAceitos(data, TipoBeneficio.JANTA);
+                formarLista(pedidos);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    public List<AlunoBeneficiado> getAlunos() {
-        return alunos;
+    private void formarLista(List<Pedido> pedidos){
+        List<Aluno> aux = new ArrayList<>();
+        for (Pedido ped : pedidos) {
+            aux = ped.getAlunos();
+            for(Aluno aluno : aux){
+                AlunoExibicao alunoExibicao = new AlunoExibicao();
+                alunoExibicao.setMatricula(aluno.getMatricula());
+                alunoExibicao.setNome(aluno.getNome());
+                alunoExibicao.setTurma(ped.getTurma());
+
+                alunoExibicaos.add(alunoExibicao);
+            }
+        }
     }
 
-    public void setAlunos(List<AlunoBeneficiado> alunos) {
-        this.alunos = alunos;
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
 
-    public AlunoDao getAlunoDao() {
-        return alunoDao;
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
-    public void setAlunoDao(AlunoDao alunoDao) {
-        this.alunoDao = alunoDao;
+    public PedidoDao getPedidoDao() {
+        return pedidoDao;
+    }
+
+    public void setPedidoDao(PedidoDao pedidoDao) {
+        this.pedidoDao = pedidoDao;
     }
 
     public LocalDate getData() {
@@ -59,5 +98,21 @@ public class PublicoBean implements Serializable {
 
     public void setData(LocalDate data) {
         this.data = data;
+    }
+
+    public String getBeneficio() {
+        return beneficio;
+    }
+
+    public void setBeneficio(String beneficio) {
+        this.beneficio = beneficio;
+    }
+
+    public List<AlunoExibicao> getAlunoExibicaos() {
+        return alunoExibicaos;
+    }
+
+    public void setAlunoExibicaos(List<AlunoExibicao> alunoExibicaos) {
+        this.alunoExibicaos = alunoExibicaos;
     }
 }
