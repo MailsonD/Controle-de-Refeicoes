@@ -115,7 +115,7 @@
                                     <div class="card-body table-full-width table-responsive">
                                         <h:form>
                                             <h:dataTable class="table table-hover table-striped" 
-                                                         value="#{pedidoBean.listar()}" var="pedido">
+                                                         value="#{pedidoBean.listarPendentes()}" var="pedido">
                                                 <h:column>
                                                     <f:facet name="header">Turma</f:facet>
                                                         #{pedido.turma}
@@ -139,7 +139,7 @@
                                                 <h:column>
                                                     <f:facet name="header">Ação</f:facet>
                                                     <h:commandLink class="col-lg-12 btn btn-success pull-right"
-                                                                     value="Aceitar">
+                                                                   value="Aceitar">
                                                         <f:ajax render="modal1#{pedido.id}"/>
                                                         <f:passThroughAttribute name="data-toggle" value="modal"/>
                                                         <f:passThroughAttribute name="data-target" value="#modal1#{pedido.id}"/>
@@ -188,11 +188,9 @@
                                                                 <div class="modal-body">
                                                                     <p> Você precisa inserir uma justificativa para não aceitar o pedido</p>
                                                                     <h5>Justificativa: </h5>
-
-                                                                    <h:inputTextarea rows="5" styleClass="form-control" value="#{pedidoBean.justificativaCAEST.justificativa}">
+                                                                    <h:inputTextarea rows="5" styleClass="form-control" value="#{pedido.justificativaCaestString}">
 
                                                                     </h:inputTextarea>
-
 
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -262,6 +260,25 @@
                                         </h:form>
                                     </div>
                                 </div>
+                                <h:form>
+                                    <nav aria-label="Navegação de página exemplo">
+                                        <ul class="pagination">
+                                            <!--<li class="page-item"><h:commandLink class="page-link">1</h:commandLink></li>-->
+                                            <li class="page-item">
+                                                <h:commandLink class="page-link" action="#{pedidoBean.mudarPagina(-1)}" disabled="#{pedidoBean.numPagina eq 1}">
+                                                    <span aria-hidden="true">&lt;</span>
+                                                    <span class="sr-only">Anterior</span>
+                                                </h:commandLink>
+                                            </li>
+                                            <li class="page-item">
+                                                <h:commandLink class="page-link" action="#{pedidoBean.mudarPagina(1)}" disabled="#{pedidoBean.ehUltimaPagina}">
+                                                    <span aria-hidden="true">&gt;</span>
+                                                    <span class="sr-only">Próximo</span>
+                                                </h:commandLink>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </h:form>
                             </div>
                         </div>
                     </div>

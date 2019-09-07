@@ -16,7 +16,8 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
     List<Pedido> buscarPorData(LocalDate data, int numeroDaPagina);
-
+    List<Pedido> buscarPorData(int keyProfessor, LocalDate data, int numeroDaPagina);
+    
     /**
      * Pedidos de um professor, o resultado é ordenado pelos pedidos em abertos (PENDENTE).
      * Consulta paginada.
@@ -52,6 +53,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
     public List<Pedido> buscarPorStatusPedido(StatusPedido statusPedido, int numeroDaPagina);
+    public List<Pedido> buscarPorStatusPedido(int keyProfessor, StatusPedido statusPedido, int numeroDaPagina);
     
     /**
      * quantidade de pedidos pelo status do pedido 
@@ -74,5 +76,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @return lista de alunos
      */
     public List<Aluno> alunosQuePossuemBeneficio(LocalDate dia);
+
+    public List<Pedido> ultimosPedidosComStatusModificado(int numeroDaPagina);
 
 }

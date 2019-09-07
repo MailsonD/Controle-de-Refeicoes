@@ -18,6 +18,7 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.Turma;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -35,17 +36,22 @@ import javax.servlet.http.HttpSession;
 @Named
 @ViewScoped
 public class PedidoBean implements Serializable {
-
+    
+    public final static int QUANTIDADE_POR_PAGINA = 10;
+    
     private Pedido pedido;
     private Aluno aluno;
     private List<Aluno> alunos;
     private List<TipoBeneficio> tipoBeneficiosSelecionados;
+    private List<Pedido> pedidos;
     private Long countPedidosAceitos;
     private Long countPedidosPendentes;
     private Long countPedidosRecusados;
     private Long quantRefeicoes;
     private int numPagina;
+    private boolean ehUltimaPagina;
     private LocalDate dia;
+    private StatusPedido statusPedido;
     private JustificativaCAEST justificativaCAEST;
 
     @Inject
@@ -65,6 +71,9 @@ public class PedidoBean implements Serializable {
         justificativaCAEST = new JustificativaCAEST();
         dia = LocalDate.now();
         contagemDePedidosPorStatus();
+        statusPedido = null;
+        ehUltimaPagina = false;
+        pedidos = new ArrayList<>();
     }
 
     public String addAluno() {
@@ -87,9 +96,6 @@ public class PedidoBean implements Serializable {
         return null;
     }
 
-    public Turma[] listarTurmas() {
-        return Turma.values();
-    }
 
     public String cadastrarPedido() {
         int tamList = alunos.size();
@@ -133,6 +139,12 @@ public class PedidoBean implements Serializable {
         return null;
     }
 
+    public String excluir(Pedido p) {
+        pedidoService.remover(p);
+        pedido = new Pedido();
+        return null;
+    }
+    
     public TipoBeneficio[] getTiposBeneficio() {
         return TipoBeneficio.values();
     }
@@ -152,36 +164,95 @@ public class PedidoBean implements Serializable {
         return null;
 
     }
-
+    
+    public String mudarPagina(int p){
+        numPagina+=p;
+        return null;
+    }
+    
     public List<Pedido> listar(int idUsuario) {
-        return pedidoService.buscarPorProfessor(idUsuario, numPagina);
+        List<Pedido> ps;
+        if(dia == null && statusPedido != null){
+            ps = pedidoService.buscarPorStatusPedido(idUsuario, statusPedido, numPagina);
+        }
+        else if(dia != null && statusPedido == null){
+            ps = pedidoService.buscarPorData(idUsuario, dia, numPagina);
+        }
+        else if(dia == null && statusPedido == null){
+            ps = pedidoService.buscarPorProfessor(idUsuario, numPagina);
+        }
+        else{
+            ps = pedidoService.buscarPedido(idUsuario, dia, statusPedido, numPagina);
+        }
+        verificaSeEhUltimaPagina(ps.size());
+        return ps;
+//        return pedidoService.buscarPorProfessor(idUsuario, numPagina);
     }
-
-    public List<Pedido> listar() {
-        return pedidoService.buscarPorStatusPedido(StatusPedido.PENDENTE, numPagina);
+    
+    public List<Pedido> listarPendentes() {
+        List<Pedido> ps;
+        ps = pedidoService.buscarPorStatusPedido(StatusPedido.PENDENTE, numPagina);
+        verificaSeEhUltimaPagina(ps.size());
+        return ps;
     }
-
+    
+    public List<Pedido> listarAceitos() {
+        List<Pedido> ps;
+        ps = pedidoService.buscarPorStatusPedido(StatusPedido.ACEITO, numPagina);
+        verificaSeEhUltimaPagina(ps.size());
+        return ps;
+    }
+    
+    public List<Pedido> listarRecusados() {
+        List<Pedido> ps;
+        ps = pedidoService.buscarPorStatusPedido(StatusPedido.RECUSADO, numPagina);
+        verificaSeEhUltimaPagina(ps.size());
+        return ps;
+    }
+    
+    public List<Pedido> ultimosPedidosComStatusModificado(){
+        List<Pedido> ps;
+        ps = pedidoService.ultimosPedidosComStatusModificado(numPagina);
+        verificaSeEhUltimaPagina(ps.size());
+        return ps;
+    }
+    
+    public void verificaSeEhUltimaPagina(int tamList){
+        if(tamList<QUANTIDADE_POR_PAGINA){
+            ehUltimaPagina = true;
+        }else{
+            ehUltimaPagina = false;
+        }
+    }
+    
+    public Turma[] listarTurmas() {
+        return Turma.values();
+    }
+    
+    public StatusPedido[] listarStatusPedidos(){
+        return StatusPedido.values();
+    }
+    
+    public String recarregar(){
+        return null;
+    }
+    
     //aluno já esta em outras solicitações deferidas?
     public boolean alunoJaPossuiBeneficio(Aluno a, LocalDate diaPedido) {
-        System.out.print("\nteste:");
         List<Aluno> alunosContemplados = pedidoService.alunosQuePossuemBeneficio(diaPedido);
         if (alunosContemplados.isEmpty()) {
-            System.out.println("entrou no if");
             return false;
         }
-
         return alunosContemplados.stream().anyMatch((outroAluno) -> (outroAluno.getMatricula().equals(a.getMatricula())));
     }
 
-    public String excluir(Pedido p) {
-        pedidoService.remover(p);
-        pedido = new Pedido();
-        return null;
-    }
 
     public String recusar(Pedido p, Usuario usuarioCaest) {
+//        System.out.println("\n------------------>"+p.getJustificativaCaestString());
+        p.setDataModificacaoDeStatus(LocalDateTime.now());
         justificativaCAEST.setPedido(p);
         justificativaCAEST.setUsuarioCAEST(usuarioCaest);
+        justificativaCAEST.setJustificativa(p.getJustificativaCaestString());
         justificativaCAESTService.salvar(justificativaCAEST);
         justificativaCAEST = new JustificativaCAEST();
         contagemDePedidosPorStatus();
@@ -189,6 +260,7 @@ public class PedidoBean implements Serializable {
     }
 
     public String aceitar(Pedido p) {
+        p.setDataModificacaoDeStatus(LocalDateTime.now());
         p.setStatusPedido(StatusPedido.ACEITO);
         pedidoService.atualizar(p);
         contagemDePedidosPorStatus();
@@ -274,6 +346,32 @@ public class PedidoBean implements Serializable {
     public void setDia(LocalDate dia) {
         this.dia = dia;
     }
+
+    public int getNumPagina() {
+        return numPagina;
+    }
+
+    public void setNumPagina(int numPagina) {
+        this.numPagina = numPagina;
+    }
+
+    public StatusPedido getStatusPedido() {
+        return statusPedido;
+    }
+
+    public void setStatusPedido(StatusPedido statusPedido) {
+        this.statusPedido = statusPedido;
+    }
+
+    public boolean isEhUltimaPagina() {
+        return ehUltimaPagina;
+    }
+
+    public void setEhUltimaPagina(boolean ehUltimaPagina) {
+        this.ehUltimaPagina = ehUltimaPagina;
+    }
+    
+    
 
 }
 //deve ser permitido a persistencia de pedidos para o mesmo dia, de professores diferentes e com os mesmos alunos. <== para gerar estatisticas relacionadas a professores.
