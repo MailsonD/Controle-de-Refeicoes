@@ -98,7 +98,7 @@ and open the template in the editor.
                                         <div class="card-body table-full-width table-responsive">
                                             <!--<h:form>-->
                                             <h:dataTable class="table table-hover table-striped" 
-                                                         value="#{pedidoBean.listar(autenticacaoBean.usuario.id)}" var="pedido">
+                                                         value="#{pedidoBean.listar(autenticacaoBean.usuario.matricula)}" var="pedido">
                                                 <h:column>
                                                     <f:facet name="header">Turma</f:facet>
                                                         #{pedido.turma}

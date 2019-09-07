@@ -17,6 +17,7 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.Turma;
 import java.io.Serializable;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -99,10 +100,13 @@ public class PedidoBean implements Serializable {
 
     public String cadastrarPedido() {
         int tamList = alunos.size();
-        if (pedido.getDiaSolicitado().isBefore(LocalDate.now().plusDays(1))) {
+        if (pedido.getDiaSolicitado().isBefore(LocalDate.now()) || 
+                pedido.getDiaSolicitado().equals(LocalDate.now()) || 
+                pedido.getDiaSolicitado().getDayOfWeek().equals(DayOfWeek.SUNDAY) ||
+                pedido.getDiaSolicitado().getDayOfWeek().equals(DayOfWeek.SATURDAY)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "•Você não pode fazer uma solicitação de refeição nesta data", null));
             return null;
-        }
+        } 
         alunos.removeIf(a -> {
             AlunoBeneficiado alunoBeneficiado = alunoService.buscarPorMatricula(a.getMatricula());
             if (alunoBeneficiado != null) {
@@ -131,6 +135,7 @@ public class PedidoBean implements Serializable {
         pedido.setAlunos(alunos);
         pedido.setStatusPedido(StatusPedido.PENDENTE);
         pedidoService.salvar(pedido);
+        pedidoService.agendaModificacaoPedido(pedido);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "•Solicitação realizado com sucesso!", null));
         tipoBeneficiosSelecionados = new ArrayList<>();
         alunos = new ArrayList<>();
@@ -170,23 +175,23 @@ public class PedidoBean implements Serializable {
         return null;
     }
     
-    public List<Pedido> listar(int idUsuario) {
+    public List<Pedido> listar(String matriculaUsuario) {
         List<Pedido> ps;
         if(dia == null && statusPedido != null){
-            ps = pedidoService.buscarPorStatusPedido(idUsuario, statusPedido, numPagina);
+            ps = pedidoService.buscarPorStatusPedido(matriculaUsuario, statusPedido, numPagina);
         }
         else if(dia != null && statusPedido == null){
-            ps = pedidoService.buscarPorData(idUsuario, dia, numPagina);
+            ps = pedidoService.buscarPorData(matriculaUsuario, dia, numPagina);
         }
         else if(dia == null && statusPedido == null){
-            ps = pedidoService.buscarPorProfessor(idUsuario, numPagina);
+            ps = pedidoService.buscarPorProfessor(matriculaUsuario, numPagina);
         }
         else{
-            ps = pedidoService.buscarPedido(idUsuario, dia, statusPedido, numPagina);
+            ps = pedidoService.buscarPedido(matriculaUsuario, dia, statusPedido, numPagina);
         }
         verificaSeEhUltimaPagina(ps.size());
         return ps;
-//        return pedidoService.buscarPorProfessor(idUsuario, numPagina);
+//        return pedidoService.buscarPorProfessor(matriculaUsuario, numPagina);
     }
     
     public List<Pedido> listarPendentes() {

@@ -60,52 +60,38 @@
                         <!--INIT SIDEBAR ADM-->
 
                         <li>
-                            <h:commandLink rendered="false" class="nav-link">
+                            <h:commandLink rendered="#{autenticacaoBean.usuario.nivelAcesso eq 'ADMINISTRADOR'}" action="#{navegacaoBean.mudarPagina('estatisticasADM')}" class="nav-link">
                                 <i class="nc-icon nc-chart-pie-35"></i>
-                                <p>Inicio</p>
+                                <p>ESTATÍSTICAS</p>
                             </h:commandLink>
                         </li>
                         <li>
-                            <h:commandLink rendered="false" class="nav-link">
+                            <h:commandLink rendered="#{autenticacaoBean.usuario.nivelAcesso eq 'ADMINISTRADOR'}" class="nav-link" action="#{navegacaoBean.mudarPagina('manterGestor')}">
                                 <i class="nc-icon nc-circle-09"></i>
-                                <p>PERFIL</p>
+                                <p>CADASTRAR</p>
                             </h:commandLink>
                         </li>
-                        <li class="nav-item active">
-                            <h:commandLink rendered="false" class="nav-link">
-                                <i class="nc-icon nc-badge"></i>
-                                <p>Gestor</p>
-                            </h:commandLink>
-                        </li>
-
                         <!--END SIDEBAR ADM-->
 
 
                         <!--INIT SIDEBAR CAEST-->
 
-                        <li class="nav-item active">
-                            <h:commandLink rendered="false" class="nav-link">
+                        <li> <!-- class="nav-item active"-->
+                            <h:commandLink rendered="#{autenticacaoBean.usuario.nivelAcesso eq 'CAEST'}" class="nav-link" action="#{navegacaoBean.mudarPagina('gerenciarSolicitacoes')}">
                                 <i class="nc-icon nc-notes"></i>
-                                <p>SOLICITAÇÕES</p>
+                                <p>GERENCIAR</p>
                             </h:commandLink>
                         </li>
                         <li>
-                            <h:commandLink rendered="false" class="nav-link">
+                            <h:commandLink rendered="#{autenticacaoBean.usuario.nivelAcesso eq 'CAEST'}" class="nav-link" action="#{navegacaoBean.mudarPagina('historicoSolicitacoes')}">
                                 <i class="nc-icon nc-paper-2"></i>
-                                <p>Histórico</p>
-                            </h:commandLink>
-                        </li>
-
-                        <li>
-                            <h:commandLink rendered="false" class="nav-link">
-                                <i class="nc-icon nc-badge"></i>
-                                <p>Alunos Beneficiados</p>
+                                <p>HISTÓRICO</p>
                             </h:commandLink>
                         </li>
                         <li>
-                            <h:commandLink rendered="false" class="nav-link">
+                            <h:commandLink rendered="#{autenticacaoBean.usuario.nivelAcesso eq 'CAEST'}" class="nav-link" action="#{navegacaoBean.mudarPagina('manterAluno')}">
                                 <i class="nc-icon nc-circle-09"></i>
-                                <p>Cadastrar Aluno</p>
+                                <p>CADASTRAR</p>
                             </h:commandLink>
                         </li>
 
@@ -115,21 +101,21 @@
                         <!--INIT SIDEBAR GESTOR-->
 
                         <li class="nav-item active">
-                            <h:commandLink rendered="false" class="nav-link">
+                            <h:commandLink rendered="#{autenticacaoBean.usuario.nivelAcesso eq 'GESTOR'}" class="nav-link" action="#{navegacaoBean.mudarPagina('estatisticasGestor')}">
                                 <i class="nc-icon nc-chart-pie-36"></i>
-                                <p>Estatísticas</p>
+                                <p>ESTATÍSTICAS</p>
                             </h:commandLink>
                         </li>
                         <li>
-                            <h:commandLink rendered="false" class="nav-link">
+                            <h:commandLink rendered="#{autenticacaoBean.usuario.nivelAcesso eq 'GESTOR'}" class="nav-link" action="#{navegacaoBean.mudarPagina('manterCAEST')}">
                                 <i class="nc-icon nc-badge"></i>
                                 <p>CAEST</p>
                             </h:commandLink>
                         </li>
                         <li>
-                            <h:commandLink rendered="false" class="nav-link">
+                            <h:commandLink rendered="#{autenticacaoBean.usuario.nivelAcesso eq 'GESTOR'}" class="nav-link" action="#{navegacaoBean.mudarPagina('manterProfessor')}">
                                 <i class="nc-icon nc-ruler-pencil"></i>
-                                <p>Professores</p>
+                                <p>PROFESSOR</p>
                             </h:commandLink>
                         </li>
 
@@ -138,7 +124,13 @@
                         <!--INIT SIDEBAR PROFESSOR-->
 
                         <li class="nav-item active">
-                            <h:commandLink rendered="false" class="nav-link">
+                            <h:commandLink rendered="#{autenticacaoBean.usuario.nivelAcesso eq 'PROFESSOR'}" class="nav-link" action="#{navegacaoBean.mudarPagina('acompanharSolicitacoes')}">
+                                <i class="nc-icon nc-notes"></i>
+                                <p>SOLICITAÇÕES</p>
+                            </h:commandLink>
+                        </li>
+                        <li class="nav-item active">
+                            <h:commandLink rendered="#{autenticacaoBean.usuario.nivelAcesso eq 'PROFESSOR'}" class="nav-link" action="#{navegacaoBean.mudarPagina('realizarSolicitacao')}">
                                 <i class="nc-icon nc-notes"></i>
                                 <p>SOLICITAR</p>
                             </h:commandLink>

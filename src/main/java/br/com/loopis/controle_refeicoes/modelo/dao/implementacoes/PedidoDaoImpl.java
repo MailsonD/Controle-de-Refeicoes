@@ -34,6 +34,9 @@ public class PedidoDaoImpl implements PedidoDao {
 
     @PersistenceContext
     private EntityManager em;
+    
+    @Resource 
+    private TimerService timerService;
 
     @Override
     public void salvar(Pedido object) {
@@ -72,8 +75,8 @@ public class PedidoDaoImpl implements PedidoDao {
     }
     
     @Override
-    public List<Pedido> buscarPorData(int keyProfessor, LocalDate data, int numeroDaPagina) {
-        TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.professor.id = :keyProfessor AND p.diaSolicitado = :data ORDER BY p.diaSolicitado", Pedido.class);
+    public List<Pedido> buscarPorData(String keyProfessor, LocalDate data, int numeroDaPagina) {
+        TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.professor.matricula like :keyProfessor AND p.diaSolicitado = :data ORDER BY p.diaSolicitado", Pedido.class);
         query.setParameter("data", data).setParameter("keyProfessor", keyProfessor);
         return query.setFirstResult(this.QUANTIDADE_POR_PAGINA * (numeroDaPagina - 1))
                 .setMaxResults(this.QUANTIDADE_POR_PAGINA)
@@ -81,8 +84,8 @@ public class PedidoDaoImpl implements PedidoDao {
     }
 
     @Override
-    public List<Pedido> buscarPorProfessor(int keyProfessor, int numeroDaPagina) {
-        TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.professor.id = :keyProfessor ORDER BY p.statusPedido", Pedido.class);
+    public List<Pedido> buscarPorProfessor(String keyProfessor, int numeroDaPagina) {
+        TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.professor.matricula like :keyProfessor ORDER BY p.statusPedido", Pedido.class);
         query.setParameter("keyProfessor", keyProfessor);
         return query.setFirstResult(this.QUANTIDADE_POR_PAGINA * (numeroDaPagina - 1))
                 .setMaxResults(this.QUANTIDADE_POR_PAGINA)
@@ -109,8 +112,8 @@ public class PedidoDaoImpl implements PedidoDao {
     }
 
     @Override
-    public List<Pedido> buscarPedido(int keyProfessor, LocalDate dataPedido, StatusPedido statusPedido, int numeroDaPagina) {
-        TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.professor.id = :keyProfessor AND p.diaSolicitado = :dataPedido AND p.statusPedido = :statusPedido ORDER BY p.diaSolicitado DESC", Pedido.class);
+    public List<Pedido> buscarPedido(String keyProfessor, LocalDate dataPedido, StatusPedido statusPedido, int numeroDaPagina) {
+        TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.professor.matricula like :keyProfessor AND p.diaSolicitado = :dataPedido AND p.statusPedido = :statusPedido ORDER BY p.diaSolicitado DESC", Pedido.class);
         query.setParameter("keyProfessor", keyProfessor);
         query.setParameter("dataPedido", dataPedido);
         query.setParameter("statusPedido", statusPedido);
@@ -137,8 +140,8 @@ public class PedidoDaoImpl implements PedidoDao {
     }
     
     @Override
-    public List<Pedido> buscarPorStatusPedido(int keyProfessor, StatusPedido statusPedido, int numeroDaPagina) {
-        TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.professor.id = :keyProfessor AND p.statusPedido = :statusPedido ORDER BY p.diaSolicitado ASC", Pedido.class);
+    public List<Pedido> buscarPorStatusPedido(String keyProfessor, StatusPedido statusPedido, int numeroDaPagina) {
+        TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.professor.matricula like :keyProfessor AND p.statusPedido = :statusPedido ORDER BY p.diaSolicitado ASC", Pedido.class);
         query.setParameter("statusPedido", statusPedido).setParameter("keyProfessor", keyProfessor);
         return query.setFirstResult(this.QUANTIDADE_POR_PAGINA * (numeroDaPagina - 1))
                 .setMaxResults(this.QUANTIDADE_POR_PAGINA)
@@ -181,18 +184,19 @@ public class PedidoDaoImpl implements PedidoDao {
 //        
 //    }
     
-    @Resource 
-    private TimerService timerService;
     
-    public void agendaModificacaoPedido(Pedido p){
-        LocalDateTime dia = LocalDateTime.of(p.getDiaSolicitado(), LocalTime.now());
+    
+    @Override
+    public void agendaModificacaoPedido(Pedido p){ //  07/09/2019 14:00      
+        LocalDateTime dia = LocalDateTime.of(p.getDiaSolicitado(), LocalTime.now());//.plusMinutes(3));
         dia = dia.minusHours(12);
+//        dia = dia.minusMinutes(1);
         ScheduleExpression scheduleExpression = new ScheduleExpression()
                 .dayOfMonth(dia.getDayOfMonth())
                 .month(dia.getMonthValue())
                 .hour(dia.getHour())
                 .minute(dia.getMinute())
-                .second(dia.getSecond());///dayOfMonth(1).hour(10);
+                .second(dia.getSecond());
         TimerConfig timerConfig = new TimerConfig();
         timerConfig.setInfo(p);
         timerService.createCalendarTimer(scheduleExpression, timerConfig);
@@ -201,8 +205,11 @@ public class PedidoDaoImpl implements PedidoDao {
     @Timeout
     private void modificarPedido(Timer timer){
         Pedido p = (Pedido)timer.getInfo();
-        p.setStatusPedido(StatusPedido.ACEITO);
-        em.merge(p);
+        if(p.getStatusPedido().equals(StatusPedido.PENDENTE.toString())){
+            p.setStatusPedido(StatusPedido.ACEITO);
+            p.setDataModificacaoDeStatus(LocalDateTime.now());
+            em.merge(p);
+        }
     }
 
 }

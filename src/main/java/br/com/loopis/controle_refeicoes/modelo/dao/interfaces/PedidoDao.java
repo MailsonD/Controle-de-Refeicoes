@@ -16,7 +16,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
     List<Pedido> buscarPorData(LocalDate data, int numeroDaPagina);
-    List<Pedido> buscarPorData(int keyProfessor, LocalDate data, int numeroDaPagina);
+    List<Pedido> buscarPorData(String keyProfessor, LocalDate data, int numeroDaPagina);
     
     /**
      * Pedidos de um professor, o resultado é ordenado pelos pedidos em abertos (PENDENTE).
@@ -25,7 +25,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @param numeroDaPagina Número da página do resultado da buscar.
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
-    List<Pedido> buscarPorProfessor(int keyProfessor, int numeroDaPagina);
+    List<Pedido> buscarPorProfessor(String keyProfessor, int numeroDaPagina);
 
     /**
      * Pedidos de um tipo de benefício. Consulta páginada por data do pedido de forma decrescente.
@@ -44,7 +44,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @param statusPedido Status do pedido que deve ser buscado.
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
-    List<Pedido> buscarPedido(int keyProfessor, LocalDate dataPedido, StatusPedido statusPedido, int numeroDaPagina);
+    List<Pedido> buscarPedido(String keyProfessor, LocalDate dataPedido, StatusPedido statusPedido, int numeroDaPagina);
 
     /**
      * Lista de pedidos com determinado Status de pedido.
@@ -53,7 +53,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
     public List<Pedido> buscarPorStatusPedido(StatusPedido statusPedido, int numeroDaPagina);
-    public List<Pedido> buscarPorStatusPedido(int keyProfessor, StatusPedido statusPedido, int numeroDaPagina);
+    public List<Pedido> buscarPorStatusPedido(String keyProfessor, StatusPedido statusPedido, int numeroDaPagina);
     
     /**
      * quantidade de pedidos pelo status do pedido 
@@ -78,5 +78,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
     public List<Aluno> alunosQuePossuemBeneficio(LocalDate dia);
 
     public List<Pedido> ultimosPedidosComStatusModificado(int numeroDaPagina);
+
+    public void agendaModificacaoPedido(Pedido p);
 
 }
