@@ -5,7 +5,8 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
-import java.time.DayOfWeek;
+import br.com.loopis.controle_refeicoes.modelo.entidades.Estatisticas;
+import br.com.loopis.controle_refeicoes.modelo.entidades.enums.DiaDaSemana;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -34,8 +35,8 @@ public class PedidoDaoImpl implements PedidoDao {
 
     @PersistenceContext
     private EntityManager em;
-    
-    @Resource 
+
+    @Resource
     private TimerService timerService;
 
     @Override
@@ -73,7 +74,7 @@ public class PedidoDaoImpl implements PedidoDao {
                 .setMaxResults(this.QUANTIDADE_POR_PAGINA)
                 .getResultList();
     }
-    
+
     @Override
     public List<Pedido> buscarPorData(String keyProfessor, LocalDate data, int numeroDaPagina) {
         TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.professor.matricula like :keyProfessor AND p.diaSolicitado = :data ORDER BY p.diaSolicitado", Pedido.class);
@@ -91,7 +92,7 @@ public class PedidoDaoImpl implements PedidoDao {
                 .setMaxResults(this.QUANTIDADE_POR_PAGINA)
                 .getResultList();
     }
-    
+
     @Override
     public List<Pedido> buscarPorTipoBeneficio(TipoBeneficio tipoBeneficio, int numeroDaPagina) {
         TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.tipoBeneficio = :tipoBeneficio ORDER BY p.diaSolicitado DESC", Pedido.class);
@@ -121,7 +122,7 @@ public class PedidoDaoImpl implements PedidoDao {
                 .setMaxResults(this.QUANTIDADE_POR_PAGINA)
                 .getResultList();
     }
-    
+
     @Override
     public List<Pedido> buscarPorStatusPedido(StatusPedido statusPedido, int numeroDaPagina) {
         TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.statusPedido = :statusPedido ORDER BY p.diaSolicitado ASC", Pedido.class);
@@ -130,7 +131,7 @@ public class PedidoDaoImpl implements PedidoDao {
                 .setMaxResults(this.QUANTIDADE_POR_PAGINA)
                 .getResultList();
     }
-    
+
     @Override
     public List<Pedido> ultimosPedidosComStatusModificado(int numeroDaPagina) {
         TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.dataModificacaoDeStatus is not null ORDER BY p.dataModificacaoDeStatus DESC", Pedido.class);
@@ -138,7 +139,7 @@ public class PedidoDaoImpl implements PedidoDao {
                 .setMaxResults(this.QUANTIDADE_POR_PAGINA)
                 .getResultList();
     }
-    
+
     @Override
     public List<Pedido> buscarPorStatusPedido(String keyProfessor, StatusPedido statusPedido, int numeroDaPagina) {
         TypedQuery<Pedido> query = em.createQuery("SELECT p FROM Pedido p WHERE p.professor.matricula like :keyProfessor AND p.statusPedido = :statusPedido ORDER BY p.diaSolicitado ASC", Pedido.class);
@@ -179,15 +180,44 @@ public class PedidoDaoImpl implements PedidoDao {
         return em.createQuery(jpql, Aluno.class).setParameter("dia", dia).setParameter("statusPedido", StatusPedido.ACEITO).getResultList();
     }
     
-//    @Schedule(hour = "", minute = "", second = "")
-//    public void aceitarPedidoAutomaticamente(){
-//        
-//    }
-    
-    
+    @Override
+    public Long quantidadeDeRefeicoes(StatusPedido statusPedido, TipoBeneficio tipoBeneficio){
+        Long quant;
+        String psql1 = "select count(p) from Pedido p where p.statusPedido=:sp and (p.tipoBeneficio=:tb1 or p.tipoBeneficio=:tb2)";
+        try{
+            quant = em.createQuery(psql1, Long.class)
+                    .setParameter("sp", statusPedido)
+                    .setParameter("tb1", tipoBeneficio)
+                    .setParameter("tb2", TipoBeneficio.AMBOS)
+                    .getSingleResult();
+        }catch(NoResultException e){
+            quant = 0L;
+        }
+        return quant;
+    }
     
     @Override
-    public void agendaModificacaoPedido(Pedido p){ //  07/09/2019 14:00      
+    public List<Object[]> rankingProfessoresQueMaisSolicitaramAlmoco(TipoBeneficio tipoBeneficio){
+        String psql = "select u.nome, count(u.matricula) from Pedido p join Usuario u on p.professor=u where p.tipoBeneficio=:tb1 or p.tipoBeneficio=:tb2 "
+                + "group by u.matricula, u.nome order by count(u.matricula) desc";
+        List<Object[]> tabela = em.createQuery(psql, Object[].class)
+                .setParameter("tb1", tipoBeneficio).
+                setParameter("tb2", TipoBeneficio.AMBOS).
+                getResultList();
+        return tabela;
+    }
+    
+    @Override
+    public List<Object[]> rankingDiasComMaisSolicitacao(){
+        String psql = "select cast(extract(dow from p.diaSolicitado) as int), count(p.diaSolicitado) as dw "
+                + "from Pedido p group by p.diaSolicitado";
+        List<Object[]> tabela = em.createQuery(psql, Object[].class).getResultList();
+        
+        return tabela;
+    }
+    
+    @Override
+    public void agendaModificacaoPedido(Pedido p) { //  07/09/2019 14:00      
         LocalDateTime dia = LocalDateTime.of(p.getDiaSolicitado(), LocalTime.now());//.plusMinutes(3));
         dia = dia.minusHours(12);
 //        dia = dia.minusMinutes(1);
@@ -201,11 +231,11 @@ public class PedidoDaoImpl implements PedidoDao {
         timerConfig.setInfo(p);
         timerService.createCalendarTimer(scheduleExpression, timerConfig);
     }
-    
+
     @Timeout
-    private void modificarPedido(Timer timer){
-        Pedido p = (Pedido)timer.getInfo();
-        if(p.getStatusPedido().equals(StatusPedido.PENDENTE.toString())){
+    private void modificarPedido(Timer timer) {
+        Pedido p = (Pedido) timer.getInfo();
+        if (p.getStatusPedido().equals(StatusPedido.PENDENTE.toString())) {
             p.setStatusPedido(StatusPedido.ACEITO);
             p.setDataModificacaoDeStatus(LocalDateTime.now());
             em.merge(p);

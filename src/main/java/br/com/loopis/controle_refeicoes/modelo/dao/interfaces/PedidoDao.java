@@ -1,6 +1,7 @@
 package br.com.loopis.controle_refeicoes.modelo.dao.interfaces;
 
 import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
+import br.com.loopis.controle_refeicoes.modelo.entidades.Estatisticas;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
@@ -80,5 +81,11 @@ public interface PedidoDao extends DaoIF<Pedido> {
     public List<Pedido> ultimosPedidosComStatusModificado(int numeroDaPagina);
 
     public void agendaModificacaoPedido(Pedido p);
+
+    public Long quantidadeDeRefeicoes(StatusPedido statusPedido, TipoBeneficio tipoBeneficio);
+
+    public List<Object[]> rankingProfessoresQueMaisSolicitaramAlmoco(TipoBeneficio tipoBeneficio);
+
+    public List<Object[]> rankingDiasComMaisSolicitacao();
 
 }

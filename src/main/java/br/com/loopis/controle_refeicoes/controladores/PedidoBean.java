@@ -10,9 +10,11 @@ import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.JustificativaCAEST
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.PedidoDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.AlunoBeneficiado;
+import br.com.loopis.controle_refeicoes.modelo.entidades.Estatisticas;
 import br.com.loopis.controle_refeicoes.modelo.entidades.JustificativaCAEST;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
+import br.com.loopis.controle_refeicoes.modelo.entidades.enums.DiaDaSemana;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.Turma;
@@ -54,6 +56,7 @@ public class PedidoBean implements Serializable {
     private LocalDate dia;
     private StatusPedido statusPedido;
     private JustificativaCAEST justificativaCAEST;
+    private Estatisticas estatisticas;
 
     @Inject
     private JustificativaCAESTDao justificativaCAESTService;
@@ -75,6 +78,7 @@ public class PedidoBean implements Serializable {
         statusPedido = null;
         ehUltimaPagina = false;
         pedidos = new ArrayList<>();
+        estatisticas = new Estatisticas();
     }
 
     public String addAluno() {
@@ -271,6 +275,50 @@ public class PedidoBean implements Serializable {
         contagemDePedidosPorStatus();
         return null;
     }
+    
+    
+    
+    public String gerarEstatisticas() {
+        estatisticas.setAlmocosDeferidos(pedidoService.quantidadeDeRefeicoes(StatusPedido.ACEITO, TipoBeneficio.ALMOCO));
+        estatisticas.setAlmocosIndeferidos(pedidoService.quantidadeDeRefeicoes(StatusPedido.RECUSADO, TipoBeneficio.ALMOCO));
+        estatisticas.setJantaresDeferidos(pedidoService.quantidadeDeRefeicoes(StatusPedido.ACEITO, TipoBeneficio.JANTA));
+        estatisticas.setJantaresIndeferidos(pedidoService.quantidadeDeRefeicoes(StatusPedido.RECUSADO, TipoBeneficio.JANTA));
+        
+        List<Object[]> tabela1 = pedidoService.rankingProfessoresQueMaisSolicitaramAlmoco(TipoBeneficio.ALMOCO);
+        if(tabela1.size()>0){
+            estatisticas.setProfessorQueMaisSolicitouAlmocos((String) tabela1.get(0)[0]);
+        }else{
+            estatisticas.setProfessorQueMaisSolicitouAlmocos("");
+        }
+        
+        List<Object[]> tabela2 = pedidoService.rankingProfessoresQueMaisSolicitaramAlmoco(TipoBeneficio.JANTA);
+        if(tabela1.size()>0){
+            estatisticas.setProfessorQueMaisSolicitouJantares((String) tabela1.get(0)[0]);
+        }else{
+            estatisticas.setProfessorQueMaisSolicitouJantares("");
+        }
+        
+        List<Object[]> tabela3 = pedidoService.rankingDiasComMaisSolicitacao();
+        if(tabela3.size()>0){
+            estatisticas.setDiaDaSemanaComMaisSolicitacoes(DiaDaSemana.valueOf((Integer)tabela3.get(0)[0]));
+        }else{
+            estatisticas.setDiaDaSemanaComMaisSolicitacoes(null);
+        }
+        
+        if(tabela3.size()>1){
+            estatisticas.setDiaDaSemanaComMenosSolicitacoes(DiaDaSemana.valueOf(
+                    (Integer)tabela3.get(tabela3.size()-1)[0])
+            );
+        }else{
+            estatisticas.setDiaDaSemanaComMenosSolicitacoes(null);
+        }
+        return null;
+    }
+    
+    
+    
+    
+    
 
     public Pedido getPedido() {
         return pedido;
@@ -374,6 +422,14 @@ public class PedidoBean implements Serializable {
 
     public void setEhUltimaPagina(boolean ehUltimaPagina) {
         this.ehUltimaPagina = ehUltimaPagina;
+    }
+
+    public Estatisticas getEstatisticas() {
+        return estatisticas;
+    }
+
+    public void setEstatisticas(Estatisticas estatisticas) {
+        this.estatisticas = estatisticas;
     }
     
     
