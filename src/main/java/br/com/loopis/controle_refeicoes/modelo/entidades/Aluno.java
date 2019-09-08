@@ -7,9 +7,13 @@ import java.io.Serializable;
  * @author Leanderson Coelho
  * *
  */
-@Embeddable
+//@Embeddable //não funciona corretamente no eclipse link. JPA gera NullPointerException;
+@Entity
 public class Aluno implements Serializable {
     
+    @Id
+    @GeneratedValue
+    private int id;
     private String matricula;
     private String nome;
 
@@ -37,9 +41,19 @@ public class Aluno implements Serializable {
         this.nome = nome;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
+
     @Override
     public String toString() {
-        return "Aluno{" + ", matricula=" + matricula + ", nome=" + nome + '}';
+        return "Aluno{matricula=" + matricula + ", nome=" + nome + '}';
     }
 
 }

@@ -10,131 +10,156 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<!--ALOCANDO TEMPLATE-->
-<ui:composition template="../WEB-INF/Template.xhtml">
+    <!--ALOCANDO TEMPLATE-->
+    <ui:composition template="../WEB-INF/Template.xhtml">
 
-    <!--DEFININDO TITULO-->
-    <ui:define name="titulo">
-        <title>Cadastrar Professores</title>
-    </ui:define>
+        <!--DEFININDO TITULO-->
+        <ui:define name="titulo">
+            <title>Cadastrar Professores</title>
+        </ui:define>
 
 
-    <!--DEFININDO CONTEUDO-->
-    <ui:define name="Conteudo">
-        <div class="main-panel">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg " color-on-scroll="500">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#pablo"> Gestor - Cadastrar Professores </a>
-                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                            aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                    </button>
-                </div>
-            </nav>
-            <!-- End Navbar -->
-            <div class="content" style="margin-left: 10%">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Cadastrar Professores</h4>
-                                </div>
-                                <div class="card-body">
-                                    <h:form enctype="multipart/form-data">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="pr-3 col-md-10 custom-file">
-                                                    <h:messages id="messagesError"
-                                                                infoStyle="list-style: none;color: green;"
-                                                                errorStyle="list-style: none;color: red;"/>
-                                                    <div class="input-group mb-3">
-                                                        <h:inputFile styleClass="form-control"
-                                                                     value="#{professorBean.part}"
-                                                                     required="true"
-                                                                     requiredMessage="Faça o upload do arquivo .csv"></h:inputFile>
-                                                        <div class="input-group-append">
-                                                            <h:commandButton styleClass="btn btn-outline-secondary" value="Carregar .CSV" type="button" />
+        <!--DEFININDO CONTEUDO-->
+        <ui:define name="Conteudo">
+            <div class="main-panel">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#pablo"> Gestor - Cadastrar Professores </a>
+                        <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                                aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                        </button>
+                    </div>
+                </nav>
+                <!-- End Navbar -->
+                <div class="content" style="margin-left: 10%">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Cadastrar Professores</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <h:form enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="pr-3 col-md-10 custom-file">
+                                                        <h:messages id="messagesError"
+                                                                    infoStyle="list-style: none;color: green;"
+                                                                    errorStyle="list-style: none;color: red;"/>
+                                                        <div class="input-group mb-3">
+                                                            <h:inputFile styleClass="form-control"
+                                                                         value="#{professorBean.part}"></h:inputFile>
+<!--                                                            <div class="input-group-append">
+                                                                <h:commandLink styleClass="btn btn-success btn-fill pull-right" value="Carregar .CSV" type="button"
+                                                                                 action="{professorBean.download()}"/>
+                                                            </div>-->
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-10 pr-3">
-                                                <h:commandButton action="#{professorBean.salvar()}"
-                                                                 class="col-lg-10 btn btn-success btn-fill pull-right"
-                                                                 value="Cadastrar">
+                                            <div class="row">
+                                                <div class="col-md-10 pr-3">
+                                                    <h:commandButton action="#{professorBean.salvar()}"
+                                                                     class="col-lg-10 btn btn-success btn-fill pull-right"
+                                                                     value="Cadastrar">
 
-                                                </h:commandButton>
+                                                    </h:commandButton>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                    </h:form>
+                                        </h:form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="card strpied-tabled-with-hover">
-                                <div class="card-header ">
-                                    <h4 class="card-title">Professores</h4>
-                                    <p class="card-category">Lista de Professores Cadastrados</p>
-                                    <h:commandButton action="#{professorBean.salvar()}"
-                                                     class="col-md-2 btn btn-sm btn-success btn-fill pull-right"
-                                                     value="Download">
+                            <div class="col-md-10">
+                                <div class="card strpied-tabled-with-hover">
+                                    <div class="card-header ">
+                                        <h4 class="card-title">Professores</h4>
+                                        <p class="card-category">Lista de Professores Cadastrados</p>
+                                        <h:form>
+                                            <h:commandButton action="#{professorBean.download()}"
+                                                             class="col-md-2 btn btn-sm btn-success btn-fill pull-right"
+                                                             value="Download">
+                                            </h:commandButton>
+                                        </h:form>
+                                    </div>
+                                    <div class="card-body table-full-width table-responsive">
+                                        <h:form>
 
-                                    </h:commandButton>
-                                </div>
-                                <div class="card-body table-full-width table-responsive">
-                                    <h:form>
+                                            <h:dataTable styleClass="table table-hover table-striped"
+                                                         value="#{professorBean.professores}" var="professor">
+                                                <h:column>
+                                                    <f:facet name="header">NOME</f:facet>
+                                                    <h:outputText value="#{professor.nome}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">MATRICULA</f:facet>
+                                                    <h:outputText value="#{professor.matricula}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">E-MAIL</f:facet>
+                                                    <h:outputText value="#{professor.email}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Apagar</f:facet>
+                                                    <h:commandLink class="col-lg-12 btn btn-danger pull-right"
+                                                                   value="Apagar">
+                                                        <f:ajax render="modal#{professor.matricula}"/>
+                                                        <f:passThroughAttribute name="data-toggle" value="modal"/>
+                                                        <f:passThroughAttribute name="data-target" value="#modal#{professor.matricula}"/>
+                                                    </h:commandLink>
+                                                    <!-- Exclusão Modal -->
+                                                    <div class="modal fade modal-primary" id="modal#{professor.matricula}" tabindex="-1" role="dialog"
+                                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header justify-content-center">
 
-                                        <h:dataTable styleClass="table table-hover table-striped"
-                                                     value="#{professorBean.professores}" var="professor">
-                                            <h:column>
-                                                <f:facet name="header">NOME</f:facet>
-                                                <h:outputText value="#{professor.nome}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">MATRICULA</f:facet>
-                                                <h:outputText value="#{professor.matricula}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">E-MAIL</f:facet>
-                                                <h:outputText value="#{professor.email}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">EXCLUIR</f:facet>
-                                                <h:commandButton styleClass="btn btn-danger btn-fill"
-                                                                 action="#{professorBean.remover(professor)}"
-                                                                 value="Excluir"></h:commandButton>
+                                                                    <h3>Remover Aluno </h3>
 
-                                            </h:column>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-link btn-simple"
+                                                                            data-dismiss="modal">Fechar
+                                                                    </button>
+                                                                    <h:commandButton class="col-lg-8 btn btn-danger pull-right"
+                                                                                     value="Apagar" action="#{professorBean.remover(professor)}">
 
-                                        </h:dataTable>
-                                    </h:form>
+                                                                    </h:commandButton>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Fim da modal -->
+                                                </h:column>
+
+                                            </h:dataTable>
+                                        </h:form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <nav>
+                            <p class="copyright text-center">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>
+                                <a href="http://www.creative-tim.com">Loopis</a>, Melhor equipe de DAC
+                            </p>
+                        </nav>
+                    </div>
+                </footer>
             </div>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav>
-                        <p class="copyright text-center">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>
-                            <a href="http://www.creative-tim.com">Loopis</a>, Melhor equipe de DAC
-                        </p>
-                    </nav>
-                </div>
-            </footer>
-        </div>
-    </ui:define>
-</ui:composition>
+        </ui:define>
+    </ui:composition>
 </html>

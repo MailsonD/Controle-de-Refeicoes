@@ -1,6 +1,7 @@
 package br.com.loopis.controle_refeicoes.modelo.entidades;
 
 import br.com.loopis.controle_refeicoes.modelo.conversor.DataConversor;
+import br.com.loopis.controle_refeicoes.modelo.conversor.DataTimeConversor;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.Turma;
@@ -8,6 +9,7 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.Turma;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -35,10 +37,19 @@ public class Pedido implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private TipoBeneficio tipoBeneficio;
-//    @ManyToMany(/*cascade = CascadeType.PERSIST*/)
-    @ElementCollection
+//    @ElementCollection
+    @ManyToMany(cascade = CascadeType.ALL)
     @CollectionTable(name = "aluno_pedido")
     private List<Aluno> alunos;
+    
+    @OneToOne(mappedBy = "pedido")
+    private JustificativaCAEST justificativaCAEST;
+    
+    @Convert(converter = DataTimeConversor.class)
+    private LocalDateTime dataModificacaoDeStatus;
+    
+    @Transient
+    private String justificativaCaestString;// = "Aqui foi!!!!!";
 
     public Pedido(){};
 
@@ -136,6 +147,36 @@ public class Pedido implements Serializable {
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
     }
+    
+    public int getQuantAlunos(){
+        return alunos.size();
+    }
+
+    public JustificativaCAEST getJustificativaCAEST() {
+        return justificativaCAEST;
+    }
+
+    public void setJustificativaCAEST(JustificativaCAEST justificativaCAEST) {
+        this.justificativaCAEST = justificativaCAEST;
+    }
+
+    public String getJustificativaCaestString() {
+        return justificativaCaestString;
+    }
+
+    public void setJustificativaCaestString(String justificativaCaestString) {
+        this.justificativaCaestString = justificativaCaestString;
+    }
+
+    public LocalDateTime getDataModificacaoDeStatus() {
+        return dataModificacaoDeStatus;
+    }
+
+    public void setDataModificacaoDeStatus(LocalDateTime dataModificacaoDeStatus) {
+        this.dataModificacaoDeStatus = dataModificacaoDeStatus;
+    }
+    
+    
 
     @Override
     public boolean equals(Object o) {
@@ -156,4 +197,11 @@ public class Pedido implements Serializable {
     public int hashCode() {
         return Objects.hash(id, professor, justificativa, diaSolicitado, turma, statusPedido, tipoBeneficio, alunos);
     }
+
+    @Override
+    public String toString() {
+        return "Pedido{" + "id=" + id + ", professor=" + professor + ", justificativa=" + justificativa + ", diaSolicitado=" + diaSolicitado + ", turma=" + turma + ", statusPedido=" + statusPedido + ", tipoBeneficio=" + tipoBeneficio + ", alunos=" + alunos + '}';
+    }
+    
+    
 }
