@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -29,6 +30,17 @@ public class UsuarioResource {
 
     private final Logger log = Logger.getLogger(UsuarioResource.class.getName());
 
+    /**
+     * Método responsável pela autenticação no sistema. Toda a lógica de autenticação é feita por
+     * matrícula e senha, independente do tipo de usuário. Para essa rota é necessário o envio de
+     * um Json com esses dois parâmetros
+     *
+     * @implNote Futuramente implementação com JWT
+     * @apiNote LOGIN
+     * @param object -> JSON com campo pra matricula e para senha
+     * @return -> O objeto do usuário sem a senha. Caso a autenticação falhe é retornado
+     * um código de UNAUTHORIZED
+     */
     @POST
     @Path("login")
     public Response login(JsonObject object){
@@ -54,6 +66,11 @@ public class UsuarioResource {
         }
     }
 
+    /**
+     * Trata de resolver o primeiro acesso do usuário gerando uma senha para ele caso ele não tenha nenhuma .
+     * @param object
+     * @return
+     */
     @POST
     @Path("primeiro-acesso")
     public Response primeiroAcesso(JsonObject object){
@@ -75,6 +92,15 @@ public class UsuarioResource {
         } catch (Exception e) {
             return erroInterno();
         }
+    }
+
+
+    @PUT
+    @Path("alterar-senha")
+    public Response alterarSenha(JsonObject object){
+
+
+        return null;
     }
 
     private Response erroInterno(){

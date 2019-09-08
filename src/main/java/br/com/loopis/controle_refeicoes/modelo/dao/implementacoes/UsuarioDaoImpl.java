@@ -78,6 +78,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
     public Usuario autenticar(Usuario usuario) throws SenhaInvalidaException, UsuarioNaoEncontradoException {
         Usuario trueUser = this.buscarPorMatricula(usuario.getMatricula());
         if (usuario.getSenha().equals(trueUser.getSenha()) && trueUser.getAtivo()) {
+            trueUser.setSenha(null);
             return trueUser;
         } else throw new SenhaInvalidaException();
     }
