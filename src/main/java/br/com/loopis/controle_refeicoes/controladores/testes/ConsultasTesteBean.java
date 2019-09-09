@@ -30,18 +30,18 @@ public class ConsultasTesteBean {
     @PostConstruct
     private void init(){
 
-        Usuario professor = new Usuario("2018123","123","dennis@gmail.com", NivelAcesso.PROFESSOR);
-        usuarioDao.salvar(professor);
-
-        Pedido pedido = new Pedido(professor,"pedidoTestado", LocalDate.now(), Turma.ADS, StatusPedido.ACEITO, TipoBeneficio.ALMOCO);
-        List<Aluno> alunos = new ArrayList<>();
-        alunos.add(new Aluno("567","testerson"));
-        alunos.add(new Aluno("568","testirson"));
-        alunos.add(new Aluno("569","testorson"));
-        alunos.add(new Aluno("570","testurson"));
-        pedido.setAlunos(alunos);
-
-        pedidoDao.salvar(pedido);
+//        Usuario professor = new Usuario("2018123","123","dennis@gmail.com", NivelAcesso.PROFESSOR);
+//        usuarioDao.salvar(professor);
+//
+//        Pedido pedido = new Pedido(professor,"pedidoTestado", LocalDate.now(), Turma.ADS, StatusPedido.ACEITO, TipoBeneficio.ALMOCO);
+//        List<Aluno> alunos = new ArrayList<>();
+//        alunos.add(new Aluno("567","testerson"));
+//        alunos.add(new Aluno("568","testirson"));
+//        alunos.add(new Aluno("569","testorson"));
+//        alunos.add(new Aluno("570","testurson"));
+//        pedido.setAlunos(alunos);
+//
+//        pedidoDao.salvar(pedido);
 
 //        List<Aluno> resultado = pedidoDao.buscarPedidosAceitos(LocalDate.now().plusDays(1),TipoBeneficio.ALMOCO);
 

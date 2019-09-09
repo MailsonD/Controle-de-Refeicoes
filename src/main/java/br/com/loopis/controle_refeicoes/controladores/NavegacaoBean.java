@@ -13,7 +13,7 @@ import javax.inject.Named;
 @RequestScoped
 public class NavegacaoBean {
 
-    public String mudarPaginaAdm(String alvo){
+    public String mudarPagina(String alvo){
         return alvo;
     }
 

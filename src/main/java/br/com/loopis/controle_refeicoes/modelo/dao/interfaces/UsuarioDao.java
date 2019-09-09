@@ -12,5 +12,8 @@ public interface UsuarioDao extends DaoIF<Usuario> {
     public Usuario buscarPorMatricula(String matricula) throws UsuarioNaoEncontradoException;
     public Usuario autenticar(Usuario usuario) throws SenhaInvalidaException, UsuarioNaoEncontradoException;
     public List<Usuario> usuariosComNivelDeAcesso(NivelAcesso nivelAcesso);
-    public void removerProfessores();
+
+    public void salvarProfessores(List<Usuario> professores);
+
+    public void removerProfessor(Usuario u);
 }

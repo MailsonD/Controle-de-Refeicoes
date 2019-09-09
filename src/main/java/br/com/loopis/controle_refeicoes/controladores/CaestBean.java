@@ -17,9 +17,11 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.AlunoBeneficiado;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteException;
+import java.io.File;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -28,8 +30,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.view.ViewScoped;
 import javax.servlet.http.Part;
+import org.omnifaces.util.Faces;
 
 
 @ViewScoped
@@ -53,7 +58,10 @@ public class CaestBean implements Serializable{
     }
 
     public void salvarAlunosCsv(){
-        List<AlunoBeneficiado> alunosAux = new ArrayList<>();
+        List<AlunoBeneficiado> alunosAux;
+        if(part==null){
+            return;
+        }
         try {
             alunosAux = ManipuladorCSV.toListAlunos(part);
             if(alunosAux.size()>0){
@@ -73,6 +81,19 @@ public class CaestBean implements Serializable{
         } catch (ArrayIndexOutOfBoundsException ex){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Coluna(s) a mais na estrutura do arquivo!", null));
         }
+    }
+    
+    public String download(){
+        try {
+            File file = ManipuladorCSV.toAlunoCsv(alunoDao.listar());
+            System.out.println("\n"+file.getAbsolutePath());
+            Faces.sendFile(file, true);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(ProfessorBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ProfessorBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public void cadastrar(){

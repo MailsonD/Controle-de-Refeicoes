@@ -12,10 +12,11 @@ import javax.ejb.Stateless;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 import javax.validation.ConstraintViolationException;
 
@@ -27,7 +28,8 @@ import javax.persistence.PersistenceException;
 /**
  * @author Mailson Dennis
  * @author Leanderson Coelho
- **/
+ *
+ */
 @Stateless
 public class UsuarioDaoImpl implements UsuarioDao {
 
@@ -35,14 +37,15 @@ public class UsuarioDaoImpl implements UsuarioDao {
     private EntityManager em;
 
     @Override
-    public void salvar(Usuario object){
+    public void salvar(Usuario object) {
         try {
             object.setAtivo(true);
             em.persist(object);
-        } catch (EntityExistsException e){
+        } catch (EntityExistsException e) {
             throw new MatriculaExistenteException();
-        }  
+        }
     }
+
     @Override
     public void atualizar(Usuario object) {
         em.merge(object);
@@ -60,12 +63,12 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public List<Usuario> listar() {
-        return em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
+        return em.createQuery("SELECT u FROM Usuario u where u.ativo=true", Usuario.class).getResultList();
     }
 
     @Override
     public Usuario buscarPorMatricula(String matricula) throws UsuarioNaoEncontradoException {
-        TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.matricula=:mat", Usuario.class);
+        TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.matricula=:mat and u.ativo=true", Usuario.class);
         query.setParameter("mat", matricula);
         try {
             return query.getSingleResult();
@@ -80,23 +83,55 @@ public class UsuarioDaoImpl implements UsuarioDao {
         if (usuario.getSenha().equals(trueUser.getSenha()) && trueUser.getAtivo()) {
             trueUser.setSenha(null);
             return trueUser;
-        } else throw new SenhaInvalidaException();
+        } else {
+            throw new SenhaInvalidaException();
+        }
     }
 
     @Override
     public List<Usuario> usuariosComNivelDeAcesso(NivelAcesso nivelAcesso) {
-        TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.nivelAcesso=:na", Usuario.class);
+        TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.nivelAcesso=:na and u.ativo=true", Usuario.class);
         query.setParameter("na", nivelAcesso);
         return query.getResultList();
     }
 
     @Override
-    public void removerProfessores() {
-        String jpql = "DELETE FROM Usuario u WHERE u.nivelAcesso=:na";
-        Query query = em.createQuery(jpql);
-        query.setParameter("na", NivelAcesso.PROFESSOR);
-        query.executeUpdate();
+    public void salvarProfessores(List<Usuario> professores) {
+        List<Usuario> professoresPersistidos = em.createQuery("select p from Usuario p where p.nivelAcesso=:na").setParameter("na", NivelAcesso.PROFESSOR).getResultList();
+        List<Usuario> auxProfessoresPersistidos = new ArrayList<>(professoresPersistidos);
+        boolean excluiu;
+        
+        //todos os professores que serão atualizados
+        for(Usuario professor:professores){
+            excluiu = professoresPersistidos.removeIf(p->{
+                return p.getMatricula().equals(professor.getMatricula());
+            });
+            if(excluiu){
+                em.merge(professor);
+            }
+        }
+        
+        //todos os professores que terão as suas contas desativadas
+        professoresPersistidos.forEach(p -> {
+            p.setAtivo(false);
+            em.merge(p);
+        });
+        
+        //todos os novos professores que serão persistidos
+        for(Usuario professor:auxProfessoresPersistidos){
+            professores.removeIf(p->{
+                return p.getMatricula().equals(professor.getMatricula());
+            });
+        }
+        professores.forEach(p -> {
+            em.persist(p);
+        });        
+    }
+
+    @Override
+    public void removerProfessor(Usuario u) {
+        u.setAtivo(false);
+        em.merge(u);
     }
 
 }
-
