@@ -37,7 +37,7 @@ public class UsuarioResource {
      *
      * @implNote Futuramente implementação com JWT
      * @apiNote LOGIN
-     * @param object -> JSON com campo pra matricula e para senha
+     * @param object -> JSON com campo pra matricula e para senha.
      * @return -> O objeto do usuário sem a senha. Caso a autenticação falhe é retornado
      * um código de UNAUTHORIZED
      */
@@ -67,9 +67,14 @@ public class UsuarioResource {
     }
 
     /**
-     * Trata de resolver o primeiro acesso do usuário gerando uma senha para ele caso ele não tenha nenhuma .
-     * @param object
-     * @return
+     * Método responsável por resolver o primeiro acesso do usuário gerando uma senha para ele
+     * caso ele não tenha nenhuma.
+     *
+     * @apiNote PRIMEIRO-ACESSO
+     * @param object -> JSON com a matrícula e senha do usuário.
+     * @return -> um código de sucesso de CREATED caso o primeiro acesso ocorra normalmente.
+     * Caso o usuário já possua uma senha retonra um código de NOT_ACCEPTABLE.
+     * Caso a matricula do usuário não exista ou o email for inválido é retornado NOT_FOUND
      */
     @POST
     @Path("primeiro-acesso")
@@ -95,12 +100,36 @@ public class UsuarioResource {
     }
 
 
+    /**
+     * Método responsável por realizar a troca de senha do usuário.
+     *
+     * @param object -> JSON contendo a senha antiga do usuário, a nova senha e a sua mátricula.
+     * @return -> Código de sucesso com conteúdo vazio caso a senha seja alterada com sucesso.
+     * Caso a senha enviada pelo usuário seja inválida, é lançado um código de erro UNAUTHORIZED.
+     * Caso a matrícula seja inválida, é lançado um CÓDIGO de NOT_FOUND
+     */
     @PUT
     @Path("alterar-senha")
     public Response alterarSenha(JsonObject object){
-
-
-        return null;
+        String matricula = object.getString("matricula");
+        String senhaAntiga = object.getString("senhaAntiga");
+        String senhaNova = object.getString("senhaNova");
+        try{
+            serviceUsuario.alterarSenha(matricula, senhaAntiga, senhaNova);
+            return Response
+                    .noContent()
+                    .build();
+        } catch (SenhaInvalidaException e) {
+            return Response
+                    .status(Response.Status.UNAUTHORIZED)
+                    .build();
+        } catch (UsuarioNaoEncontradoException e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .build();
+        } catch (Exception e){
+            return erroInterno();
+        }
     }
 
     private Response erroInterno(){

@@ -70,6 +70,17 @@ public class ServiceUsuario {
         return usuarioDao.usuariosComNivelDeAcesso(NivelAcesso.PROFESSOR);
     }
 
+    public void alterarSenha(String matricula, String senhaAntiga, String senhaNova) throws UsuarioNaoEncontradoException, SenhaInvalidaException {
+        Usuario user = usuarioDao.buscarPorMatricula(matricula);
+        if(user.getSenha().equals(senhaAntiga)){
+            user.setSenha(senhaNova);
+            usuarioDao.atualizar(user);
+        }else{
+            throw new SenhaInvalidaException();
+        }
+
+    }
+
 
     public void primeiroAcesso(String matricula, String email) throws UsuarioNaoEncontradoException, SenhaExistenteException, EmailInvalidoException {
         Usuario user = usuarioDao.buscarPorMatricula(matricula);
