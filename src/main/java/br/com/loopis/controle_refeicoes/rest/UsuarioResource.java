@@ -6,15 +6,11 @@ import br.com.loopis.controle_refeicoes.modelo.excessoes.SenhaExistenteException
 import br.com.loopis.controle_refeicoes.modelo.excessoes.SenhaInvalidaException;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
 import br.com.loopis.controle_refeicoes.service.ServiceUsuario;
-import jdk.net.SocketFlow;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.JsonObject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.logging.Level;
@@ -122,6 +118,33 @@ public class UsuarioResource {
         } catch (SenhaInvalidaException e) {
             return Response
                     .status(Response.Status.UNAUTHORIZED)
+                    .build();
+        } catch (UsuarioNaoEncontradoException e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .build();
+        } catch (Exception e){
+            return erroInterno();
+        }
+    }
+
+    /**
+     * Método responsável por buscar todas as informações de um usuário pela sua matrícula.
+     *
+     * @implNote Futuramente permitir que o usuário logado acesse apenas as suas informações
+     * @param matricula -> Chave primária do usuário, utilizada para buscar o objeto no banco
+     * @return -> Código de sucesso com um JSON do usuário sem a senha caso a matrícula seja válida.
+     * Retorna um código de NOT_FOUND caso a a matrícula seja inválida.
+     */
+    @GET
+    @Path("{matricula}")
+    public Response buscarPorMatricula(@PathParam("matricula") String matricula){
+        try {
+            Usuario user = serviceUsuario.buscarPorMatricula(matricula);
+            user.setSenha(null);
+            return Response
+                    .ok()
+                    .entity(user)
                     .build();
         } catch (UsuarioNaoEncontradoException e) {
             return Response
