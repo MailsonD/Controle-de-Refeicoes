@@ -40,7 +40,7 @@
         <navigation-case>
             <from-action>#{primerioAcessoBean.abrirPagina()}</from-action>
             <from-outcome>meuPrimeiroAcesso</from-outcome>
-            <to-view-id>publico/primeiroLogin.xhtml?faces-redirect=true</to-view-id>
+            <to-view-id>primeiroLogin.xhtml?faces-redirect=true</to-view-id>
             <redirect/>
         </navigation-case>
 		

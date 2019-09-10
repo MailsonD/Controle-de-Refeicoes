@@ -42,7 +42,7 @@
                                                 <div class="form-group">
                                                     <label>Nome</label>
                                                     <h:inputText class="form-control"
-                                                                 value="#{gestorBean.usuario.nome}">
+                                                                 value="#{gestorBean.usuario.nome}" required="true" requiredMessage="Informe o nome">
                                                         <f:passThroughAttribute name="placeholder"
                                                                                 value="Nome"></f:passThroughAttribute>
                                                     </h:inputText>
@@ -54,7 +54,7 @@
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Email</label>
                                                     <h:inputText class="form-control"
-                                                                 value="#{gestorBean.usuario.email}">
+                                                                 value="#{gestorBean.usuario.email}" required="true" requiredMessage="Informe o email">
                                                         <f:passThroughAttribute name="placeholder"
                                                                                 value="E-mail"></f:passThroughAttribute>
                                                     </h:inputText>
@@ -66,7 +66,7 @@
                                                 <div class="form-group">
                                                     <label>Matricula</label>
                                                     <h:inputText class="form-control"
-                                                                 value="#{gestorBean.usuario.matricula}">
+                                                                 value="#{gestorBean.usuario.matricula}" required="true" requiredMessage="Informe a matricula">
                                                         <f:passThroughAttribute name="placeholder"
                                                                                 value="Matricula"></f:passThroughAttribute>
                                                     </h:inputText>
