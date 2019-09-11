@@ -59,7 +59,9 @@ public class ServiceUsuario {
     }
 
     public Usuario buscarPorMatricula(String matricula) throws UsuarioNaoEncontradoException {
-        return usuarioDao.buscarPorMatricula(matricula);
+        Usuario user = usuarioDao.buscarPorMatricula(matricula);
+        user.setSenha(null);
+        return user;
     }
 
     public Usuario autenticar(Usuario usuario) throws SenhaInvalidaException, UsuarioNaoEncontradoException {
