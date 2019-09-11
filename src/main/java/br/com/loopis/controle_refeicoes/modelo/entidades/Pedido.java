@@ -2,11 +2,14 @@ package br.com.loopis.controle_refeicoes.modelo.entidades;
 
 import br.com.loopis.controle_refeicoes.modelo.conversor.DataConversor;
 import br.com.loopis.controle_refeicoes.modelo.conversor.DataTimeConversor;
+import br.com.loopis.controle_refeicoes.modelo.conversor.DataXmlBind;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.Turma;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,10 +26,13 @@ public class Pedido implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
+
     @ManyToOne
     private Usuario professor;
+
     @Lob
     private String justificativa;
+
     @Convert(converter = DataConversor.class)
     private LocalDate diaSolicitado;
     @Enumerated(EnumType.STRING)
@@ -37,19 +43,18 @@ public class Pedido implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private TipoBeneficio tipoBeneficio;
-//    @ElementCollection
+
     @ManyToMany(cascade = CascadeType.ALL)
     @CollectionTable(name = "aluno_pedido")
     private List<Aluno> alunos;
-    
+
     @OneToOne(mappedBy = "pedido")
     private JustificativaCAEST justificativaCAEST;
-    
-    @Convert(converter = DataTimeConversor.class)
+
     private LocalDateTime dataModificacaoDeStatus;
-    
+
     @Transient
-    private String justificativaCaestString;// = "Aqui foi!!!!!";
+    private String justificativaCaestString;
 
     public Pedido(){};
 
@@ -175,8 +180,8 @@ public class Pedido implements Serializable {
     public void setDataModificacaoDeStatus(LocalDateTime dataModificacaoDeStatus) {
         this.dataModificacaoDeStatus = dataModificacaoDeStatus;
     }
-    
-    
+
+
 
     @Override
     public boolean equals(Object o) {

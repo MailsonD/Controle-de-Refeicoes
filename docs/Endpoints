@@ -22,8 +22,11 @@ Pedido:
     Criar Pedido:
         POST
         /pedido -> Recebe Pedido -> Retorna sucesso 
-    Recuperar pedidos por professor:
-        GET         
+    Deletar um pedido
+        DELETE
+        /pedido/id -> Recebe id -> Retorna sucesso
+    Recuperar pedidos por professor:   
+         GET         
         /pedido/professor/id?page=x -> Recebe id Professor + pagina -> Retorna lista de pedidos do professor
     Filtrar pedidos por professor: 
         GET

@@ -3,6 +3,7 @@ package br.com.loopis.controle_refeicoes.modelo.entidades;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,6 +12,7 @@ import java.util.Objects;
  * **/
 
 @Entity
+@XmlRootElement
 public class Usuario implements Serializable {
 
 //    @GeneratedValue

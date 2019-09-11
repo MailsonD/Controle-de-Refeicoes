@@ -1,5 +1,8 @@
 package br.com.loopis.controle_refeicoes.modelo.entidades.enums;
 
+import javax.xml.bind.annotation.XmlEnum;
+
+@XmlEnum
 public enum Turma {
     DESENHO_CI("DESENHO DE CONSTRUÇÃO CIVIL - PROEJA"),
     INTED1("INTEGRADO EM EDIFICAÇÕES 1"),

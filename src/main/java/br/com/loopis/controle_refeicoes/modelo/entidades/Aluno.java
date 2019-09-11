@@ -1,6 +1,7 @@
 package br.com.loopis.controle_refeicoes.modelo.entidades;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
@@ -10,7 +11,6 @@ import java.io.Serializable;
  */
 //@Embeddable //não funciona corretamente no eclipse link. JPA gera NullPointerException;
 @Entity
-@XmlRootElement
 public class Aluno implements Serializable {
     
     @Id
