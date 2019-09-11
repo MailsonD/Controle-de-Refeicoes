@@ -5,8 +5,6 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
-import br.com.loopis.controle_refeicoes.modelo.entidades.Estatisticas;
-import br.com.loopis.controle_refeicoes.modelo.entidades.enums.DiaDaSemana;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -148,12 +146,7 @@ public class PedidoDaoImpl implements PedidoDao {
                 .setMaxResults(this.QUANTIDADE_POR_PAGINA)
                 .getResultList();
     }
-
-//    @Override
-//    public List<Long> listaDeQuantidadeDePedidosPorStatus(LocalDate dia){
-//        String jpql = "select count(p.statusPedido) from Pedido p where p.diaSolicitado=:dia group by p.statusPedido order by p.statusPedido";
-//        return em.createQuery(jpql).setParameter("dia", dia).getResultList();
-//    }
+    
     @Override
     public Long quantidadeDePedidosPorStatus(LocalDate dia, StatusPedido statusPedido) {
         String jpql = "select count(p.statusPedido) from Pedido p where p.diaSolicitado=:dia and p.statusPedido=:statusPedido";
@@ -175,15 +168,15 @@ public class PedidoDaoImpl implements PedidoDao {
     }
 
     @Override
-    public List<Aluno> alunosQuePossuemBeneficio(LocalDate dia) {
-        String jpql = "select a from Pedido p join p.alunos a where p.diaSolicitado=:dia and p.statusPedido=:statusPedido";
-        return em.createQuery(jpql, Aluno.class).setParameter("dia", dia).setParameter("statusPedido", StatusPedido.ACEITO).getResultList();
+    public List<Aluno> alunosQuePossuemBeneficio(LocalDate dia, TipoBeneficio tipoBeneficio) {
+        String jpql = "select a from Pedido p join p.alunos a where p.diaSolicitado=:dia and p.statusPedido=:statusPedido and p.tipoBeneficio=:tb";
+        return em.createQuery(jpql, Aluno.class).setParameter("dia", dia).setParameter("statusPedido", StatusPedido.ACEITO).setParameter("tb", tipoBeneficio).getResultList();
     }
     
     @Override
     public Long quantidadeDeRefeicoes(StatusPedido statusPedido, TipoBeneficio tipoBeneficio){
         Long quant;
-        String psql1 = "select count(p) from Pedido p where p.statusPedido=:sp and (p.tipoBeneficio=:tb1 or p.tipoBeneficio=:tb2)";
+        String psql1 = "select count(a) from Pedido p join p.alunos a where p.statusPedido=:sp and (p.tipoBeneficio=:tb1 or p.tipoBeneficio=:tb2)";
         try{
             quant = em.createQuery(psql1, Long.class)
                     .setParameter("sp", statusPedido)

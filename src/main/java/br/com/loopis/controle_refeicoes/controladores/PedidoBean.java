@@ -39,9 +39,9 @@ import javax.servlet.http.HttpSession;
 @Named
 @ViewScoped
 public class PedidoBean implements Serializable {
-    
+
     public final static int QUANTIDADE_POR_PAGINA = 10;
-    
+
     private Pedido pedido;
     private Aluno aluno;
     private List<Aluno> alunos;
@@ -101,16 +101,15 @@ public class PedidoBean implements Serializable {
         return null;
     }
 
-
     public String cadastrarPedido() {
         int tamList = alunos.size();
-        if (pedido.getDiaSolicitado().isBefore(LocalDate.now()) || 
-                pedido.getDiaSolicitado().equals(LocalDate.now()) || 
-                pedido.getDiaSolicitado().getDayOfWeek().equals(DayOfWeek.SUNDAY) ||
-                pedido.getDiaSolicitado().getDayOfWeek().equals(DayOfWeek.SATURDAY)) {
+        if (pedido.getDiaSolicitado().isBefore(LocalDate.now())
+                || pedido.getDiaSolicitado().equals(LocalDate.now())
+                || pedido.getDiaSolicitado().getDayOfWeek().equals(DayOfWeek.SUNDAY)
+                || pedido.getDiaSolicitado().getDayOfWeek().equals(DayOfWeek.SATURDAY)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "•Você não pode fazer uma solicitação de refeição nesta data", null));
             return null;
-        } 
+        }
         alunos.removeIf(a -> {
             AlunoBeneficiado alunoBeneficiado = alunoService.buscarPorMatricula(a.getMatricula());
             if (alunoBeneficiado != null) {
@@ -153,7 +152,7 @@ public class PedidoBean implements Serializable {
         pedido = new Pedido();
         return null;
     }
-    
+
     public TipoBeneficio[] getTiposBeneficio() {
         return TipoBeneficio.values();
     }
@@ -173,95 +172,100 @@ public class PedidoBean implements Serializable {
         return null;
 
     }
-    
-    public String mudarPagina(int p){
-        numPagina+=p;
+
+    public String mudarPagina(int p) {
+        numPagina += p;
         return null;
     }
-    
+
     public List<Pedido> listar(String matriculaUsuario) {
         List<Pedido> ps;
-        if(dia == null && statusPedido != null){
+        if (dia == null && statusPedido != null) {
             ps = pedidoService.buscarPorStatusPedido(matriculaUsuario, statusPedido, numPagina);
-        }
-        else if(dia != null && statusPedido == null){
+        } else if (dia != null && statusPedido == null) {
             ps = pedidoService.buscarPorData(matriculaUsuario, dia, numPagina);
-        }
-        else if(dia == null && statusPedido == null){
+        } else if (dia == null && statusPedido == null) {
             ps = pedidoService.buscarPorProfessor(matriculaUsuario, numPagina);
-        }
-        else{
+        } else {
             ps = pedidoService.buscarPedido(matriculaUsuario, dia, statusPedido, numPagina);
         }
         verificaSeEhUltimaPagina(ps.size());
         return ps;
 //        return pedidoService.buscarPorProfessor(matriculaUsuario, numPagina);
     }
-    
-    public List<Pedido> listarPendentes() {
+
+    public String listarPendentes() {
         List<Pedido> ps;
         ps = pedidoService.buscarPorStatusPedido(StatusPedido.PENDENTE, numPagina);
         verificaSeEhUltimaPagina(ps.size());
-        return ps;
+        pedidos = ps;
+        return null;
     }
-    
+
     public List<Pedido> listarAceitos() {
         List<Pedido> ps;
         ps = pedidoService.buscarPorStatusPedido(StatusPedido.ACEITO, numPagina);
         verificaSeEhUltimaPagina(ps.size());
         return ps;
     }
-    
+
     public List<Pedido> listarRecusados() {
         List<Pedido> ps;
         ps = pedidoService.buscarPorStatusPedido(StatusPedido.RECUSADO, numPagina);
         verificaSeEhUltimaPagina(ps.size());
         return ps;
     }
-    
-    public List<Pedido> ultimosPedidosComStatusModificado(){
+
+    public List<Pedido> ultimosPedidosComStatusModificado() {
         List<Pedido> ps;
         ps = pedidoService.ultimosPedidosComStatusModificado(numPagina);
         verificaSeEhUltimaPagina(ps.size());
         return ps;
     }
-    
-    public void verificaSeEhUltimaPagina(int tamList){
-        if(tamList<QUANTIDADE_POR_PAGINA){
+
+    public void verificaSeEhUltimaPagina(int tamList) {
+        if (tamList < QUANTIDADE_POR_PAGINA) {
             ehUltimaPagina = true;
-        }else{
+        } else {
             ehUltimaPagina = false;
         }
     }
-    
+
     public Turma[] listarTurmas() {
         return Turma.values();
     }
-    
-    public StatusPedido[] listarStatusPedidos(){
+
+    public StatusPedido[] listarStatusPedidos() {
         return StatusPedido.values();
     }
-    
-    public String recarregar(){
+
+    public String recarregar() {
         return null;
     }
-    
+
     //aluno já esta em outras solicitações deferidas?
-    public boolean alunoJaPossuiBeneficio(Aluno a, LocalDate diaPedido) {
-        List<Aluno> alunosContemplados = pedidoService.alunosQuePossuemBeneficio(diaPedido);
+    public boolean alunoJaPossuiBeneficio(Aluno a, LocalDate diaPedido, TipoBeneficio tipoBeneficio) {
+
+        List<Aluno> alunosContemplados;// = pedidoService.alunosQuePossuemBeneficio(diaPedido, tipoBeneficio);
+        if (tipoBeneficio.equals(TipoBeneficio.AMBOS)) {
+            alunosContemplados = pedidoService.alunosQuePossuemBeneficio(diaPedido, TipoBeneficio.ALMOCO);
+            alunosContemplados.addAll(pedidoService.alunosQuePossuemBeneficio(diaPedido, TipoBeneficio.JANTA));
+        } else {
+            alunosContemplados = pedidoService.alunosQuePossuemBeneficio(diaPedido, tipoBeneficio);
+        }
         if (alunosContemplados.isEmpty()) {
             return false;
         }
         return alunosContemplados.stream().anyMatch((outroAluno) -> (outroAluno.getMatricula().equals(a.getMatricula())));
     }
 
-
     public String recusar(Pedido p, Usuario usuarioCaest) {
-//        System.out.println("\n------------------>"+p.getJustificativaCaestString());
         p.setDataModificacaoDeStatus(LocalDateTime.now());
         justificativaCAEST.setPedido(p);
+        p.setJustificativaCAEST(justificativaCAEST);
         justificativaCAEST.setUsuarioCAEST(usuarioCaest);
         justificativaCAEST.setJustificativa(p.getJustificativaCaestString());
+        p.setDataModificacaoDeStatus(LocalDateTime.now());
         justificativaCAESTService.salvar(justificativaCAEST);
         justificativaCAEST = new JustificativaCAEST();
         contagemDePedidosPorStatus();
@@ -271,54 +275,48 @@ public class PedidoBean implements Serializable {
     public String aceitar(Pedido p) {
         p.setDataModificacaoDeStatus(LocalDateTime.now());
         p.setStatusPedido(StatusPedido.ACEITO);
+        p.setDataModificacaoDeStatus(LocalDateTime.now());
         pedidoService.atualizar(p);
         contagemDePedidosPorStatus();
         return null;
     }
-    
-    
-    
+
     public String gerarEstatisticas() {
         estatisticas.setAlmocosDeferidos(pedidoService.quantidadeDeRefeicoes(StatusPedido.ACEITO, TipoBeneficio.ALMOCO));
         estatisticas.setAlmocosIndeferidos(pedidoService.quantidadeDeRefeicoes(StatusPedido.RECUSADO, TipoBeneficio.ALMOCO));
         estatisticas.setJantaresDeferidos(pedidoService.quantidadeDeRefeicoes(StatusPedido.ACEITO, TipoBeneficio.JANTA));
         estatisticas.setJantaresIndeferidos(pedidoService.quantidadeDeRefeicoes(StatusPedido.RECUSADO, TipoBeneficio.JANTA));
-        
+
         List<Object[]> tabela1 = pedidoService.rankingProfessoresQueMaisSolicitaramAlmoco(TipoBeneficio.ALMOCO);
-        if(tabela1.size()>0){
+        if (tabela1.size() > 0) {
             estatisticas.setProfessorQueMaisSolicitouAlmocos((String) tabela1.get(0)[0]);
-        }else{
+        } else {
             estatisticas.setProfessorQueMaisSolicitouAlmocos("");
         }
-        
+
         List<Object[]> tabela2 = pedidoService.rankingProfessoresQueMaisSolicitaramAlmoco(TipoBeneficio.JANTA);
-        if(tabela1.size()>0){
+        if (tabela1.size() > 0) {
             estatisticas.setProfessorQueMaisSolicitouJantares((String) tabela1.get(0)[0]);
-        }else{
+        } else {
             estatisticas.setProfessorQueMaisSolicitouJantares("");
         }
-        
+
         List<Object[]> tabela3 = pedidoService.rankingDiasComMaisSolicitacao();
-        if(tabela3.size()>0){
-            estatisticas.setDiaDaSemanaComMaisSolicitacoes(DiaDaSemana.valueOf((Integer)tabela3.get(0)[0]));
-        }else{
+        if (tabela3.size() > 0) {
+            estatisticas.setDiaDaSemanaComMaisSolicitacoes(DiaDaSemana.valueOf((Integer) tabela3.get(0)[0]));
+        } else {
             estatisticas.setDiaDaSemanaComMaisSolicitacoes(null);
         }
-        
-        if(tabela3.size()>1){
+
+        if (tabela3.size() > 1) {
             estatisticas.setDiaDaSemanaComMenosSolicitacoes(DiaDaSemana.valueOf(
-                    (Integer)tabela3.get(tabela3.size()-1)[0])
+                    (Integer) tabela3.get(tabela3.size() - 1)[0])
             );
-        }else{
+        } else {
             estatisticas.setDiaDaSemanaComMenosSolicitacoes(null);
         }
         return null;
     }
-    
-    
-    
-    
-    
 
     public Pedido getPedido() {
         return pedido;
@@ -431,8 +429,14 @@ public class PedidoBean implements Serializable {
     public void setEstatisticas(Estatisticas estatisticas) {
         this.estatisticas = estatisticas;
     }
-    
-    
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 
 }
 //deve ser permitido a persistencia de pedidos para o mesmo dia, de professores diferentes e com os mesmos alunos. <== para gerar estatisticas relacionadas a professores.
