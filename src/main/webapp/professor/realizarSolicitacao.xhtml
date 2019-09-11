@@ -57,7 +57,10 @@ and open the template in the editor.
 
 
                                             <br/>
-                                            <h:inputTextarea class="form-control" cols="30" rows="10" value="#{pedidoBean.pedido.justificativa}" required="true" requiredMessage="•Informe a justificativa antes de solicitar o pedido ou adicionar alunos a lista"/>
+                                            <h:inputTextarea class="form-control" cols="30" rows="10"  value="#{pedidoBean.pedido.justificativa}" required="true" requiredMessage="•Informe a justificativa antes de solicitar o pedido ou adicionar alunos a lista">
+                                                <f:passThroughAttribute name="placeholder"
+                                                                                value="Justificativa"></f:passThroughAttribute>
+                                            </h:inputTextarea>
                                             <br/>
 
                                             <h:inputText a:type="date" styleClass="form-control" value="#{pedidoBean.pedido.diaSolicitado}" requiredMessage="•Informe a data antes de solicitar o pedido ou adicionar alunos a lista"
