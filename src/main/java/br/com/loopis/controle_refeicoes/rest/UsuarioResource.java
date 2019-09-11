@@ -54,6 +54,7 @@ public class UsuarioResource {
                     .build();
         } catch (SenhaInvalidaException | UsuarioNaoEncontradoException e) {
             log.log(Level.WARNING, "Erro de autenticação. Email ou senha inválidos");
+            e.printStackTrace();
             return Response
                     .status(Response.Status.UNAUTHORIZED)
                     .build();
