@@ -47,7 +47,6 @@ public class PublicoBean implements Serializable {
             try {
                 pedidos = new ArrayList<>();
                 pedidos = pedidoDao.buscarPedidosAceitos(data, TipoBeneficio.ALMOCO);
-                quant = pedidoDao.quantRefeicaoDia(data, TipoBeneficio.ALMOCO);
                 formarLista(pedidos);
             } catch (Exception e){
                 e.printStackTrace();
@@ -57,7 +56,6 @@ public class PublicoBean implements Serializable {
             try {
                 pedidos = new ArrayList<>();
                 pedidos = pedidoDao.buscarPedidosAceitos(data, TipoBeneficio.JANTA);
-                quant = pedidoDao.quantRefeicaoDia(data, TipoBeneficio.JANTA);
                 formarLista(pedidos);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -67,9 +65,12 @@ public class PublicoBean implements Serializable {
 
     private void formarLista(List<Pedido> pedidos){
         List<Aluno> aux = new ArrayList<>();
+        alunoExibicaos = new ArrayList<>();
+        quant = 0;
         for (Pedido ped : pedidos) {
             aux = ped.getAlunos();
             for(Aluno aluno : aux){
+                quant ++;
                 AlunoExibicao alunoExibicao = new AlunoExibicao();
                 alunoExibicao.setMatricula(aluno.getMatricula());
                 alunoExibicao.setNome(aluno.getNome());

@@ -107,7 +107,4 @@ public class PedidoDaoImpl implements PedidoDao {
                 .getResultList();
     }
 
-    public int quantRefeicaoDia(LocalDate data, TipoBeneficio tipoBeneficio){
-        return 8; //IMPLEMENTAR
-    }
 }
