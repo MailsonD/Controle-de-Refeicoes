@@ -246,13 +246,7 @@ public class PedidoBean implements Serializable {
     //aluno já esta em outras solicitações deferidas?
     public boolean alunoJaPossuiBeneficio(Aluno a, LocalDate diaPedido, TipoBeneficio tipoBeneficio) {
 
-        List<Aluno> alunosContemplados;// = pedidoService.alunosQuePossuemBeneficio(diaPedido, tipoBeneficio);
-        if (tipoBeneficio.equals(TipoBeneficio.AMBOS)) {
-            alunosContemplados = pedidoService.alunosQuePossuemBeneficio(diaPedido, TipoBeneficio.ALMOCO);
-            alunosContemplados.addAll(pedidoService.alunosQuePossuemBeneficio(diaPedido, TipoBeneficio.JANTA));
-        } else {
-            alunosContemplados = pedidoService.alunosQuePossuemBeneficio(diaPedido, tipoBeneficio);
-        }
+        List<Aluno> alunosContemplados = pedidoService.alunosQuePossuemBeneficio(diaPedido, tipoBeneficio);
         if (alunosContemplados.isEmpty()) {
             return false;
         }

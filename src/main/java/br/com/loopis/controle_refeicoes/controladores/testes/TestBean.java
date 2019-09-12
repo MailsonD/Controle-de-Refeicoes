@@ -57,16 +57,16 @@ public class TestBean {
         alunos2.add(new Aluno("321", "2"));
         alunos2.add(new Aluno("354", "3"));
         List<Aluno> alunos3 = new ArrayList<>();
-        alunos3.add(new Aluno("987", "1"));
+        alunos3.add(new Aluno("987", "4"));
         List<Aluno> alunos4 = new ArrayList<>();
-        alunos4.add(new Aluno("123", "2"));
-        alunos4.add(new Aluno("456", "3"));
+        alunos4.add(new Aluno("123", "5"));
+        alunos4.add(new Aluno("456", "6"));
         
-        Pedido p1 = new Pedido(u1, "teste 1", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.ALMOCO, alunos1);
+        Pedido p1 = new Pedido(u1, "teste 1", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.AMBOS, alunos1);
         Pedido p2 = new Pedido(u1, "teste 2", LocalDate.now(), Turma.CIVIL, StatusPedido.PENDENTE, TipoBeneficio.JANTA, alunos2);
         Pedido p3 = new Pedido(u1, "teste 3", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.AMBOS, alunos3);
         Pedido p4 = new Pedido(u1, "teste 4", LocalDate.now(), Turma.CIVIL, StatusPedido.PENDENTE, TipoBeneficio.AMBOS, alunos4);
-        Pedido p5 = new Pedido(u5, "teste 5", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.ALMOCO, alunos1);
+        Pedido p5 = new Pedido(u5, "teste 5", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.JANTA, alunos1);
         Pedido p6 = new Pedido(u5, "teste 6", LocalDate.now(), Turma.CIVIL, StatusPedido.PENDENTE, TipoBeneficio.JANTA, alunos2);
         Pedido p7 = new Pedido(u5, "teste 7", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.AMBOS, alunos3);
         Pedido p8 = new Pedido(u1, "teste 8", LocalDate.now(), Turma.CIVIL, StatusPedido.PENDENTE, TipoBeneficio.AMBOS, alunos4);
@@ -87,17 +87,18 @@ public class TestBean {
             pedidoDao.salvar(p2);
             pedidoDao.salvar(p3);
             pedidoDao.salvar(p4);
-//            pedidoDao.salvar(p5);
-//            pedidoDao.salvar(p6);
-//            pedidoDao.salvar(p7);
-//            pedidoDao.salvar(p8);
-//            pedidoDao.salvar(p9);
-//            pedidoDao.salvar(p10);
-//            pedidoDao.salvar(p11);
-//            pedidoDao.salvar(p12);
+            pedidoDao.salvar(p5);
+            pedidoDao.salvar(p6);
+            pedidoDao.salvar(p7);
+            pedidoDao.salvar(p8);
+            pedidoDao.salvar(p9);
+            pedidoDao.salvar(p10);
+            pedidoDao.salvar(p11);
+            pedidoDao.salvar(p12);
 
         } catch (MatriculaExistenteException ex) {
             Logger.getLogger(TestBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }

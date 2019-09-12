@@ -88,4 +88,6 @@ public interface PedidoDao extends DaoIF<Pedido>{
 
     public List<Object[]> rankingDiasComMaisSolicitacao();
 
+    public Long quantidadeDeRefeicoes();
+
 }
