@@ -52,6 +52,28 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
     public List<Pedido> buscarPorStatusPedido(StatusPedido statusPedido, int numeroDaPagina);
+    
+    /**
+     * quantidade de pedidos pelo status do pedido 
+     * @param dia das solicitações
+     * @param statusPedido do pedido
+     * @return quantidade de pedidos
+     */
+    public Long quantidadeDePedidosPorStatus(LocalDate dia, StatusPedido statusPedido);
+    
+    /**
+     * quantidade de refeições entreges em um dia específico 
+     * @param dia das solicitações
+     * @return quantidade de refeições
+     */
+    public Long quantidadeDeRefeicoes(LocalDate dia);
+
+    /**
+     * alunos que já possuem benefício num dia específico 
+     * @param dia das solicitações
+     * @return lista de alunos
+     */
+    public List<Aluno> alunosQuePossuemBeneficio(LocalDate dia);
 
 
 }

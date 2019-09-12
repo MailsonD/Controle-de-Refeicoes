@@ -6,14 +6,18 @@
 package br.com.loopis.controle_refeicoes.controladores;
 
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.AlunoDao;
+import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.JustificativaCAESTDao;
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.PedidoDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.AlunoBeneficiado;
+import br.com.loopis.controle_refeicoes.modelo.entidades.JustificativaCAEST;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
+import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.Turma;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -28,80 +32,167 @@ import javax.servlet.http.HttpSession;
  *
  * @author ian
  */
-
 @Named
 @ViewScoped
-public class PedidoBean implements Serializable{
-    
+public class PedidoBean implements Serializable {
+
     private Pedido pedido;
     private Aluno aluno;
     private List<Aluno> alunos;
     private List<TipoBeneficio> tipoBeneficiosSelecionados;
+    private Long countPedidosAceitos;
+    private Long countPedidosPendentes;
+    private Long countPedidosRecusados;
+    private Long quantRefeicoes;
+    private int numPagina;
+    private LocalDate dia;
+    private JustificativaCAEST justificativaCAEST;
+
+    @Inject
+    private JustificativaCAESTDao justificativaCAESTService;
     @Inject
     private PedidoDao pedidoService;
-    @Inject 
+    @Inject
     private AlunoDao alunoService;
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         aluno = new Aluno();
         alunos = new ArrayList<>();
         tipoBeneficiosSelecionados = new ArrayList<>();
         pedido = new Pedido();
+        numPagina = 1;
+        justificativaCAEST = new JustificativaCAEST();
+        dia = LocalDate.now();
+        contagemDePedidosPorStatus();
     }
-    
-    public String addAluno(){
+
+    public String addAluno() {
+        if (aluno.getMatricula().equals("") || aluno.getNome().equals("")) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "•Informe nome e matrícula do aluno", null));
+            return null;
+        }
+
+        for (Aluno a : alunos) {
+            if (a.getMatricula().equals(aluno.getMatricula())) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "•Aluno com matrícula " + aluno.getMatricula() + " já foi adicionado à lista", null));
+                return null;
+            }
+        }
+
         alunos.add(aluno);
         aluno = new Aluno();
         return null;
     }
-    
-    public Turma[] listarTurmas(){
+
+    public Turma[] listarTurmas() {
         return Turma.values();
     }
-    
-    public String cadastrarPedido(){
+
+    public String cadastrarPedido() {
         int tamList = alunos.size();
-        alunos.removeIf(a->{
+        if (pedido.getDiaSolicitado().isBefore(LocalDate.now().plusDays(1))) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "•Você não pode fazer uma solicitação de refeição nesta data", null));
+            return null;
+        }
+        alunos.removeIf(a -> {
             AlunoBeneficiado alunoBeneficiado = alunoService.buscarPorMatricula(a.getMatricula());
-            if(alunoBeneficiado!=null){
+            if (alunoBeneficiado != null) {
                 TipoBeneficio beneficioAlunoBeneficio = alunoBeneficiado.getTipoBeneficio();
-                if(beneficioAlunoBeneficio==pedido.getTipoBeneficio() || beneficioAlunoBeneficio==TipoBeneficio.AMBOS){
+                if (beneficioAlunoBeneficio == pedido.getTipoBeneficio() || beneficioAlunoBeneficio == TipoBeneficio.AMBOS) {
                     return true;
                 }
             }
             return false;
         });
-        
-        if(tamList!=alunos.size()){
-            if(alunos.size()==0){
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Todos os alunos selecionados já possuem o benefício", null));
+
+        if (tamList != alunos.size()) {
+            if (alunos.size() == 0) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "•Todos os alunos selecionados já possuem o benefício", null));
                 return null;
             }
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Na lista havia alunos que já recebem o benefício. Eles serão removidos da lista para você", null));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "•Na lista havia alunos que já recebem o benefício. Eles serão removidos da lista para você", null));
         }
-        if(tipoBeneficiosSelecionados.size()>1){
+        if (tipoBeneficiosSelecionados.size() > 1) {
             pedido.setTipoBeneficio(TipoBeneficio.AMBOS);
-        }else{
+        } else {
             pedido.setTipoBeneficio(tipoBeneficiosSelecionados.get(0));
         }
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        pedido.setProfessor((Usuario)session.getAttribute("usuarioLogado"));
+        pedido.setProfessor((Usuario) session.getAttribute("usuarioLogado"));
         pedido.setAlunos(alunos);
+        pedido.setStatusPedido(StatusPedido.PENDENTE);
         pedidoService.salvar(pedido);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "•Solicitação realizado com sucesso!", null));
         tipoBeneficiosSelecionados = new ArrayList<>();
         alunos = new ArrayList<>();
         aluno = new Aluno();
         pedido = new Pedido();
         return null;
     }
-    
-    public TipoBeneficio[] getTiposBeneficio(){
+
+    public TipoBeneficio[] getTiposBeneficio() {
         return TipoBeneficio.values();
     }
-    
-    public int tamanhoListaAlunos(){
+
+    public int tamanhoListaAlunos() {
         return alunos.size();
+    }
+
+    public String contagemDePedidosPorStatus() {
+        if (dia == null) {
+            dia = LocalDate.now();
+        }
+        countPedidosPendentes = pedidoService.quantidadeDePedidosPorStatus(dia, StatusPedido.PENDENTE);
+        countPedidosAceitos = pedidoService.quantidadeDePedidosPorStatus(dia, StatusPedido.ACEITO);
+        countPedidosRecusados = pedidoService.quantidadeDePedidosPorStatus(dia, StatusPedido.RECUSADO);
+        quantRefeicoes = pedidoService.quantidadeDeRefeicoes(dia);
+        return null;
+
+    }
+
+    public List<Pedido> listar(int idUsuario) {
+        return pedidoService.buscarPorProfessor(idUsuario, numPagina);
+    }
+
+    public List<Pedido> listar() {
+        return pedidoService.buscarPorStatusPedido(StatusPedido.PENDENTE, numPagina);
+    }
+
+    //aluno já esta em outras solicitações deferidas?
+    public boolean alunoJaPossuiBeneficio(Aluno a, LocalDate diaPedido) {
+        System.out.print("\nteste:");
+        List<Aluno> alunosContemplados = pedidoService.alunosQuePossuemBeneficio(diaPedido);
+        if (alunosContemplados.isEmpty()) {
+            System.out.println("entrou no if");
+            return false;
+        }
+
+        return alunosContemplados.stream().anyMatch((outroAluno) -> (outroAluno.getMatricula().equals(a.getMatricula())));
+    }
+
+    public String excluir(Pedido p) {
+        pedidoService.remover(p);
+        pedido = new Pedido();
+        return null;
+    }
+
+    public String recusar(Pedido p, Usuario usuarioCaest) {
+        justificativaCAEST.setPedido(p);
+        justificativaCAEST.setUsuarioCAEST(usuarioCaest);
+        justificativaCAESTService.salvar(justificativaCAEST);
+        justificativaCAEST = new JustificativaCAEST();
+        contagemDePedidosPorStatus();
+        return null;
+    }
+
+    public String aceitar(Pedido p) {
+        p.setStatusPedido(StatusPedido.ACEITO);
+        pedidoService.atualizar(p);
+        contagemDePedidosPorStatus();
+        return null;
     }
 
     public Pedido getPedido() {
@@ -136,7 +227,53 @@ public class PedidoBean implements Serializable{
         this.tipoBeneficiosSelecionados = tipoBeneficiosSelecionados;
     }
 
-    
-    
-    
+    public JustificativaCAEST getJustificativaCAEST() {
+        return justificativaCAEST;
+    }
+
+    public void setJustificativaCAEST(JustificativaCAEST justificativaCAEST) {
+        this.justificativaCAEST = justificativaCAEST;
+    }
+
+    public Long getCountPedidosAceitos() {
+        return countPedidosAceitos;
+    }
+
+    public void setCountPedidosAceitos(Long countPedidosAceitos) {
+        this.countPedidosAceitos = countPedidosAceitos;
+    }
+
+    public Long getCountPedidosPendentes() {
+        return countPedidosPendentes;
+    }
+
+    public void setCountPedidosPendentes(Long countPedidosPendentes) {
+        this.countPedidosPendentes = countPedidosPendentes;
+    }
+
+    public Long getCountPedidosRecusados() {
+        return countPedidosRecusados;
+    }
+
+    public void setCountPedidosRecusados(Long countPedidosRecusados) {
+        this.countPedidosRecusados = countPedidosRecusados;
+    }
+
+    public Long getQuantRefeicoes() {
+        return quantRefeicoes;
+    }
+
+    public void setQuantRefeicoes(Long quantRefeicoes) {
+        this.quantRefeicoes = quantRefeicoes;
+    }
+
+    public LocalDate getDia() {
+        return dia;
+    }
+
+    public void setDia(LocalDate dia) {
+        this.dia = dia;
+    }
+
 }
+//deve ser permitido a persistencia de pedidos para o mesmo dia, de professores diferentes e com os mesmos alunos. <== para gerar estatisticas relacionadas a professores.
