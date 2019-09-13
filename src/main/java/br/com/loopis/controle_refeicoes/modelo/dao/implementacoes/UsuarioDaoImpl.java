@@ -6,24 +6,13 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteException;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.SenhaInvalidaException;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
-import java.sql.SQLException;
 
 import javax.ejb.Stateless;
 import javax.persistence.*;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import javax.validation.ConstraintViolationException;
-
-import org.eclipse.persistence.exceptions.DatabaseException;
-import org.postgresql.util.PSQLException;
-import javax.ejb.TransactionRolledbackLocalException;
-import javax.persistence.PersistenceException;
 
 /**
  * @author Mailson Dennis
@@ -37,13 +26,17 @@ public class UsuarioDaoImpl implements UsuarioDao {
     private EntityManager em;
 
     @Override
-    public void salvar(Usuario object) {
-        try {
-            object.setAtivo(true);
-            em.persist(object);
-        } catch (EntityExistsException e) {
+    public void salvar(Usuario object) throws MatriculaExistenteException{
+        if (em.find(Usuario.class, object.getMatricula())!=null) {
             throw new MatriculaExistenteException();
         }
+//        try {
+        object.setAtivo(true);
+        em.persist(object);
+
+//        } catch (EntityExistsException e) {
+//            throw new MatriculaExistenteException();
+//        }
     }
 
     @Override
@@ -99,32 +92,32 @@ public class UsuarioDaoImpl implements UsuarioDao {
         List<Usuario> professoresPersistidos = em.createQuery("select p from Usuario p where p.nivelAcesso=:na").setParameter("na", NivelAcesso.PROFESSOR).getResultList();
         List<Usuario> auxProfessoresPersistidos = new ArrayList<>(professoresPersistidos);
         boolean excluiu;
-        
+
         //todos os professores que serão atualizados
-        for(Usuario professor:professores){
-            excluiu = professoresPersistidos.removeIf(p->{
+        for (Usuario professor : professores) {
+            excluiu = professoresPersistidos.removeIf(p -> {
                 return p.getMatricula().equals(professor.getMatricula());
             });
-            if(excluiu){
+            if (excluiu) {
                 em.merge(professor);
             }
         }
-        
+
         //todos os professores que terão as suas contas desativadas
         professoresPersistidos.forEach(p -> {
             p.setAtivo(false);
             em.merge(p);
         });
-        
+
         //todos os novos professores que serão persistidos
-        for(Usuario professor:auxProfessoresPersistidos){
-            professores.removeIf(p->{
+        for (Usuario professor : auxProfessoresPersistidos) {
+            professores.removeIf(p -> {
                 return p.getMatricula().equals(professor.getMatricula());
             });
         }
         professores.forEach(p -> {
             em.persist(p);
-        });        
+        });
     }
 
     @Override
