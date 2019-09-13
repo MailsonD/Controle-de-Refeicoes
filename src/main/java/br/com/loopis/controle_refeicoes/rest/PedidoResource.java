@@ -5,6 +5,7 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.AcessoNegadoException;
+import br.com.loopis.controle_refeicoes.modelo.excessoes.PaginaInvalidaExcpetion;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
 import br.com.loopis.controle_refeicoes.rest.dto.AlunosDTO;
 import br.com.loopis.controle_refeicoes.rest.dto.PedidoDTO;
@@ -15,15 +16,8 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -86,17 +80,84 @@ public class PedidoResource {
             return Response
                     .status(Response.Status.CREATED)
                     .build();
-        } catch (UsuarioNaoEncontradoException | AcessoNegadoException e) {
+        } catch (AcessoNegadoException | UsuarioNaoEncontradoException e) {
             log.log(Level.SEVERE, "Usuário inexistente tentando realiar solicitação");
             return Response
                     .status(Response.Status.UNAUTHORIZED)
                     .build();
-        } catch (Exception e){
+        } catch(Exception e){
+            log.log(Level.SEVERE, "Erro interno");
+            e.printStackTrace();
+            return erroInterno();
+        }
+    }
+
+    /**
+     * Método responsável por buscar todos os pedidos do professor com paginação. Para realizar a requisição
+     * a deve ser enviado o parâmento na url para uma página válida. Cada página possui 10 elementos. Ex:
+     *              professor/1234?pagina=2
+     *
+     * @param matriculaProf -> Matricula do professor que está solicitando a visualização de seus pedidos
+     * @param pagina -> a página solicitada
+     * @return -> A lista de pedidos completa daquela paǵina. Caso seja enviada uma página inválida é
+     * retornado um código de BAD_REQUEST. E caso o usuário solicitado não seja um professor ou não
+     * possua mátricula válida é retornado um código de UNAUTHORIZED.
+     */
+    @GET
+    @Path("professor/{matricula}")
+    public Response pedidosPorProfessor(@PathParam("matricula") String matriculaProf, @QueryParam("pagina") int pagina){
+        try {
+            List<Pedido> pedidos = servicePedido.buscarPorProfessor(buscarProfessor(matriculaProf), pagina);
+
+            GenericEntity<List<Pedido>> pedidosJson = new GenericEntity<List<Pedido>>(pedidos){};
+
+            return Response
+                    .ok()
+                    .entity(pedidosJson)
+                    .build();
+        } catch (PaginaInvalidaExcpetion e) {
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .build();
+        } catch (AcessoNegadoException | UsuarioNaoEncontradoException e) {
+            log.log(Level.SEVERE, "Usuário inexistente ou sem permissão tentando realiar solicitação");
+            return Response
+                    .status(Response.Status.UNAUTHORIZED)
+                    .build();
+        } catch (Exception e) {
+            log.log(Level.SEVERE, "Erro interno");
+            e.printStackTrace();
             return erroInterno();
         }
     }
 
 
+    @GET
+    @Path("total-refeicoes")
+    public Response totalDeRefeicoes(){
+        Long quantidade = servicePedido.totalRefeicoes();
+        QuantidadeDTO json = new QuantidadeDTO();
+        json.setQuantidade(quantidade);
+        return Response.ok().entity(json).build();
+    }
+    
+    @GET
+    @Path("resultado/almoco")
+    public Response listaDeAlunosAlmoco(){
+        List<Aluno> alunos = servicePedido.listDeAlunosAlmoco();
+        AlunosDTO json = new AlunosDTO();
+        json.setAlunos(alunos);
+        return Response.ok().entity(json).build();
+    }
+    
+    @GET
+    @Path("resultado/janta")
+    public Response listaDeAlunosJanta(){
+        List<Aluno> alunos = servicePedido.listDeAlunosJanta();
+        AlunosDTO json = new AlunosDTO();
+        json.setAlunos(alunos);
+        return Response.ok().entity(json).build();
+    }
 
     private Response erroInterno(){
         return Response
@@ -126,32 +187,8 @@ public class PedidoResource {
         );
 
     }
-    
-    @GET
-    @Path("total-refeicoes")
-    public Response totalDeRefeicoes(){
-        Long quantidade = servicePedido.totalRefeicoes();
-        QuantidadeDTO json = new QuantidadeDTO();
-        json.setQuantidade(quantidade);
-        return Response.ok().entity(json).build();
-    }
-    
-    @GET
-    @Path("resultado/almoco")
-    public Response listaDeAlunosAlmoco(){
-        List<Aluno> alunos = servicePedido.listDeAlunosAlmoco();
-        AlunosDTO json = new AlunosDTO();
-        json.setAlunos(alunos);
-        return Response.ok().entity(json).build();
-    }
-    
-    @GET
-    @Path("resultado/janta")
-    public Response listaDeAlunosJanta(){
-        List<Aluno> alunos = servicePedido.listDeAlunosJanta();
-        AlunosDTO json = new AlunosDTO();
-        json.setAlunos(alunos);
-        return Response.ok().entity(json).build();
-    }
 
+    private Usuario buscarProfessor(String matriculaProf) throws UsuarioNaoEncontradoException {
+        return serviceUsuario.buscarPorMatricula(matriculaProf);
+    }
 }

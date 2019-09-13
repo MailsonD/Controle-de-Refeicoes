@@ -18,7 +18,7 @@ public class Usuario implements Serializable {
 
     @Id
     private String matricula;
-    @XmlTransient
+    @XmlTransient   
     private String senha;
     @Column(unique = true)
     private String email;
