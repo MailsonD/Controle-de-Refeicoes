@@ -14,8 +14,10 @@ Usuário:
         /usuario/idUsuario -> Recebe IdUsuario -> Retorna Usuário (sem senha)
     
 Relatórios:
-    /relatorio
-    GET
+    Buscar todos os dados de relatório
+        GET    
+        /relatorio -> Recebe nada -> Retora um objeto relatório com todas as estatísticas
+    
 
 Pedido:
     /pedido
@@ -27,10 +29,10 @@ Pedido:
         /pedido/id -> Recebe id -> Retorna sucesso
     Recuperar pedidos por professor:   
          GET         
-        /pedido/professor/id?page=x -> Recebe id Professor + pagina -> Retorna lista de pedidos do professor
+        /pedido/professor/matricula?page=x -> Recebe matricula Professor + pagina -> Retorna lista de pedidos do professor
     Filtrar pedidos por professor: 
         GET
-        /pedido/professor/id?page=x&data=dd/mm/yyyy&statusPedido=asdqasd -> Recebe um monte de coisa -> Retorna a página filtrada;
+        /pedido/professor/matricula?page=x&data=dd/mm/yyyy&statusPedido=asdqasd -> Recebe um monte de coisa -> Retorna a página filtrada;
     Quantidade de refeições:
         GET
         /pedido/total-refeicoes -> Recebe nada -> Retorna a quantidade de refeições concedidas

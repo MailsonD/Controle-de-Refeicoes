@@ -6,6 +6,10 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 
+/**
+ * @author mailson
+ * @mail mailssondennis@gmail.com
+ */
 @Provider
 public class CORSFilter implements ContainerResponseFilter {
 

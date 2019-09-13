@@ -5,8 +5,6 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
-import br.com.loopis.controle_refeicoes.modelo.entidades.Estatisticas;
-import br.com.loopis.controle_refeicoes.modelo.entidades.enums.DiaDaSemana;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -149,11 +147,6 @@ public class PedidoDaoImpl implements PedidoDao {
                 .getResultList();
     }
 
-//    @Override
-//    public List<Long> listaDeQuantidadeDePedidosPorStatus(LocalDate dia){
-//        String jpql = "select count(p.statusPedido) from Pedido p where p.diaSolicitado=:dia group by p.statusPedido order by p.statusPedido";
-//        return em.createQuery(jpql).setParameter("dia", dia).getResultList();
-//    }
     @Override
     public Long quantidadeDePedidosPorStatus(LocalDate dia, StatusPedido statusPedido) {
         String jpql = "select count(p.statusPedido) from Pedido p where p.diaSolicitado=:dia and p.statusPedido=:statusPedido";
@@ -166,38 +159,76 @@ public class PedidoDaoImpl implements PedidoDao {
 
     @Override
     public Long quantidadeDeRefeicoes(LocalDate dia) {
-        String jpql = "select count(distinct a.matricula) from Pedido p join p.alunos a where p.diaSolicitado=:dia and p.statusPedido=:statusPedido";
-        try {
-            return em.createQuery(jpql, Long.class).setParameter("dia", dia).setParameter("statusPedido", StatusPedido.ACEITO).getSingleResult();
-        } catch (NoResultException e) {
-            return 0L;
+        Long valor;
+        String sql = "select cast(sum(result.quant) as bigint) from("
+                + "	select (case when sum(p_pa_a.case)>=2 then 2 else 1 end)quant from("
+                + "		select distinct a.matricula, case when p_pa.tipobeneficio='AMBOS' then 2 else 1 end from ("
+                + "			select pa.pedido_id, pa.alunos_id, p.tipoBeneficio from pedido p join pedido_aluno pa on p.id=pa.pedido_id"
+                + "			  where p.diaSolicitado='2019-09-12' and p.statusPedido=1"
+                + "		) as p_pa join aluno a on p_pa.alunos_id=a.id"
+                + "	) as p_pa_a group by p_pa_a.matricula"
+                + ") as result";
+        valor = (Long) em.createNativeQuery(sql)
+                .setParameter(1, dia)
+                .setParameter(2, 1L)
+                .getSingleResult();
+        if (valor == null) {
+            valor = 0L;
         }
+        return valor;
     }
 
     @Override
-    public List<Aluno> alunosQuePossuemBeneficio(LocalDate dia) {
-        String jpql = "select a from Pedido p join p.alunos a where p.diaSolicitado=:dia and p.statusPedido=:statusPedido";
-        return em.createQuery(jpql, Aluno.class).setParameter("dia", dia).setParameter("statusPedido", StatusPedido.ACEITO).getResultList();
-    }
-    
-    @Override
-    public Long quantidadeDeRefeicoes(StatusPedido statusPedido, TipoBeneficio tipoBeneficio){
-        Long quant;
-        String psql1 = "select count(p) from Pedido p where p.statusPedido=:sp and (p.tipoBeneficio=:tb1 or p.tipoBeneficio=:tb2)";
-        try{
-            quant = em.createQuery(psql1, Long.class)
-                    .setParameter("sp", statusPedido)
-                    .setParameter("tb1", tipoBeneficio)
-                    .setParameter("tb2", TipoBeneficio.AMBOS)
-                    .getSingleResult();
-        }catch(NoResultException e){
-            quant = 0L;
+    public Long quantidadeDeRefeicoes() {
+        Long valor1 = quantidadeDeRefeicoes(StatusPedido.ACEITO, TipoBeneficio.ALMOCO);
+        Long valor2 = quantidadeDeRefeicoes(StatusPedido.ACEITO, TipoBeneficio.JANTA);
+
+//        valor = (Long) em.createNativeQuery(sql)
+//                .setParameter(0, 0L)
+//                .setParameter(2, 0L)
+//                .getSingleResult();
+        if (valor1 == null) {
+            valor1 = 0L;
         }
-        return quant;
+        if (valor2 == null) {
+            valor2 = 0L;
+        }
+        return valor1+valor2;
     }
-    
+
     @Override
-    public List<Object[]> rankingProfessoresQueMaisSolicitaramAlmoco(TipoBeneficio tipoBeneficio){
+    public Long quantidadeDeRefeicoes(StatusPedido statusPedido, TipoBeneficio tipoBeneficio) {
+        Long valor;
+        String sql = "select cast(sum(p_pa_a.quant) as bigint) from("
+                + "	select count(distinct (a.matricula, p_pa.diaSolicitado)) quant from ("
+                + "		select pa.pedido_id, pa.alunos_id, p.tipoBeneficio, p.diaSolicitado from pedido p join pedido_aluno pa on p.id=pa.pedido_id "
+                + "                    where p.statusPedido=? and (p.tipoBeneficio=? or p.tipoBeneficio=?)"
+                + "	) p_pa join aluno a on p_pa.alunos_id=a.id"
+                + ") p_pa_a";
+        valor = (Long) em.createNativeQuery(sql)
+                .setParameter(1, Integer.toUnsignedLong(statusPedido.ordinal()))
+                .setParameter(2, tipoBeneficio.toString())
+                .setParameter(3, TipoBeneficio.AMBOS.toString())
+                .getSingleResult();
+        if (valor == null) {
+            valor = 0L;
+        }
+        return valor;
+    }
+
+    @Override
+    public List<Aluno> alunosQuePossuemBeneficio(LocalDate dia, TipoBeneficio tipoBeneficio) {
+        String jpql = "select distinct(a) from Pedido p join p.alunos a where p.diaSolicitado=:dia and p.statusPedido=:statusPedido and (p.tipoBeneficio=:tb1 or p.tipoBeneficio=:tb2)";
+        return em.createQuery(jpql, Aluno.class)
+                .setParameter("dia", dia)
+                .setParameter("statusPedido", StatusPedido.ACEITO)
+                .setParameter("tb1", tipoBeneficio)
+                .setParameter("tb2", TipoBeneficio.AMBOS)
+                .getResultList();
+    }
+
+    @Override
+    public List<Object[]> rankingProfessoresQueMaisSolicitaramAlmoco(TipoBeneficio tipoBeneficio) {
         String psql = "select u.nome, count(u.matricula) from Pedido p join Usuario u on p.professor=u where p.tipoBeneficio=:tb1 or p.tipoBeneficio=:tb2 "
                 + "group by u.matricula, u.nome order by count(u.matricula) desc";
         List<Object[]> tabela = em.createQuery(psql, Object[].class)
@@ -206,16 +237,16 @@ public class PedidoDaoImpl implements PedidoDao {
                 getResultList();
         return tabela;
     }
-    
+
     @Override
-    public List<Object[]> rankingDiasComMaisSolicitacao(){
+    public List<Object[]> rankingDiasComMaisSolicitacao() {
         String psql = "select cast(extract(dow from p.diaSolicitado) as int), count(p.diaSolicitado) as dw "
                 + "from Pedido p group by p.diaSolicitado";
         List<Object[]> tabela = em.createQuery(psql, Object[].class).getResultList();
-        
+
         return tabela;
     }
-    
+
     @Override
     public void agendaModificacaoPedido(Pedido p) { //  07/09/2019 14:00      
         LocalDateTime dia = LocalDateTime.of(p.getDiaSolicitado(), LocalTime.now());//.plusMinutes(3));

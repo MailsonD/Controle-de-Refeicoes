@@ -4,6 +4,7 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -15,11 +16,9 @@ import java.util.Objects;
 @XmlRootElement
 public class Usuario implements Serializable {
 
-//    @GeneratedValue
-//    @Column(unique = true)
-//    private int id;
     @Id
     private String matricula;
+    @XmlTransient   
     private String senha;
     @Column(unique = true)
     private String email;

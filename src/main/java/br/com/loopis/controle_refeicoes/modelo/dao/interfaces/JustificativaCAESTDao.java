@@ -12,5 +12,6 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.JustificativaCAEST;
  * @author ian
  */
 public interface JustificativaCAESTDao extends DaoIF<JustificativaCAEST>{
-    
+    void salvar(JustificativaCAEST justificativaCAEST);
+
 }
