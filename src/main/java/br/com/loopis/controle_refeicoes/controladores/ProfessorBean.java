@@ -9,8 +9,6 @@ import br.com.loopis.controle_refeicoes.util.ManipuladorCSV;
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.UsuarioDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
-import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteException;
-import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -66,8 +64,6 @@ public class ProfessorBean implements Serializable{
             }
             
             
-        } catch (MatriculaExistenteException ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Professores com matrículas repetidas!", null));
         } catch (IOException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro na leitura deste arquivo!", null));
         } catch (ArrayIndexOutOfBoundsException ex){

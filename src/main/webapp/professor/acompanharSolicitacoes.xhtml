@@ -167,9 +167,14 @@ and open the template in the editor.
                                                                 <div class="modal-header justify-content-center">
 
                                                                     <h3>Detalhes </h3>
-
+                                                                    
                                                                 </div>
                                                                 <div class="modal-body">
+                                                                    <div>
+                                                                        <h:outputText rendered="#{not (pedido.justificativaCAEST eq null)}" 
+                                                                                      value="justificativa de indeferimento:#{pedido.justificativaCAEST.justificativa}">
+                                                                        </h:outputText>
+                                                                    </div>
                                                                     <h4>Justificativa do Profesor: </h4>
                                                                     #{pedido.justificativa}
                                                                     <h4>Lista de Alunos: </h4>
@@ -197,7 +202,6 @@ and open the template in the editor.
                                                     </div>
                                                     <!-- Fim da modal -->
                                                 </h:column>
-
                                             </h:dataTable>
                                             <!--</h:form>-->
                                         </div>

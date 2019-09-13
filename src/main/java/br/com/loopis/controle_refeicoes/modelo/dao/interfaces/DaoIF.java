@@ -4,7 +4,7 @@ import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteExcep
 import java.util.List;
 
 public interface DaoIF<T> {
-    void salvar(T object);
+    
     void atualizar(T object);
     void remover(T object);
     T buscar(Object key);

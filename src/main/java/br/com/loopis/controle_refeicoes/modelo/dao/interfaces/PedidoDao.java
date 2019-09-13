@@ -1,7 +1,6 @@
 package br.com.loopis.controle_refeicoes.modelo.dao.interfaces;
 
 import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
-import br.com.loopis.controle_refeicoes.modelo.entidades.Estatisticas;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
@@ -9,7 +8,8 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface PedidoDao extends DaoIF<Pedido> {
+public interface PedidoDao extends DaoIF<Pedido>{
+    void salvar(Pedido object);
     /**
      * Pedidos de uma determinada data, consulta paginada.
      * @param data Data que será buscada
@@ -76,7 +76,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @param dia das solicitações
      * @return lista de alunos
      */
-    public List<Aluno> alunosQuePossuemBeneficio(LocalDate dia);
+    public List<Aluno> alunosQuePossuemBeneficio(LocalDate dia, TipoBeneficio tipoBeneficio);
 
     public List<Pedido> ultimosPedidosComStatusModificado(int numeroDaPagina);
 
@@ -87,5 +87,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
     public List<Object[]> rankingProfessoresQueMaisSolicitaramAlmoco(TipoBeneficio tipoBeneficio);
 
     public List<Object[]> rankingDiasComMaisSolicitacao();
+
+    public Long quantidadeDeRefeicoes();
 
 }

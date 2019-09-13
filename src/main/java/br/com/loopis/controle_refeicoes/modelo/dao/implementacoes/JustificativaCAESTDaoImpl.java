@@ -49,5 +49,4 @@ public class JustificativaCAESTDaoImpl implements JustificativaCAESTDao {
     public List<JustificativaCAEST> listar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }
