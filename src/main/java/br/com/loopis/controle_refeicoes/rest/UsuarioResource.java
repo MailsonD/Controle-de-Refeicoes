@@ -43,6 +43,8 @@ public class UsuarioResource {
     public Response login(JsonObject object){
         String matricula = object.getString("matricula");
         String senha = object.getString("senha");
+        log.log(Level.INFO, "Matricula ->> "+matricula);
+        log.log(Level.INFO, "Senha ->> "+senha);
         Usuario user = new Usuario();
         user.setMatricula(matricula);
         user.setSenha(senha);
@@ -143,7 +145,6 @@ public class UsuarioResource {
     public Response buscarPorMatricula(@PathParam("matricula") String matricula){
         try {
             Usuario user = serviceUsuario.buscarPorMatricula(matricula);
-            user.setSenha(null);
             return Response
                     .ok()
                     .entity(user)
