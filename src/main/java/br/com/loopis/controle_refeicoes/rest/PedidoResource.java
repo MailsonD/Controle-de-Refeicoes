@@ -33,7 +33,7 @@ import java.util.logging.Logger;
  */
 @Stateless
 @Path("pedido")
-@Consumes({MediaType.APPLICATION_JSON})
+@Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class PedidoResource {
 
@@ -95,6 +95,8 @@ public class PedidoResource {
             return erroInterno();
         }
     }
+
+
 
     private Response erroInterno(){
         return Response
