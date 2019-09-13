@@ -12,6 +12,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author mailson
+ * @mail mailssondennis@gmail.com
+ */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PedidoDTO implements Serializable {

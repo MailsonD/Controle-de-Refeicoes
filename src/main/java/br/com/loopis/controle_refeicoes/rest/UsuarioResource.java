@@ -16,6 +16,10 @@ import javax.ws.rs.core.Response;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author mailson
+ * @mail mailssondennis@gmail.com
+ */
 @Stateless
 @Path("usuario")
 @Consumes(MediaType.APPLICATION_JSON)
