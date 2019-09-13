@@ -109,6 +109,11 @@ public class UsuarioResource {
      * @return -> Código de sucesso com conteúdo vazio caso a senha seja alterada com sucesso.
      * Caso a senha enviada pelo usuário seja inválida, é lançado um código de erro UNAUTHORIZED.
      * Caso a matrícula seja inválida, é lançado um CÓDIGO de NOT_FOUND
+     * {
+     *     "matricula":"sadasdsad",
+     *     "senhaAntiga":"asdasd",
+     *     "senhaNova":"asdsad",
+     * }
      */
     @PUT
     @Path("alterar-senha")
