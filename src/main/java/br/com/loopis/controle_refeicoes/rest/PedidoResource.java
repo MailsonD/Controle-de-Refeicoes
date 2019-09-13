@@ -1,17 +1,22 @@
 package br.com.loopis.controle_refeicoes.rest;
 
+import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
+import br.com.loopis.controle_refeicoes.rest.dto.AlunosDTO;
 import br.com.loopis.controle_refeicoes.rest.dto.PedidoDTO;
+import br.com.loopis.controle_refeicoes.rest.dto.QuantidadeDTO;
 import br.com.loopis.controle_refeicoes.service.ServicePedido;
 import br.com.loopis.controle_refeicoes.service.ServiceUsuario;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
@@ -77,6 +82,33 @@ public class PedidoResource {
                 pedidoDTO.getAlunos()
         );
 
+    }
+    
+    @GET
+    @Path("total-refeicoes")
+    public Response totalDeRefeicoes(){
+        Long quantidade = servicePedido.totalRefeicoes();
+        QuantidadeDTO json = new QuantidadeDTO();
+        json.setQuantidade(quantidade);
+        return Response.ok().entity(json).build();
+    }
+    
+    @GET
+    @Path("resultado/almoco")
+    public Response listaDeAlunosAlmoco(){
+        List<Aluno> alunos = servicePedido.listDeAlunosAlmoco();
+        AlunosDTO json = new AlunosDTO();
+        json.setAlunos(alunos);
+        return Response.ok().entity(json).build();
+    }
+    
+    @GET
+    @Path("resultado/janta")
+    public Response listaDeAlunosJanta(){
+        List<Aluno> alunos = servicePedido.listDeAlunosJanta();
+        AlunosDTO json = new AlunosDTO();
+        json.setAlunos(alunos);
+        return Response.ok().entity(json).build();
     }
 
 }
