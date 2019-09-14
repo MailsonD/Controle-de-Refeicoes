@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+    db:
+        build: ./database/
+        ports: 
+            - "5433:5432"   
+        container_name: db_refeicoes_IFPB
+    web:
+        build: .
+        links: 
+            - db:banco
+        ports:
+            - "8080:8080"
+            - "4848:4848"
+        container_name: web_refeicoes_IFPB

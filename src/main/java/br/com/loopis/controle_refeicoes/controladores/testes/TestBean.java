@@ -45,10 +45,10 @@ public class TestBean {
 
     @PostConstruct
     private void init() {
-        Usuario u1 = new Usuario("1", "1", "1", "Usuario1", NivelAcesso.PROFESSOR, Boolean.TRUE);
+        Usuario u1 = new Usuario("1234", "1234", "1234", "Usuario1", NivelAcesso.PROFESSOR, Boolean.TRUE);
         Usuario u2 = new Usuario("2", "2", "2", "Usuario2", NivelAcesso.ADMINISTRADOR, Boolean.TRUE);
         Usuario u3 = new Usuario("3", "3", "3", "Usuario3", NivelAcesso.CAEST, Boolean.TRUE);
-        Usuario u4 = new Usuario("4", "4", "4", "Usuario4", NivelAcesso.GESTOR, Boolean.TRUE);
+        Usuario u4 = new Usuario("4444", "4444", "4", "Usuario4", NivelAcesso.GESTOR, Boolean.TRUE);
         Usuario u5 = new Usuario("123", "321", "mailssondennis@gmail.com", "Mailson", NivelAcesso.PROFESSOR, true);
         AlunoBeneficiado ab = new AlunoBeneficiado("1", "Zé", TipoBeneficio.AMBOS, "2019.12");;
         List<Aluno> alunos1 = new ArrayList<>();
