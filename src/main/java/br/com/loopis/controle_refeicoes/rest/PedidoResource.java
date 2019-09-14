@@ -155,18 +155,20 @@ public class PedidoResource {
     @Path("resultado/almoco")
     public Response listaDeAlunosAlmoco(){
         List<Aluno> alunos = servicePedido.listDeAlunosAlmoco();
-        AlunosDTO json = new AlunosDTO();
-        json.setAlunos(alunos);
-        return Response.ok().entity(json).build();
+
+        GenericEntity<List<Aluno>> alunosJson = new GenericEntity<List<Aluno>>(alunos){};
+
+        return Response.ok().entity(alunos).build();
     }
     
     @GET
     @Path("resultado/janta")
     public Response listaDeAlunosJanta(){
         List<Aluno> alunos = servicePedido.listDeAlunosJanta();
-        AlunosDTO json = new AlunosDTO();
-        json.setAlunos(alunos);
-        return Response.ok().entity(json).build();
+
+        GenericEntity<List<Aluno>> alunosJson = new GenericEntity<List<Aluno>>(alunos){};
+
+        return Response.ok().entity(alunos).build();
     }
 
     private Response erroInterno(){
