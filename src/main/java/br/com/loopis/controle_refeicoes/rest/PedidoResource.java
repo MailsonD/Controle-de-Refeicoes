@@ -139,7 +139,16 @@ public class PedidoResource {
         }
     }
 
-
+    @DELETE
+    @Path("id")
+    public Response deletarPedido(long id) {
+        Pedido pedido = new Pedido();
+        pedido.setId(id);
+        servicePedido.remover(pedido);
+        return Response
+                .status(Response.Status.OK)
+                .build();
+    }
 
 
     @GET
