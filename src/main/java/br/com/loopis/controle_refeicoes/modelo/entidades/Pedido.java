@@ -129,8 +129,8 @@ public class Pedido implements Serializable {
         this.turma = turma;
     }
 
-    public String getStatusPedido() {
-        return String.valueOf(statusPedido);
+    public StatusPedido getStatusPedido() {
+        return this.statusPedido;
     }
 
     public void setStatusPedido(StatusPedido statusPedido) {

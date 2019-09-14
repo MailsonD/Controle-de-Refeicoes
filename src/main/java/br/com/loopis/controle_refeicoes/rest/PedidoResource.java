@@ -139,26 +139,7 @@ public class PedidoResource {
         }
     }
 
-    private List<PedidoDTO> criarPedidosDTOs(List<Pedido> pedidos) {
-        List<PedidoDTO> pedidoDTOS = new ArrayList<>();
-        if(pedidos != null){
-            pedidos.forEach(p -> {
-                pedidoDTOS.add(
-                        new PedidoDTO(
-                            p.getId(),
-                            p.getProfessor().getMatricula(),
-                            p.getJustificativa(),
-                            p.getDiaSolicitado(),
-                            p.getTurma(),
-                            p.getTipoBeneficio(),
-                            p.getAlunos(),
-                            p.getJustificativaCAEST()
-                        )
-                );
-            });
-        }
-        return pedidoDTOS;
-    }
+
 
 
     @GET
@@ -192,6 +173,28 @@ public class PedidoResource {
         return Response
                 .status(Response.Status.INTERNAL_SERVER_ERROR)
                 .build();
+    }
+
+    private List<PedidoDTO> criarPedidosDTOs(List<Pedido> pedidos) {
+        List<PedidoDTO> pedidoDTOS = new ArrayList<>();
+        if(pedidos != null){
+            pedidos.forEach(p -> {
+                pedidoDTOS.add(
+                        new PedidoDTO(
+                                p.getId(),
+                                p.getProfessor().getMatricula(),
+                                p.getJustificativa(),
+                                p.getDiaSolicitado(),
+                                p.getTurma(),
+                                p.getTipoBeneficio(),
+                                p.getAlunos(),
+                                p.getStatusPedido(),
+                                p.getJustificativaCAEST()
+                        )
+                );
+            });
+        }
+        return pedidoDTOS;
     }
 
     /**
