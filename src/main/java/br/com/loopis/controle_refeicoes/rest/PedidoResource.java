@@ -12,6 +12,8 @@ import br.com.loopis.controle_refeicoes.rest.dto.PedidoDTO;
 import br.com.loopis.controle_refeicoes.rest.dto.QuantidadeDTO;
 import br.com.loopis.controle_refeicoes.service.ServicePedido;
 import br.com.loopis.controle_refeicoes.service.ServiceUsuario;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -109,7 +111,13 @@ public class PedidoResource {
         try {
             List<Pedido> pedidos = servicePedido.buscarPorProfessor(buscarProfessor(matriculaProf), pagina);
 
-            GenericEntity<List<Pedido>> pedidosJson = new GenericEntity<List<Pedido>>(pedidos){};
+            log.log(Level.INFO,"PEDIDOS ->>>>>" + pedidos.toString());
+
+            List<PedidoDTO> pedidosDTOs = criarPedidosDTOs(pedidos);
+
+            log.log(Level.INFO, "PEDIDOSDTOs ->>>>>>" + pedidosDTOs);
+
+            GenericEntity<List<PedidoDTO>> pedidosJson = new GenericEntity<List<PedidoDTO>>(pedidosDTOs){};
 
             return Response
                     .ok()
@@ -129,6 +137,27 @@ public class PedidoResource {
             e.printStackTrace();
             return erroInterno();
         }
+    }
+
+    private List<PedidoDTO> criarPedidosDTOs(List<Pedido> pedidos) {
+        List<PedidoDTO> pedidoDTOS = new ArrayList<>();
+        if(pedidos != null){
+            pedidos.forEach(p -> {
+                pedidoDTOS.add(
+                        new PedidoDTO(
+                            p.getId(),
+                            p.getProfessor().getMatricula(),
+                            p.getJustificativa(),
+                            p.getDiaSolicitado(),
+                            p.getTurma(),
+                            p.getTipoBeneficio(),
+                            p.getAlunos(),
+                            p.getJustificativaCAEST()
+                        )
+                );
+            });
+        }
+        return pedidoDTOS;
     }
 
 

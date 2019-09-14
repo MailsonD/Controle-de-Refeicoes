@@ -2,6 +2,7 @@ package br.com.loopis.controle_refeicoes.rest.dto;
 
 
 import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
+import br.com.loopis.controle_refeicoes.modelo.entidades.JustificativaCAEST;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.Turma;
@@ -34,11 +35,12 @@ public class PedidoDTO implements Serializable {
     @XmlList
     @XmlElement(required = true)
     private List<Aluno> alunos;
+    private JustificativaCAEST justificativaCAEST;
 
     public PedidoDTO() {
     }
 
-    public PedidoDTO(Long id, String matriculaProfessor, String justificativa, LocalDate diaSolicitado, Turma turma, TipoBeneficio tipoBeneficio, List<Aluno> alunos) {
+    public PedidoDTO(Long id, String matriculaProfessor, String justificativa, LocalDate diaSolicitado, Turma turma, TipoBeneficio tipoBeneficio, List<Aluno> alunos, JustificativaCAEST justificativaCAEST) {
         this.id = id;
         this.matriculaProfessor = matriculaProfessor;
         this.justificativa = justificativa;
@@ -46,15 +48,17 @@ public class PedidoDTO implements Serializable {
         this.turma = turma;
         this.tipoBeneficio = tipoBeneficio;
         this.alunos = alunos;
+        this.justificativaCAEST = justificativaCAEST;
     }
 
-    public PedidoDTO(String matriculaProfessor, String justificativa, LocalDate diaSolicitado, Turma turma, TipoBeneficio tipoBeneficio, List<Aluno> alunos) {
+    public PedidoDTO(String matriculaProfessor, String justificativa, LocalDate diaSolicitado, Turma turma, TipoBeneficio tipoBeneficio, List<Aluno> alunos, JustificativaCAEST justificativaCAEST) {
         this.matriculaProfessor = matriculaProfessor;
         this.justificativa = justificativa;
         this.diaSolicitado = diaSolicitado;
         this.turma = turma;
         this.tipoBeneficio = tipoBeneficio;
         this.alunos = alunos;
+        this.justificativaCAEST = justificativaCAEST;
     }
 
     public String getMatriculaProfessor() {
@@ -113,23 +117,32 @@ public class PedidoDTO implements Serializable {
         this.id = id;
     }
 
+    public JustificativaCAEST getJustificativaCAEST() {
+        return justificativaCAEST;
+    }
+
+    public void setJustificativaCAEST(JustificativaCAEST justificativaCAEST) {
+        this.justificativaCAEST = justificativaCAEST;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PedidoDTO pedidoDTO = (PedidoDTO) o;
-        return id == pedidoDTO.id &&
+        return Objects.equals(id, pedidoDTO.id) &&
                 Objects.equals(matriculaProfessor, pedidoDTO.matriculaProfessor) &&
                 Objects.equals(justificativa, pedidoDTO.justificativa) &&
                 Objects.equals(diaSolicitado, pedidoDTO.diaSolicitado) &&
                 turma == pedidoDTO.turma &&
                 tipoBeneficio == pedidoDTO.tipoBeneficio &&
-                Objects.equals(alunos, pedidoDTO.alunos);
+                Objects.equals(alunos, pedidoDTO.alunos) &&
+                Objects.equals(justificativaCAEST, pedidoDTO.justificativaCAEST);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, matriculaProfessor, justificativa, diaSolicitado, turma, tipoBeneficio, alunos);
+        return Objects.hash(id, matriculaProfessor, justificativa, diaSolicitado, turma, tipoBeneficio, alunos, justificativaCAEST);
     }
 
     @Override
@@ -142,6 +155,7 @@ public class PedidoDTO implements Serializable {
                 ", turma=" + turma +
                 ", tipoBeneficio=" + tipoBeneficio +
                 ", alunos=" + alunos +
+                ", justificativaCAEST=" + justificativaCAEST +
                 '}';
     }
 }

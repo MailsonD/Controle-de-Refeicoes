@@ -24,8 +24,9 @@ public class ServicePedido {
     public void salvar(Pedido p) throws AcessoNegadoException {
         if(p.getProfessor().getNivelAcesso().equals(NivelAcesso.PROFESSOR)){
             pedidoDao.salvar(p);
+        }else{
+            throw new AcessoNegadoException("O usuário que tentou realizar a solicitação não é um professor");
         }
-        throw new AcessoNegadoException("O usuário que tentou realizar a solicitação não é um professor");
     }
 
     public void atualizar(Pedido p) {
