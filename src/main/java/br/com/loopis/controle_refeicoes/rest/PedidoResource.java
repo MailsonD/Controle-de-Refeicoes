@@ -13,6 +13,8 @@ import br.com.loopis.controle_refeicoes.rest.dto.QuantidadeDTO;
 import br.com.loopis.controle_refeicoes.service.ServicePedido;
 import br.com.loopis.controle_refeicoes.service.ServiceUsuario;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,6 +101,14 @@ public class PedidoResource {
      * a deve ser enviado o parâmento na url para uma página válida. Cada página possui 10 elementos. Ex:
      *              professor/1234?pagina=2
      *
+     * É possível também realizar buscas por data e por status do pedido. Ambos sendo enviados por parâmetro.
+     * É possível buscar só por um deles ou pelos dois. Ex:
+     *          professor/1234?pagina=1&statusPedido=ACEITO&data=2019-09-14
+     *          ou
+     *          professor/1234?pagina=1&statusPedido=ACEITO
+     *          ou
+     *          professor/1234?pagina=1&data=2019-09-14
+     *
      * @param matriculaProf -> Matricula do professor que está solicitando a visualização de seus pedidos
      * @param pagina -> a página solicitada
      * @return -> A lista de pedidos completa daquela paǵina. Caso seja enviada uma página inválida é
@@ -107,9 +117,29 @@ public class PedidoResource {
      */
     @GET
     @Path("professor/{matricula}")
-    public Response pedidosPorProfessor(@PathParam("matricula") String matriculaProf, @QueryParam("pagina") int pagina){
+    public Response pedidosPorProfessor(@PathParam("matricula") String matriculaProf, @QueryParam("pagina") int pagina,
+                                        @QueryParam("data")String dataString, @QueryParam("statusPedido") StatusPedido statusPedido){
+
+        log.log(Level.INFO, "INICIANDO BUSCA POR PEDIDOS DE UM PROFESSOR!");
+
+        log.log(Level.INFO, "PAGINA ->>>> " + pagina);
+        log.log(Level.INFO, "MATRICULA ->>>> " + matriculaProf);
+        log.log(Level.INFO, "DATA ->>>> " + dataString);
+        log.log(Level.INFO, "STATUS ->>>> " + statusPedido);
+
         try {
-            List<Pedido> pedidos = servicePedido.buscarPorProfessor(buscarProfessor(matriculaProf), pagina);
+            List<Pedido> pedidos;
+            if((dataString != null && !dataString.isEmpty()) && statusPedido != null) {
+                LocalDate data = LocalDate.parse(dataString);
+                pedidos = servicePedido.buscarPorProfessor(buscarProfessor(matriculaProf), pagina, data, statusPedido);
+            }else if(statusPedido != null) {
+                pedidos = servicePedido.buscarPorProfessor(buscarProfessor(matriculaProf), pagina, statusPedido);
+            }else if ((dataString != null && !dataString.isEmpty())) {
+                LocalDate data = LocalDate.parse(dataString);
+                pedidos = servicePedido.buscarPorProfessor(buscarProfessor(matriculaProf), pagina, data);
+            }else{
+                pedidos = servicePedido.buscarPorProfessor(buscarProfessor(matriculaProf), pagina);
+            }
 
             log.log(Level.INFO,"PEDIDOS ->>>>>" + pedidos.toString());
 
@@ -123,7 +153,7 @@ public class PedidoResource {
                     .ok()
                     .entity(pedidosJson)
                     .build();
-        } catch (PaginaInvalidaExcpetion e) {
+        } catch (PaginaInvalidaExcpetion | DateTimeParseException e) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
                     .build();
@@ -151,6 +181,8 @@ public class PedidoResource {
     }
 
 
+
+
     @GET
     @Path("total-refeicoes")
     public Response totalDeRefeicoes(){
@@ -164,18 +196,20 @@ public class PedidoResource {
     @Path("resultado/almoco")
     public Response listaDeAlunosAlmoco(){
         List<Aluno> alunos = servicePedido.listDeAlunosAlmoco();
-        AlunosDTO json = new AlunosDTO();
-        json.setAlunos(alunos);
-        return Response.ok().entity(json).build();
+
+        GenericEntity<List<Aluno>> alunosJson = new GenericEntity<List<Aluno>>(alunos){};
+
+        return Response.ok().entity(alunos).build();
     }
     
     @GET
     @Path("resultado/janta")
     public Response listaDeAlunosJanta(){
         List<Aluno> alunos = servicePedido.listDeAlunosJanta();
-        AlunosDTO json = new AlunosDTO();
-        json.setAlunos(alunos);
-        return Response.ok().entity(json).build();
+
+        GenericEntity<List<Aluno>> alunosJson = new GenericEntity<List<Aluno>>(alunos){};
+
+        return Response.ok().entity(alunos).build();
     }
 
     private Response erroInterno(){
