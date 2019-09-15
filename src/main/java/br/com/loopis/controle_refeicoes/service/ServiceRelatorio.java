@@ -42,13 +42,13 @@ public class ServiceRelatorio {
 
     public DiaDaSemana diaDaSemanaComMaisSolicitao(){
         Object[] dia =pedidoDao.rankingDiasComMaisSolicitacao().get(0);
-        return (DiaDaSemana) dia[0];
+        return DiaDaSemana.valueOf(Integer.parseInt((String) dia[0]));
     }
 
     public DiaDaSemana diaDaSemanaComMenosSolicitacao(){
         int num = pedidoDao.rankingDiasComMaisSolicitacao().size();
         Object[] dia = pedidoDao.rankingDiasComMaisSolicitacao().get(num-1);
-        return (DiaDaSemana) dia[0];
+        return DiaDaSemana.valueOf(dia[0].toString());
     }
 
 }
