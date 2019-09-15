@@ -7,21 +7,19 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.AcessoNegadoException;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.PaginaInvalidaExcpetion;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
-import br.com.loopis.controle_refeicoes.rest.dto.AlunosDTO;
 import br.com.loopis.controle_refeicoes.rest.dto.PedidoDTO;
 import br.com.loopis.controle_refeicoes.rest.dto.QuantidadeDTO;
 import br.com.loopis.controle_refeicoes.service.ServicePedido;
 import br.com.loopis.controle_refeicoes.service.ServiceUsuario;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
