@@ -7,6 +7,7 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.StatusPedido;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.AcessoNegadoException;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.PaginaInvalidaExcpetion;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
+import br.com.loopis.controle_refeicoes.rest.dto.JustificativaCAESTDTO;
 import br.com.loopis.controle_refeicoes.rest.dto.PedidoDTO;
 import br.com.loopis.controle_refeicoes.rest.dto.QuantidadeDTO;
 import br.com.loopis.controle_refeicoes.service.ServicePedido;
@@ -226,6 +227,13 @@ public class PedidoResource {
         List<PedidoDTO> pedidoDTOS = new ArrayList<>();
         if(pedidos != null){
             pedidos.forEach(p -> {
+                JustificativaCAESTDTO justificativa = null;
+                if(p.getJustificativaCAEST() != null){
+                    justificativa = new JustificativaCAESTDTO(
+                            p.getJustificativaCAEST().getJustificativa(),
+                            p.getJustificativaCAEST().getUsuarioCAEST()
+                    );
+                }
                 pedidoDTOS.add(
                         new PedidoDTO(
                                 p.getId(),
@@ -236,7 +244,7 @@ public class PedidoResource {
                                 p.getTipoBeneficio(),
                                 p.getAlunos(),
                                 p.getStatusPedido(),
-                                p.getJustificativaCAEST()
+                                justificativa
                         )
                 );
             });

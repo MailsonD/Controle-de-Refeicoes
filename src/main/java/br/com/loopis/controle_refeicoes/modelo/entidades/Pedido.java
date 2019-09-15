@@ -35,6 +35,7 @@ public class Pedido implements Serializable {
 
     @Convert(converter = DataConversor.class)
     private LocalDate diaSolicitado;
+
     @Enumerated(EnumType.STRING)
     private Turma turma;
 

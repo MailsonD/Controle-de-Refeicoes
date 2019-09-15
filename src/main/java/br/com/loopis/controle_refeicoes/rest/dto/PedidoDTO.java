@@ -36,12 +36,12 @@ public class PedidoDTO implements Serializable {
     @XmlElement(required = true)
     private List<Aluno> alunos;
     private StatusPedido statusPedido;
-    private JustificativaCAEST justificativaCAEST;
+    private JustificativaCAESTDTO justificativaCAEST;
 
     public PedidoDTO() {
     }
 
-    public PedidoDTO(Long id, String matriculaProfessor, String justificativa, LocalDate diaSolicitado, Turma turma, TipoBeneficio tipoBeneficio, List<Aluno> alunos, StatusPedido statusPedido, JustificativaCAEST justificativaCAEST) {
+    public PedidoDTO(Long id, String matriculaProfessor, String justificativa, LocalDate diaSolicitado, Turma turma, TipoBeneficio tipoBeneficio, List<Aluno> alunos, StatusPedido statusPedido, JustificativaCAESTDTO justificativaCAEST) {
         this.id = id;
         this.matriculaProfessor = matriculaProfessor;
         this.justificativa = justificativa;
@@ -54,7 +54,7 @@ public class PedidoDTO implements Serializable {
     }
 
 
-    public PedidoDTO(String matriculaProfessor, String justificativa, LocalDate diaSolicitado, Turma turma, TipoBeneficio tipoBeneficio, List<Aluno> alunos, StatusPedido statusPedido, JustificativaCAEST justificativaCAEST) {
+    public PedidoDTO(String matriculaProfessor, String justificativa, LocalDate diaSolicitado, Turma turma, TipoBeneficio tipoBeneficio, List<Aluno> alunos, StatusPedido statusPedido, JustificativaCAESTDTO justificativaCAEST) {
         this.matriculaProfessor = matriculaProfessor;
         this.justificativa = justificativa;
         this.diaSolicitado = diaSolicitado;
@@ -129,11 +129,11 @@ public class PedidoDTO implements Serializable {
         this.statusPedido = statusPedido;
     }
 
-    public JustificativaCAEST getJustificativaCAEST() {
+    public JustificativaCAESTDTO getJustificativaCAEST() {
         return justificativaCAEST;
     }
 
-    public void setJustificativaCAEST(JustificativaCAEST justificativaCAEST) {
+    public void setJustificativaCAEST(JustificativaCAESTDTO justificativaCAEST) {
         this.justificativaCAEST = justificativaCAEST;
     }
 
