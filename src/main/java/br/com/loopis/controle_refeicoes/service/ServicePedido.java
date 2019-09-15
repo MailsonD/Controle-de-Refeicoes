@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-
-import static br.com.loopis.controle_refeicoes.modelo.entidades.Pedido_.dataModificacaoDeStatus;
-import static br.com.loopis.controle_refeicoes.modelo.entidades.Pedido_.professor;
+//
+//import static br.com.loopis.controle_refeicoes.modelo.entidades.Pedido_.dataModificacaoDeStatus;
+//import static br.com.loopis.controle_refeicoes.modelo.entidades.Pedido_.professor;
 
 @Stateless
 public class ServicePedido {

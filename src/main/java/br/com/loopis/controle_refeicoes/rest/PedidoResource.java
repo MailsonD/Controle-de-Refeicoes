@@ -168,17 +168,23 @@ public class PedidoResource {
     }
 
     @DELETE
-    @Path("id")
-    public Response deletarPedido(long id) {
+    @Path("{id}")
+    public Response deletarPedido(@PathParam("id") long id) {
         Pedido pedido = new Pedido();
         pedido.setId(id);
-        servicePedido.remover(pedido);
+        Pedido aux = servicePedido.buscar(id);
+        if (aux != null){
+            servicePedido.remover(pedido);
+            return Response
+                    .status(Response.Status.FOUND)
+                    .build();
+        }
         return Response
-                .status(Response.Status.OK)
+                .status(Response.Status.NOT_FOUND)
                 .build();
+
+
     }
-
-
 
 
     @GET
