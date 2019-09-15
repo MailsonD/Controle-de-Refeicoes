@@ -63,6 +63,7 @@ public class CaestBean implements Serializable {
         try {
             alunosAux = ManipuladorCSV.toListAlunos(part);
             if (alunosAux.size() > 0) {
+                this.alunoDao.removerTodos();
                 for (AlunoBeneficiado aluno : alunosAux) {
                     this.alunoDao.salvar(aluno);
                 }

@@ -62,18 +62,18 @@ public class TestBean {
         alunos4.add(new Aluno("123", "5"));
         alunos4.add(new Aluno("456", "6"));
         
-        Pedido p1 = new Pedido(u1, "teste 1", LocalDate.now(), Turma.ADS, StatusPedido.ACEITO, TipoBeneficio.AMBOS, alunos1);
-        Pedido p2 = new Pedido(u1, "teste 2", LocalDate.now(), Turma.CIVIL, StatusPedido.ACEITO, TipoBeneficio.JANTA, alunos2);
+        Pedido p1 = new Pedido(u1, "teste 1", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.AMBOS, alunos1);
+        Pedido p2 = new Pedido(u1, "teste 2", LocalDate.now(), Turma.CIVIL, StatusPedido.PENDENTE, TipoBeneficio.JANTA, alunos2);
         Pedido p3 = new Pedido(u1, "teste 3", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.AMBOS, alunos3);
-        Pedido p4 = new Pedido(u1, "teste 4", LocalDate.now(), Turma.CIVIL, StatusPedido.ACEITO, TipoBeneficio.AMBOS, alunos4);
-        Pedido p5 = new Pedido(u5, "teste 5", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.JANTA, alunos1);
-        Pedido p6 = new Pedido(u5, "teste 6", LocalDate.now(), Turma.CIVIL, StatusPedido.PENDENTE, TipoBeneficio.JANTA, alunos2);
-        Pedido p7 = new Pedido(u5, "teste 7", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.AMBOS, alunos3);
-        Pedido p8 = new Pedido(u1, "teste 8", LocalDate.now(), Turma.CIVIL, StatusPedido.RECUSADO, TipoBeneficio.AMBOS, alunos4);
-        Pedido p9 = new Pedido(u5, "teste 9", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.ALMOCO, alunos1);
-        Pedido p10 = new Pedido(u5, "teste 10", LocalDate.now(), Turma.CIVIL, StatusPedido.PENDENTE, TipoBeneficio.JANTA, alunos2);
+        Pedido p4 = new Pedido(u1, "teste 4", LocalDate.now(), Turma.CIVIL, StatusPedido.PENDENTE, TipoBeneficio.AMBOS, alunos4);
+        Pedido p5 = new Pedido(u1, "teste 5", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.JANTA, alunos1);
+        Pedido p6 = new Pedido(u1, "teste 6", LocalDate.now(), Turma.CIVIL, StatusPedido.PENDENTE, TipoBeneficio.JANTA, alunos2);
+        Pedido p7 = new Pedido(u1, "teste 7", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.AMBOS, alunos3);
+        Pedido p8 = new Pedido(u1, "teste 8", LocalDate.now(), Turma.CIVIL, StatusPedido.PENDENTE, TipoBeneficio.AMBOS, alunos4);
+        Pedido p9 = new Pedido(u1, "teste 9", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.ALMOCO, alunos1);
+        Pedido p10 = new Pedido(u1, "teste 10", LocalDate.now(), Turma.CIVIL, StatusPedido.PENDENTE, TipoBeneficio.JANTA, alunos2);
         Pedido p11 = new Pedido(u1, "teste 11", LocalDate.now(), Turma.ADS, StatusPedido.PENDENTE, TipoBeneficio.AMBOS, alunos3);
-        Pedido p12 = new Pedido(u1, "teste 12", LocalDate.now(), Turma.CIVIL, StatusPedido.RECUSADO, TipoBeneficio.ALMOCO, alunos4);
+        Pedido p12 = new Pedido(u1, "teste 12", LocalDate.now(), Turma.CIVIL, StatusPedido.PENDENTE, TipoBeneficio.ALMOCO, alunos4);
 
         try {
             usuarioDao.salvar(u1);

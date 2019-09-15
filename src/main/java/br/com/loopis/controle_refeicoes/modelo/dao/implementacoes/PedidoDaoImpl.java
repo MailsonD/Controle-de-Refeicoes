@@ -42,6 +42,7 @@ public class PedidoDaoImpl implements PedidoDao {
 //        String jpql = "select a from Pedido p join p.alunos a where a in :alunos";
 //        em.createQuery(jpql).setParameter("alunos", object.getAlunos());
         em.persist(object);
+        agendaModificacaoPedido(object);
     }
 
     @Override
@@ -164,7 +165,7 @@ public class PedidoDaoImpl implements PedidoDao {
                 + "	select (case when sum(p_pa_a.case)>=2 then 2 else 1 end)quant from("
                 + "		select distinct a.matricula, case when p_pa.tipobeneficio='AMBOS' then 2 else 1 end from ("
                 + "			select pa.pedido_id, pa.alunos_id, p.tipoBeneficio from pedido p join pedido_aluno pa on p.id=pa.pedido_id"
-                + "			  where p.diaSolicitado='2019-09-12' and p.statusPedido=1"
+                + "			  where p.diaSolicitado=? and p.statusPedido=?"
                 + "		) as p_pa join aluno a on p_pa.alunos_id=a.id"
                 + "	) as p_pa_a group by p_pa_a.matricula"
                 + ") as result";

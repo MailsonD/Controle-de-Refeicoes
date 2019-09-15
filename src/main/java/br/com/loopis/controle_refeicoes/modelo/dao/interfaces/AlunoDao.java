@@ -6,4 +6,6 @@ public interface AlunoDao extends DaoIF<AlunoBeneficiado> {
     public AlunoBeneficiado buscarPorMatricula(String matricula);
 
     public void salvar(AlunoBeneficiado aluno);
+
+    public void removerTodos();
 }

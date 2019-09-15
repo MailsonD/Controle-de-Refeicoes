@@ -138,7 +138,6 @@ public class PedidoBean implements Serializable {
         pedido.setAlunos(alunos);
         pedido.setStatusPedido(StatusPedido.PENDENTE);
         pedidoService.salvar(pedido);
-        pedidoService.agendaModificacaoPedido(pedido);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "•Solicitação realizado com sucesso!", null));
         tipoBeneficiosSelecionados = new ArrayList<>();
         alunos = new ArrayList<>();
