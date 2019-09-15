@@ -86,7 +86,7 @@ public class ServiceUsuario {
         Usuario user = usuarioDao.buscarPorMatricula(matricula);
         if(user.getSenha() != null && !user.getSenha().isEmpty()){
             throw new SenhaExistenteException("Este não é o primeiro acesso deste usuário");
-        }else if(user.getMatricula().equals(email)) {
+        }else if(user.getEmail().equals(email)) {
             log.info("gerando a senha");
             String senhaGerada = GeradorDeSenha.gerarSenhaAleatoria();
             user.setSenha(senhaGerada);
