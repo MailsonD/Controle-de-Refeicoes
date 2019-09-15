@@ -1,5 +1,6 @@
 package br.com.loopis.controle_refeicoes.service;
 
+import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.AlunoDao;
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.PedidoDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Pedido;
@@ -14,6 +15,7 @@ import br.com.loopis.controle_refeicoes.modelo.excessoes.PaginaInvalidaExcpetion
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 //
@@ -25,9 +27,19 @@ public class ServicePedido {
     
     @Inject
     private PedidoDao pedidoDao;
+
+    @Inject
+    private AlunoDao alunoDao;
     
     public void salvar(Pedido p) throws AcessoNegadoException {
         if(p.getProfessor().getNivelAcesso().equals(NivelAcesso.PROFESSOR)){
+            p.setAlunos(
+                    p.getAlunos()
+                            .stream()
+                            .filter(a ->
+                                alunoDao.buscarPorMatricula(a.getMatricula()) == null
+                            ).collect(Collectors.toList())
+            );
             pedidoDao.salvar(p);
         }else{
             throw new AcessoNegadoException("O usuário que tentou realizar a solicitação não é um professor");
