@@ -48,21 +48,28 @@ and open the template in the editor.
                                         <h:form enctype="multipart/form-data">
                                             <div class="row">
                                                 <div class="pr-3 col-md-10">
-                                                    <div class="pr-3 col-md-10 custom-file">
-                                                        <h:messages id="messagesError"
-                                                                    infoStyle="list-style: none;color: green;"
-                                                                    errorStyle="list-style: none;color: red;"/>
-                                                        <div class="input-group mb-3">
-                                                            <h:inputFile styleClass="form-control"
-                                                                         value="#{caestBean.part}"></h:inputFile>
-                                                            <div class="input-group-append">
-                                                                <h:commandLink styleClass="btn btn-success btn-fill pull-right" value="Carregar .CSV" type="button"
-                                                                               action="#{caestBean.download()}" />
-                                                            </div>
+                                                    <h:messages id="messagesError"
+                                                                infoStyle="list-style: none;color: green;"
+                                                                errorStyle="list-style: none;color: red;"/>
+
+                                                    <div class="input-group">
+
+                                                        <h:inputFile styleClass="form-control"
+                                                                     value="#{caestBean.part}">
+                                                        </h:inputFile>
+                                                 
+
+
+                                                        <div class="input-group-append">
+                                                            <h:commandLink styleClass="btn btn-success btn-fill pull-right" value="Carregar .CSV" type="button"
+                                                                           action="#{caestBean.download()}" />
                                                         </div>
+
                                                     </div>
+
                                                 </div>
                                             </div>
+
                                             <div class="row">
                                                 <div class="col-md-10 pr-3">
                                                     <h:commandButton action="#{caestBean.salvarAlunosCsv()}"
