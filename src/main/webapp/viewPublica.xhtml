@@ -138,7 +138,7 @@ and open the template in the editor.
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg " color-on-scroll="500">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#pablo"> Dashboard </a>
+                <a class="navbar-brand" href="#pablo"> #{templateRender.styleClass} </a>
                 <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar burger-lines"></span>
                     <span class="navbar-toggler-bar burger-lines"></span>
@@ -177,14 +177,14 @@ and open the template in the editor.
         <!-- End Navbar -->
         <div class="wrapper">
             <div class="page-header clear-filter">
-                <div class="page-header-image" data-parallax="true" style="background-image: url('../resources/assets/img/if2.jpg')">
+                <div class="page-header-image" data-parallax="true" style="background-image: url('resources/assets/img/if2.jpg')">
                     <div class="filter"> </div>
 
                     <div class="title-container2 text-center">
                         <div class="form-group"> <div id="contador"></div>
 
                             <h1> Ja servimos 
-                                <b> <big>  <span class="counter-up" data-count-to="3970"></span> </big></b>
+                                <b> <big>  <span class="counter-up" data-count-to="#{publicoBean.total}"></span> </big></b>
                                 refeições extras
                             </h1>
 
@@ -209,6 +209,7 @@ and open the template in the editor.
 
                                     <div class="card-body all-icons">
                                         <div class="form-group">
+                                            <h1>#{templateRender.styleClass}</h1>
                                             <h2 class="text-center">Controle de Refeições</h2>
                                             <p>É o sistema de gerenciamento de refeições do IFPB Campus Cajazeiras, 
                                                 desenvolvido pela Loopis Soluções Tecnologicas, empresa junior o curso de 
@@ -304,7 +305,7 @@ and open the template in the editor.
     </script> -->
     <script type="text/javascript">
                                 const tempo_intervalo = 5; //ms -> define a velocidade da animação
-                                const tempo = 40000; //ms -> define o tempo total da animaçao
+                                const tempo = 4000; //ms -> define o tempo total da animaçao
 
                                 $('.counter-up').each(function () {
                                     let count_to = parseInt($(this).data('countTo'));

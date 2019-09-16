@@ -16,7 +16,7 @@ and open the template in the editor.
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
 
-        <title>Solicitar</title>
+        <title>Lista Publica</title>
 
         <!--     Fonts and icons     -->
 
@@ -175,6 +175,8 @@ and open the template in the editor.
             </div>
         </nav>
         <!-- End Navbar -->
+
+        <h:form>
         <div class="wrapper">
             <div class="page-header2 clear-filter">
                 <div class="page-header-image2" data-parallax="true" style="background-image: url('../resources/assets/img/if2.jpg')">
@@ -182,10 +184,10 @@ and open the template in the editor.
 
                     <div class="title-container2 text-center">
                         <div class="form-group"> <div id="contador"></div>
-                            
-                            <h1> Hoje o #horario do perdido tem
-                                <b> <big>  <span class="counter-up" data-count-to="123"></span> </big></b>
-                                refeições extras
+
+                            <h1> Hoje serão servidos 
+                                <b> <big>  <span class="counter-up" data-count-to="#{publicoBean.quant}"></span> </big></b>
+                                #{publicoBean.beneficio} extras
                             </h1>
 
                         </div>
@@ -196,7 +198,6 @@ and open the template in the editor.
 
                 </div>
             </div>
-            <br/>
             <div class="main-panel2">
 
                 <div class="content">
@@ -208,17 +209,21 @@ and open the template in the editor.
                                 <div class="card">
                                     <table>
                                         <tr>
-
                                             <td>
-                                                <select class="form-control" id="select">
-                                                    <option value="">Almoço</option>
-                                                    <option value="">Janta</option>
-                                                </select>
+<!--                                                <select class="form-control" id="select">-->
+<!--                                                    <option value="">Almoço</option>-->
+<!--                                                    <option value="">Janta</option>-->
+<!--                                                </select>-->
+
+                                                <h:selectOneMenu class="form-control" id="select" value="#{publicoBean.beneficio}">
+                                                    <f:selectItem itemLabel="Almoço" itemValue="almoços"/>
+                                                    <f:selectItem itemLabel="Janta" itemValue="jantares"/>
+                                                </h:selectOneMenu>
                                             </td>   
                                             <td>
                                                 <h:commandButton
-                                                    class="col-lg-12 btn btn-success btn-fill pull-right"
-                                                    value="Buscar"/>
+                                                    class="col-lg-12 btn btn-success btn-fill pull-right" value="Buscar"
+                                                    action= "#{publicoBean.listar()}"/>
                                             </td>
                                         </tr>
                                     </table>
@@ -234,10 +239,10 @@ and open the template in the editor.
                                 <div class="card strpied-tabled-with-hover">
                                     <div class="card-header ">
                                         <h4 class="card-title">Lista de alunos</h4>
-                                        <p class="card-category"> Dia: 00/00/000</p>
+                                        <p class="card-category"> #{publicoBean.data}</p>
                                     </div>
                                     <div class="card-body table-full-width table-responsive">
-                                        <h:dataTable class="table table-hover table-striped" value="#{pedidoBean.alunos}" var="aluno">
+                                        <h:dataTable class="table table-hover table-striped" value="#{publicoBean.alunoExibicaos}" var="aluno">
                                             <h:column>
                                                 <f:facet name="header">Matricula</f:facet>
                                                     #{aluno.matricula}
@@ -265,6 +270,7 @@ and open the template in the editor.
             </div>
             
         </div>
+        </h:form>
         <footer class="footer">
                 <div class="container-fluid">
                     <nav>
@@ -328,7 +334,7 @@ and open the template in the editor.
     </script> -->
     <script type="text/javascript">
                                 const tempo_intervalo = 5; //ms -> define a velocidade da animação
-                                const tempo = 400; //ms -> define o tempo total da animaçao
+                                const tempo = 4000; //ms -> define o tempo total da animaçao
 
                                 $('.counter-up').each(function () {
                                     let count_to = parseInt($(this).data('countTo'));

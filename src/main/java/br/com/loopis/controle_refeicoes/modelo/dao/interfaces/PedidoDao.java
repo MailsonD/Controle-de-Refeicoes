@@ -59,7 +59,7 @@ public interface PedidoDao extends DaoIF<Pedido>{
     /**
      * quantidade de pedidos pelo status do pedido 
      * @param dia das solicitações
-     * @param status do pedido
+     * @param statusPedido do pedido
      * @return quantidade de pedidos
      */
     public Long quantidadeDePedidosPorStatus(LocalDate dia, StatusPedido statusPedido);
@@ -89,5 +89,6 @@ public interface PedidoDao extends DaoIF<Pedido>{
     public List<Object[]> rankingDiasComMaisSolicitacao();
 
     public Long quantidadeDeRefeicoes();
+
 
 }
