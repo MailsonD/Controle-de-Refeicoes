@@ -44,6 +44,9 @@ public class PedidoResource {
     @Context
     private UriInfo uriInfo;
 
+    @Inject
+    private GeradorDeNotificacoes geradorDeNotificacoes;
+
     private final Logger log = Logger.getLogger(PedidoResource.class.getName());
 
 
@@ -178,7 +181,8 @@ public class PedidoResource {
         if (aux != null){
             servicePedido.remover(pedido);
             String msg = "O professor "+pedido.getProfessor().getNome()+" camcelou o pedido "+pedido.getId();
-            GeradorDeNotificacoes.enviar(msg);
+//            GeradorDeNotificacoes.enviar(msg);
+            geradorDeNotificacoes.enviar(msg);
             return Response
                     .status(Response.Status.FOUND)
                     .build();
