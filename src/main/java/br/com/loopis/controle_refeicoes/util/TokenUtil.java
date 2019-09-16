@@ -12,8 +12,10 @@ import java.util.stream.Collectors;
 public class TokenUtil {
 
     public static void armazenarToken(String key, String token) throws StoreTokenException {
-        try(FileOutputStream out = new FileOutputStream(key + ".txt")) {
+        try(FileOutputStream out = new FileOutputStream(key + ".txt")) { ;
             out.write(token.getBytes());
+            File file = new File(key+".txt");
+            System.out.println(file.getCanonicalPath());
             salvarKey(key);
         } catch (IOException e) {
             e.printStackTrace();
@@ -60,12 +62,13 @@ public class TokenUtil {
    private static void salvarKey(String key){
         try(BufferedWriter bw = new BufferedWriter(
                 new OutputStreamWriter(
-                        new FileOutputStream("keys.txt")
+                        new FileOutputStream("keys.txt", true)
                 )
         )){
             bw.write(key);
             bw.newLine();
             bw.flush();
+//            bw.write(key);
         } catch (IOException e) {
             e.printStackTrace();
         }

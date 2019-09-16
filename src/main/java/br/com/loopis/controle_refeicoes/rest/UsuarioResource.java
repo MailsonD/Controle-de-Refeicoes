@@ -4,6 +4,7 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.*;
 import br.com.loopis.controle_refeicoes.rest.dto.UserFirebaseDTO;
 import br.com.loopis.controle_refeicoes.service.ServiceUsuario;
+import br.com.loopis.controle_refeicoes.util.GeradorDeNotificacoes;
 import br.com.loopis.controle_refeicoes.util.TokenUtil;
 
 import javax.ejb.Stateless;
@@ -179,7 +180,20 @@ public class UsuarioResource {
             e.printStackTrace();
             return erroInterno();
         }
+    }
 
+    @POST
+    @Path("teste")
+    public Response teste(JsonObject json){
+        GeradorDeNotificacoes.enviar(json.getString("msg"));
+        return Response.ok().build();
+    }
+
+    @DELETE
+    @Path("token/{key}")
+    public Response removerToken(@PathParam("key") String key){
+        TokenUtil.removerToken(key);
+        return Response.ok().build();
     }
 
     private Response erroInterno(){

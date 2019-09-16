@@ -12,6 +12,7 @@ import br.com.loopis.controle_refeicoes.rest.dto.PedidoDTO;
 import br.com.loopis.controle_refeicoes.rest.dto.QuantidadeDTO;
 import br.com.loopis.controle_refeicoes.service.ServicePedido;
 import br.com.loopis.controle_refeicoes.service.ServiceUsuario;
+import br.com.loopis.controle_refeicoes.util.GeradorDeNotificacoes;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -176,6 +177,8 @@ public class PedidoResource {
         Pedido aux = servicePedido.buscar(id);
         if (aux != null){
             servicePedido.remover(pedido);
+            String msg = "O professor "+pedido.getProfessor().getNome()+" camcelou o pedido "+pedido.getId();
+            GeradorDeNotificacoes.enviar(msg);
             return Response
                     .status(Response.Status.FOUND)
                     .build();
