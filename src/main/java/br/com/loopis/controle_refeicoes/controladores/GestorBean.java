@@ -15,10 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.view.ViewScoped;
 
-
 @ViewScoped
 @Named
-public class GestorBean implements Serializable{
+public class GestorBean implements Serializable {
 
     private Usuario usuario;
     @Inject
@@ -31,8 +30,7 @@ public class GestorBean implements Serializable{
         gestores = gestorDao.usuariosComNivelDeAcesso(NivelAcesso.GESTOR);
     }
 
-
-    public String cadastrar(){
+    public String cadastrar() {
         try {
             usuario.setAtivo(true);
             usuario.setNivelAcesso(NivelAcesso.GESTOR);
@@ -41,12 +39,12 @@ public class GestorBean implements Serializable{
             usuario = new Usuario();
             gestores = gestorDao.usuariosComNivelDeAcesso(NivelAcesso.GESTOR);
         } catch (MatriculaExistenteException e) {
-            System.out.println("Foi");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Já existe um usuário com esta matrícula!", null));
         }
         return "";
     }
-    
-    public void remover(Usuario usuario){
+
+    public void remover(Usuario usuario) {
         this.gestorDao.remover(usuario);
         this.gestores = this.gestorDao.usuariosComNivelDeAcesso(NivelAcesso.GESTOR);
     }

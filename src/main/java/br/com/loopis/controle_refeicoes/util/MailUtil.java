@@ -9,6 +9,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+/**
+ * @author mailson
+ * @mail mailssondennis@gmail.com
+ */
 public class MailUtil {
 
     private static final Properties props = new Properties();
@@ -60,6 +64,15 @@ public class MailUtil {
         CommandMap.setDefaultCommandMap(mc);
     }
 
+    /**
+     * Método responsável por encaminhar a mensagem de email para o usuário no seu primeiro acesso.
+     * Ele uitliza do provider do gmail para realizar o envio de emails.
+     *
+     * Será construiída uma mensagem de email com uma imagem, um texto de apresentação e a senha do usuário.
+     * @param emailDestinatario -> email do usuário que receberá a senha
+     * @param nomeDestinatario -> o nome do usuário que receberá a senha
+     * @param senhaGerada -> A senha que será enviada para o usuário
+     */
     public static void enviarEmail(String emailDestinatario, String nomeDestinatario, String senhaGerada){
         log.info("Iniciando Envio de email");
         try{

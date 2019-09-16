@@ -8,7 +8,8 @@ import br.com.loopis.controle_refeicoes.modelo.entidades.enums.TipoBeneficio;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface PedidoDao extends DaoIF<Pedido> {
+public interface PedidoDao extends DaoIF<Pedido>{
+    void salvar(Pedido object);
     /**
      * Pedidos de uma determinada data, consulta paginada.
      * @param data Data que será buscada
@@ -16,7 +17,8 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
     List<Pedido> buscarPorData(LocalDate data, int numeroDaPagina);
-
+    List<Pedido> buscarPorData(String keyProfessor, LocalDate data, int numeroDaPagina);
+    
     /**
      * Pedidos de um professor, o resultado é ordenado pelos pedidos em abertos (PENDENTE).
      * Consulta paginada.
@@ -24,7 +26,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @param numeroDaPagina Número da página do resultado da buscar.
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
-    List<Pedido> buscarPorProfessor(int keyProfessor, int numeroDaPagina);
+    List<Pedido> buscarPorProfessor(String keyProfessor, int numeroDaPagina);
 
     /**
      * Pedidos de um tipo de benefício. Consulta páginada por data do pedido de forma decrescente.
@@ -43,7 +45,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @param statusPedido Status do pedido que deve ser buscado.
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
-    List<Pedido> buscarPedido(int keyProfessor, LocalDate dataPedido, StatusPedido statusPedido, int numeroDaPagina);
+    List<Pedido> buscarPedido(String keyProfessor, LocalDate dataPedido, StatusPedido statusPedido, int numeroDaPagina);
 
     /**
      * Lista de pedidos com determinado Status de pedido.
@@ -52,6 +54,7 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @return Lista de pedidos, caso exista, com as informações passadas por parâmetro.
      */
     public List<Pedido> buscarPorStatusPedido(StatusPedido statusPedido, int numeroDaPagina);
+    public List<Pedido> buscarPorStatusPedido(String keyProfessor, StatusPedido statusPedido, int numeroDaPagina);
     
     /**
      * quantidade de pedidos pelo status do pedido 
@@ -73,7 +76,19 @@ public interface PedidoDao extends DaoIF<Pedido> {
      * @param dia das solicitações
      * @return lista de alunos
      */
-    public List<Aluno> alunosQuePossuemBeneficio(LocalDate dia);
+    public List<Aluno> alunosQuePossuemBeneficio(LocalDate dia, TipoBeneficio tipoBeneficio);
+
+    public List<Pedido> ultimosPedidosComStatusModificado(int numeroDaPagina);
+
+    public void agendaModificacaoPedido(Pedido p);
+
+    public Long quantidadeDeRefeicoes(StatusPedido statusPedido, TipoBeneficio tipoBeneficio);
+
+    public List<Object[]> rankingProfessoresQueMaisSolicitaramAlmoco(TipoBeneficio tipoBeneficio);
+
+    public List<Object[]> rankingDiasComMaisSolicitacao();
+
+    public Long quantidadeDeRefeicoes();
 
 
 }

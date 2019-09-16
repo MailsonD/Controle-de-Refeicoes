@@ -40,7 +40,7 @@
         <navigation-case>
             <from-action>#{primerioAcessoBean.abrirPagina()}</from-action>
             <from-outcome>meuPrimeiroAcesso</from-outcome>
-            <to-view-id>publico/primeiroLogin.xhtml?faces-redirect=true</to-view-id>
+            <to-view-id>primeiroLogin.xhtml?faces-redirect=true</to-view-id>
             <redirect/>
         </navigation-case>
 		
@@ -68,5 +68,68 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
-
+    
+    <navigation-rule>
+        <from-view-id>adm/*</from-view-id>
+        <navigation-case>
+            <from-outcome>estatisticasADM</from-outcome>
+            <to-view-id>adm/estatisticasADM.xhtml?faces-redirect=true</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manterGestor</from-outcome>
+            <to-view-id>adm/manterGestor.xhtml?faces-redirect=true</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>caest/*</from-view-id>
+        <navigation-case>
+            <from-outcome>gerenciarSolicitacoes</from-outcome>
+            <to-view-id>caest/gerenciarSolicitacoes.xhtml?faces-redirect=true</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>historicoSolicitacoes</from-outcome>
+            <to-view-id>caest/historicoSolicitacoes.xhtml?faces-redirect=true</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manterAluno</from-outcome>
+            <to-view-id>caest/manterAluno.xhtml?faces-redirect=true</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>gestor/*</from-view-id>
+        <navigation-case>
+            <from-outcome>estatisticasGestor</from-outcome>
+            <to-view-id>gestor/estatisticasGestor.xhtml?faces-redirect=true</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manterCAEST</from-outcome>
+            <to-view-id>gestor/manterCAEST.xhtml?faces-redirect=true</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>manterProfessor</from-outcome>
+            <to-view-id>gestor/manterProfessor.xhtml?faces-redirect=true</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>professor/*</from-view-id>
+        <navigation-case>
+            <from-outcome>acompanharSolicitacoes</from-outcome>
+            <to-view-id>professor/acompanharSolicitacoes.xhtml?faces-redirect=true</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>realizarSolicitacao</from-outcome>
+            <to-view-id>professor/realizarSolicitacao.xhtml?faces-redirect=true</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
 </faces-config>

@@ -10,140 +10,114 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<!--ALOCANDO TEMPLATE-->
-<ui:composition template="../WEB-INF/Template.xhtml">
+    <!--ALOCANDO TEMPLATE-->
+    <ui:composition template="../WEB-INF/Template.xhtml">
 
-    <!--DEFININDO TITULO-->
-    <ui:define name="titulo">
-        <title>Estatísticas</title>
-    </ui:define>
+        <!--DEFININDO TITULO-->
+        <ui:define name="titulo">
+            <title>Estatísticas</title>
+        </ui:define>
 
 
-    <!--DEFININDO CONTEUDO-->
-    <ui:define name="Conteudo">
-        <div class="main-panel">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg " color-on-scroll="500">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#pablo"> Gestor - Estatísticas </a>
-                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                            aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                    </button>
-                </div>
-            </nav>
-            <!-- End Navbar -->
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-body all-icons">
-                            <div class="row">
-                                <div class="font-icon-list col-3">
-                                    <div class="font-icon-detail">
-                                        <h2 class="card-title">139</h2>
-                                        <p class="card-category">Almoços Deferidos</p>
+        <!--DEFININDO CONTEUDO-->
+        <ui:define name="Conteudo">
+            <div class="main-panel">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#pablo"> Gestor - Estatísticas </a>
+                        <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                                aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                        </button>
+                    </div>
+                </nav>
+                <!-- End Navbar -->
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="card">
+                            <div class="card-body all-icons">
+                                <f:metadata>
+                                    <f:event type="preRenderView" listener="#{pedidoBean.gerarEstatisticas()}"/>
+                                </f:metadata>
+                                <div class="row">
+                                    <div class="font-icon-list col-6">
+                                        <div class="font-icon-detail">
+                                            <h2 class="card-title">#{pedidoBean.estatisticas.almocosDeferidos}</h2>
+                                            <p class="card-category">Almoços Deferidos</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="font-icon-list col-3">
-                                    <div class="font-icon-detail">
-                                        <h2 class="card-title">5</h2>
-                                        <p class="card-category ">Almoços Indeferidos </p>
+                                    <div class="font-icon-list col-6">
+                                        <div class="font-icon-detail">
+                                            <h2 class="card-title">#{pedidoBean.estatisticas.almocosIndeferidos}</h2>
+                                            <p class="card-category ">Almoços Indeferidos </p>
+                                        </div>
                                     </div>
+
+
                                 </div>
-                                <div class="font-icon-list col-3">
-                                    <div class="font-icon-detail">
-                                        <h2 class="card-title">139</h2>
-                                        <p class="card-category">Ambos Deferidos</p>
+                                <div class="row">
+                                    <div class="font-icon-list col-6">
+                                        <div class="font-icon-detail">
+                                            <h2 class="card-title">#{pedidoBean.estatisticas.professorQueMaisSolicitouAlmocos}</h2>
+                                            <p class="card-category">Professor que mais Solicitou almoços</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="font-icon-list col-3">
-                                    <div class="font-icon-detail">
-                                        <h2 class="card-title">139</h2>
-                                        <p class="card-category">Ambos Indeferidos</p>
+                                    <div class="font-icon-list col-6">
+                                        <div class="font-icon-detail">
+                                            <h2 class="card-title">#{pedidoBean.estatisticas.professorQueMaisSolicitouJantares}</h2>
+                                            <p class="card-category">Professor que mais Solicitou Jantares </p>
+                                        </div>
                                     </div>
+
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="font-icon-list col-4">
-                                    <div class="font-icon-detail">
-                                        <h2 class="card-title">Ricardo Job</h2>
-                                        <p class="card-category">Professor que mais Solicitou almoços</p>
+                                <div class="row">
+                                    <div class="font-icon-list col-3">
+                                        <div class="font-icon-detail">
+                                            <h2 class="card-title">#{pedidoBean.estatisticas.jantaresDeferidos}</h2>
+                                            <p class="card-category">Jantares Deferidos</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="font-icon-list col-4">
-                                    <div class="font-icon-detail">
-                                        <h2 class="card-title">Rafael</h2>
-                                        <p class="card-category">Professor que mais Solicitou Jantares </p>
+                                    <div class="font-icon-list col-3">
+                                        <div class="font-icon-detail">
+                                            <h2 class="card-title">#{pedidoBean.estatisticas.jantaresIndeferidos}</h2>
+                                            <p class="card-category ">Jantares Indeferidos </p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="font-icon-list col-4">
-                                    <div class="font-icon-detail">
-                                        <h2 class="card-title">Caio</h2>
-                                        <p class="card-category">Professor que mais Solicitou Ambos</p>
+                                    <div class="font-icon-list col-3">
+                                        <div class="font-icon-detail">
+                                            <h2 class="card-title">#{pedidoBean.estatisticas.diaDaSemanaComMaisSolicitacoes}</h2>
+                                            <p class="card-category">Dia da semana com mais Solicitações</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="font-icon-list col-3">
-                                    <div class="font-icon-detail">
-                                        <h2 class="card-title">139</h2>
-                                        <p class="card-category">Jantares Deferidos</p>
-                                    </div>
-                                </div>
-                                <div class="font-icon-list col-3">
-                                    <div class="font-icon-detail">
-                                        <h2 class="card-title">5</h2>
-                                        <p class="card-category ">Jantares Indeferidos </p>
-                                    </div>
-                                </div>
-                                <div class="font-icon-list col-3">
-                                    <div class="font-icon-detail">
-                                        <h2 class="card-title">Quarta</h2>
-                                        <p class="card-category">Dia da semana com mais Solicitações</p>
-                                    </div>
-                                </div>
-                                <div class="font-icon-list col-3">
-                                    <div class="font-icon-detail">
-                                        <h2 class="card-title">Segunda</h2>
-                                        <p class="card-category ">Dia da semana com menos Solicitações</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="font-icon-list col-6">
-                                    <div class="font-icon-detail">
-                                        <h2 class="card-title">Mulher Legal</h2>
-                                        <p class="card-category">Funcionario CAEST que aceitou Solicitações</p>
-                                    </div>
-                                </div>
-                                <div class="font-icon-list col-6">
-                                    <div class="font-icon-detail">
-                                        <h2 class="card-title">Mulher dessa Semana</h2>
-                                        <p class="card-category">Funcionario CAEST que recusou Solicitações</p>
+                                    <div class="font-icon-list col-3">
+                                        <div class="font-icon-detail">
+                                            <h2 class="card-title">#{pedidoBean.estatisticas.diaDaSemanaComMenosSolicitacoes}</h2>
+                                            <p class="card-category ">Dia da semana com menos Solicitações</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <nav>
+                            <p class="copyright text-center">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>
+                                <a href="http://www.creative-tim.com">Loopis</a>, Melhor equipe de DAC
+                            </p>
+                        </nav>
+                    </div>
+                </footer>
             </div>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav>
-                        <p class="copyright text-center">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>
-                            <a href="http://www.creative-tim.com">Loopis</a>, Melhor equipe de DAC
-                        </p>
-                    </nav>
-                </div>
-            </footer>
-        </div>
-    </ui:define>
-</ui:composition>
+        </ui:define>
+    </ui:composition>
 </html>

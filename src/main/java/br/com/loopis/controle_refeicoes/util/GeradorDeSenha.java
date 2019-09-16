@@ -2,6 +2,10 @@ package br.com.loopis.controle_refeicoes.util;
 
 import java.util.Random;
 
+/**
+ * @author mailson
+ * @mail mailssondennis@gmail.com
+ */
 public class GeradorDeSenha {
 
     private static final char[] ALL_CHARS = new char[62];

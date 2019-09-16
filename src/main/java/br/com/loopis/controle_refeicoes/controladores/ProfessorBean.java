@@ -9,8 +9,6 @@ import br.com.loopis.controle_refeicoes.util.ManipuladorCSV;
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.UsuarioDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
-import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteException;
-import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -50,24 +48,22 @@ public class ProfessorBean implements Serializable{
     }
     
     public void salvar(){
+        if(part==null){
+            return;
+        }
         List<Usuario> professoresAux = new ArrayList<>();
         try {
             professoresAux = ManipuladorCSV.toListProfessor(part);
             if(professoresAux.size()>0){
-                this.dao.removerProfessores();
-                for(Usuario professor: professoresAux){
-                    professor.setAtivo(true);
-                    professor.setNivelAcesso(NivelAcesso.PROFESSOR);
-                    this.dao.salvar(professor);
-                }
+                dao.salvarProfessores(new ArrayList<>(professoresAux));
                 this.professores = professoresAux;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Professores cadastrados!", null));
+
             }else{
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Documento com extenção inválida ou vazio!", null));
             }
             
             
-        } catch (MatriculaExistenteException ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Professores com matrículas repetidas!", null));
         } catch (IOException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro na leitura deste arquivo!", null));
         } catch (ArrayIndexOutOfBoundsException ex){
@@ -75,7 +71,7 @@ public class ProfessorBean implements Serializable{
         }
     } 
     
-    public void download(){
+    public String download(){
         try {
             File file = ManipuladorCSV.toProfessorCsv(dao.usuariosComNivelDeAcesso(NivelAcesso.PROFESSOR));
             Faces.sendFile(file, true);
@@ -85,10 +81,11 @@ public class ProfessorBean implements Serializable{
         } catch (IOException ex) {
             Logger.getLogger(ProfessorBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
     
     public void remover(Usuario usuario){
-        this.dao.remover(usuario);
+        this.dao.removerProfessor(usuario);
         this.professores = this.dao.usuariosComNivelDeAcesso(NivelAcesso.PROFESSOR);
     }
 

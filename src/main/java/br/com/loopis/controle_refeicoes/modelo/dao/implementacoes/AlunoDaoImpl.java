@@ -32,6 +32,11 @@ public class AlunoDaoImpl implements AlunoDao {
     public void remover(AlunoBeneficiado object) {
         em.remove(em.merge(object));
     }
+    @Override
+    public void removerTodos() {
+        List<AlunoBeneficiado> ab = listar();
+        ab.forEach(a -> em.remove(em.merge(a)));
+    }
 
     @Override
     public AlunoBeneficiado buscar(Object key) {

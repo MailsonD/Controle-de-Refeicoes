@@ -35,88 +35,70 @@ and open the template in the editor.
                         </button>
                     </div>
                 </nav>
+                <h:form>
+                    <div class="content">
+                        <div class="container-fluid">
 
-                <div class="content">
-                    <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header col-4">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-header col-4">
-
-                                    </div>
-                                    <div class="card-body all-icons">
-                                        <div class="row">
-                                            <div class="col-md-12">
-
-                                                <div class="card">
-                                                    <table>
-                                                        <tr>
-                                                            <td>
-                                                                <h:inputText a:type="date" styleClass="form-control"
-                                                                             value="#{bean.date}"/>
-                                                            </td>
-                                                            <td>
-                                                                <select class="form-control" id="select">
-                                                                    <option value=""></option>
-
-                                                                    <option value="">Aceita</option>
-                                                                    <option value="">Recusada</option>
-                                                                    <option value="">Pendente</option>
-
-
-                                                                </select>
-                                                            </td>
-                                                            <td>
-                                                                <h:commandButton
-                                                                    class="col-lg-12 btn btn-success btn-fill pull-right"
-                                                                    value="Buscar"/>
-                                                            </td>
-                                                        </tr>
-                                                        <!--                                                        <tr>
-                                                                                                                    <td>
-                                                                                                                        <select class="form-control" id="select">
-                                                                                                                            <option value="">Situação</option>
-                                                                                                                            <optgroup label="Es">
-                                                                                                                                <option value="">Aceita</option>
-                                                                                                                                <option value="">Recusada</option>
-                                                                                                                                <option value="">Pendente</option>
-                                                                                                                            </optgroup>
-                                                                                                                            
-                                                                                                                        </select>
-                                                                                                                    </td>
-                                                                                                                    <td>
-                                                                                                                        <h:commandButton
-                                                                                                                            class="col-lg-12 btn btn-success btn-fill pull-right"
-                                                                                                                            value="Buscar por Situação"/>
-                                                                                                                    </td>
-                                                                                                                </tr>-->
-
-                                                    </table>
-                                                </div>
-
-
-                                            </div>
                                         </div>
+                                        <div class="card-body all-icons">
+                                            <div class="row">
+                                                <div class="col-md-12">
 
+                                                    <div class="card">
+                                                        <!--<h:form>-->
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <h:inputText a:type="date" styleClass="form-control" converter="localDateConverter"
+                                                                                 value="#{pedidoBean.dia}"/>
+                                                                </td>
+                                                                <td>
+                                                                    <h:selectOneMenu styleClass="form-control" id="select" value="#{pedidoBean.statusPedido}">
+                                                                        <f:selectItem itemLabel="___SITUAÇÂO___" noSelectionOption="true"/>
+                                                                        <f:selectItems value="#{pedidoBean.listarStatusPedidos()}" var="status">
+                                                                            <f:selectItem itemValue="#{status}" itemLabel="#{status}"></f:selectItem>
+                                                                        </f:selectItems>
+                                                                    </h:selectOneMenu>
+                                                                </td>
+                                                                <td>
+                                                                    <h:commandButton 
+                                                                        class="col-lg-12 btn btn-success btn-fill pull-right"
+                                                                        value="Buscar" action="#{pedidoBean.recarregar()}" >
+
+                                                                    </h:commandButton>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <!--</h:form>-->
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row">
+                            <div class="row">
 
 
-                            <div class="col-md-12">
-                                <div class="card strpied-tabled-with-hover">
-                                    <div class="card-header ">
-                                        <h4 class="card-title">Solicitações</h4>
-                                        <p class="card-category"></p>
-                                    </div>
-                                    <div class="card-body table-full-width table-responsive">
-                                        <h:form>
+                                <div class="col-md-12">
+                                    <div class="card strpied-tabled-with-hover">
+                                        <div class="card-header ">
+                                            <h4 class="card-title">Solicitações</h4>
+                                            <p class="card-category"></p>
+                                        </div>
+                                        <div class="card-body table-full-width table-responsive">
+                                            <!--<h:form>-->
                                             <h:dataTable class="table table-hover table-striped" 
-                                                         value="#{pedidoBean.listar(autenticacaoBean.usuario.id)}" var="pedido">
+                                                         value="#{pedidoBean.listar(autenticacaoBean.usuario.matricula)}" var="pedido">
                                                 <h:column>
                                                     <f:facet name="header">Turma</f:facet>
                                                         #{pedido.turma}
@@ -185,9 +167,14 @@ and open the template in the editor.
                                                                 <div class="modal-header justify-content-center">
 
                                                                     <h3>Detalhes </h3>
-
+                                                                    
                                                                 </div>
                                                                 <div class="modal-body">
+                                                                    <div>
+                                                                        <h:outputText rendered="#{not (pedido.justificativaCAEST eq null)}" 
+                                                                                      value="justificativa de indeferimento:#{pedido.justificativaCAEST.justificativa}">
+                                                                        </h:outputText>
+                                                                    </div>
                                                                     <h4>Justificativa do Profesor: </h4>
                                                                     #{pedido.justificativa}
                                                                     <h4>Lista de Alunos: </h4>
@@ -215,15 +202,34 @@ and open the template in the editor.
                                                     </div>
                                                     <!-- Fim da modal -->
                                                 </h:column>
-
                                             </h:dataTable>
-                                        </h:form>
+                                            <!--</h:form>-->
+                                        </div>
                                     </div>
+                                    <!--<h:form>-->
+                                        <nav aria-label="Navegação de página exemplo">
+                                            <ul class="pagination">
+                                                <!--<li class="page-item"><h:commandLink class="page-link">1</h:commandLink></li>-->
+                                                <li class="page-item">
+                                                    <h:commandLink class="page-link" action="#{pedidoBean.mudarPagina(-1)}" disabled="#{pedidoBean.numPagina eq 1}">
+                                                        <span aria-hidden="true">&lt;</span>
+                                                        <span class="sr-only">Anterior</span>
+                                                    </h:commandLink>
+                                                </li>
+                                                <li class="page-item">
+                                                    <h:commandLink class="page-link" action="#{pedidoBean.mudarPagina(1)}" disabled="#{pedidoBean.ehUltimaPagina}">
+                                                        <span aria-hidden="true">&gt;</span>
+                                                        <span class="sr-only">Próximo</span>
+                                                    </h:commandLink>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    <!--</h:form>-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </h:form>
                 <footer class="footer">
                     <div class="container-fluid">
                         <nav>

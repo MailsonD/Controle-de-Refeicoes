@@ -3,10 +3,12 @@ package br.com.loopis.controle_refeicoes.service;
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.UsuarioDao;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
-import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteException;
-import br.com.loopis.controle_refeicoes.modelo.excessoes.SenhaInvalidaException;
-import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
+import br.com.loopis.controle_refeicoes.modelo.excessoes.*;
+import br.com.loopis.controle_refeicoes.util.GeradorDeSenha;
+import br.com.loopis.controle_refeicoes.util.MailUtil;
+
 import java.util.List;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 
 import javax.ejb.SessionContext;
@@ -27,7 +29,8 @@ public class ServiceUsuario {
     
     @Resource
     private SessionContext context;
-    
+    private final Logger log = Logger.getLogger(ServiceUsuario.class.getName());
+
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void salvar(Usuario u) throws MatriculaExistenteException{
         try{
@@ -55,7 +58,8 @@ public class ServiceUsuario {
     }
 
     public Usuario buscarPorMatricula(String matricula) throws UsuarioNaoEncontradoException {
-        return usuarioDao.buscarPorMatricula(matricula);
+        Usuario user = usuarioDao.buscarPorMatricula(matricula);
+        return user;
     }
 
     public Usuario autenticar(Usuario usuario) throws SenhaInvalidaException, UsuarioNaoEncontradoException {
@@ -66,4 +70,35 @@ public class ServiceUsuario {
         return usuarioDao.usuariosComNivelDeAcesso(NivelAcesso.PROFESSOR);
     }
 
+    public void alterarSenha(String matricula, String senhaAntiga, String senhaNova) throws UsuarioNaoEncontradoException, SenhaInvalidaException {
+        Usuario user = usuarioDao.buscarPorMatricula(matricula);
+        if(user.getSenha().equals(senhaAntiga)){
+            user.setSenha(senhaNova);
+            usuarioDao.atualizar(user);
+        }else{
+            throw new SenhaInvalidaException();
+        }
+
+    }
+
+
+    public void primeiroAcesso(String matricula, String email) throws UsuarioNaoEncontradoException, SenhaExistenteException, EmailInvalidoException {
+        Usuario user = usuarioDao.buscarPorMatricula(matricula);
+        if(user.getSenha() != null && !user.getSenha().isEmpty()){
+            throw new SenhaExistenteException("Este não é o primeiro acesso deste usuário");
+        }else if(user.getEmail().equals(email)) {
+            log.info("gerando a senha");
+            String senhaGerada = GeradorDeSenha.gerarSenhaAleatoria();
+            user.setSenha(senhaGerada);
+            usuarioDao.atualizar(user);
+            log.info("senha gerada");
+            log.info("Enviando email");
+            MailUtil.enviarEmail(email,user.getNome(),senhaGerada);
+            log.info("processo de primeiro acesso concluído");
+        }else {
+            throw new EmailInvalidoException("Este não é seu email de acesso!");
+        }
+
+
+    }
 }

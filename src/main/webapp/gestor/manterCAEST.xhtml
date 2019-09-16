@@ -45,11 +45,14 @@ and open the template in the editor.
                                 </div>
                                 <div class="card-body">
                                     <h:form>
+                                        <h:messages id="messagesError"
+                                                    infoStyle="list-style: none;color: green;"
+                                                    errorStyle="list-style: none;color: red;"/>
                                         <div class="row">
                                             <div class="col-md-12 pr-3">
                                                 <div class="form-group">
                                                     <label>Nome</label>
-                                                    <h:inputText class="form-control" value="#{caestBean.caest.nome}">
+                                                    <h:inputText class="form-control" value="#{caestBean.caest.nome}" required="true" requiredMessage="Informe o nome">
                                                         <f:passThroughAttribute name="placeholder"
                                                                                 value="Nome"></f:passThroughAttribute>
                                                     </h:inputText>
@@ -60,7 +63,7 @@ and open the template in the editor.
                                             <div class="col-md-12 pr-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Email</label>
-                                                    <h:inputText class="form-control" value="#{caestBean.caest.email}">
+                                                    <h:inputText class="form-control" value="#{caestBean.caest.email}" required="true" requiredMessage="Informe o email">
                                                         <f:passThroughAttribute name="placeholder"
                                                                                 value="E-mail"></f:passThroughAttribute>
                                                     </h:inputText>
@@ -72,7 +75,7 @@ and open the template in the editor.
                                                 <div class="form-group">
                                                     <label>Matricula</label>
                                                     <h:inputText class="form-control"
-                                                                 value="#{caestBean.caest.matricula}">
+                                                                 value="#{caestBean.caest.matricula}" required="true" requiredMessage="Informe a matricula">
                                                         <f:passThroughAttribute name="placeholder"
                                                                                 value="Matricula"></f:passThroughAttribute>
                                                     </h:inputText>

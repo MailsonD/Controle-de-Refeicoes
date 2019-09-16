@@ -3,6 +3,8 @@ package br.com.loopis.controle_refeicoes.modelo.entidades;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,13 +13,12 @@ import java.util.Objects;
  * **/
 
 @Entity
+@XmlRootElement
 public class Usuario implements Serializable {
 
     @Id
-    @GeneratedValue
-    private int id;
-    @Column(unique = true)
     private String matricula;
+    @XmlTransient   
     private String senha;
     @Column(unique = true)
     private String email;
@@ -55,13 +56,13 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public String getMatricula() {
         return matricula;
@@ -116,7 +117,7 @@ public class Usuario implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return id == usuario.id &&
+        return /*id == usuario.id &&*/
                 Objects.equals(matricula, usuario.matricula) &&
                 Objects.equals(senha, usuario.senha) &&
                 Objects.equals(email, usuario.email) &&
@@ -127,13 +128,13 @@ public class Usuario implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, matricula, senha, email, nome, nivelAcesso, ativo);
+        return Objects.hash(matricula, senha, email, nome, nivelAcesso, ativo);
     }
 
     @Override
     public String toString() {
         return "Usuario{" +
-                "id=" + id +
+//                "id=" + id +
                 ", matricula='" + matricula + '\'' +
                 ", senha='" + senha + '\'' +
                 ", email='" + email + '\'' +

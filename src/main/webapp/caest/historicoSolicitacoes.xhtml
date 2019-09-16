@@ -10,187 +10,155 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<!--ALOCANDO TEMPLATE-->
-<ui:composition template="../WEB-INF/Template.xhtml">
+    <!--ALOCANDO TEMPLATE-->
+    <ui:composition template="../WEB-INF/Template.xhtml">
 
-    <!--DEFININDO TITULO-->
-    <ui:define name="titulo">
-        <title>Histórico</title>
-    </ui:define>
+        <!--DEFININDO TITULO-->
+        <ui:define name="titulo">
+            <title>Histórico</title>
+        </ui:define>
 
-    <!--DEFININDO CONTEUDO-->
-    <ui:define name="Conteudo">
-        <div class="main-panel">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg " color-on-scroll="500">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#pablo">CAEST - Historico de Solicitações </a>
-                    <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                            aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                        <span class="navbar-toggler-bar burger-lines"></span>
-                    </button>
-                </div>
-            </nav>
-            <!-- End Navbar -->
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-
-                        <div class="col-md-12">
-                            <div class="card strpied-tabled-with-hover">
-                                <div class="card-header ">
-                                    <h4 class="card-title">Solicitações</h4>
-                                    <p class="card-category">Lista com o historico solicitações respondidas</p>
-                                </div>
-
-                                <div class="card-body table-full-width table-responsive">
-
-
-                                    <h:form>
-
-                                        <h:dataTable class="table table-hover table-striped">
-                                            <h:column>
-                                                <f:facet name="header">Turma</f:facet>
-                                                <h:outputText value="ADS"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">Quantidade</f:facet>
-                                                <h:outputText value="20"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">DIA</f:facet>
-                                                <h:outputText value="03/09/2019"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">REFEIÇÃO</f:facet>
-                                                <h:outputText value="JANTAR"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">SITUAÇÃO</f:facet>
-                                                <h:outputText value="APROVADA / RECUSADA"/>
-                                            </h:column>
-
-                                            <h:column>
-                                                <f:facet name="header">DETALHES</f:facet>
-                                                <h:commandButton class="col-lg-6 btn btn-danger btn-fill pull-right"
-                                                                 value="detalhes">
-
-                                                </h:commandButton>
-                                            </h:column>
-
-                                        </h:dataTable>
-                                    </h:form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="card strpied-tabled-with-hover">
-                                <div class="card-header ">
-                                    <h4 class="card-title">Solicitações</h4>
-                                    <p class="card-category">Lista com o historico solicitações respondidas</p>
-                                </div>
-                                <div class="card-body table-full-width table-responsive">
-                                    <table class="table table-hover table-striped">
-                                        <thead>
-                                        <th>Turma</th>
-                                        <th>Professor</th>
-                                        <th>Quantidade</th>
-                                        <th>Dia</th>
-                                        <th>Refeição</th>
-
-                                        <th>Situação</th>
-                                        <th>Detalhes</th>
-
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>ADS</td>
-                                            <td>Ricardo Job</td>
-                                            <td>50</td>
-                                            <td>01/08/2019</td>
-                                            <td>JANTA</td>
-                                            <td> Aprovada</td>
-
-                                            <td>
-                                                <h:commandLink class="col-lg-12 btn btn-info pull-right"
-                                                               value="Detalhes">
-                                                    <f:ajax render="@all"/>
-                                                    <f:passThroughAttribute name="data-toggle" value="modal"/>
-                                                    <f:passThroughAttribute name="data-target" value="#myModal1"/>
-                                                </h:commandLink>
-                                            </td>
-
-
-                                        </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+        <!--DEFININDO CONTEUDO-->
+        <ui:define name="Conteudo">
+            <div class="main-panel">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#pablo">CAEST - Historico de Solicitações </a>
+                        <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                                aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                            <span class="navbar-toggler-bar burger-lines"></span>
+                        </button>
                     </div>
-                    <!-- Detalhes Modal -->
-                    <div class="modal fade modal-primary" id="myModal1" tabindex="-1" role="dialog"
-                         aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header justify-content-center">
+                </nav>
+                <!-- End Navbar -->
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="row">
 
-                                    <h3>Detalhes </h3>
-
-                                </div>
-                                <div class="modal-body">
-                                    <h4>Justificativa do Profesor: </h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                        culpa qui officia deserunt mollit anim id est laborum.
-                                    </p>
-                                    <h4>Lista de Alunos: </h4>
-                                    <div class="card-body table-full-width table-responsive">
-                                        <table class="table table-hover table-striped">
-                                            <thead>
-                                            <th>Matricula</th>
-                                            <th>Nome</th>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>201612010261</td>
-                                                <td>Aluno Com Fome</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="col-md-12">
+                                <div class="card strpied-tabled-with-hover">
+                                    <div class="card-header ">
+                                        <h4 class="card-title">Solicitações</h4>
+                                        <p class="card-category">Lista com o historico solicitações respondidas</p>
                                     </div>
 
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-link btn-simple" data-dismiss="modal">Fechar
-                                    </button>
+                                    <div class="card-body table-full-width table-responsive">
+                                        <h:form>
+                                            <h:dataTable class="table table-hover table-striped" 
+                                                         value="#{pedidoBean.ultimosPedidosComStatusModificado()}" var="pedido1">
+                                                <h:column>
+                                                    <f:facet name="header">Turma</f:facet>
+                                                        #{pedido1.turma}
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Quantidade</f:facet>
+                                                        #{pedido1.quantAlunos}
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Dia</f:facet>
+                                                        #{pedido1.diaSolicitado}
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Refeição</f:facet>
+                                                        #{pedido1.tipoBeneficio}
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Situação</f:facet>
+                                                        #{pedido1.statusPedido}
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">Detalhes</f:facet>
+                                                    <h:commandLink class="col-lg-12 btn btn-info pull-right"
+                                                                   value="Detalhes">
+                                                        <f:ajax render="modal1#{pedido1.id}"/>
+                                                        <f:passThroughAttribute name="data-toggle" value="modal"/>
+                                                        <f:passThroughAttribute name="data-target" value="#modal1#{pedido1.id}"/>
+                                                    </h:commandLink>
+                                                    <!-- Detalhes Modal -->
+                                                    <div class="modal fade modal-primary" id="modal1#{pedido1.id}" tabindex="-1" role="dialog"
+                                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header justify-content-center">
+
+                                                                    <h3>Detalhes </h3>
+
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <h4>Justificativa do Profesor: </h4>
+                                                                    #{pedido1.justificativa}
+                                                                    <h4>Lista de Alunos: </h4>
+                                                                    <div class="card-body table-full-width table-responsive">
+                                                                        <h:dataTable class="table table-hover table-striped" value="#{pedido1.alunos}" var="aluno1">
+                                                                            <h:column>
+                                                                                <f:facet name="header">Matricula</f:facet>
+                                                                                    #{aluno1.matricula}
+                                                                            </h:column>
+                                                                            <h:column>
+                                                                                <f:facet name="header">Nome</f:facet>
+                                                                                    #{aluno1.nome}
+                                                                            </h:column>
+                                                                        </h:dataTable>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-link btn-simple"
+                                                                            data-dismiss="modal">Fechar
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Fim da modal -->
+                                                </h:column>
+
+                                            </h:dataTable>
+                                        </h:form>
+
+                                    </div>
                                 </div>
                             </div>
+                            <h:form>
+                                <nav aria-label="Navegação de página exemplo">
+                                    <ul class="pagination">
+                                        <!--<li class="page-item"><h:commandLink class="page-link">1</h:commandLink></li>-->
+                                        <li class="page-item">
+                                            <h:commandLink class="page-link" action="#{pedidoBean.mudarPagina(-1)}" disabled="#{pedidoBean.numPagina eq 1}">
+                                                <span aria-hidden="true">&lt;</span>
+                                                <span class="sr-only">Anterior</span>
+                                            </h:commandLink>
+                                        </li>
+                                        <li class="page-item">
+                                            <h:commandLink class="page-link" action="#{pedidoBean.mudarPagina(1)}" disabled="#{pedidoBean.ehUltimaPagina}">
+                                                <span aria-hidden="true">&gt;</span>
+                                                <span class="sr-only">Próximo</span>
+                                            </h:commandLink>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </h:form>
                         </div>
                     </div>
-                    <!--  End Modal -->
-
                 </div>
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <nav>
+                            <p class="copyright text-center">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>
+                                <a href="http://www.creative-tim.com">Loopis</a>, Melhor equipe de DAC
+                            </p>
+                        </nav>
+                    </div>
+                </footer>
             </div>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav>
-                        <p class="copyright text-center">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>
-                            <a href="http://www.creative-tim.com">Loopis</a>, Melhor equipe de DAC
-                        </p>
-                    </nav>
-                </div>
-            </footer>
-        </div>
-    </ui:define>
-</ui:composition>
+        </ui:define>
+    </ui:composition>
 
 </html>

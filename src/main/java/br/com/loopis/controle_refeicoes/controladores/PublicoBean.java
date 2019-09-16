@@ -32,7 +32,7 @@ public class PublicoBean implements Serializable {
     private LocalDate data;
     private String beneficio;
     private int quant;
-    private int total;
+    private long total;
 
     @PostConstruct
     public void init(){
@@ -40,7 +40,7 @@ public class PublicoBean implements Serializable {
         alunoExibicaos = new ArrayList<>();
         data = LocalDate.now();
         quant = 0;
-        total = 400;
+        total = pedidoDao.quantidadeDeRefeicoes();
     }
 
 
@@ -131,11 +131,11 @@ public class PublicoBean implements Serializable {
         this.quant = quant;
     }
 
-    public int getTotal() {
+    public long getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(long total) {
         this.total = total;
     }
 }

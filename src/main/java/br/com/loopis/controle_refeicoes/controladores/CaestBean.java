@@ -12,14 +12,15 @@ package br.com.loopis.controle_refeicoes.controladores;
 import br.com.loopis.controle_refeicoes.util.ManipuladorCSV;
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.AlunoDao;
 import br.com.loopis.controle_refeicoes.modelo.dao.interfaces.UsuarioDao;
-import br.com.loopis.controle_refeicoes.modelo.entidades.Aluno;
 import br.com.loopis.controle_refeicoes.modelo.entidades.AlunoBeneficiado;
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
 import br.com.loopis.controle_refeicoes.modelo.entidades.enums.NivelAcesso;
 import br.com.loopis.controle_refeicoes.modelo.excessoes.MatriculaExistenteException;
+import java.io.File;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -28,13 +29,15 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.view.ViewScoped;
 import javax.servlet.http.Part;
-
+import org.omnifaces.util.Faces;
 
 @ViewScoped
 @Named
-public class CaestBean implements Serializable{
+public class CaestBean implements Serializable {
 
     private Usuario caest;
     @Inject
@@ -52,30 +55,43 @@ public class CaestBean implements Serializable{
         alunos = alunoDao.listar();
     }
 
-    public void salvarAlunosCsv(){
-        List<AlunoBeneficiado> alunosAux = new ArrayList<>();
+    public void salvarAlunosCsv() {
+        List<AlunoBeneficiado> alunosAux;
+        if (part == null) {
+            return;
+        }
         try {
             alunosAux = ManipuladorCSV.toListAlunos(part);
-            if(alunosAux.size()>0){
-                for(AlunoBeneficiado aluno: alunosAux){
+            if (alunosAux.size() > 0) {
+                this.alunoDao.removerTodos();
+                for (AlunoBeneficiado aluno : alunosAux) {
                     this.alunoDao.salvar(aluno);
                 }
                 this.alunos = alunosAux;
-            }else{
+            } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Documento com extenção inválida ou vazio!", null));
             }
 
-
-        } catch (MatriculaExistenteException ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alunos com matrículas repetidas!", null));
         } catch (IOException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro na leitura deste arquivo!", null));
-        } catch (ArrayIndexOutOfBoundsException ex){
+        } catch (ArrayIndexOutOfBoundsException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Coluna(s) a mais na estrutura do arquivo!", null));
         }
     }
 
-    public void cadastrar(){
+    public String download() {
+        try {
+            File file = ManipuladorCSV.toAlunoCsv(alunoDao.listar());
+            Faces.sendFile(file, true);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(ProfessorBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ProfessorBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void cadastrar() {
         try {
             caest.setAtivo(true);
             caest.setNivelAcesso(NivelAcesso.CAEST);
@@ -84,16 +100,16 @@ public class CaestBean implements Serializable{
             caest = new Usuario();
             usuariosCaest = dao.usuariosComNivelDeAcesso(NivelAcesso.CAEST);
         } catch (MatriculaExistenteException e) {
-            System.out.println("Foi");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Já existe um usuário com esta matrícula!", null));
         }
     }
-    
-    public void remover(Usuario usuario){
+
+    public void remover(Usuario usuario) {
         this.dao.remover(usuario);
         this.usuariosCaest = this.dao.usuariosComNivelDeAcesso(NivelAcesso.CAEST);
     }
 
-    public void removerAluno(AlunoBeneficiado aluno){
+    public void removerAluno(AlunoBeneficiado aluno) {
         this.alunoDao.remover(aluno);
         this.alunos = alunoDao.listar();
     }
@@ -129,5 +145,5 @@ public class CaestBean implements Serializable{
     public void setUsuariosCaest(List<Usuario> usuariosCaest) {
         this.usuariosCaest = usuariosCaest;
     }
-    
+
 }

@@ -1,6 +1,8 @@
 package br.com.loopis.controle_refeicoes.modelo.entidades;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
