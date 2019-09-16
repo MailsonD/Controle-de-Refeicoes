@@ -287,6 +287,11 @@ input:focus {
     height: 100vh;
 }
 
+.img-app{
+    width: 50%;
+    height: 50%;
+}
+
 .page-header .page-header-image {
     background-position: center center;
     background-size: cover;
