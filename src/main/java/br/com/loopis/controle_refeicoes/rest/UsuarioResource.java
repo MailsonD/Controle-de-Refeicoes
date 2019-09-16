@@ -1,11 +1,10 @@
 package br.com.loopis.controle_refeicoes.rest;
 
 import br.com.loopis.controle_refeicoes.modelo.entidades.Usuario;
-import br.com.loopis.controle_refeicoes.modelo.excessoes.EmailInvalidoException;
-import br.com.loopis.controle_refeicoes.modelo.excessoes.SenhaExistenteException;
-import br.com.loopis.controle_refeicoes.modelo.excessoes.SenhaInvalidaException;
-import br.com.loopis.controle_refeicoes.modelo.excessoes.UsuarioNaoEncontradoException;
+import br.com.loopis.controle_refeicoes.modelo.excessoes.*;
+import br.com.loopis.controle_refeicoes.rest.dto.UserFirebaseDTO;
 import br.com.loopis.controle_refeicoes.service.ServiceUsuario;
+import br.com.loopis.controle_refeicoes.util.TokenUtil;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -165,6 +164,22 @@ public class UsuarioResource {
         } catch (Exception e){
             return erroInterno();
         }
+    }
+
+    @POST
+    @Path("token")
+    public Response armazenarToken(UserFirebaseDTO user){
+        log.log(Level.INFO, "USUARIO ->>" + user);
+        try {
+            TokenUtil.armazenarToken(user.getMatricula(), user.getToken());
+            return Response
+                    .status(Response.Status.CREATED)
+                    .build();
+        } catch (StoreTokenException e) {
+            e.printStackTrace();
+            return erroInterno();
+        }
+
     }
 
     private Response erroInterno(){
