@@ -52,6 +52,7 @@ public class PedidoDaoImpl implements PedidoDao {
 
     @Override
     public void remover(Pedido object) {
+        object.setAlunos(null);
         em.remove(em.merge(object));
     }
 
