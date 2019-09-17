@@ -97,6 +97,7 @@ public class TestBean {
             pedidoDao.salvar(p11);
             pedidoDao.salvar(p12);
 
+//            em.persist(ab);
         } catch (MatriculaExistenteException ex) {
             Logger.getLogger(TestBean.class.getName()).log(Level.SEVERE, null, ex);
         }
