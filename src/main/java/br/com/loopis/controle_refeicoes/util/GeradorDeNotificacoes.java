@@ -71,9 +71,12 @@ public class GeradorDeNotificacoes {
 
     private String gerarJSON(String msg, String token) {
         JSONObject json = new JSONObject();
+        JSONObject notification = new JSONObject();
+        notification.put("title", "Controle de Refeições - IFPB");
+        notification.put("body", msg);
+
+        json.put("notification", notification.toString());
         json.put("to", token);
-        json.put("title", "Controle de Refeições - IFPB");
-        json.put("body", msg);
         return json.toString();
     }
 
