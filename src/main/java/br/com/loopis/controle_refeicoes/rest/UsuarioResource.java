@@ -182,13 +182,6 @@ public class UsuarioResource {
         }
     }
 
-    @POST
-    @Path("teste")
-    public Response teste(JsonObject json){
-        GeradorDeNotificacoes.enviar(json.getString("msg"));
-        return Response.ok().build();
-    }
-
     @DELETE
     @Path("token/{key}")
     public Response removerToken(@PathParam("key") String key){

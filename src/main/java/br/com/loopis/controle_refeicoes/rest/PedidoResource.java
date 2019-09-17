@@ -175,12 +175,10 @@ public class PedidoResource {
     @DELETE
     @Path("{id}")
     public Response deletarPedido(@PathParam("id") long id) {
-        Pedido pedido = new Pedido();
-        pedido.setId(id);
         Pedido aux = servicePedido.buscar(id);
         if (aux != null){
-            servicePedido.remover(pedido);
-            String msg = "O professor "+pedido.getProfessor().getNome()+" camcelou o pedido "+pedido.getId();
+            servicePedido.remover(aux);
+            String msg = "O professor "+aux.getProfessor().getNome()+" cancelou o pedido "  +aux.getId();
 //            GeradorDeNotificacoes.enviar(msg);
             geradorDeNotificacoes.enviar(msg);
             return Response

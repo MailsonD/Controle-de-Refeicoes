@@ -75,7 +75,7 @@ public class GeradorDeNotificacoes {
         notification.put("title", "Controle de Refeições - IFPB");
         notification.put("body", msg);
 
-        json.put("notification", notification.toString());
+        json.put("notification", notification);
         json.put("to", token);
         return json.toString();
     }
