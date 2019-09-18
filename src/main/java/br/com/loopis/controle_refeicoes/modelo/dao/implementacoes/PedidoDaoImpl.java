@@ -243,7 +243,7 @@ public class PedidoDaoImpl implements PedidoDao {
     @Override
     public List<Object[]> rankingDiasComMaisSolicitacao() {
         String psql = "select cast(extract(dow from p.diaSolicitado) as int), count(p.diaSolicitado) as dw "
-                + "from Pedido p group by p.diaSolicitado";
+                + "from Pedido p group by p.diaSolicitado order by dw desc";
         List<Object[]> tabela = em.createQuery(psql, Object[].class).getResultList();
 
         return tabela;
